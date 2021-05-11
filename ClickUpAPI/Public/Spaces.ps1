@@ -236,12 +236,14 @@ function Set-ClickUpSpace {
 }
 
 function Remove-ClickupSpace {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID
     )
 
-    $Space = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID"
-    Return $Space
+    if ($PSCmdlet.ShouldProcess($SpaceID)) {
+        $Space = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID"
+        Return $Space
+    }
 }

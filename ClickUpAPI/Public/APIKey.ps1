@@ -22,9 +22,11 @@
 }
 
 function Remove-ClickUpAPIKey {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param ()
-    Remove-Variable -Name 'ClickUpAPIKey' -Scope Global -Force
+    if ($PSCmdlet.ShouldProcess($ClickUpAPIKey)) {
+        Remove-Variable -Name 'ClickUpAPIKey' -Scope Global -Force
+    }
 }
 
 function Get-ClickUpAPIKey {

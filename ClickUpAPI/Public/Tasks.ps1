@@ -498,7 +498,7 @@ function Set-ClickUpTask {
     https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/update-task.html
 #>
 function Remove-ClickUpTask {
-    [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [CmdletBinding(DefaultParameterSetName = 'TaskID', SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -509,15 +509,17 @@ function Remove-ClickUpTask {
         [int]$TeamID
     )
 
-    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
-        $QueryString = @{
-            custom_task_ids = $true
-            team_id         = $TeamID
+    if ($PSCmdlet.ShouldProcess($TaskID)) {
+        if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+            $QueryString = @{
+                custom_task_ids = $true
+                team_id         = $TeamID
+            }
+        } else {
+            $QueryString = @{}
         }
-    } else {
-        $QueryString = @{}
-    }
 
-    $Task = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID"
-    Return $Task
+        $Task = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID"
+        Return $Task
+    }
 }
