@@ -5,10 +5,10 @@
     Get all ClickUp tasks under a particular list.
 .EXAMPLE
     PS C:\> Get-ClickUpTasks -ListID 11111111
-
+    Get all ClickUp task under List with ID "11111111".
 .EXAMPLE
     PS C:\> Get-ClickUpTasks -ListID 22222222 -Archived $true -Page 1 -OrderBy 'updated' -Statuses 'New','In Progress'
-
+    Get all ClickUp task under List with ID "22222222" and various other options.
 .INPUTS
     None
 .OUTPUTS
@@ -19,7 +19,6 @@
     https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-tasks.html
     https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-legacy/get-filtered-team-tasks.html
 #>
-# BUG: An array of statuses isn't working. No results are returned. Unsure if it's an error with ClickUp API or with this code.
 function Get-ClickUpTasks {
     [CmdletBinding(DefaultParameterSetName = 'ListID')]
     param (
@@ -121,6 +120,9 @@ function Get-ClickUpTasks {
     if ($PSBoundParameters.ContainsKey('ListIDs')) {
         $QueryString.Add('list_ids[]', $ListIDs)
     }
+    if ($PSBoundParameters.ContainsKey('Statuses')) {
+        $QueryString.Add('statuses[]', $Statuses)
+    }
     if ($PSBoundParameters.ContainsKey('Assignees')) {
         $QueryString.Add('assignees[]', $Assignees)
     }
@@ -161,10 +163,10 @@ function Get-ClickUpTasks {
     Get a ClickUp task.
 .EXAMPLE
     PS C:\> Get-ClickUpTask -TaskID 9hz
-
+    Get a ClickUp task under List with ID "11111111".
 .EXAMPLE
     PS C:\> Get-ClickUpTask -TaskID 9hz -CustomTaskIDs $true -TeamID 123
-
+    Get a ClickUp task under List with ID "22222222" and various other options.
 .INPUTS
     None
 .OUTPUTS
@@ -209,10 +211,10 @@ function Get-ClickUpTask {
     Get a ClickUp task's time in status.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatus -TaskID 9hz
-
+    Get a ClickUp task's time in status with ID "9hz".
 .EXAMPLE
-    PS C:\> Get-ClickUpTaskTimeInStatus -TaskID 9hz -CustomTaskIDs $true -TeamID 123
-
+    PS C:\> Get-ClickUpTaskTimeInStatus -TaskID "CustomTaskID" -CustomTaskIDs $true -TeamID 123
+    Get a ClickUp task's time in status with custom ID "CustomTaskID".
 .INPUTS
     None
 .OUTPUTS
@@ -257,10 +259,10 @@ function Get-ClickUpTaskTimeInStatus {
     Get a ClickUp bulk task's time in status.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID 9hz,3cuh,g4fs
-
+    Get a ClickUp task's time in status with ID "9hz".
 .EXAMPLE
-    PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID 9hz,3cuh,g4fs -CustomTaskIDs $true -TeamID 123
-
+    PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID "CustomTaskID 1","CustomTaskID 2","CustomTaskID 3" -CustomTaskIDs $true -TeamID 123
+    Get multiple ClickUp task's time in status with custom IDs "CustomTaskID 1", "CustomTaskID 2", and "CustomTaskID 3".
 .INPUTS
     None
 .OUTPUTS
@@ -270,8 +272,7 @@ function Get-ClickUpTaskTimeInStatus {
 .LINK
     https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-bulk-tasks'-time-in-status.html
 #>
-# TODO: Need to figure out how to Pass in multiple task_ids parameters with different task ids to query for multiple tasks' time in status. Example: task_ids=3cuh&task_ids=g4fs& ...
-<#function Get-ClickUpTaskTimeInStatusBulk {
+function Get-ClickUpTaskTimeInStatusBulk {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
@@ -280,24 +281,23 @@ function Get-ClickUpTaskTimeInStatus {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID,
-        [Parameter(ParameterSetName = 'TaskID')]
-        [Parameter(ParameterSetName = 'CustomTaskIDs')]
-        $IncludeSubtasks = $false
+        [int]$TeamID
     )
 
     $QueryString = @{
-        include_subtasks = $IncludeSubtasks
+        task_ids         = $TaskID
     }
 
-    $QueryString += @{
-        custom_task_ids = $CustomTaskIDs
-        team_id         = $TeamID
+    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+        $QueryString += @{
+            custom_task_ids = $CustomTaskIDs
+            team_id         = $TeamID
+        }
     }
 
     $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint 'task/bulk_time_in_status/task_ids'
     Return $Task
-}#>
+}
 
 <#
 .SYNOPSIS

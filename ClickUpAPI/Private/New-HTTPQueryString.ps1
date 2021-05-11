@@ -17,15 +17,16 @@
 
     foreach ($key in $QueryParameter.Keys) {
         if ($QueryParameter.$key -is [array]) {
-            $Value = $QueryParameter.$key -join ','
+            foreach ($QP in $QueryParameter.$key) {
+                $nvCollection.Add($key, $QP)
+            }
         } else {
-            $Value = $QueryParameter.$key
+            $nvCollection.Add($key, $QueryParameter.$key)
         }
-        $nvCollection.Add($key, $Value)
     }
 
     # Build the uri
-    $uriRequest = [System.UriBuilder]$uri
+    $uriRequest = [System.UriBuilder]$Uri
     $uriRequest.Query = $nvCollection.ToString()
 
     Write-Verbose -Message $uriRequest.Uri.OriginalString
