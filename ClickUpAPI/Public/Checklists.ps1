@@ -39,7 +39,7 @@ function New-ClickUpChecklist {
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
         $QueryString = @{
-            custom_task_ids = $true
+            custom_task_ids = $CustomTaskIDs
             team_id         = $TeamID
         }
     } else {
