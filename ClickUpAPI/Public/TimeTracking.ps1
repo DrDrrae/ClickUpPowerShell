@@ -261,6 +261,279 @@ function New-ClickUpTimeEntry {
 
 <#
 .SYNOPSIS
+    Add tags to a ClickUp time entry.
+.DESCRIPTION
+    Add tags to a ClickUp time entry.
+.EXAMPLE
+    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222 -Tags "name of tag"
+    Add the tag with name "name of tag" to ClickUp time entry with ID "2222222222222222222".
+.EXAMPLE
+    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
+    Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
+.INPUTS
+    None
+.OUTPUTS
+    System.Management.Automation.PSCustomObject
+.NOTES
+    See the link for information.
+.LINK
+    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/add-tags-from-time-entries.html
+#>
+function Add-ClickUpTimeEntryTags {
+    [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TeamID,
+        [Parameter(Mandatory = $true)]
+        [UInt64[]]$TimeEntryIDs,
+        [Parameter(Mandatory = $true)]
+        [string[]]$Tags
+    )
+
+    $Body = @{
+        time_entry_ids = $TimeEntryIDs
+        tags           = $Tags
+    }
+
+    Invoke-ClickUpAPIPost -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+}
+
+<#
+.SYNOPSIS
+    Update tag names from ClickUp time entries.
+.DESCRIPTION
+    Update tag names from ClickUp time entries.
+.EXAMPLE
+    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222 -Tags "name of tag"
+    Add the tag with name "name of tag" to ClickUp time entry with ID "2222222222222222222".
+.EXAMPLE
+    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
+    Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
+.INPUTS
+    None
+.OUTPUTS
+    System.Management.Automation.PSCustomObject
+.NOTES
+    See the link for information.
+.LINK
+    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/change-tag-names-from-time-entries.html
+#>
+function Set-ClickUpTimeEntryTags {
+    [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TeamID,
+        [Parameter(Mandatory = $true)]
+        [string]$OldTagName,
+        [Parameter(Mandatory = $true)]
+        [string]$NewTagName,
+        [Parameter()]
+        [string]$TagBackgroundColor,
+        [Parameter()]
+        [string]$TagForegroundColor
+    )
+
+    $Body = @{
+        name     = $NewTagName
+        new_name = $OldTagName
+        tag_bg   = $TagBackgroundColor
+        tag_fg   = $TagForegroundColor
+    }
+
+    Invoke-ClickUpAPIPut -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+}
+
+<#
+.SYNOPSIS
+    Start a ClickUp time entry.
+.DESCRIPTION
+    Start a ClickUp time entry.
+.EXAMPLE
+    PS C:\> Start-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description'
+    Start time entry with ID "2004673344540003570" and set description to "Time entry description" for team with ID "512".
+.EXAMPLE
+    PS C:\> Start-ClickUpTimeEntry -TeamID 512 -TaskID 9hx -Description 'Time entry description' -Billable $true
+    Start time entry for task with ID "9hx" and set description to "Time entry description" and billable set to true for team with ID "512".
+.INPUTS
+    None
+.OUTPUTS
+    System.Management.Automation.PSCustomObject
+.NOTES
+    See the link for information.
+.LINK
+    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/start-a-time-entry.html
+#>
+function Start-ClickUpTimeEntry() {
+    [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Management.Automation.PSCustomObject])]
+    param (
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
+        [UInt32]$TeamID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
+        [UInt64]$TimerID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
+        [string]$TaskID,
+        [Parameter(ParameterSetName = 'TaskID')]
+        [Parameter(ParameterSetName = 'TimerID')]
+        [string]$Description = '',
+        [Parameter(ParameterSetName = 'TaskID')]
+        [Parameter(ParameterSetName = 'TimerID')]
+        [hashtable[]]$Tags,
+        [Parameter(ParameterSetName = 'TaskID')]
+        [Parameter(ParameterSetName = 'TimerID')]
+        [bool]$Billable = $false,
+        [Parameter(ParameterSetName = 'TaskID')]
+        [Parameter(ParameterSetName = 'TimerID')]
+        [bool]$CustomTaskIDs
+    )
+
+    $Body = @{
+        description = $Description
+        tid = $TaskID
+        billable = $Billable
+    }
+
+    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+        $QueryString = @{
+            custom_task_ids = $CustomTaskIDs
+            team_id         = $TeamID
+        }
+    } else {
+        $QueryString = @{}
+    }
+
+    if ($PSBoundParameters.ContainsKey('Tags')) {
+        $Body.Add('tags', $Tags)
+    }
+
+    $TimeEntry = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "/team/$TeamID/time_entries/start/$TimerID" -Body $Body
+    Return $TimeEntry.data
+}
+
+<#
+.SYNOPSIS
+    Stop ClickUp time entries.
+.DESCRIPTION
+    Stop ClickUp time entries.
+.EXAMPLE
+    PS C:\> Stop-ClickUpTimeEntry -TeamID 512
+    Stop ClickUp time entries for Team with ID "512".
+.INPUTS
+    None
+.OUTPUTS
+    System.Management.Automation.PSCustomObject
+.NOTES
+    See the link for information.
+.LINK
+    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/stop-a-time-entry.html
+#>
+function Stop-ClickUpTimeEntry() {
+    [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
+    param (
+        [Parameter(Mandatory = $true)]
+        [UInt32]$TeamID
+    )
+
+    $TimeEntry = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/time_entries/stop"
+    $TimeEntry.data
+}
+
+<#
+.SYNOPSIS
+    Update a ClickUp time entry.
+.DESCRIPTION
+    Update a ClickUp time entry.
+.EXAMPLE
+    PS C:\> Set-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description.' -Tags 'Time Entry Tag' -TagAction 'replace'
+    Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time entry description." and removes the tag "Time Entry Tag".
+.EXAMPLE
+    PS C:\> Set-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description.' -Tags 'Time Entry Tag' -TagAction 'add'
+    Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time entry description." and adds the tag "Time Entry Tag".
+.INPUTS
+    None
+.OUTPUTS
+    System.Management.Automation.PSCustomObject
+.NOTES
+    See the link for information.
+.LINK
+    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/update-a-time-entry.html
+#>
+function Set-ClickUpTimeEntry() {
+    [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
+    param (
+        [Parameter(Mandatory = $true)]
+        [UInt32]$TeamID,
+        [Parameter(Mandatory = $true)]
+        [UInt64]$TimerID,
+        [Parameter()]
+        [string]$Description = '',
+        [Parameter()]
+        [hashtable[]]$Tags,
+        [Parameter()]
+        [ValidateSet('replace','add','remove')]
+        [string]$TagAction,
+        [Parameter()]
+        [string]$StartDate,
+        [Parameter()]
+        [string]$EndDate,
+        [Parameter(Mandatory = $true)]
+        [string]$TaskID,
+        [Parameter()]
+        [bool]$Billable,
+        [Parameter()]
+        [UInt32]$Duration,
+        [Parameter()]
+        [bool]$CustomTaskIDs
+    )
+
+    $Body = @{}
+
+    if ($PSBoundParameters.ContainsKey('Description')) {
+        $Body.Add('description', $Description)
+    }
+    if ($PSBoundParameters.ContainsKey('Tags')) {
+        $Body.Add('tags', $Tags)
+    }
+    if ($PSBoundParameters.ContainsKey('TagAction')) {
+        $Body.Add('tag_action', $TagAction)
+    }
+    if ($PSBoundParameters.ContainsKey('StartDate')) {
+        $Body.Add('start', $(Get-DatePosixMilliseconds -DateTime $StartDate))
+    }
+    if ($PSBoundParameters.ContainsKey('EndDate')) {
+        $Body.Add('end', $(Get-DatePosixMilliseconds -DateTime $EndDate))
+    }
+    if ($PSBoundParameters.ContainsKey('TaskID')) {
+        $Body.Add('tid', $TaskID)
+    }
+    if ($PSBoundParameters.ContainsKey('Billable')) {
+        $Body.Add('billable', $Billable)
+    }
+    if ($PSBoundParameters.ContainsKey('Duration')) {
+        $Body.Add('duration', $Duration)
+    }
+
+    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+        $QueryString = @{
+            custom_task_ids = $CustomTaskIDs
+            team_id         = $TeamID
+        }
+    } else {
+        $QueryString = @{}
+    }
+
+    $TimeEntry = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "team/$TeamID/time_entries/stop" -Body $Body
+    $TimeEntry.data
+}
+
+
+<#
+.SYNOPSIS
     Remove a ClickUp time entry.
 .DESCRIPTION
     Remove a ClickUp time entry.
@@ -274,7 +547,7 @@ function New-ClickUpTimeEntry {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/create-a-time-entry.html
+    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/delete-a-time-entry.html
 #>
 function Remove-ClickUpTimeEntry {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
