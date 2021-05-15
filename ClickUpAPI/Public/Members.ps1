@@ -24,7 +24,7 @@ function Get-ClickUpTaskMembers {
     )
 
     $TaskMembers = Invoke-ClickUpAPIGet -Endpoint "task/$TaskID/member"
-    $TaskMembers.members
+    Return $TaskMembers.members
 }
 
 <#
@@ -53,5 +53,5 @@ function Get-ClickUpListMembers {
     )
 
     $ListMembers = Invoke-ClickUpAPIGet -Endpoint "list/$TaskID/member"
-    $ListMembers.members
+    Return $ListMembers.members
 }
