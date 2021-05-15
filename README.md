@@ -8,25 +8,25 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 
 | API Reference | Code | Docs | Error Handling | Tested | Comments |
 | ------------- | ---- | ---- | --- | ------ | -------- |
-| Attachments   | ✅    | 🟡  |   |         |          |
+| Attachments   | ✅    | 🟡    |   |         |          |
 | Authorization |      |      |   |        |          |
-| Checklists    | ✅    | 🟡  |   |         |          |
-| Comments      | ✅    | 🟡  |   |         |          |
+| Checklists    | ✅    | 🟡    |   |         |          |
+| Comments      | ✅    | 🟡    |   |         |          |
 | Custom Fields |      |      |   |        |          |
 | Dependencies  |      |      |   |        |          |
-| Folders       | ✅    | 🟡  |   |         |          |
+| Folders       | ✅    | 🟡    |   |         |          |
 | Goals         |      |      |   |        |          |
 | Guests        |      |      |   |        | Enterprise only |
-| Lists         | ✅    | 🟡  |   |         |          |
-| Members       | ✅    |      |   |        |          |
+| Lists         | ✅    | 🟡    |   |         |          |
+| Members       | ✅    | 🟡    |   |        |          |
 | Shared Hierarchy |   |      |   |        |          |
-| Spaces        | ✅    | 🟡  |   |         |          |
+| Spaces        | ✅    | 🟡    |   |         |          |
 | Tags          |      |      |   |        |          |
-| Tasks         | ✅    | 🟡  |   |         |          |
+| Tasks         | ✅    | 🟡    |   |         |          |
 | Task Templates |      |     |   |        |          |
-| Teams         | ✅    | 🟡  |   |         |          |
-| Time Tracking |      |      |   |        |          |
-| Users         | ✅    | 🟡  |   |         | Enterprise only |
+| Teams         | ✅    | 🟡    |   |         |          |
+| Time Tracking | 🟡    | 🟡    |   |        | Partial implementation only. v2.0 will be implemented only. Legacy will not be implemented. |
+| Users         | ✅    | 🟡    |   |         | Enterprise only |
 | Views         |      |      |   |        |          |
 | Webhooks      |      |      |   |        |          |
 
