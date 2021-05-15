@@ -25,7 +25,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 | Tasks         | ✅    | 🟡    |   |         |          |
 | Task Templates |      |     |   |        |          |
 | Teams         | ✅    | 🟡    |   |         |          |
-| Time Tracking | 🟡    | 🟡    |   |        | Partial implementation only. v2.0 will be implemented only. Legacy will not be implemented. |
+| Time Tracking | ✅    | 🟡    |   |        | Partial implementation only. v2.0 will be implemented only. Legacy will not be implemented. |
 | Users         | ✅    | 🟡    |   |         | Enterprise only |
 | Views         |      |      |   |        |          |
 | Webhooks      |      |      |   |        |          |
