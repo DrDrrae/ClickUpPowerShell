@@ -2,34 +2,36 @@
 
 This PowerShell module wraps around and eases the use of the [ClickUp API](https://clickup.com/api) in PowerShell scripts and projects.
 
-
 ## Roadmap
+
 ### API endpoints
+
 | API Reference | Code | Docs | Error Handling | Tested | Comments |
 | ------------- | ---- | ---- | --- | ------ | -------- |
-| Attachments   | ✅   | 🟡  |   |         |          |
+| Attachments   | ✅    | 🟡  |   |         |          |
 | Authorization |      |      |   |        |          |
-| Checklists    | ✅   | 🟡  |   |         |          |
-| Comments      | ✅   | 🟡  |   |         |          |
+| Checklists    | ✅    | 🟡  |   |         |          |
+| Comments      | ✅    | 🟡  |   |         |          |
 | Custom Fields |      |      |   |        |          |
 | Dependencies  |      |      |   |        |          |
-| Folders       | ✅   | 🟡  |   |         |          |
+| Folders       | ✅    | 🟡  |   |         |          |
 | Goals         |      |      |   |        |          |
 | Guests        |      |      |   |        | Enterprise only |
-| Lists         | ✅   | 🟡  |   |         |          |
-| Members       |      |      |   |        |          |
+| Lists         | ✅    | 🟡  |   |         |          |
+| Members       | ✅    |      |   |        |          |
 | Shared Hierarchy |   |      |   |        |          |
-| Spaces        | ✅   | 🟡  |   |         |          |
+| Spaces        | ✅    | 🟡  |   |         |          |
 | Tags          |      |      |   |        |          |
-| Tasks         | ✅   | 🟡  |   |         |          |
+| Tasks         | ✅    | 🟡  |   |         |          |
 | Task Templates |      |     |   |        |          |
-| Teams         | ✅   | 🟡  |   |         |          |
+| Teams         | ✅    | 🟡  |   |         |          |
 | Time Tracking |      |      |   |        |          |
-| Users         | ✅   | 🟡  |   |         | Enterprise only |
+| Users         | ✅    | 🟡  |   |         | Enterprise only |
 | Views         |      |      |   |        |          |
 | Webhooks      |      |      |   |        |          |
-| 
+
 ### Other
+
 | API Reference | Code | Docs | Tested | Comments |
 | ------------- | ---- | ---- | ------ | -------- |
 | Authentication      |      |      |        |          |
