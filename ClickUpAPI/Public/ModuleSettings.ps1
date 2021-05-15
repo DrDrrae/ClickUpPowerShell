@@ -32,6 +32,7 @@ function Import-ClickUpModuleSettings {
         $tmp_config.ClickUpAPIKey = ConvertTo-SecureString $tmp_config.ClickUpAPIKey
 
         Set-Variable -Name 'ClickUpAPIKey' -Value $tmp_config.ClickUpAPIKey -Option ReadOnly -Scope Global -Force
+        Set-Variable -Name 'ClickUpJSONConversionDepth' -Value $tmp_config.ClickUpJSONConversionDepth -Scope Global -Force
 
         Write-Host "ClickUpAPI Module configuration loaded successfully from $ClickUpAPIConfPath\$ClickUpAPIConfFile!" -ForegroundColor Green
 
