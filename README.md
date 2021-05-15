@@ -6,7 +6,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 ## Roadmap
 ### API endpoints
 | API Reference | Code | Docs | Error Handling | Tested | Comments |
-| ------------- | ---- | ---- |   | ------ | -------- |
+| ------------- | ---- | ---- | --- | ------ | -------- |
 | Attachments   | ✅   | 🟡  |   |         |          |
 | Authorization |      |      |   |        |          |
 | Checklists    | ✅   | 🟡  |   |         |          |
