@@ -23,7 +23,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 | Spaces        | ✅    | 🟡    |   |         |          |
 | Tags          | ✅    | 🟡    |   |        |          |
 | Tasks         | ✅    | 🟡    |   |         |          |
-| Task Templates |      |     |   |        |          |
+| Task Templates |✅    | 🟡    |   |        |          |
 | Teams         | ✅    | 🟡    |   |         |          |
 | Time Tracking | ✅    | 🟡    |   |        | Partial implementation only. v2.0 will be implemented only. Legacy will not be implemented. |
 | Users         | ✅    | 🟡    |   |         | Enterprise only |
