@@ -21,7 +21,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 | Members       | ✅    | 🟡    |   |        |          |
 | Shared Hierarchy | ✅    | 🟡    |   |        |          |
 | Spaces        | ✅    | 🟡    |   |         |          |
-| Tags          |      |      |   |        |          |
+| Tags          | ✅    | 🟡    |   |        |          |
 | Tasks         | ✅    | 🟡    |   |         |          |
 | Task Templates |      |     |   |        |          |
 | Teams         | ✅    | 🟡    |   |         |          |
