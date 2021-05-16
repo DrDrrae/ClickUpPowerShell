@@ -15,7 +15,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 | Custom Fields | ✅    | 🟡    |   |        |          |
 | Dependencies  | ✅    | 🟡    |   |        |          |
 | Folders       | ✅    | 🟡    |   |         |          |
-| Goals         |      |      |   |        |          |
+| Goals         | ✅    | 🟡    |   |        |          |
 | Guests        |      |      |   |        | Enterprise only |
 | Lists         | ✅    | 🟡    |   |         |          |
 | Members       | ✅    | 🟡    |   |        |          |
