@@ -195,9 +195,11 @@ function Get-ClickUpTask {
         include_subtasks = $IncludeSubtasks
     }
 
-    $QueryString += @{
-        custom_task_ids = $CustomTaskIDs
-        team_id         = $TeamID
+    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+        $QueryString += @{
+            custom_task_ids = $CustomTaskIDs
+            team_id         = $TeamID
+        }
     }
 
     $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID"
