@@ -22,7 +22,7 @@ function Get-ClickUpGoals {
         [int]$TeamID
     )
 
-    $Goals = Invoke-ClickUpAPIGet-Endpoint "team/$TeamID/goal"
+    $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
     Return $Goals.goals
 }
 
@@ -50,7 +50,7 @@ function Get-ClickUpGoal {
         [int]$GoalID
     )
 
-    $Goal = Invoke-ClickUpAPIGet-Endpoint "goal/$GoalID"
+    $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
     Return $Goal.goal
 }
 
