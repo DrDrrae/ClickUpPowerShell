@@ -19,7 +19,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 | Guests        |      |      |   |        | Enterprise only |
 | Lists         | ✅    | 🟡    |   |         |          |
 | Members       | ✅    | 🟡    |   |        |          |
-| Shared Hierarchy |   |      |   |        |          |
+| Shared Hierarchy | ✅    | 🟡    |   |        |          |
 | Spaces        | ✅    | 🟡    |   |         |          |
 | Tags          |      |      |   |        |          |
 | Tasks         | ✅    | 🟡    |   |         |          |
