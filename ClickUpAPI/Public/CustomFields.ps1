@@ -86,7 +86,6 @@ function Set-ClickUpCustomFieldValue {
         value = $Value
     }
 
-
     Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/field/$FieldID" -Body $Body
 }
 
@@ -112,7 +111,7 @@ function Set-ClickUpCustomFieldValue {
     https://jsapi.apiary.io/apis/clickup20/reference/0/custom-fields/remove-custom-field-value.html
 #>
 function Remove-ClickUpCustomFieldValue {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     param (
@@ -137,5 +136,7 @@ function Remove-ClickUpCustomFieldValue {
         $QueryString = @{}
     }
 
-    Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/field/$FieldID"
+    if ($PSCmdlet.ShouldProcess($FieldID)) {
+        Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/field/$FieldID"
+    }
 }
