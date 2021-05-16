@@ -12,7 +12,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 | Authorization |      |      |   |        |          |
 | Checklists    | ✅    | 🟡    |   |         |          |
 | Comments      | ✅    | 🟡    |   |         |          |
-| Custom Fields |      |      |   |        |          |
+| Custom Fields | ✅    | 🟡    |   |        |          |
 | Dependencies  |      |      |   |        |          |
 | Folders       | ✅    | 🟡    |   |         |          |
 | Goals         |      |      |   |        |          |
