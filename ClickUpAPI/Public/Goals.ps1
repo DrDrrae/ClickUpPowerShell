@@ -19,7 +19,7 @@ function Get-ClickUpGoals {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID
+        [UInt32]$TeamID
     )
 
     $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
@@ -47,7 +47,7 @@ function Get-ClickUpGoal {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$GoalID
+        [UInt32]$GoalID
     )
 
     $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
