@@ -66,7 +66,7 @@ function New-ClickUpTaskFromTemplate {
         [string]$Name
     )
 
-    if($PSBoundParameters.ContainsKey('Name')) {
+    if ($PSBoundParameters.ContainsKey('Name')) {
         $Body = @{
             name = $Name
         }

@@ -392,8 +392,8 @@ function Start-ClickUpTimeEntry() {
 
     $Body = @{
         description = $Description
-        tid = $TaskID
-        billable = $Billable
+        tid         = $TaskID
+        billable    = $Billable
     }
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -475,7 +475,7 @@ function Set-ClickUpTimeEntry() {
         [Parameter()]
         [hashtable[]]$Tags,
         [Parameter()]
-        [ValidateSet('replace','add','remove')]
+        [ValidateSet('replace', 'add', 'remove')]
         [string]$TagAction,
         [Parameter()]
         [string]$StartDate,

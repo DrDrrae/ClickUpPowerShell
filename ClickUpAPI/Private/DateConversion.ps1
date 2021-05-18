@@ -1,9 +1,8 @@
 ﻿function Get-DatePosixMilliseconds {
     [CmdletBinding()]
     param(
-        [parameter(Mandatory = $false)]
-        [DateTime]
-        $DateTime = (Get-Date)
+        [parameter()]
+        [DateTime]$DateTime = (Get-Date)
     )
     $UTCDateTime = Get-Date($DateTime).ToUniversalTime()
     $unixEpochStart = New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
@@ -13,9 +12,8 @@ function ConvertTo-WindowsTime {
     [OutputType([DateTime])]
     Param(
         # Date in UNIX time
-        [Parameter(Mandatory, ValueFromPipeline = $true, HelpMessage = 'Milliseconds.')]
-        [int64]
-        $ticks
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, HelpMessage = 'Milliseconds.')]
+        [int64]$ticks
     )
     [DateTime]::new(1970, 1, 1, 0, 0, 0, 0, [System.DateTimeKind]::Utc).AddMilliseconds($ticks).ToLocalTime()
 }

@@ -10,13 +10,13 @@
     )
     try {
         $InvokeParams = @{
-            Body           = if ($Body) { ConvertTo-Json -InputObject $Body -Depth $ClickUpJSONConversionDepth } else { '' }
-            ContentType    = 'application/json'
+            Body        = if ($Body) { ConvertTo-Json -InputObject $Body -Depth $ClickUpJSONConversionDepth } else { '' }
+            ContentType = 'application/json'
             Headers     = @{
                 Authorization = Get-ClickUpAPIKeyInsecure -APIKey $ClickUpAPIKey
             }
-            Method         = $Method
-            Uri            = $URI
+            Method      = $Method
+            Uri         = $URI
         }
         $Response = Invoke-RestMethod @InvokeParams
         if ($Response) {

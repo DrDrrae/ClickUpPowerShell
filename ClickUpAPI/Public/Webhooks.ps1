@@ -74,7 +74,7 @@ function New-ClickUpWebhook {
 
     $Body = @{
         endpoint = $Endpoint
-        events = $Events
+        events   = $Events
     }
 
     if ($PSBoundParameters.ContainsKey('FilterToSpaceID')) {

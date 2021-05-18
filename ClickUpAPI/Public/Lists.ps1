@@ -101,7 +101,7 @@ function Get-ClickUpList {
 function New-ClickUpList {
     [CmdletBinding(DefaultParameterSetName = 'FolderID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = "FolderID")]
+        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [UInt32]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
         [UInt32]$SpaceID,

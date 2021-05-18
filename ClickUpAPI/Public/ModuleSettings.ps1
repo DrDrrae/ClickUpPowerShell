@@ -13,7 +13,7 @@ function Export-ClickUpModuleSettings {
         }
 
         $ClickupSettings = @{
-            ClickUpAPIKey = $secureString
+            ClickUpAPIKey              = $secureString
             ClickUpJSONConversionDepth = $ClickUpJSONConversionDepth
         }
         $ClickupSettings | Export-Clixml -LiteralPath ($ClickUpAPIConfPath + '\' + $ClickUpAPIConfFile) -Force

@@ -94,7 +94,7 @@ function New-ClickUpGoal {
         name = $Name
     }
 
-    if($PSBoundParameters.ContainsKey('DueDate')) {
+    if ($PSBoundParameters.ContainsKey('DueDate')) {
         $Body.Add('due_date', $(Get-DatePosixMilliseconds -DateTime $DueDate))
     }
     if ($PSBoundParameters.ContainsKey('Description')) {
@@ -231,7 +231,7 @@ function New-ClickUpKeyResult {
         [Parameter()]
         [UInt32[]]$Owners,
         [Parameter()]
-        [ValidateSet('number','currency','boolean','percentage','automatic')]
+        [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
         [UInt32]$StepsStart,

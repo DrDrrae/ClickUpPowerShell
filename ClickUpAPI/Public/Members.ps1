@@ -19,7 +19,7 @@ function Get-ClickUpTaskMembers {
     [CmdletBinding()]
     [OutputType([hashtable])]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$TaskID
     )
 

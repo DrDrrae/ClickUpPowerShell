@@ -146,7 +146,7 @@ function Remove-ClickUpChecklist {
 function New-ClickUpChecklistItem {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$True)]
+        [Parameter(Mandatory = $True)]
         [string]$CheckListID,
         [Parameter(Mandatory = $True)]
         [string]$Name,

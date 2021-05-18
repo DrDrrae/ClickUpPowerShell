@@ -2,12 +2,9 @@
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [string]
-        $Uri,
-
+        [string]$Uri,
         [Parameter(Mandatory = $true)]
-        [hashtable]
-        $QueryParameter
+        [hashtable]$QueryParameter
     )
     # Add System.Web
     Add-Type -AssemblyName System.Web

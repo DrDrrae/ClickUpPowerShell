@@ -287,7 +287,7 @@ function Get-ClickUpTaskTimeInStatusBulk {
     )
 
     $QueryString = @{
-        task_ids         = $TaskID
+        task_ids = $TaskID
     }
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
