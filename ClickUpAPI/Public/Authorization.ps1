@@ -19,7 +19,7 @@ function Get-ClickUpAuthorizedUser {
     [CmdletBinding()]
     param ()
 
-    $User = Invoke-ClickUpAPIPost -Endpoint 'user'
+    $User = Invoke-ClickUpAPIGet -Endpoint 'user'
     Return $User.user
 }
 
@@ -44,7 +44,7 @@ function Get-ClickUpAuthorizedTeams {
     [CmdletBinding()]
     param ()
 
-    $Teams = Invoke-ClickUpAPIPost -Endpoint 'team'
+    $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
     Return $Teams.teams
 }
 
