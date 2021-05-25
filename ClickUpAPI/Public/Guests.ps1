@@ -292,6 +292,7 @@ function Add-ClickUpGuestToFolder {
 #>
 function Remove-ClickUpGuest {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$TeamID,
@@ -376,6 +377,7 @@ function Remove-ClickUpGuestFromTask {
 #>
 function Remove-ClickUpGuestFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ListID,
@@ -408,6 +410,7 @@ function Remove-ClickUpGuestFromList {
 #>
 function Remove-ClickUpGuestFromFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$FolderID,
