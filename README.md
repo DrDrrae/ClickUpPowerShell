@@ -8,7 +8,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 
 | API Reference | Code | Docs | Error Handling | Tested | Comments |
 | ------------- | ---- | ---- | --- | ------ | -------- |
-| Attachments   |      |      |   |         |          |
+| Attachments   | ✅    | 🟡    |   |         |          |
 | Authorization | ✅    | 🟡    |   |        |          |
 | Checklists    | ✅    | 🟡    |   |         |          |
 | Comments      | ✅    | 🟡    |   |         |          |

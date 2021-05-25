@@ -94,3 +94,33 @@ function Invoke-ClickUpAPIDelete {
     $Response = Invoke-ClickUpAPIRequest -Uri $URI -Method 'Delete' -Body $Body
     return $Response
 }
+
+function Invoke-ClickUpAPIPostAttachment {
+    [CmdletBinding()]
+    param (
+        [hashtable]$Arguments = @{},
+        [Parameter(Mandatory = $true)]
+        [string]$Endpoint,
+        [Parameter(Mandatory = $true)]
+        [string]$Body,
+        [Parameter(Mandatory = $true)]
+        [string]$Boundary
+    )
+    if ($Arguments.Count) {
+        $URI = New-HTTPQueryString -Uri "https://api.clickup.com/api/v2/$Endpoint" -QueryParameter $Arguments
+    } else {
+        $URI = "https://api.clickup.com/api/v2/$Endpoint"
+    }
+
+    $InvokeParams = @{
+            Body        = $Body
+            ContentType = "multipart/form-data; boundary=`"$Boundary`""
+            Headers     = @{
+                Authorization = Get-ClickUpAPIKeyInsecure -APIKey $ClickUpAPIKey
+            }
+            Method      = 'post'
+            Uri         = $URI
+        }
+    $Response = Invoke-RestMethod @InvokeParams
+    return $Response
+}
