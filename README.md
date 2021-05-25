@@ -16,7 +16,7 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 | Dependencies  | ✅    | 🟡    |   |        |          |
 | Folders       | ✅    | 🟡    |   |         |          |
 | Goals         | ✅    | 🟡    |   |        |          |
-| Guests        |      |      |   |        | Enterprise only |
+| Guests        | ✅    | 🟡    |   |        | Enterprise only |
 | Lists         | ✅    | 🟡    |   |         |          |
 | Members       | ✅    | 🟡    |   |        |          |
 | Shared Hierarchy | ✅    | 🟡    |   |        |          |
