@@ -55,6 +55,12 @@ function Get-ClickUpAuthorizedTeams {
     Get a new ClickUp access token.
 .DESCRIPTION
     Get a new ClickUp access token.
+.PARAMETER ClientID
+    ClickUp OAuth app client id
+.PARAMETER ClientSecret
+    ClickUp OAuth app client secret
+.PARAMETER Code
+    Code given in redirect url
 .EXAMPLE
     PS C:\> New-ClickUpAccessToken -ClientID "ClientID" -ClientSecret "ClientSecret" -Code "Code"
     Get a new ClickUp access token.
