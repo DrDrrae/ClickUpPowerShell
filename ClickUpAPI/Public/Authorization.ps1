@@ -56,11 +56,11 @@ function Get-ClickUpAuthorizedTeams {
 .DESCRIPTION
     Get a new ClickUp access token.
 .PARAMETER ClientID
-    ClickUp OAuth app client id
+    ClickUp OAuth app client id.
 .PARAMETER ClientSecret
-    ClickUp OAuth app client secret
+    ClickUp OAuth app client secret.
 .PARAMETER Code
-    Code given in redirect url
+    Code given in redirect url.
 .EXAMPLE
     PS C:\> New-ClickUpAccessToken -ClientID "ClientID" -ClientSecret "ClientSecret" -Code "Code"
     Get a new ClickUp access token.
@@ -77,11 +77,11 @@ function New-ClickUpAccessToken {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'ClickUp OAuth app client id.')]
         [string]$ClientID,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'ClickUp OAuth app client secret.')]
         [string]$ClientSecret,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'Code given in redirect url.')]
         [string]$Code
     )
 
