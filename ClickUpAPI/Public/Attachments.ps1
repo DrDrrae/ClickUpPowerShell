@@ -4,7 +4,7 @@
 .DESCRIPTION
     Upload an attachment to a ClickUp task.
 .PARAMETER TaskID
-    The ClickUp TaskID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
 .PARAMETER AttachmentPath
     The path to the attachment to upload.
 .PARAMETER CustomTaskIDs
