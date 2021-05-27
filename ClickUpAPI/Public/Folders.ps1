@@ -12,7 +12,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -20,6 +20,7 @@
 #>
 function Get-ClickUpFolders {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID,
@@ -46,7 +47,7 @@ function Get-ClickUpFolders {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -54,6 +55,7 @@ function Get-ClickUpFolders {
 #>
 function Get-ClickUpFolder {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$FolderID
@@ -74,7 +76,7 @@ function Get-ClickUpFolder {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -82,6 +84,7 @@ function Get-ClickUpFolder {
 #>
 function New-ClickUpFolder {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID,
@@ -108,7 +111,7 @@ function New-ClickUpFolder {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -116,6 +119,7 @@ function New-ClickUpFolder {
 #>
 function Set-ClickUpFolder {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$FolderID,
@@ -142,7 +146,7 @@ function Set-ClickUpFolder {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK

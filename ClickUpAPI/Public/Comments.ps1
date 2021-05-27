@@ -12,7 +12,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -54,7 +54,7 @@ function Get-ClickUpTaskComments {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -62,6 +62,7 @@ function Get-ClickUpTaskComments {
 #>
 function Get-ClickUpChatViewComments {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID
@@ -82,7 +83,7 @@ function Get-ClickUpChatViewComments {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -90,6 +91,7 @@ function Get-ClickUpChatViewComments {
 #>
 function Get-ClickUpListComments {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$ListID
@@ -115,7 +117,7 @@ function Get-ClickUpListComments {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -123,6 +125,7 @@ function Get-ClickUpListComments {
 #>
 function Set-ClickUpListComment {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$CommentID,
@@ -144,7 +147,7 @@ function Set-ClickUpListComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -207,7 +210,7 @@ function Remove-ClickUpListComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -278,7 +281,7 @@ function New-ClickUpTaskComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -286,6 +289,7 @@ function New-ClickUpTaskComment {
 #>
 function New-ClickUpChatViewComment {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
@@ -334,7 +338,7 @@ function New-ClickUpChatViewComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -342,6 +346,7 @@ function New-ClickUpChatViewComment {
 #>
 function New-ClickUpListComment {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$ListID,

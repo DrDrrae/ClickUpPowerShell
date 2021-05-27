@@ -9,7 +9,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -19,6 +19,7 @@
 #>
 function Get-ClickUpSharedHierarchy {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$TeamID

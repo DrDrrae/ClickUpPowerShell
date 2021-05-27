@@ -31,6 +31,7 @@ function Remove-ClickUpAPIKey {
 
 function Get-ClickUpAPIKey {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param ()
     if ($null -eq $ClickUpAPIKey) {
         Write-Error 'No API key exists. Please run Add-ClickUpAPIKey to add one.'

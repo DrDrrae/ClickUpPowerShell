@@ -9,7 +9,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -17,6 +17,7 @@
 #>
 function Get-ClickUpTags {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID
@@ -37,7 +38,7 @@ function Get-ClickUpTags {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -45,6 +46,7 @@ function Get-ClickUpTags {
 #>
 function New-ClickUpTag {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID,
@@ -82,7 +84,7 @@ function New-ClickUpTag {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -90,6 +92,7 @@ function New-ClickUpTag {
 #>
 function Set-ClickUpTag {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID,
@@ -129,7 +132,7 @@ function Set-ClickUpTag {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -163,7 +166,7 @@ function Remove-ClickUpTag {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -210,7 +213,7 @@ function Add-ClickUpTagToTask {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK

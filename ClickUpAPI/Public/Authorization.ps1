@@ -9,7 +9,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -17,6 +17,7 @@
 #>
 function Get-ClickUpAuthorizedUser {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param ()
 
     $User = Invoke-ClickUpAPIGet -Endpoint 'user'
@@ -34,7 +35,7 @@ function Get-ClickUpAuthorizedUser {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -42,6 +43,7 @@ function Get-ClickUpAuthorizedUser {
 #>
 function Get-ClickUpAuthorizedTeams {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param ()
 
     $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
@@ -59,7 +61,7 @@ function Get-ClickUpAuthorizedTeams {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -67,6 +69,7 @@ function Get-ClickUpAuthorizedTeams {
 #>
 function New-ClickUpAccessToken {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$ClientID,

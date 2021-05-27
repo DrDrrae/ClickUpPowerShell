@@ -4,6 +4,7 @@ $ClickUpAPIConfFile = 'Config.xml'
 
 function Export-ClickUpModuleSettings {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param ()
     # Confirm variables exist and are not null before exporting
     if ($ClickUpAPIKey -and $ClickUpJSONConversionDepth) {
@@ -24,6 +25,7 @@ function Export-ClickUpModuleSettings {
 
 function Import-ClickUpModuleSettings {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param ()
 
     if (Test-Path ($ClickUpAPIConfPath + '\' + $ClickUpAPIConfFile) ) {

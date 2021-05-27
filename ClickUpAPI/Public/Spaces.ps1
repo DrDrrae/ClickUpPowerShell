@@ -12,7 +12,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -20,6 +20,7 @@
 #>
 function Get-ClickUpSpaces {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$TeamID,
@@ -46,7 +47,7 @@ function Get-ClickUpSpaces {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -54,6 +55,7 @@ function Get-ClickUpSpaces {
 #>
 function Get-ClickUpSpace {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID
@@ -73,7 +75,7 @@ function Get-ClickUpSpace {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -81,6 +83,7 @@ function Get-ClickUpSpace {
 #>
 function New-ClickUpSpace {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$TeamID,
@@ -178,7 +181,7 @@ function New-ClickUpSpace {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information on how to format the body.
 
@@ -224,6 +227,7 @@ function New-ClickUpSpace {
 #>
 function Set-ClickUpSpace {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$SpaceID,

@@ -1,5 +1,6 @@
 ﻿function Get-ClickUpUser {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [int]$TeamID,

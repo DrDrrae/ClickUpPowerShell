@@ -9,7 +9,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -17,6 +17,7 @@
 #>
 function Get-ClickUpGoals {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$TeamID
@@ -37,7 +38,7 @@ function Get-ClickUpGoals {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -45,6 +46,7 @@ function Get-ClickUpGoals {
 #>
 function Get-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$GoalID
@@ -65,7 +67,7 @@ function Get-ClickUpGoal {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -73,6 +75,7 @@ function Get-ClickUpGoal {
 #>
 function New-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [Uint32]$TeamID,
@@ -125,7 +128,7 @@ function New-ClickUpGoal {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -133,6 +136,7 @@ function New-ClickUpGoal {
 #>
 function Set-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [Uint32]$GoalID,
@@ -186,7 +190,7 @@ function Set-ClickUpGoal {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -215,7 +219,7 @@ function Remove-ClickUpGoal {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -223,6 +227,7 @@ function Remove-ClickUpGoal {
 #>
 function New-ClickUpKeyResult {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$GoalID,
@@ -286,7 +291,7 @@ function New-ClickUpKeyResult {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -294,6 +299,7 @@ function New-ClickUpKeyResult {
 #>
 function Set-ClickUpKeyResult {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$KeyResultID,
@@ -368,7 +374,7 @@ function Set-ClickUpKeyResult {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK

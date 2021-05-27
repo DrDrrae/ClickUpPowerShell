@@ -9,7 +9,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -20,6 +20,7 @@
 #>
 function Get-ClickUpView {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID
@@ -40,7 +41,7 @@ function Get-ClickUpView {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -51,6 +52,7 @@ function Get-ClickUpView {
 #>
 function Get-ClickUpTeamViews {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$TeamID
@@ -71,7 +73,7 @@ function Get-ClickUpTeamViews {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -82,6 +84,7 @@ function Get-ClickUpTeamViews {
 #>
 function Get-ClickUpSpaceViews {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$SpaceID
@@ -102,7 +105,7 @@ function Get-ClickUpSpaceViews {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -113,6 +116,7 @@ function Get-ClickUpSpaceViews {
 #>
 function Get-ClickUpListViews {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$FolderID
@@ -133,7 +137,7 @@ function Get-ClickUpListViews {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -144,6 +148,7 @@ function Get-ClickUpListViews {
 #>
 function Get-ClickUpListViews {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$ListID
@@ -167,7 +172,7 @@ function Get-ClickUpListViews {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -178,6 +183,7 @@ function Get-ClickUpListViews {
 #>
 function Get-ClickUpViewTaks {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
@@ -212,7 +218,7 @@ function Get-ClickUpViewTaks {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -223,6 +229,7 @@ function Get-ClickUpViewTaks {
 #>
 function New-ClickUpTeamView {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$TeamID,
@@ -253,7 +260,7 @@ function New-ClickUpTeamView {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -264,6 +271,7 @@ function New-ClickUpTeamView {
 #>
 function New-ClickUpSpaceView {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$SpaceID,
@@ -294,7 +302,7 @@ function New-ClickUpSpaceView {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -305,6 +313,7 @@ function New-ClickUpSpaceView {
 #>
 function New-ClickUpListView {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$FolderID,
@@ -335,7 +344,7 @@ function New-ClickUpListView {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -346,6 +355,7 @@ function New-ClickUpListView {
 #>
 function New-ClickUpListViews {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$ListID,
@@ -376,7 +386,7 @@ function New-ClickUpListViews {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 
@@ -387,6 +397,7 @@ function New-ClickUpListViews {
 #>
 function Set-ClickUpView {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
@@ -409,7 +420,7 @@ function Set-ClickUpView {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 

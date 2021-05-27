@@ -12,7 +12,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -20,6 +20,7 @@
 #>
 function Get-ClickUpTaskTemplates {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$TeamID,
@@ -49,7 +50,7 @@ function Get-ClickUpTaskTemplates {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -57,6 +58,7 @@ function Get-ClickUpTaskTemplates {
 #>
 function New-ClickUpTaskFromTemplate {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt32]$ListID,

@@ -12,7 +12,7 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -64,7 +64,7 @@ function New-ClickUpChecklist {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -72,6 +72,7 @@ function New-ClickUpChecklist {
 #>
 function Set-ClickUpChecklist {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
@@ -105,7 +106,7 @@ function Set-ClickUpChecklist {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -137,7 +138,7 @@ function Remove-ClickUpChecklist {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -145,6 +146,7 @@ function Remove-ClickUpChecklist {
 #>
 function New-ClickUpChecklistItem {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$CheckListID,
@@ -180,7 +182,7 @@ function New-ClickUpChecklistItem {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
@@ -188,6 +190,7 @@ function New-ClickUpChecklistItem {
 #>
 function Set-ClickUpChecklistItem {
     [CmdletBinding()]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
@@ -233,7 +236,7 @@ function Set-ClickUpChecklistItem {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Management.Automation.PSCustomObject
 .NOTES
     See the link for information.
 .LINK
