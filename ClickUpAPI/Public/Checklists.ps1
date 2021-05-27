@@ -3,6 +3,14 @@
     Create a new ClickUp checklist.
 .DESCRIPTION
     Create a new ClickUp checklist.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER Name
+    The name of the new ClickUp checklist.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> New-ClickUpChecklist -TaskID 9hz -Name "Checklist"
     Create a new checklist on ClickUp task with ID "9hz" with name "Checklist".
@@ -20,6 +28,7 @@
 #>
 function New-ClickUpChecklist {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -55,6 +64,14 @@ function New-ClickUpChecklist {
     Update a ClickUp checklist.
 .DESCRIPTION
     Update a ClickUp checklist.
+.PARAMETER ChecklistID
+    The ClickUp checklist ID.
+.PARAMETER Name
+    The new name of the ClickUp checklist.
+.PARAMETER Position
+    The position of the checklist.
+
+    Zero-based index of the order you want the checklist to exist on the task. If you want the checklist to be in the first position, pass 0.
 .EXAMPLE
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -Name "New checklist name."
     Update ClickUp checklist with ID "b955c4dc" to new name "New checklist name."
@@ -74,11 +91,11 @@ function Set-ClickUpChecklist {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
         [string]$ChecklistID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'The new name of the ClickUp checklist.')]
         [string]$Name,
-        [Parameter()]
+        [Parameter(HelpMessage = 'The zero-based position of the checklist.')]
         [UInt32]$Position
     )
 
@@ -100,6 +117,8 @@ function Set-ClickUpChecklist {
     Delete a ClickUp checklist.
 .DESCRIPTION
     Delete a ClickUp checklist.
+.PARAMETER ChecklistID
+    The ClickUp checklist ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc
     Remove ClickUp checklist with ID "b955c4dc".
@@ -114,8 +133,9 @@ function Set-ClickUpChecklist {
 #>
 function Remove-ClickUpChecklist {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
         [string]$ChecklistID
     )
 
@@ -129,6 +149,12 @@ function Remove-ClickUpChecklist {
     Create a new ClickUp checklist item.
 .DESCRIPTION
     Create a new ClickUp checklist item.
+.PARAMETER ChecklistID
+    The ClickUp checklist ID.
+.PARAMETER Name
+    The name of the new ClickUp checklist item.
+.PARAMETER Assignee
+    The ClickUp user ID of the user to assign the checklist item to.
 .EXAMPLE
     PS C:\> New-ClickUpChecklist -CheckListID b955c4dc -Name "Checklist item"
     Create a new checklist item on ClickUp Checklist with ID "b955c4dc" with name "Checklist item".
@@ -148,11 +174,11 @@ function New-ClickUpChecklistItem {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'The ClickUp checklist ID.')]
         [string]$CheckListID,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'The name of the new ClickUp checklist item')]
         [string]$Name,
-        [Parameter()]
+        [Parameter(HelpMessage = 'The ClickUp user ID of the user to assign the checklist item to.')]
         [UInt32]$Assignee
     )
 
@@ -173,6 +199,18 @@ function New-ClickUpChecklistItem {
     Update a ClickUp checklist item.
 .DESCRIPTION
     Update a ClickUp checklist item.
+.PARAMETER ChecklistID
+    The ClickUp checklist ID.
+.PARAMETER ChecklistItemID
+    The ClickUp checklist item ID.
+.PARAMETER Name
+    The new name of the ClickUp checklist item.
+.PARAMETER Assignee
+    The ClickUp user ID of the user to assign the checklist item to.
+.PARAMETER Resolved
+    If the checklist item is resolved or not.
+.PARAMETER Parent
+    Another checklist item that you want to nest the target checklist item underneath.
 .EXAMPLE
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8 -Name "New checklist item name."
     Update ClickUp checklist item with ID "21e08dc8" under checklist with ID "b955c4dc" to new name "New checklist item name."
@@ -192,17 +230,17 @@ function Set-ClickUpChecklistItem {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
         [string]$ChecklistID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist item ID.')]
         [string]$ChecklistItemId,
-        [Parameter()]
+        [Parameter(HelpMessage = 'The new name of the ClickUp checklist item.')]
         [string]$Name,
-        [Parameter()]
+        [Parameter(HelpMessage = 'The ClickUp user ID of the user to assign the checklist item to.')]
         [UInt32]$Assignee,
-        [Parameter()]
+        [Parameter(HelpMessage = 'If the checklist item is resolved or not.')]
         [bool]$Resolved,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Another checklist item that you want to nest the target checklist item underneath.')]
         [string]$Parent
     )
 
@@ -230,6 +268,10 @@ function Set-ClickUpChecklistItem {
     Delete a ClickUp checklist item.
 .DESCRIPTION
     Delete a ClickUp checklist item.
+.PARAMETER ChecklistID
+    The ClickUp checklist ID.
+.PARAMETER ChecklistItemID
+    The ClickUp checklist item ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8
     Remove ClickUp checklist with ID "b955c4dc".
@@ -244,10 +286,11 @@ function Set-ClickUpChecklistItem {
 #>
 function Remove-ClickUpCheckListItem {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
         [string]$ChecklistID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist item ID.')]
         [string]$ChecklistItemId
     )
 
