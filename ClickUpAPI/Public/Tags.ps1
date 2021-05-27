@@ -20,7 +20,7 @@ function Get-ClickUpTags {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID
+        [UInt32]$SpaceID
     )
 
     $Tags = Invoke-ClickUpAPIGet-Endpoint "space/$SpaceID/tag"
@@ -49,7 +49,7 @@ function New-ClickUpTag {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [UInt32]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName,
         [Parameter()]
@@ -95,7 +95,7 @@ function Set-ClickUpTag {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [UInt32]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName,
         [Parameter()]
@@ -142,7 +142,7 @@ function Remove-ClickUpTag {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [UInt32]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName
     )
@@ -184,7 +184,7 @@ function Add-ClickUpTagToTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [UInt32]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -231,7 +231,7 @@ function Remove-ClickUpTagFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [UInt32]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {

@@ -23,7 +23,7 @@ function Get-ClickUpSpaces {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID,
+        [UInt32]$TeamID,
         [Parameter()]
         [bool]$Archived = $false
     )
@@ -58,7 +58,7 @@ function Get-ClickUpSpace {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID
+        [UInt32]$SpaceID
     )
     $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
     Return $Space
@@ -86,7 +86,7 @@ function New-ClickUpSpace {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID,
+        [UInt32]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [bool]$Multiple_Assignees = $true,
@@ -230,7 +230,7 @@ function Set-ClickUpSpace {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [UInt32]$SpaceID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -243,7 +243,7 @@ function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID
+        [UInt32]$SpaceID
     )
 
     if ($PSCmdlet.ShouldProcess($SpaceID)) {

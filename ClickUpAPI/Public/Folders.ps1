@@ -23,7 +23,7 @@ function Get-ClickUpFolders {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [UInt32]$SpaceID,
         [Parameter()]
         [bool]$Archived = $false
     )
@@ -58,7 +58,7 @@ function Get-ClickUpFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$FolderID
+        [UInt32]$FolderID
     )
 
     $Folder = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "folder/$FolderID"
@@ -87,9 +87,9 @@ function New-ClickUpFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [UInt32]$SpaceID,
         [Parameter(Mandatory = $true)]
-        [int]$Name
+        [UInt32]$Name
     )
 
     $Body = @{
@@ -122,9 +122,9 @@ function Set-ClickUpFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$FolderID,
+        [UInt32]$FolderID,
         [Parameter(Mandatory = $true)]
-        [int]$Name
+        [UInt32]$Name
     )
 
     $Body = @{
@@ -156,7 +156,7 @@ function Remove-ClickUpFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$FolderID
+        [UInt32]$FolderID
     )
 
     if ($PSCmdlet.ShouldProcess($FolderID)) {

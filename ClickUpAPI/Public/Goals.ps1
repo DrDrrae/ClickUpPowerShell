@@ -78,7 +78,7 @@ function New-ClickUpGoal {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [Uint32]$TeamID,
+        [UInt32]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
@@ -139,7 +139,7 @@ function Set-ClickUpGoal {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [Uint32]$GoalID,
+        [UInt32]$GoalID,
         [Parameter()]
         [string]$Name,
         [Parameter()]

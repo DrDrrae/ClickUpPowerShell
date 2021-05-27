@@ -33,7 +33,7 @@ function Get-ClickUpTasks {
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
-        [int]$Page = 0,
+        [UInt32]$Page = 0,
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
@@ -185,7 +185,7 @@ function Get-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID,
+        [UInt32]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -235,7 +235,7 @@ function Get-ClickUpTaskTimeInStatus {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID,
+        [UInt32]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -283,7 +283,7 @@ function Get-ClickUpTaskTimeInStatusBulk {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [UInt32]$TeamID
     )
 
     $QueryString = @{
@@ -326,17 +326,17 @@ function New-ClickUpTask {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$ListID,
+        [UInt32]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [string]$Description,
         [int[]]$Assignees,
         [string[]]$Tags,
         [string]$Status,
-        [int]$Priority,
+        [UInt32]$Priority,
         [datetime]$DueDate,
         [bool]$DueDateTime = $false,
-        [int]$TimeEstimate,
+        [UInt32]$TimeEstimate,
         [datetime]$StartDate,
         [bool]$StartDateTime = $false,
         [bool]$NotifyAll,
@@ -463,7 +463,7 @@ function Set-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [UInt32]$TeamID
     )
 
 
@@ -509,7 +509,7 @@ function Remove-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [UInt32]$TeamID
     )
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {

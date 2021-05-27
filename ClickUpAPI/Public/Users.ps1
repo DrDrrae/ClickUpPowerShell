@@ -3,9 +3,9 @@
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID,
+        [UInt32]$TeamID,
         [Parameter(Mandatory = $true)]
-        [int]$UserID
+        [UInt32]$UserID
     )
 
     Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/user/$UserID"

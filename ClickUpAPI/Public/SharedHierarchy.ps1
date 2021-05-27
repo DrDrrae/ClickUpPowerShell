@@ -22,7 +22,7 @@ function Get-ClickUpSharedHierarchy {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID
+        [UInt32]$TeamID
     )
 
     $SharedHierarchy = Invoke-ClickUpAPIGet-Endpoint "team/$TeamID/shared"
