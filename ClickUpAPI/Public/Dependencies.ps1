@@ -3,6 +3,16 @@
     Add ClickUp dependency.
 .DESCRIPTION
     Add ClickUp dependency.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER DependsOn
+    The ClickUp task ID that the task ID referenced by "TaskID" depends on.
+.PARAMETER DependendencyOf
+    The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Add-ClickUpDependency -TaskID 9hv -DependsOn 9hz
     Add ClickUp task with ID "9hz" as a dependency of ClickUp task with ID "9hv".
@@ -76,6 +86,16 @@ function Add-ClickUpDependency {
     Remove ClickUp dependency.
 .DESCRIPTION
     Remove ClickUp dependency.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER DependsOn
+    The ClickUp task ID that the task ID referenced by "TaskID" depends on to be removed.
+.PARAMETER DependendencyOf
+    The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of to be removed.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Remove-ClickUpDependency -TaskID 9hv -DependsOn 9hz
     Remove ClickUp task with ID "9hz" as a dependency of ClickUp task with ID "9hv".
@@ -141,6 +161,14 @@ function Remove-ClickUpDependency {
     Add ClickUp task link.
 .DESCRIPTION
     Add ClickUp task link.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER LinksTo
+    The ClickUp task ID that the task ID referenced by "TaskID" should be linked to.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Add-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Add ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
@@ -189,6 +217,14 @@ function Add-ClickUpTaskLink {
     Remove ClickUp task link.
 .DESCRIPTION
     Remove ClickUp task link.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER LinksTo
+    The ClickUp task ID that the task ID referenced by "TaskID" should be removed from linked to.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Remove-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Remove ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
