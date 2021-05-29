@@ -3,9 +3,13 @@
     Get ClickUp guest.
 .DESCRIPTION
     Get ClickUp guest.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER GuestID
+    ClickUp guest ID.
 .EXAMPLE
     PS C:\> Get-ClickUpGuest -TeamID 333 -GuestID 403
-    Guest ClickUp guest user with ID "403" for team with ID "333".
+    guest ClickUp guest user with ID "403" for team with ID "333".
 .INPUTS
     None
 .OUTPUTS
@@ -34,6 +38,16 @@ function Get-ClickUpGuest {
     Invite ClickUp guest to workspace.
 .DESCRIPTION
     Invite ClickUp guest to workspace.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER GuestEmail
+    The email address of the guest to invite.
+.PARAMETER CanEditTags
+    Whether the guest can edit tags.
+.PARAMETER CanSeeTimeSpent
+    Whether the guest can see time spent.
+.PARAMETER CanSeeTimeEstimated
+    Wheter the guest can see time estimated.
 .EXAMPLE
     PS C:\> Add-ClickUpGuest -TeamID 333 -GuestEmail 'guest@example.com'
     Add ClickUp guest user with email "guest@example.com" for team with ID "333".
@@ -81,6 +95,18 @@ function Add-ClickUpGuest {
     Update ClickUp guest on workspace.
 .DESCRIPTION
     Update ClickUp guest on workspace.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER GuestID
+    ClickUp guest ID.
+.PARAMETER Username
+    The new username of the guest.
+.PARAMETER CanEditTags
+    Whether the guest can edit tags.
+.PARAMETER CanSeeTimeSpent
+    Whether the guest can see time spent.
+.PARAMETER CanSeeTimeEstimated
+    Wheter the guest can see time estimated.
 .EXAMPLE
     PS C:\> Set-ClickUpGuest -TeamID 333 -GuestID 403 -Username 'Guest User'
     Update ClickUp guest's username to "Guest User"  for guest with ID "403".
@@ -102,6 +128,8 @@ function Set-ClickUpGuest {
     param (
         [Parameter(Mandatory = $True)]
         [UInt32]$TeamID,
+        [Parameter(Mandatory = $True)]
+        [UInt32]$GuestID,
         [Parameter()]
         [string]$Username,
         [Parameter()]
@@ -127,7 +155,7 @@ function Set-ClickUpGuest {
         $Body.Add('can_see_time_estimated', $CanSeeTimeEstimated)
     }
 
-    $Guest = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/guest" -Body $Body
+    $Guest = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/guest/$GuestID" -Body $Body
     Return $Guest.guest
 }
 
@@ -136,6 +164,16 @@ function Set-ClickUpGuest {
     Add ClickUp guest to task.
 .DESCRIPTION
     Add ClickUp guest to task.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER GuestID
+    ClickUp guest ID.
+.PARAMETER PermissionLevel
+    Permission level of the guest added to the task.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToTask -TaskID c04 -GuestID 403
     Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "read".
@@ -196,6 +234,13 @@ function Add-ClickUpGuestToTask {
     Add ClickUp guest to list.
 .DESCRIPTION
     Add ClickUp guest to list.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER GuestID
+    ClickUp guest ID.
+.PARAMETER PermissionLevel
+    Permission level of the guest added to the task.
+    T
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToList -ListID 1427 -GuestID 403
     Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "read".
@@ -211,7 +256,7 @@ function Add-ClickUpGuestToTask {
 .LINK
     https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html
 #>
-function Add-ClickUpGuestToTask {
+function Add-ClickUpGuestToList {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
@@ -237,6 +282,12 @@ function Add-ClickUpGuestToTask {
     Add ClickUp guest to folder.
 .DESCRIPTION
     Add ClickUp guest to folder.
+.PARAMETER FolderID
+    ClickUp folder ID.
+.PARAMETER GuestID
+    ClickUp guest ID.
+.PARAMETER PermissionLevel
+    Permission level of the guest added to the folder.
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToFolder -FolderID 1057 -GuestID 403
     Add ClickUp guest user with ID "403" to folder with ID "1057" with permission level "read".
@@ -278,6 +329,10 @@ function Add-ClickUpGuestToFolder {
     Remove ClickUp guest from workspace.
 .DESCRIPTION
     Remove ClickUp guest from workspace.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER GuestID
+    ClickUp guest ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuest -TeamID 333 -GuestID 403
     Remove ClickUp guest with Id "403" from team with ID "333".
@@ -311,6 +366,14 @@ function Remove-ClickUpGuest {
     Remove ClickUp guest from task.
 .DESCRIPTION
     Remove ClickUp guest from task.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER GuestID
+    ClickUp guest ID.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuestFromTask -TaskID 1427 -GuestID 403
     Remove ClickUp guest with Id "403" from task with ID "1427".
@@ -363,6 +426,10 @@ function Remove-ClickUpGuestFromTask {
     Remove ClickUp guest from list.
 .DESCRIPTION
     Remove ClickUp guest from list.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER GuestID
+    ClickUp guest ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuestFromList -ListID c04 -GuestID 403
     Remove ClickUp guest with Id "403" from list with ID "c04".
@@ -396,6 +463,10 @@ function Remove-ClickUpGuestFromList {
     Remove ClickUp guest from folder.
 .DESCRIPTION
     Remove ClickUp guest from folder.
+.PARAMETER FolderID
+    ClickUp folder ID.
+.PARAMETER GuestID
+    ClickUp guest ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuestFromFolder -FolderID 1057 -GuestID 403
     Remove ClickUp guest with Id "403" from folder with ID "1057".
