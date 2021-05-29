@@ -3,6 +3,8 @@
     Get ClickUp custom fields.
 .DESCRIPTION
     Get ClickUp custom fields.
+.PARAMETER ListID
+    The ClickUp list ID.
 .EXAMPLE
     PS C:\> Get-ClickUpCustomFields -TaskID 9hz
     Get all ClickUp custom field under task with ID "9hz"
@@ -36,6 +38,16 @@ function Get-ClickUpCustomFields {
     Set ClickUp custom field value.
 .DESCRIPTION
     Set ClickUp custom field value.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER FieldID
+    ClickUp custom field ID.
+.PARAMETER Value
+    Value to set to the custom field.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Set-ClickUpCustomFieldValue -TaskID 9hz -FieldID b955c4dc -Value 80
     Set the ClickUp custom field under task with ID "9hz" and field with ID "b955c4dc" to value "80".
@@ -94,6 +106,14 @@ function Set-ClickUpCustomFieldValue {
     Remove a ClickUp custom field value.
 .DESCRIPTION
     Remove a ClickUp custom field value.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER FieldID
+    ClickUp custom field ID.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Remove-ClickUpCustomFieldValue -TaskID 9hz -FieldID b955c4dc -Value 80
     Remove the ClickUp custom field under task with ID "9hz" and field with ID "b955c4dc".
