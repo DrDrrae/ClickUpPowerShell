@@ -176,9 +176,9 @@ function Add-ClickUpTagToTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskIDs')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs')]
-        [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [string]$TaskID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [string]$TagName,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -223,9 +223,9 @@ function Remove-ClickUpTagFromTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID', SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs')]
-        [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [string]$TaskID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [string]$TagName,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
