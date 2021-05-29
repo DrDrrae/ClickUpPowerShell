@@ -3,6 +3,10 @@
     Get all ClickUp Folders.
 .DESCRIPTION
     Get all ClickUp Folders.
+.PARAMETER SpaceID
+    The ClickUp space ID.
+.PARAMETER Archived
+    If set to $true, will return archived spaces in addition to non-archived spaced.
 .EXAMPLE
     PS C:\> Get-ClickUpFolders -SpaceID 11111111
     Get all ClickUp folders under ClickUp Space with ID "11111111".
@@ -41,6 +45,8 @@ function Get-ClickUpFolders {
     Get properties on a particular ClickUp folder.
 .DESCRIPTION
     Get properties on a particular ClickUp folder.
+.PARAMETER FolderID
+    The ClickUp folder ID.
 .EXAMPLE
     PS C:\> Get-ClickUpFolder -FolderID 11111111
     Get ClickUp folder with ID "11111111".
@@ -70,6 +76,10 @@ function Get-ClickUpFolder {
     Create a ClickUp folder in a particular space.
 .DESCRIPTION
     Create a ClickUp folder in a particular space.
+.PARAMETER SpaceID
+    The ClickUp space ID.
+.PARAMETER Name
+    The name of the ClickUp folder to be created.
 .EXAMPLE
     PS C:\> New-ClickUpFolder -SpaceID 11111111 -Name 'New Folder Name'
     Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with ID "11111111".
@@ -105,6 +115,10 @@ function New-ClickUpFolder {
     Update the name of a ClickUp Folder.
 .DESCRIPTION
     Update the name of a ClickUp Folder.
+.PARAMETER FolderID
+    The ClickUp folder ID.
+.PARAMETER Name
+    The new name of the ClickUp folder.
 .EXAMPLE
     PS C:\> Set-ClickUpFolder -FolderID 11111111 -Name 'Change Folder Name'
     Change the name of the ClickUp folder with ID "11111111" to "Change Folder Name".
@@ -140,6 +154,8 @@ function Set-ClickUpFolder {
     Delete a ClickUp Folder.
 .DESCRIPTION
     Delete a ClickUp Folder.
+.PARAMETER FolderID
+    The ClickUp folder ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpFolder -FolderID 11111111
     Delete the ClickUp folder with ID "11111111".
