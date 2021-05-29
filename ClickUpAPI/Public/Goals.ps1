@@ -3,6 +3,8 @@
     Get all ClickUp team goals.
 .DESCRIPTION
     Get all ClickUp team goals.
+.PARAMETER TeamID
+    Clickup team ID.
 .EXAMPLE
     PS C:\> Get-ClickUpGoals -TeamID 123
     Get all ClickUp team goals for team with ID "123".
@@ -32,6 +34,8 @@ function Get-ClickUpGoals {
     Get a single ClickUp team goal.
 .DESCRIPTION
     Get a single ClickUp team goal.
+.PARAMETER GoalID
+    Clickup goal ID.
 .EXAMPLE
     PS C:\> Get-ClickUpGoal -GoalID e53a033c
     Get a ClickUp team goal with ID "e53a033c".
@@ -61,6 +65,20 @@ function Get-ClickUpGoal {
     Create a ClickUp team goal.
 .DESCRIPTION
     Create a ClickUp team goal.
+.PARAMETER TeamID
+    Clickup team ID.
+.PARAMETER Name
+    Name of the ClickUp team goal to create.
+.PARAMETER DueDate
+    The due-date of the ClickUp team goal.
+.PARAMETER Description
+    Description of the ClickUp team goal.
+.PARAMETER MultipleOwners
+    If set to true, allows multiple owners.
+.PARAMETER Owners
+    The ClickUp team member ID for the owner(s) of the team goal.
+.PARAMETER Color
+    The color of the team goal in hex notation. i.e. "#32a852"
 .EXAMPLE
     PS C:\> New-ClickUpGoal -TeamID 123 -Name 'Goal Name' -DueDate "12/31/2021 17:00"
     Create a new ClickUp goal for team with ID "123" with the name of "Goal Name" and the due date of "December 31st, 2021 at 5:00 PM."
@@ -122,6 +140,20 @@ function New-ClickUpGoal {
     Create a ClickUp team goal.
 .DESCRIPTION
     Create a ClickUp team goal.
+.PARAMETER GoalID
+    Clickup goal ID.
+.PARAMETER Name
+    New Name of the ClickUp team goal being updated.
+.PARAMETER DueDate
+    The due-date of the ClickUp team goal.
+.PARAMETER Description
+    Description of the ClickUp team goal.
+.PARAMETER MultipleOwners
+    If set to true, allows multiple owners.
+.PARAMETER Owners
+    The ClickUp team member ID for the owner(s) of the team goal.
+.PARAMETER Color
+    The color of the team goal in hex notation. i.e. "#32a852"
 .EXAMPLE
     PS C:\> Set-ClickUpGoal -GoalID e53a033c -Name "Updated Goal Name"
     Update ClickUp goal with ID "e53a033c" name to "Updated Goal Name".
@@ -184,6 +216,8 @@ function Set-ClickUpGoal {
     Remove a ClickUp team goal.
 .DESCRIPTION
     Remove a ClickUp team goal.
+.PARAMETER GoalID
+    Clickup goal ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpGoal -GoalID e53a033c
     Remove ClickUp goal with ID "e53a033c".
@@ -213,6 +247,24 @@ function Remove-ClickUpGoal {
     Create a ClickUp key result.
 .DESCRIPTION
     Create a ClickUp key result.
+.PARAMETER GoalID
+    Clickup goal ID.
+.PARAMETER Name
+    Name of the ClickUp key result.
+.PARAMETER Owners
+    The ClickUp team member ID for the owner(s) of the team goal.
+.PARAMETER Type
+    Type of the key result.
+.PARAMETER StepsStart
+    Current step.
+.PARAMETER StepsEnd
+    Number of steps to reach the end.
+.PARAMETER Unit
+    Unit of the key result.
+.PARAMETER TaskIDs
+    If specified, will attach the task resource to the goal.
+.PARAMETER ListIDs
+    If specified, will attach the list resource to the goal.
 .EXAMPLE
     PS C:\> New-ClickUpKeyResult -GoalID e53a033c -Name 'New Key Result Name' -Owners 183 -Type number -StepsStart 0 -StepsEnd 10 -Unit km
     Create a new ClickUp key result for goal with ID "e53a033c".
@@ -285,6 +337,26 @@ function New-ClickUpKeyResult {
     Update a ClickUp key result.
 .DESCRIPTION
     Update a ClickUp key result.
+.PARAMETER KeyResultID
+    Clickup key result ID.
+.PARAMETER Name
+    New name of the ClickUp key result.
+.PaRAMETER Note
+    Note to add to the ClickUp key result.
+.PARAMETER Owners
+    The ClickUp team member ID for the owner(s) of the team goal.
+.PARAMETER Type
+    Type of the key result.
+.PARAMETER StepsStart
+    Current step.
+.PARAMETER StepsEnd
+    Number of steps to reach the end.
+.PARAMETER Unit
+    Unit of the key result.
+.PARAMETER TaskIDs
+    If specified, will attach the task resource to the goal.
+.PARAMETER ListIDs
+    If specified, will attach the list resource to the goal.
 .EXAMPLE
     PS C:\> Set-ClickUpKeyResult -KeyResultID 947d46ed -StepsCurrent 5 -Note 'Target achieved'
     Update a ClickUp key result with ID "947d46ed".
@@ -368,6 +440,8 @@ function Set-ClickUpKeyResult {
     Remove a ClickUp key result.
 .DESCRIPTION
     Remove a ClickUp key result.
+.PARAMETER KeyResultID
+    Clickup key result ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpKeyResult -KeyResultID 947d46ed
     Remove ClickUp key result with ID "947d46ed".
