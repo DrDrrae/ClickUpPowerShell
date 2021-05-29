@@ -3,6 +3,12 @@
     Get all comments on a ClickUp task.
 .DESCRIPTION
     Get all comments on a ClickUp task.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID 9hz
     Get all ClickUp comments under task with ID "9hz"
@@ -48,6 +54,8 @@ function Get-ClickUpTaskComments {
     Get ClickUp chat view comments.
 .DESCRIPTION
     Get ClickUp chat view comments.
+.PARAMETER ViewID
+    The ClickUp view ID.
 .EXAMPLE
     PS C:\> Get-ClickUpChatViewComments -ViewID 3c
     Get ClickUp chat view comments for view with ID "3c".
@@ -77,6 +85,8 @@ function Get-ClickUpChatViewComments {
     Get all comments on a ClickUp list.
 .DESCRIPTION
     Get all comments on a ClickUp list.
+.PARAMETER ViewID
+    The ClickUp list ID.
 .EXAMPLE
     PS C:\> Get-ClickUpListComments -ListID 123
     Get ClickUp chat view comments for view with ID "3c".
@@ -106,6 +116,10 @@ function Get-ClickUpListComments {
     Update ClickUp comment.
 .DESCRIPTION
     Update ClickUp comment.
+.PARAMETER CommentID
+    The ClickUp comment ID
+.PARAMETER Body
+    A hashtable containing the parameters of the ClickUp list comment that are to be changed.
 .EXAMPLE
     PS C:\> $Body = @{
     >> comment_text = "Updated comment text"
@@ -141,6 +155,8 @@ function Set-ClickUpListComment {
     Delete ClickUp comment.
 .DESCRIPTION
     Delete ClickUp comment.
+.PARAMETER CommentID
+    The ClickUp comment ID
 .EXAMPLE
     PS C:\> Remove-ClickUpComment -CommentID 456
     Delete comment with ID "456".
@@ -170,6 +186,14 @@ function Remove-ClickUpListComment {
     Create ClickUp task comment.
 .DESCRIPTION
     Create ClickUp task comment.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER Body
+    A hashtable containing the contents and parameters of the ClickUp comment to be created on a task.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> $Body = @{
     >> comment_text = "Task comment content"
@@ -249,6 +273,10 @@ function New-ClickUpTaskComment {
     Create ClickUp chat view comment.
 .DESCRIPTION
     Create ClickUp chat view comment.
+.PARAMETER ViewID
+    The ClickUp view ID.
+.PARAMETER Body
+    A hashtable containing the contents and parameters of the ClickUp comment to be created on a view.
 .EXAMPLE
     PS C:\> $Body = @{
     >> comment_text = "Task comment content"
@@ -306,6 +334,10 @@ function New-ClickUpChatViewComment {
     Create ClickUp list comment.
 .DESCRIPTION
     Create ClickUp list comment.
+.PARAMETER ListID
+    The ClickUp list ID.
+.PARAMETER Body
+    A hashtable containing the contents and parameters of the ClickUp comment to be created on a list.
 .EXAMPLE
     PS C:\> $Body = @{
     >> comment_text = "Task comment content"
