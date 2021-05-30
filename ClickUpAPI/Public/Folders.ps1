@@ -6,7 +6,7 @@
 .PARAMETER SpaceID
     The ClickUp space ID.
 .PARAMETER Archived
-    If set to $true, will return archived spaces in addition to non-archived spaced.
+    If set to true, will return archived spaces in addition to non-archived spaced.
 .EXAMPLE
     PS C:\> Get-ClickUpFolders -SpaceID 11111111
     Get all ClickUp folders under ClickUp Space with ID "11111111".
@@ -26,7 +26,7 @@ function Get-ClickUpFolders {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp space ID.')]
         [UInt32]$SpaceID,
         [Parameter()]
         [bool]$Archived = $false
@@ -63,7 +63,7 @@ function Get-ClickUpFolder {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
         [UInt32]$FolderID
     )
 
@@ -96,9 +96,9 @@ function New-ClickUpFolder {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp space ID.')]
         [UInt32]$SpaceID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The name of the ClickUp folder to be created.')]
         [UInt32]$Name
     )
 
@@ -135,9 +135,9 @@ function Set-ClickUpFolder {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
         [UInt32]$FolderID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The new name of the ClickUp folder.')]
         [UInt32]$Name
     )
 
@@ -171,7 +171,7 @@ function Set-ClickUpFolder {
 function Remove-ClickUpFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
         [UInt32]$FolderID
     )
 

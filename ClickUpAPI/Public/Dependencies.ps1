@@ -10,9 +10,9 @@
 .PARAMETER DependendencyOf
     The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> Add-ClickUpDependency -TaskID 9hv -DependsOn 9hz
     Add ClickUp task with ID "9hz" as a dependency of ClickUp task with ID "9hv".
@@ -40,22 +40,22 @@ function Add-ClickUpDependency {
     [CmdletBinding(DefaultParameterSetName = 'DependsOnTaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
         [string]$DependsOn,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
         [string]$DependendencyOf,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 
@@ -93,9 +93,9 @@ function Add-ClickUpDependency {
 .PARAMETER DependendencyOf
     The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of to be removed.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> Remove-ClickUpDependency -TaskID 9hv -DependsOn 9hz
     Remove ClickUp task with ID "9hz" as a dependency of ClickUp task with ID "9hv".
@@ -117,22 +117,22 @@ function Remove-ClickUpDependency {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'DependsOnTaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
         [string]$DependsOn,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
         [string]$DependendencyOf,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 
@@ -166,9 +166,9 @@ function Remove-ClickUpDependency {
 .PARAMETER LinksTo
     The ClickUp task ID that the task ID referenced by "TaskID" should be linked to.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> Add-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Add ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
@@ -188,15 +188,15 @@ function Add-ClickUpTaskLink {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be linked to.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be linked to.')]
         [string]$LinksTo,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 
@@ -222,9 +222,9 @@ function Add-ClickUpTaskLink {
 .PARAMETER LinksTo
     The ClickUp task ID that the task ID referenced by "TaskID" should be removed from linked to.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> Remove-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Remove ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
@@ -244,15 +244,15 @@ function Remove-ClickUpTaskLink {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be removed from linked to.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be removed from linked to.')]
         [string]$LinksTo,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 

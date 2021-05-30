@@ -26,9 +26,9 @@ function Get-ClickUpSpaces {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'If set to true, will returned archived spaces in addition to non-archived spaces.')]
         [bool]$Archived = $false
     )
 
@@ -63,7 +63,7 @@ function Get-ClickUpSpace {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [UInt32]$SpaceID
     )
     $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
@@ -121,22 +121,35 @@ function New-ClickUpSpace {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'Name of the new ClickUp space.')]
         [string]$Name,
+        [Parameter(HelpMessage = 'Set to true to enable the multiple assignees ClickUp app.')]
         [bool]$MultipleAssignees = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the due dates ClickUp app.')]
         [bool]$FeatureDueDates = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the start dates ClickUp app.')]
         [bool]$FeatureStartDate = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the remap due dates ClickUp app.')]
         [bool]$FeatureRemapDueDates = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the remap closed due date ClickUp app.')]
         [bool]$FeatureRemapClosedDueDate = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the time tracking ClickUp app.')]
         [bool]$FeatureTimeTracking = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the tags ClickUp app.')]
         [bool]$FeatureTags = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the time estimates ClickUp app.')]
         [bool]$FeatureTimeEstimates = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the checklist ClickUp app.')]
         [bool]$FeatureChecklist = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the custom fields ClickUp app.')]
         [bool]$FeatureCustomFields = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the remap dependencies ClickUp app.')]
         [bool]$FeatureRemapDependencies = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the dependency warning ClickUp app.')]
         [bool]$FeatureDependencyWarning = $false,
+        [Parameter(HelpMessage = 'Set to true to enable the portfolios ClickUp app.')]
         [bool]$FeaturePortfolios = $false
     )
     $Body = @{
@@ -269,9 +282,9 @@ function Set-ClickUpSpace {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [UInt32]$SpaceID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the settings and/or properties to change on the ClickUp space.')]
         [hashtable]$Body
     )
 
@@ -302,7 +315,7 @@ function Set-ClickUpSpace {
 function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [UInt32]$SpaceID
     )
 

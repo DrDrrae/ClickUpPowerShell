@@ -23,9 +23,9 @@ function Get-ClickUpGuest {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID
     )
 
@@ -67,15 +67,15 @@ function Add-ClickUpGuest {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'The email address of the guest to invite.')]
         [string]$GuestEmail,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Whether the guest can edit tags.')]
         [bool]$CanEditTags = $false,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Whether the guest can see time spent.')]
         [bool]$CanSeeTimeSpent = $false,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Wheter the guest can see time estimated.')]
         [bool]$CanSeeTimeEstimated = $false
     )
 
@@ -106,7 +106,7 @@ function Add-ClickUpGuest {
 .PARAMETER CanSeeTimeSpent
     Whether the guest can see time spent.
 .PARAMETER CanSeeTimeEstimated
-    Wheter the guest can see time estimated.
+    Whether the guest can see time estimated.
 .EXAMPLE
     PS C:\> Set-ClickUpGuest -TeamID 333 -GuestID 403 -Username 'Guest User'
     Update ClickUp guest's username to "Guest User"  for guest with ID "403".
@@ -126,17 +126,17 @@ function Set-ClickUpGuest {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'The new username of the guest.')]
         [string]$Username,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Whether the guest can edit tags.')]
         [bool]$CanEditTags = $false,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Whether the guest can see time spent.')]
         [bool]$CanSeeTimeSpent = $false,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Whether the guest can see time estimated.')]
         [bool]$CanSeeTimeEstimated = $false
     )
 
@@ -171,9 +171,9 @@ function Set-ClickUpGuest {
 .PARAMETER PermissionLevel
     Permission level of the guest added to the task.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to trrrrrrrrrrrrrrrrrrrrue if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToTask -TaskID c04 -GuestID 403
     Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "read".
@@ -196,19 +196,19 @@ function Add-ClickUpGuestToTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp guest ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID,
-        [Parameter(ParameterSetName = 'TaskID')]
-        [Parameter(ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Permission level of the guest added to the task.')]
+        [Parameter(ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Permission level of the guest added to the task.')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read',
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskIDs,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 
@@ -240,7 +240,6 @@ function Add-ClickUpGuestToTask {
     ClickUp guest ID.
 .PARAMETER PermissionLevel
     Permission level of the guest added to the task.
-    T
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToList -ListID 1427 -GuestID 403
     Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "read".
@@ -260,11 +259,11 @@ function Add-ClickUpGuestToList {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [UInt32]$ListID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Permission level of the guest added to the task.')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
     )
@@ -307,11 +306,11 @@ function Add-ClickUpGuestToFolder {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
         [UInt32]$FolderID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Permission level of the guest added to the task.')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
     )
@@ -349,9 +348,9 @@ function Remove-ClickUpGuest {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID
     )
 
@@ -371,9 +370,9 @@ function Remove-ClickUpGuest {
 .PARAMETER GuestID
     ClickUp guest ID.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuestFromTask -TaskID 1427 -GuestID 403
     Remove ClickUp guest with Id "403" from task with ID "1427".
@@ -390,19 +389,15 @@ function Remove-ClickUpGuestFromTask {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp guest ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID,
-        [Parameter(ParameterSetName = 'TaskID')]
-        [Parameter(ParameterSetName = 'CustomTaskIDs')]
-        [ValidateSet('read', 'comment', 'edit', 'create')]
-        [string]$PermissionLevel = 'read',
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskIDs,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 
@@ -446,9 +441,9 @@ function Remove-ClickUpGuestFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [string]$ListID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID
     )
 
@@ -483,9 +478,9 @@ function Remove-ClickUpGuestFromFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
         [string]$FolderID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
         [UInt32]$GuestID
     )
 

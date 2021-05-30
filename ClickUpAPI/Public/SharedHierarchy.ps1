@@ -23,7 +23,7 @@ function Get-ClickUpSharedHierarchy {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID
     )
 

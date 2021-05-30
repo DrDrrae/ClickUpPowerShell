@@ -26,9 +26,9 @@ function Get-ClickUpTaskTemplates {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'The page number to return.')]
         [UInt32]$Page = 0
     )
 
@@ -70,11 +70,11 @@ function New-ClickUpTaskFromTemplate {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$TemplateID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'ClickUp template ID.')]
         [string]$Name
     )
 

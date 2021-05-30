@@ -8,9 +8,9 @@
 .PARAMETER AttachmentPath
     The path to the attachment to upload.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> New-ClickUpTaskAttachment -TaskID 9hv -AttachmentPath "C:\Path\To\File.txt"
     Upload file "File.txt" as an attachment to ClickUp task with ID "9hv".
@@ -36,9 +36,9 @@ function New-ClickUpTaskAttachment {
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs', HelpMessage = 'The path to the attachment to upload.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The path to the attachment to upload.')]
         [string]$AttachmentPath,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskIDs,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 

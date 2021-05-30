@@ -6,9 +6,9 @@
 .PARAMETER TaskID
     The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID 9hz
     Get all ClickUp comments under task with ID "9hz"
@@ -27,12 +27,12 @@
 function Get-ClickUpTaskComments {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskIDs,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 
@@ -72,7 +72,7 @@ function Get-ClickUpChatViewComments {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp view ID.')]
         [string]$ViewID
     )
 
@@ -103,7 +103,7 @@ function Get-ClickUpListComments {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp list ID.')]
         [UInt32]$ListID
     )
 
@@ -117,7 +117,7 @@ function Get-ClickUpListComments {
 .DESCRIPTION
     Update ClickUp comment.
 .PARAMETER CommentID
-    The ClickUp comment ID
+    The ClickUp comment ID.
 .PARAMETER Body
     A hashtable containing the parameters of the ClickUp list comment that are to be changed.
 .EXAMPLE
@@ -141,9 +141,9 @@ function Set-ClickUpListComment {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp comment ID.')]
         [UInt32]$CommentID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the parameters of the ClickUp list comment that are to be changed.')]
         [hashtable]$Body
     )
 
@@ -156,7 +156,7 @@ function Set-ClickUpListComment {
 .DESCRIPTION
     Delete ClickUp comment.
 .PARAMETER CommentID
-    The ClickUp comment ID
+    The ClickUp comment ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpComment -CommentID 456
     Delete comment with ID "456".
@@ -172,7 +172,7 @@ function Set-ClickUpListComment {
 function Remove-ClickUpListComment {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp comment ID.')]
         [UInt32]$CommentID
     )
 
@@ -191,9 +191,9 @@ function Remove-ClickUpListComment {
 .PARAMETER Body
     A hashtable containing the contents and parameters of the ClickUp comment to be created on a task.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
-    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+    Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
     PS C:\> $Body = @{
     >> comment_text = "Task comment content"
@@ -243,15 +243,15 @@ function Remove-ClickUpListComment {
 function New-ClickUpTaskComment {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a task.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a task.')]
         [hashtable]$Body,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskIDs,
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [UInt32]$TeamID
     )
 
@@ -319,9 +319,9 @@ function New-ClickUpChatViewComment {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp view ID.')]
         [string]$ViewID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a view.')]
         [hashtable]$Body
     )
 
@@ -380,9 +380,9 @@ function New-ClickUpListComment {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp list ID.')]
         [UInt32]$ListID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a list.')]
         [hashtable]$Body
     )
 

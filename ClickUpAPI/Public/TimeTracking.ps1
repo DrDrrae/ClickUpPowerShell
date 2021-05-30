@@ -30,13 +30,13 @@ function Get-ClickUpTimeEntries {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Start date and time of the time entries range.')]
         [DateTime]$StartDate,
-        [Parameter()]
+        [Parameter(HelpMessage = 'End date and time of the time entries range.')]
         [DateTime]$EndDate,
-        [Parameter()]
+        [Parameter(HelpMessage = 'ClickUp member IDs to return the time entries of.')]
         [UInt32[]]$Assignees
     )
 
@@ -81,9 +81,9 @@ function Get-ClickUpTimeEntry {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [UInt64]$TimerID
     )
 
@@ -116,9 +116,9 @@ function Get-ClickUpTimeEntryHistory {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [UInt64]$TimerID
     )
 
@@ -154,9 +154,9 @@ function Get-ClickUpRunningTimeEntry {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'ClickUp member ID.')]
         [UInt32]$Assignee
     )
 
@@ -195,7 +195,7 @@ function Get-ClickUpTimeEntryTags {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID
     )
 
@@ -211,7 +211,7 @@ function Get-ClickUpTimeEntryTags {
 .PARAMETER TeamID
     ClickUp team ID.
 .PARAMETER CustomTaskIDs
-    If you want to reference a task by it's custom task ID, this value must be true.
+    If you want to reference a task by its custom task ID, this value must be true.
 .PARAMETER Description
     Description of the new ClickUp time entry.
 .PARAMETER Tags
@@ -242,23 +242,23 @@ function New-ClickUpTimeEntry {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'If you want to reference a task by its custom task ID, this value must be true.')]
         [bool]$CustomTaskIDs = $false,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Description of the new ClickUp time entry.')]
         [string]$Description,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Tags to add to the new ClickUp time entry.')]
         [hashtable[]]$Tags,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'Start date and time of the new ClickUp time entry.')]
         [DateTime]$StartDate,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Set to true to make the new time entry billable.')]
         [bool]$Billable,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'Duration of the new ClickUp time entry in seconds.')]
         [UInt32]$Duration,
-        [Parameter()]
+        [Parameter(HelpMessage = 'ClickUp member assigned to the new ClickUp time entry.')]
         [UInt32]$Assignee,
-        [Parameter()]
+        [Parameter(HelpMessage = 'ClickUp task ID to assign the time entry to.')]
         [string]$TaskID
     )
 
@@ -330,11 +330,11 @@ function Add-ClickUpTimeEntryTags {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [string]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'Array of ClickUp time entry IDs to assign tags to.')]
         [UInt64[]]$TimeEntryIDs,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'Name of ClickUp tag to add to the time entries.')]
         [string[]]$Tags
     )
 
@@ -380,15 +380,15 @@ function Set-ClickUpTimeEntryTags {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [string]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'Old name of the ClickUp tag to change.')]
         [string]$OldTagName,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'New name of the ClickUp tag.')]
         [string]$NewTagName,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Background color of the ClickUp tag in hex format.')]
         [string]$TagBackgroundColor,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Foreground color of the ClickUp tag in nex format.')]
         [string]$TagForegroundColor
     )
 
@@ -420,7 +420,7 @@ function Set-ClickUpTimeEntryTags {
 .PARAMETER Billable
     Set to true to make the time entry billable.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .EXAMPLE
     PS C:\> Start-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description'
     Start time entry with ID "2004673344540003570" and set description to "Time entry description" for team with ID "512".
@@ -440,24 +440,24 @@ function Start-ClickUpTimeEntry() {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp team Id.')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', HelpMessage = 'ClickUp team Id.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', HelpMessage = 'ClickUp time entry ID.')]
         [UInt64]$TimerID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter(ParameterSetName = 'TaskID')]
-        [Parameter(ParameterSetName = 'TimerID')]
+        [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Description to change the time entry to.')]
+        [Parameter(ParameterSetName = 'TimerID', HelpMessage = 'Description to change the time entry to.')]
         [string]$Description = '',
-        [Parameter(ParameterSetName = 'TaskID')]
-        [Parameter(ParameterSetName = 'TimerID')]
+        [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'ClickUp tags to add to the ClickUp time entry.')]
+        [Parameter(ParameterSetName = 'TimerID', HelpMessage = 'ClickUp tags to add to the ClickUp time entry.')]
         [hashtable[]]$Tags,
-        [Parameter(ParameterSetName = 'TaskID')]
+        [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Set to true to make the time entry billable.')]
         [Parameter(ParameterSetName = 'TimerID')]
         [bool]$Billable = $false,
-        [Parameter(ParameterSetName = 'TaskID')]
-        [Parameter(ParameterSetName = 'TimerID')]
+        [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [Parameter(ParameterSetName = 'TimerID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskIDs
     )
 
@@ -507,7 +507,7 @@ function Stop-ClickUpTimeEntry() {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID
     )
 
@@ -521,7 +521,7 @@ function Stop-ClickUpTimeEntry() {
 .DESCRIPTION
     Update a ClickUp time entry.
 .PARAMETER TeamID
-    ClickUp team Id.
+    ClickUp team ID.
 .PARAMETER TimerID
     ClickUp time entry ID.
 .PARAMETER Description
@@ -541,7 +541,7 @@ function Stop-ClickUpTimeEntry() {
 .PARAMETER Duration
     Duration of the new ClickUp time entry in seconds.
 .PARAMETER CustomTaskIDs
-    Set to $true if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .EXAMPLE
     PS C:\> Set-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description.' -Tags 'Time Entry Tag' -TagAction 'replace'
     Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time entry description." and removes the tag "Time Entry Tag".
@@ -561,28 +561,28 @@ function Set-ClickUpTimeEntry() {
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [UInt64]$TimerID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Description to change the time entry to.')]
         [string]$Description = '',
-        [Parameter()]
+        [Parameter(HelpMessage = 'ClickUp tags to add to the ClickUp time entry.')]
         [hashtable[]]$Tags,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Action to perform on the tags referenced in the -Tags parameter. Can be replace, add, or remove.')]
         [ValidateSet('replace', 'add', 'remove')]
         [string]$TagAction,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Start date and time of the ClickUp time entry.')]
         [string]$StartDate,
-        [Parameter()]
+        [Parameter(HelpMessage = 'End date and time of the ClickUp time entry.')]
         [string]$EndDate,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp task ID.')]
         [string]$TaskID,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Set to true to make the time entry billable.')]
         [bool]$Billable,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Duration of the new ClickUp time entry in seconds.')]
         [UInt32]$Duration,
-        [Parameter()]
+        [Parameter(HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [bool]$CustomTaskIDs
     )
 
@@ -653,9 +653,9 @@ function Remove-ClickUpTimeEntry {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [UInt64]$TimerID
     )
 

@@ -26,11 +26,11 @@ function Export-ClickUpModuleSettings {
             New-Item -ItemType Directory -Force -Path $ClickUpAPIConfPath | ForEach-Object { $_.Attributes = 'hidden' }
         }
 
-        $ClickupSettings = @{
+        $ClickUpSettings = @{
             ClickUpAPIKey              = $secureString
             ClickUpJSONConversionDepth = $ClickUpJSONConversionDepth
         }
-        $ClickupSettings | Export-Clixml -LiteralPath ($ClickUpAPIConfPath + '\' + $ClickUpAPIConfFile) -Force
+        $ClickUpSettings | Export-Clixml -LiteralPath ($ClickUpAPIConfPath + '\' + $ClickUpAPIConfFile) -Force
     } else {
         Write-Error -Message "Failed export ClickUp Module settings to $ClickUpAPIConfPath\$ITGlueAPIConfFile."
     }
