@@ -3,6 +3,8 @@
     Get ClickUp shared hierarchy.
 .DESCRIPTION
     Get ClickUp shared hierarchy. Returns all resources you have access to where you don't have access to its parent. For example, if you have a access to a shared task, but don't have access to its parent list, it will come back in this request.
+.PARAMETER TeamID
+    ClickUp team ID.
 .EXAMPLE
     PS C:\> Get-ClickUpSharedHierarchy -TeamID 123
     Returns all ClickUp resources you have access to where you don't have access to its parent.
