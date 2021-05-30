@@ -3,6 +3,10 @@
     Get the details on all ClickUp Spaces in a team.
 .DESCRIPTION
     Get the details on all ClickUp Spaces in a team.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER Archived
+    If set to true, will returned archived spaces in addition to non-archived spaces.
 .EXAMPLE
     PS C:\> Get-ClickUpSpaces TeamID 11111111
     Returns the data on all the ClickUp Spaces with the Team ID "11111111"
@@ -41,6 +45,8 @@ function Get-ClickUpSpaces {
     Get the details on a single ClickUp Space.
 .DESCRIPTION
     Get the details on a single ClickUp Space.
+.PARAMETER SpaceID
+    ClickUp space ID.
 .EXAMPLE
     PS C:\> Get-ClickUpSpace SpaceID 11111111
     Returns the data on the ClickUp Space with ID "11111111"
@@ -69,6 +75,36 @@ function Get-ClickUpSpace {
     Create a new ClickUp Space.
 .DESCRIPTION
     Create a new ClickUp Space.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER Name
+    Name of the new ClickUp space.
+.PARAMETER MultipleAssignees
+    Set to true to enable the multiple assignees ClickUp app.
+.PARAMETER FeatureDueDates
+    Set to true to enable the due dates ClickUp app.
+.PARAMETER FeatureStartDate
+    Set to true to enable the start dates ClickUp app.
+.PARAMETER FeatureRemapDueDates
+    Set to true to enable the remap due dates ClickUp app.
+.PARAMETER FeatureRemapClosedDueDate
+    Set to true to enable the remap closed due date ClickUp app.
+.PARAMETER FeatureTimeTracking
+    Set to true to enable the time tracking ClickUp app.
+.PARAMETER FeatureTags
+    Set to true to enable the tags ClickUp app.
+.PARAMETER FeatureTimeEstimates
+    Set to true to enable the time estimates ClickUp app.
+.PARAMETER FeatureChecklist
+    Set to true to enable the checklist ClickUp app.
+.PARAMETER FeatureCustomFields
+    Set to true to enable the custom fields ClickUp app.
+.PARAMETER FeatureRemapDependencies
+    Set to true to enable the remap dependencies ClickUp app.
+.PARAMETER FeatureDependencyWarning
+    Set to true to enable the dependency warning ClickUp app.
+.PARAMETER FeaturePortfolios
+    Set to true to enable the portfolios ClickUp app.
 .EXAMPLE
     PS C:\> New-ClickUpSpace -TeamID 11111111 -Name 'New ClickUp Space' -Multiple_Assignees
     Creates a new ClickUp Space with the name "New Clickup Space" and the Multiple Assignees feature enabled.
@@ -89,23 +125,23 @@ function New-ClickUpSpace {
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
-        [bool]$Multiple_Assignees = $true,
-        [bool]$FeatureDueDates = $true,
+        [bool]$MultipleAssignees = $false,
+        [bool]$FeatureDueDates = $false,
         [bool]$FeatureStartDate = $false,
-        [bool]$FeatureRemapDueDates = $true,
-        [bool]$FeatureRemapClosedDueDate = $true,
-        [bool]$FeatureTimeTracking = $true,
-        [bool]$FeatureTags = $true,
-        [bool]$FeatureTimeEstimates = $true,
-        [bool]$FeatureChecklist = $true,
-        [bool]$FeatureCustomFields = $true,
-        [bool]$FeatureRemapdependencies = $true,
-        [bool]$FeatureDependencyWarning = $true,
-        [bool]$FeaturePortfolios = $true
+        [bool]$FeatureRemapDueDates = $false,
+        [bool]$FeatureRemapClosedDueDate = $false,
+        [bool]$FeatureTimeTracking = $false,
+        [bool]$FeatureTags = $false,
+        [bool]$FeatureTimeEstimates = $false,
+        [bool]$FeatureChecklist = $false,
+        [bool]$FeatureCustomFields = $false,
+        [bool]$FeatureRemapDependencies = $false,
+        [bool]$FeatureDependencyWarning = $false,
+        [bool]$FeaturePortfolios = $false
     )
     $Body = @{
         name               = $Name
-        multiple_assignees = $Multiple_Assignees
+        multiple_assignees = $MultipleAssignees
         features           = @{
             due_dates          = @{
                 enabled                = $FeatureDueDates
@@ -148,6 +184,10 @@ function New-ClickUpSpace {
     Change settings of a ClickUp Space
 .DESCRIPTION
     Change settings of a ClickUp Space. Requires passing a hashtable of expected changes.
+.PARAMETER SpaceID
+    ClickUp space ID.
+.PARAMETER Body
+    Hashtable containing the settings and/or properties to change on the ClickUp space.
 .EXAMPLE
     PS C:\> $Body = @{
     >> name = 'New Name'
@@ -239,6 +279,26 @@ function Set-ClickUpSpace {
     Return $Space
 }
 
+
+<#
+.SYNOPSIS
+    Remove a ClickUp Space
+.DESCRIPTION
+    Remove a ClickUp Space
+.PARAMETER SpaceID
+    ClickUp space ID.
+.EXAMPLE
+    PS C:\> Set-ClickUpSpace -SpaceID 11111111
+    Remove ClickUp space with ID "11111111".
+.INPUTS
+    None
+.OUTPUTS
+    System.Management.Automation.PSCustomObject
+.NOTES
+    See the link for information.
+.LINK
+    https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/delete-space.html
+#>
 function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
