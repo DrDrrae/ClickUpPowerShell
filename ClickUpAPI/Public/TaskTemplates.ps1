@@ -3,6 +3,10 @@
     Get all ClickUp task templates.
 .DESCRIPTION
     Get all ClickUp task templates.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER Page
+    The page number to return.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTemplates -TeamID 512
     Get all ClickUp team goals for team with ID "123".
@@ -41,6 +45,12 @@ function Get-ClickUpTaskTemplates {
     Create a ClickUp task from template.
 .DESCRIPTION
     Create a ClickUp task from template.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER TemplateID
+    ClickUp template ID.
+.PARAMETER Name
+    Name of the new ClickUp task to create from the template.
 .EXAMPLE
     PS C:\> New-ClickUpTaskFromTemplate -TeamID 512
     Get all ClickUp team goals for team with ID "123".
