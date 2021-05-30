@@ -3,6 +3,8 @@
     Get all ClickUp task members.
 .DESCRIPTION
     Get all ClickUp task members.
+.PARAMETER TaskID
+    ClickUp task ID.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskMembers -TaskId 9hz
     Get ClickUp task members from task with ID "9hz".
@@ -32,6 +34,8 @@ function Get-ClickUpTaskMembers {
     Get all ClickUp list members.
 .DESCRIPTION
     Get all ClickUp list members.
+.PARAMETER ListID
+    ClickUp list ID.
 .EXAMPLE
     PS C:\> Get-ClickUpListMembers -ListId 123
     Get ClickUp list members from list with ID "123".
