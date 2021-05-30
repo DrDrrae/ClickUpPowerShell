@@ -3,6 +3,12 @@
     Get all ClickUp lists.
 .DESCRIPTION
     Get all ClickUp lists.
+.PARAMETER FolderID
+    ClickUp folder ID.
+.PARAMETER SpaceID
+    Clickup space ID.
+.PARAMETER Archived
+    If set to true, will returned archived lists in addition to non-archived lists.
 .EXAMPLE
     PS C:\> Get-ClickUpLists -FolderID 456
     Get ClickUp lists under folder with ID "456".
@@ -48,6 +54,8 @@ function Get-ClickUpLists {
     Get a single ClickUp list.
 .DESCRIPTION
     Get a single ClickUp list.
+.PARAMETER ListID
+    Clickup list ID.
 .EXAMPLE
     PS C:\> Get-ClickUpList -ListID 456
     Get a ClickUp list with ID "456".
@@ -77,6 +85,24 @@ function Get-ClickUpList {
     Create a ClickUp list.
 .DESCRIPTION
     Create a ClickUp list.
+.PARAMETER FolderID
+    ClickUp folder ID.
+.PARAMETER SpaceID
+    Clickup space ID.
+.PARAMETER Name
+    Name of the new ClickUp list.
+.PARAMETER Content
+    Content of the new ClickUp list.
+.PARAMETER DueDate
+    Due date of the new ClickUp list.
+.PARAMETER DueDateTime
+    If set to true, will set the due date to also include a time instead of just a date.
+.PARAMETER Priority
+    Priority of the new ClickUp list.
+.PARAMETER Assignee
+    Member ID of the ClickUp user to assign the list to.
+.PARAMETER Status
+    Status of the new ClickUp list.
 .EXAMPLE
     PS C:\> New-ClickUpList -FolderID 456 -Name "New ClickUp List"
     Create a ClickUp list called "New ClickUp List" under folder with ID "456".
@@ -165,6 +191,24 @@ function New-ClickUpList {
     Update a ClickUp list.
 .DESCRIPTION
     Update a ClickUp list.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER SpaceID
+    Clickup space ID.
+.PARAMETER Name
+    New name of the ClickUp list.
+.PARAMETER Content
+    New content of the ClickUp list.
+.PARAMETER DueDate
+    New due date of the ClickUp list.
+.PARAMETER DueDateTime
+    If set to true, will set the due date to also include a time instead of just a date.
+.PARAMETER Priority
+    New priority of the ClickUp list.
+.PARAMETER Assignee
+    Member ID of the ClickUp user to assign the list to.
+.PARAMETER Status
+    New status of the ClickUp list.
 .EXAMPLE
     PS C:\> Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
     Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
@@ -234,6 +278,8 @@ function Set-ClickUpList {
     Remove a ClickUp list.
 .DESCRIPTION
     Remove a ClickUp list.
+.PARAMETER ListID
+    ClickUp list ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpList -ListID 124
     Delete a ClickUp list with ID "124".
@@ -262,6 +308,10 @@ function Remove-ClickUpList {
     Add a ClickUp task to a list.
 .DESCRIPTION
     Add a ClickUp task to a list.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER TaskID
+    ClickUp task ID.
 .EXAMPLE
     PS C:\> Add-ClickUpTaskToList -ListID 123 -TaskID 9hz
     Add ClickUp task with ID "9hz" to list with ID "123".
@@ -292,6 +342,10 @@ function Add-ClickUpTaskToList {
     Remove a ClickUp task from a list.
 .DESCRIPTION
     Remove a ClickUp task from a list.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER TaskID
+    ClickUp task ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpTaskFromList -ListID 123 -TaskID 9hz
     Add ClickUp task with ID "9hz" to list with ID "123".
