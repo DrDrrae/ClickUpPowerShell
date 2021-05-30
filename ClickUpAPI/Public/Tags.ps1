@@ -3,6 +3,8 @@
     Get all ClickUp space tags.
 .DESCRIPTION
     Get all ClickUp space tags.
+.PARAMETER SpaceID
+    ClickUp space ID.
 .EXAMPLE
     PS C:\> Get-ClickUpTags -SpaceID 512
     Get all ClickUp tags for space with ID "512".
@@ -32,6 +34,14 @@ function Get-ClickUpTags {
     Create a new ClickUp space tag.
 .DESCRIPTION
     Create a new ClickUp space tag.
+.PARAMETER SpaceID
+    ClickUp space ID.
+.PARAMETER TagName
+    Name of the new ClickUp tag.
+.PARAMETER ForegroundColor
+    Foreground color of the new ClickUp tag.
+.PARAMETER BackgroundColor
+    Background color of the new ClickUp tag.
 .EXAMPLE
     PS C:\> New-ClickUpTag -SpaceID 512 -Name "Tag Name" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
     Create a new ClickUp tag for space with ID "512" with the name "Tag Name", foreground color white, and background color black.
@@ -78,6 +88,16 @@ function New-ClickUpTag {
     Update a ClickUp space tag.
 .DESCRIPTION
     Update a ClickUp space tag.
+.PARAMETER SpaceID
+    ClickUp space ID.
+.PARAMETER TagName
+    Name of the ClickUp tag.
+.PARAMETER NewName
+    New name of the clickUp tag.
+.PARAMETER ForegroundColor
+    New foreground color of the ClickUp tag.
+.PARAMETER BackgroundColor
+    New background color of the ClickUp tag.
 .EXAMPLE
     PS C:\> Set-ClickUpTag -SpaceID 512 -TagName "Tag Name" -NewName "Updated Tag" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
     Update a ClickUp tag with name "Tag Name" for space with ID "512" to the name "Updated Tag", foreground color to white, and background color to black.
@@ -126,6 +146,10 @@ function Set-ClickUpTag {
     Get all ClickUp space tags.
 .DESCRIPTION
     Get all ClickUp space tags.
+.PARAMETER SpaceID
+    ClickUp space ID.
+.PARAMETER TagName
+    Name of the ClickUp tag.
 .EXAMPLE
     PS C:\> Remove-ClickUpTag -SpaceID 512 -TagName "Tag name"
     Remove a ClickUp tag with name "Tag Name" for space with ID "512".
@@ -157,6 +181,14 @@ function Remove-ClickUpTag {
     Add ClickUp tag to task.
 .DESCRIPTION
     Add ClickUp tag to task.
+.PARAMETER TaskID
+    ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER TagName
+    Name of the ClickUp tag.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Add-ClickUpTagToTask -TaskID abc -TagName "name"
     Add ClickUp tag with name "name" to task with ID "abc".
@@ -204,6 +236,14 @@ function Add-ClickUpTagToTask {
     Remove ClickUp tag from task.
 .DESCRIPTION
     Remove ClickUp tag from task.
+.PARAMETER TaskID
+    ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER TagName
+    Name of the ClickUp tag.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Remove-ClickUpTagToTask -TaskID abc -TagName "name"
     Remove ClickUp tag with name "name" to task with ID "abc".
