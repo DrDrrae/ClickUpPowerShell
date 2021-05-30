@@ -2,9 +2,22 @@
 $ClickUpAPIConfPath = "$($env:USERPROFILE)\ClickUpAPI"
 $ClickUpAPIConfFile = 'Config.xml'
 
+<#
+.SYNOPSIS
+    Save ClickUp module settings to a file in the user's profile. Can be imported later.
+.DESCRIPTION
+    Save ClickUp module settings including the ClickUp API Key and JSON conversion depth to a file in the user's profile. Can be imported later.
+.EXAMPLE
+    PS C:\> Export-ClickUpModuleSettings
+    Exports and saves the ClickUp module settings to the user's profile.
+.INPUTS
+    None
+.OUTPUTS
+    System.Void
+#>
 function Export-ClickUpModuleSettings {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Void])]
     param ()
     # Confirm variables exist and are not null before exporting
     if ($ClickUpAPIKey -and $ClickUpJSONConversionDepth) {
@@ -19,13 +32,26 @@ function Export-ClickUpModuleSettings {
         }
         $ClickupSettings | Export-Clixml -LiteralPath ($ClickUpAPIConfPath + '\' + $ClickUpAPIConfFile) -Force
     } else {
-        Write-Error -Message "Failed export ITGlue Module settings to $ClickUpAPIConfPath\$ITGlueAPIConfFile."
+        Write-Error -Message "Failed export ClickUp Module settings to $ClickUpAPIConfPath\$ITGlueAPIConfFile."
     }
 }
 
+<#
+.SYNOPSIS
+    Retrieves the ClickUp module settings from a file in the user's profile. Can be exported later.
+.DESCRIPTION
+    Retrieves the ClickUp module settings including the ClickUp API Key and JSON conversion depth from a file in the user's profile. Can be exported later.
+.EXAMPLE
+    PS C:\> Import-ClickUpModuleSettings
+    Imports the ClickUp module settings from the user's profile into the current session.
+.INPUTS
+    None
+.OUTPUTS
+    System.Void
+#>
 function Import-ClickUpModuleSettings {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Void])]
     param ()
 
     if (Test-Path ($ClickUpAPIConfPath + '\' + $ClickUpAPIConfFile) ) {
