@@ -3,6 +3,14 @@
     Get ClickUp time entries.
 .DESCRIPTION
     Get ClickUp time entries. Optional within a date range.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER StartDate
+    Start date and time of the time entries range.
+.PARAMETER EndDate
+    End date and time of the time entries range.
+.PARAMETER Assignees
+    ClickUp member IDs to return the time entries of.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntries -TeamID 512
     Get ClickUp Time Entries for ClickUp team with ID "512".
@@ -53,6 +61,10 @@ function Get-ClickUpTimeEntries {
     Get a single ClickUp time entry.
 .DESCRIPTION
     Get a single ClickUp time entry.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER TimerID
+    ClickUp time entry ID.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntry -TeamID 512 -TimerID 1963465985517105840
     Get a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID "512".
@@ -84,6 +96,10 @@ function Get-ClickUpTimeEntry {
     Get the history of a single ClickUp time entry.
 .DESCRIPTION
     Get the history of a single ClickUp time entry.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER TimerID
+    ClickUp time entry ID.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntryHistory -TeamID 512 -TimerID 1963465985517105840
     Get the history of a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID "512".
@@ -115,6 +131,10 @@ function Get-ClickUpTimeEntryHistory {
     Get running ClickUp time entries.
 .DESCRIPTION
     Get running ClickUp time entries.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER Assignee
+    ClickUp member ID.
 .EXAMPLE
     PS C:\> Get-ClickUpRunningTimeEntry -TeamID 512
     Get running time entries for ClickUp team with ID "512".
@@ -157,6 +177,8 @@ function Get-ClickUpRunningTimeEntry {
     Get all tags from ClickUp time entries.
 .DESCRIPTION
     Get all tags from ClickUp time entries.
+.PARAMETER TeamID
+    ClickUp team ID.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntryTags -TeamID 512
     Get time entry tags for ClickUp team with ID "512".
@@ -186,6 +208,24 @@ function Get-ClickUpTimeEntryTags {
     Create a new ClickUp time entry.
 .DESCRIPTION
     Create a new ClickUp time entry.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER CustomTaskIDs
+    If you want to reference a task by it's custom task ID, this value must be true.
+.PARAMETER Description
+    Description of the new ClickUp time entry.
+.PARAMETER Tags
+    Tags to add to the new ClickUp time entry.
+.PARAMETER StartDate
+    Start date and time of the new ClickUp time entry.
+.PARAMETER Billable
+    Set to true to make the new time entry billable.
+.PARAMETER Duration
+    Duration of the new ClickUp time entry in seconds.
+.PARAMETER Assignee
+    ClickUp member assigned to the new ClickUp time entry.
+.PARAMETER TaskID
+    ClickUp task ID to assign the time entry to.
 .EXAMPLE
     PS C:\> New-ClickUpTimeEntry -TeamID 1111111 -Description 'this is a test time entry' -StartDate '12/31/2021 08:25' -Duration '600'
     Create a new ClickUp time entry starting December 31, 2021 8:25 AM with a duration of 10 minutes.
@@ -246,7 +286,8 @@ function New-ClickUpTimeEntry {
         $Body.Add('billable', $Billable)
     }
     if ($PSBoundParameters.ContainsKey('Duration')) {
-        $Body.Add('duration', $Duration)
+        $T = New-TimeSpan -Seconds $Duration
+        $Body.Add('duration', $T.TotalMilliseconds)
     }
     if ($PSBoundParameters.ContainsKey('Assignee')) {
         $Body.Add('assignee', $Assignee)
@@ -264,6 +305,12 @@ function New-ClickUpTimeEntry {
     Add tags to a ClickUp time entry.
 .DESCRIPTION
     Add tags to a ClickUp time entry.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER TimeEntryIDs
+    Array of ClickUp time entry IDs to assign tags to.
+.PARAMETER Tags
+    Name of ClickUp tag to add to the time entries.
 .EXAMPLE
     PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222 -Tags "name of tag"
     Add the tag with name "name of tag" to ClickUp time entry with ID "2222222222222222222".
@@ -304,12 +351,22 @@ function Add-ClickUpTimeEntryTags {
     Update tag names from ClickUp time entries.
 .DESCRIPTION
     Update tag names from ClickUp time entries.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER OldTagName
+    Old name of the ClickUp tag to change.
+.PARAMETER NewTagName
+    New name of the ClickUp tag.
+.PARAMETER TagBackgroundColor
+    Background color of the ClickUp tag in hex format.
+.PARAMETER TagForegroundColor
+    Foreground color of the ClickUp tag in nex format.
 .EXAMPLE
-    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222 -Tags "name of tag"
-    Add the tag with name "name of tag" to ClickUp time entry with ID "2222222222222222222".
+    PS C:\> Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag name" -NewTagName "new tag name"
+    Change the ClickUp tag with name "old tag name" to "new tag name".
 .EXAMPLE
-    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
-    Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
+    PS C:\> Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag name" TagBackgroundColor "#000000" -TagForegroundColor "#ffffff"
+    Change the ClickUp tag with name "old tag name" foreground color to white and background color to black.
 .INPUTS
     None
 .OUTPUTS
@@ -350,6 +407,20 @@ function Set-ClickUpTimeEntryTags {
     Start a ClickUp time entry.
 .DESCRIPTION
     Start a ClickUp time entry.
+.PARAMETER TeamID
+    ClickUp team Id.
+.PARAMETER TimerID
+    ClickUp time entry ID.
+.PARAMETER TaskID
+    ClickUp task ID.
+.PARAMETER Description
+    Description to change the time entry to.
+.PARAMETER Tags
+    ClickUp tags to add to the ClickUp time entry.
+.PARAMETER Billable
+    Set to true to make the time entry billable.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
 .EXAMPLE
     PS C:\> Start-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description'
     Start time entry with ID "2004673344540003570" and set description to "Time entry description" for team with ID "512".
@@ -418,6 +489,8 @@ function Start-ClickUpTimeEntry() {
     Stop ClickUp time entries.
 .DESCRIPTION
     Stop ClickUp time entries.
+.PARAMETER TeamID
+    ClickUp team ID.
 .EXAMPLE
     PS C:\> Stop-ClickUpTimeEntry -TeamID 512
     Stop ClickUp time entries for Team with ID "512".
@@ -447,6 +520,28 @@ function Stop-ClickUpTimeEntry() {
     Update a ClickUp time entry.
 .DESCRIPTION
     Update a ClickUp time entry.
+.PARAMETER TeamID
+    ClickUp team Id.
+.PARAMETER TimerID
+    ClickUp time entry ID.
+.PARAMETER Description
+    Description to change the time entry to.
+.PARAMETER Tags
+    ClickUp tags to add to the ClickUp time entry.
+.PARAMETER TagAction
+    Action to perform on the tags referenced in the -Tags parameter. Can be replace, add, or remove.
+.PARAMETER StartDate
+    Start date and time of the ClickUp time entry.
+.PARAMETER EndDate
+    End date and time of the ClickUp time entry.
+.PARAMETER TaskID
+    ClickUp task ID.
+.PARAMETER Billable
+    Set to true to make the time entry billable.
+.PARAMETER Duration
+    Duration of the new ClickUp time entry in seconds.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
 .EXAMPLE
     PS C:\> Set-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description.' -Tags 'Time Entry Tag' -TagAction 'replace'
     Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time entry description." and removes the tag "Time Entry Tag".
@@ -515,7 +610,8 @@ function Set-ClickUpTimeEntry() {
         $Body.Add('billable', $Billable)
     }
     if ($PSBoundParameters.ContainsKey('Duration')) {
-        $Body.Add('duration', $Duration)
+        $T = New-TimeSpan -Seconds $Duration
+        $Body.Add('duration', $T.TotalMilliseconds)
     }
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -537,6 +633,10 @@ function Set-ClickUpTimeEntry() {
     Remove a ClickUp time entry.
 .DESCRIPTION
     Remove a ClickUp time entry.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER TimerId
+    ClickUp time entry ID.
 .EXAMPLE
     PS C:\> Remove-ClickUpTimeEntry -TeamID 1111111 -TimerID 2222222222222222222
     Remove a ClickUp time entry with ID "2222222222222222222".
