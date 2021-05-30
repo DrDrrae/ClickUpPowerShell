@@ -3,6 +3,48 @@
     Get all ClickUp tasks under a particular list.
 .DESCRIPTION
     Get all ClickUp tasks under a particular list.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER TeamID
+    ClickUp team ID.
+.PARAMETER Archived
+    If set to true, will return archived ClickUp tasks in addition to non-archived tasks.
+.PARAMETER Page
+    The page number to return.
+.PARAMETER OrderBy
+    The property of the task to order the returned results by.
+.PARAMETER Reverse
+    Set to true to order the list in reverse order.
+.PARAMETER Subtasks
+    Set to true to return subtasks.
+.PARAMETER SpaceIDs
+    Array of ClickUp space IDs to return the tasks of.
+.PARAMETER ProjectIDs
+    Array of ClickUp project IDs to return the tasks of.
+.PARAMETER ListIDs
+    Array of ClickUp list IDs to return the tasks of.
+.PARAMETER Statuses
+    Array of the statuses to return the tasks of.
+.PARAMETER IncludeClosed
+    Set to true to return closed tasks in addition to open tasks.
+.PARAMETER Assignees
+    Return tasks which are assigned to an array of ClickUp team member IDs.
+.PARAMETER DueDateGreaterThan
+    Return tasks with due date greater than this date and time.
+.PARAMETER DueDateLessThan
+    Return tasks with due date less than this date and time.
+.PARAMETER DateCreatedGreaterThan
+    Return tasks with date created greater than this date and time.
+.PARAMETER DateCreatedLessThan
+    Return tasks with date created less than this date and time.
+.PARAMETER DateUpdatedGreaterThan
+    Return tasks with date updated greater than this date and time.
+.PARAMETER DateUpdatedLessThan
+    Return tasks with date updated less than this date and time.
+.PARAMETER CustomFields
+    Return tasks with these custom fields.
+.PARAMETER CustomTaskIDs
+    If you want to reference a task by it's custom task ID, this value must be true
 .EXAMPLE
     PS C:\> Get-ClickUpTasks -ListID 11111111
     Get all ClickUp task under List with ID "11111111".
@@ -161,6 +203,14 @@ function Get-ClickUpTasks {
     Get a ClickUp task.
 .DESCRIPTION
     Get a ClickUp task.
+.PARAMETER TaskID
+    ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+.PARAMETER IncludeSubtasks
+    Set to true to include sub-tasks.
 .EXAMPLE
     PS C:\> Get-ClickUpTask -TaskID 9hz
     Get a ClickUp task under List with ID "11111111".
@@ -211,6 +261,14 @@ function Get-ClickUpTask {
     Get a ClickUp task's time in status.
 .DESCRIPTION
     Get a ClickUp task's time in status.
+.PARAMETER TaskID
+    ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
+.PARAMETER IncludeSubtasks
+    Set to true to include sub-tasks.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatus -TaskID 9hz
     Get a ClickUp task's time in status with ID "9hz".
@@ -259,6 +317,12 @@ function Get-ClickUpTaskTimeInStatus {
     Get a ClickUp bulk task's time in status.
 .DESCRIPTION
     Get a ClickUp bulk task's time in status.
+.PARAMETER TaskID
+    ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID 9hz,3cuh,g4fs
     Get a ClickUp task's time in status with ID "9hz".
@@ -306,12 +370,59 @@ function Get-ClickUpTaskTimeInStatusBulk {
     Create a new ClickUp task.
 .DESCRIPTION
     Create a new ClickUp task.
+.PARAMETER ListID
+    ClickUp list ID.
+.PARAMETER Name
+    Name of the new ClickUp task.
+.PARAMETER Description
+    Description of the new ClickUp task.
+.PARAMETER Assignees
+    ClickUp member IDs of the users to be assigned to the new ClickUp task.
+.PARAMETER Tags
+    Tags to add to the new ClickUp task.
+.PARAMETER Status
+    Status to set to the new ClickUp task.
+.PARAMETER Priority
+    Priority to set to the new ClickUp task.
+.PARAMETER DueDate
+    Due date to set to the new ClickUp task.
+.PARAMETER DueDateTime
+    Set to true to include a time for the due date instead of just a date.
+.PARAMETER TimeEstimate
+    The time estimate in minutes.
+.PARAMETER StartDate
+    Start date to set to the new ClickUp task.
+.PARAMETER StartDateTime
+    Set to true to include a time for the start date instead of just a date.
+.PARAMETER NotifyAll
+    If set to true, creation notifications will be sent to everyone including the creator of the task.
+.PARAMETER Parent
+    ClickUp task ID to set as the parent of the new ClickUp task.
+.PARAMETER LinksTo
+    A ClickUp task ID to create a linked dependency on the new task.
+.PARAMETER CheckRequiredCustomFields
+    If required custom fields are checked when creating the new ClickUp task.
+.PARAMETER CustomFields
+    A hashtable array containing the custom fields and their properties to set.
 .EXAMPLE
     PS C:\> New-ClickUpTask -ListID 11111111 -Name 'This is a new task'
     Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111".
 .EXAMPLE
     PS C:\> New-ClickUpTask -ListID 22222222 -Name 'This is another new task' -Description "Description of the other new task" -Assignees 33333333 -Status 'Review' -Priority 1
     Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
+.EXAMPLE
+    PS C:\> $CustomFields = @(
+    >> @{
+    >> id = "0a52c486-5f05-403b-b4fd-c512ff05131c"
+    >> value = 23
+    >> },
+    >> @{
+    >> id = "03efda77-c7a0-42d3-8afd-fd546353c2f5"
+    >> value = "Text field input"
+    >> }
+    >> )
+    PS C:\> New-ClickUpTask -ListID 11111111 -Name 'This is a new task' -CheckRequiredCustomFields $true -CustomFields $CustomFields
+    Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111" with two custom fields set.
 .INPUTS
     None
 .OUTPUTS
@@ -367,7 +478,8 @@ function New-ClickUpTask {
         $Body.Add('due_date_time', $DueDateTime)
     }
     if ($PSBoundParameters.ContainsKey('TimeEstimate')) {
-        $Body.Add('time_estimate', $TimeEstimate)
+        $T = New-TimeSpan -Minutes $TimeEstimate
+        $Body.Add('time_estimate', $T.TotalMilliseconds)
     }
     if ($PSBoundParameters.ContainsKey('StartDate')) {
         $Body.Add('start_date', $StartDate)
@@ -397,6 +509,14 @@ function New-ClickUpTask {
     Update a ClickUp task.
 .DESCRIPTION
     Update a ClickUp task.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER Body
+    A hashtable containing the properties of the task ID to update.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> $Body = @{
     >> name = "Updated Task Name"
@@ -485,6 +605,12 @@ function Set-ClickUpTask {
     Remove a ClickUp task.
 .DESCRIPTION
     Remove a ClickUp task.
+.PARAMETER TaskID
+    The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+.PARAMETER CustomTaskIDs
+    Set to $true if the task ID provided is a custom ID.
+.PARAMETER TeamID
+    Required ClickUp team ID if -CustomTaskIDs is set to $true.
 .EXAMPLE
     PS C:\> Remove-ClickUpTask -TaskID 9hx
     Remove the task with ID "9hx".
