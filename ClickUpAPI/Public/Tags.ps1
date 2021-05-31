@@ -23,7 +23,7 @@ function Get-ClickUpTags {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID
+        [UInt64]$SpaceID
     )
 
     $Tags = Invoke-ClickUpAPIGet-Endpoint "space/$SpaceID/tag"
@@ -61,7 +61,7 @@ function New-ClickUpTag {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the new ClickUp tag.')]
         [ValidateNotNullOrEmpty()]
         [string]$TagName,
@@ -121,7 +121,7 @@ function Set-ClickUpTag {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the ClickUp tag.')]
         [ValidateNotNullOrEmpty()]
         [string]$TagName,
@@ -177,7 +177,7 @@ function Remove-ClickUpTag {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the ClickUp tag.')]
         [ValidateNotNullOrEmpty()]
         [string]$TagName
@@ -232,7 +232,7 @@ function Add-ClickUpTagToTask {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -291,7 +291,7 @@ function Remove-ClickUpTagFromTask {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {

@@ -28,7 +28,7 @@ function Get-ClickUpSpaces {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(HelpMessage = 'If set to true, will returned archived spaces in addition to non-archived spaces.')]
         [ValidateNotNullOrEmpty()]
         [bool]$Archived = $false
@@ -67,7 +67,7 @@ function Get-ClickUpSpace {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID
+        [UInt64]$SpaceID
     )
     $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
     Return $Space
@@ -126,7 +126,7 @@ function New-ClickUpSpace {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the new ClickUp space.')]
         [ValidateNotNullOrEmpty()]
         [string]$Name,
@@ -302,7 +302,7 @@ function Set-ClickUpSpace {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the settings and/or properties to change on the ClickUp space.')]
         [ValidateNotNullOrEmpty()]
         [hashtable]$Body
@@ -337,7 +337,7 @@ function Remove-ClickupSpace {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID
+        [UInt64]$SpaceID
     )
 
     if ($PSCmdlet.ShouldProcess($SpaceID)) {

@@ -79,7 +79,7 @@ function Get-ClickUpTasks {
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'The page number to return.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'The page number to return.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Page = 0,
+        [UInt64]$Page = 0,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'The property of the task to order the returned results by.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'The property of the task to order the returned results by.')]
@@ -259,7 +259,7 @@ function Get-ClickUpTask {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to $true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Set to true to include sub-tasks.')]
         [Parameter(ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true to include sub-tasks.')]
         [ValidateNotNullOrEmpty()]
@@ -321,7 +321,7 @@ function Get-ClickUpTaskTimeInStatus {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to $true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Set to true to include sub-tasks.')]
         [Parameter(ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true to include sub-tasks.')]
         [ValidateNotNullOrEmpty()]
@@ -379,7 +379,7 @@ function Get-ClickUpTaskTimeInStatusBulk {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to $true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $QueryString = @{
@@ -470,7 +470,7 @@ function New-ClickUpTask {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the new ClickUp task.')]
         [ValidateNotNullOrEmpty()]
         [string]$Name,
@@ -488,7 +488,7 @@ function New-ClickUpTask {
         [string]$Status,
         [Parameter(HelpMessage = 'Priority to set to the new ClickUp task.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Priority,
+        [UInt64]$Priority,
         [Parameter(HelpMessage = 'Due date to set to the new ClickUp task.')]
         [ValidateNotNullOrEmpty()]
         [datetime]$DueDate,
@@ -497,7 +497,7 @@ function New-ClickUpTask {
         [bool]$DueDateTime = $false,
         [Parameter(HelpMessage = 'The time estimate in minutes.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TimeEstimate,
+        [UInt64]$TimeEstimate,
         [Parameter(HelpMessage = 'Start date to set to the new ClickUp task.')]
         [ValidateNotNullOrEmpty()]
         [datetime]$StartDate,
@@ -651,7 +651,7 @@ function Set-ClickUpTask {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
 
@@ -706,7 +706,7 @@ function Remove-ClickUpTask {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {

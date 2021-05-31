@@ -28,7 +28,7 @@ function Get-ClickUpFolders {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter()]
         [ValidateNotNullOrEmpty()]
         [bool]$Archived = $false
@@ -67,7 +67,7 @@ function Get-ClickUpFolder {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FolderID
+        [UInt64]$FolderID
     )
 
     $Folder = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "folder/$FolderID"
@@ -101,10 +101,10 @@ function New-ClickUpFolder {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'The name of the ClickUp folder to be created.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Name
+        [UInt64]$Name
     )
 
     $Body = @{
@@ -142,10 +142,10 @@ function Set-ClickUpFolder {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FolderID,
+        [UInt64]$FolderID,
         [Parameter(Mandatory = $true, HelpMessage = 'The new name of the ClickUp folder.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Name
+        [UInt64]$Name
     )
 
     $Body = @{
@@ -180,7 +180,7 @@ function Remove-ClickUpFolder {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FolderID
+        [UInt64]$FolderID
     )
 
     if ($PSCmdlet.ShouldProcess($FolderID)) {

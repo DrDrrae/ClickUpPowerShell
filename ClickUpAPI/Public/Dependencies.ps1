@@ -61,7 +61,7 @@ function Add-ClickUpDependency {
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -143,7 +143,7 @@ function Remove-ClickUpDependency {
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $QueryString = @{}
@@ -211,7 +211,7 @@ function Add-ClickUpTaskLink {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -271,7 +271,7 @@ function Remove-ClickUpTaskLink {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $QueryString = @{}

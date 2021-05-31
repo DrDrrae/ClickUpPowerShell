@@ -23,7 +23,7 @@ function Get-ClickUpGoals {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
@@ -55,7 +55,7 @@ function Get-ClickUpGoal {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp goal ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$GoalID
+        [UInt64]$GoalID
     )
 
     $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
@@ -98,7 +98,7 @@ function New-ClickUpGoal {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the ClickUp team goal to create.')]
         [ValidateNotNullOrEmpty()]
@@ -181,7 +181,7 @@ function Set-ClickUpGoal {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp goal ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$GoalID,
+        [UInt64]$GoalID,
         [Parameter(HelpMessage = 'New name of the ClickUp team goal being updated.')]
         [ValidateNotNullOrEmpty()]
         [string]$Name,
@@ -312,10 +312,10 @@ function New-ClickUpKeyResult {
         [string]$Type,
         [Parameter(HelpMessage = 'Current step.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$StepsStart,
+        [UInt64]$StepsStart,
         [Parameter(HelpMessage = 'Number of steps to reach the end.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$StepsEnd,
+        [UInt64]$StepsEnd,
         [Parameter(HelpMessage = 'Unit of the key result.')]
         [ValidateNotNullOrEmpty()]
         [string]$Unit,
@@ -417,13 +417,13 @@ function Set-ClickUpKeyResult {
         [string]$Type,
         [Parameter(HelpMessage = 'Step number to start at.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$StepsStart,
+        [UInt64]$StepsStart,
         [Parameter(HelpMessage = 'Number of steps to reach the end.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$StepsEnd,
+        [UInt64]$StepsEnd,
         [Parameter(HelpMessage = 'Current step.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$StepsCurrent,
+        [UInt64]$StepsCurrent,
         [Parameter(HelpMessage = 'Unit of the key result.')]
         [ValidateNotNullOrEmpty()]
         [string]$Unit,

@@ -28,10 +28,10 @@ function Get-ClickUpTaskTemplates {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(HelpMessage = 'The page number to return.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Page = 0
+        [UInt64]$Page = 0
     )
 
     $QueryString = @{
@@ -74,7 +74,7 @@ function New-ClickUpTaskFromTemplate {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$TemplateID,

@@ -29,10 +29,10 @@ function Get-ClickUpUser {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp user ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$UserID
+        [UInt64]$UserID
     )
 
     $Member = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/user/$UserID"
@@ -75,7 +75,7 @@ function Add-ClickUpUser {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'Email address of the user to invite.')]
         [ValidateNotNullOrEmpty()]
         [string]$EmailAddress,
@@ -131,10 +131,10 @@ function Set-ClickUpUser {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp user ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$UserID,
+        [UInt64]$UserID,
         [Parameter(HelpMessage = 'Email address of the user to invite.')]
         [ValidateNotNullOrEmpty()]
         [string]$EmailAddress,
@@ -183,10 +183,10 @@ function Remove-ClickUpUser {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp user ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$UserID
+        [UInt64]$UserID
     )
 
     if ($PSCmdlet.ShouldProcess($TimerID)) {

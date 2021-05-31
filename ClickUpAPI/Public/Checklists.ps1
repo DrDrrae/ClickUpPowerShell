@@ -43,7 +43,7 @@ function New-ClickUpChecklist {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Body = @{
@@ -103,7 +103,7 @@ function Set-ClickUpChecklist {
         [string]$Name,
         [Parameter(HelpMessage = 'The zero-based position of the checklist.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Position
+        [UInt64]$Position
     )
 
     $Body = @{}
@@ -190,7 +190,7 @@ function New-ClickUpChecklistItem {
         [string]$Name,
         [Parameter(HelpMessage = 'The ClickUp user ID of the user to assign the checklist item to.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Assignee
+        [UInt64]$Assignee
     )
 
     $Body = @{
@@ -252,7 +252,7 @@ function Set-ClickUpChecklistItem {
         [string]$Name,
         [Parameter(HelpMessage = 'The ClickUp user ID of the user to assign the checklist item to.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Assignee,
+        [UInt64]$Assignee,
         [Parameter(HelpMessage = 'If the checklist item is resolved or not.')]
         [ValidateNotNullOrEmpty()]
         [bool]$Resolved,

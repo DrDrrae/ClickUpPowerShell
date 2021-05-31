@@ -30,10 +30,10 @@ function Get-ClickUpLists {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', HelpMessage = 'ClickUp folder ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FolderID,
+        [UInt64]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', HelpMessage = 'Clickup space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'If set to true, will returned archived lists in addition to non-archived lists.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'If set to true, will returned archived lists in addition to non-archived lists.')]
         [ValidateNotNullOrEmpty()]
@@ -76,7 +76,7 @@ function Get-ClickUpList {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'Clickup list ID.')]
-        [UInt32]$ListID
+        [UInt64]$ListID
     )
 
     $List = Invoke-ClickUpAPIGet -Endpoint "list/$ListID"
@@ -133,10 +133,10 @@ function New-ClickUpList {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', HelpMessage = 'ClickUp folder ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FolderID,
+        [UInt64]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', HelpMessage = 'Clickup space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', HelpMessage = 'Name of the new ClickUp list.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', HelpMessage = 'Name of the new ClickUp list.')]
         [ValidateNotNullOrEmpty()]
@@ -160,7 +160,7 @@ function New-ClickUpList {
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'Member ID of the ClickUp user to assign the list to.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'Member ID of the ClickUp user to assign the list to.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Assignee,
+        [UInt64]$Assignee,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'Status of the new ClickUp list.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'Status of the new ClickUp list.')]
         [ValidateNotNullOrEmpty()]
@@ -258,7 +258,7 @@ function Set-ClickUpList {
         [UInt16]$Priorty,
         [Parameter(HelpMessage = 'Member ID of the ClickUp user to assign the list to.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Assignee,
+        [UInt64]$Assignee,
         [Parameter(HelpMessage = 'Set to true to remove the current status.')]
         [ValidateNotNullOrEmpty()]
         [bool]$UnsetStatus
@@ -315,7 +315,7 @@ function Remove-ClickUpList {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID
+        [UInt64]$ListID
     )
     if ($PSCmdlet.ShouldProcess($ListID)) {
         Invoke-ClickUpAPIDelete -Endpoint "list/$ListID"
@@ -349,7 +349,7 @@ function Add-ClickUpTaskToList {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp task ID.')]
         [ValidateNotNullOrEmpty()]
         [string]$TaskID
@@ -384,7 +384,7 @@ function Remove-ClickUpTaskFromList {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp task ID.')]
         [ValidateNotNullOrEmpty()]
         [string]$TaskID

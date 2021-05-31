@@ -61,7 +61,7 @@ function Get-ClickUpTeamViews {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/view"
@@ -96,7 +96,7 @@ function Get-ClickUpSpaceViews {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID
+        [UInt64]$SpaceID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID/view"
@@ -131,7 +131,7 @@ function Get-ClickUpListViews {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FolderID
+        [UInt64]$FolderID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "folder/$FolderID/view"
@@ -166,7 +166,7 @@ function Get-ClickUpListViews {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID
+        [UInt64]$ListID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/view"
@@ -213,7 +213,7 @@ function Get-ClickUpViewTaks {
         [string]$ViewID,
         [Parameter(HelpMessage = 'Page number to return.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Page = 0
+        [UInt64]$Page = 0
     )
 
     $QueryString = @{
@@ -262,7 +262,7 @@ function New-ClickUpTeamView {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
         [ValidateNotNullOrEmpty()]
         [hashtable]$Body
@@ -310,7 +310,7 @@ function New-ClickUpSpaceView {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
         [ValidateNotNullOrEmpty()]
         [hashtable]$Body
@@ -358,7 +358,7 @@ function New-ClickUpListView {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FolderID,
+        [UInt64]$FolderID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
         [ValidateNotNullOrEmpty()]
         [hashtable]$Body
@@ -406,7 +406,7 @@ function New-ClickUpListViews {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
         [ValidateNotNullOrEmpty()]
         [hashtable]$Body

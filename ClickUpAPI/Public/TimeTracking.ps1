@@ -32,7 +32,7 @@ function Get-ClickUpTimeEntries {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(HelpMessage = 'Start date and time of the time entries range.')]
         [ValidateNotNullOrEmpty()]
         [DateTime]$StartDate,
@@ -87,7 +87,7 @@ function Get-ClickUpTimeEntry {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [ValidateNotNullOrEmpty()]
         [UInt64]$TimerID
@@ -124,7 +124,7 @@ function Get-ClickUpTimeEntryHistory {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [ValidateNotNullOrEmpty()]
         [UInt64]$TimerID
@@ -164,10 +164,10 @@ function Get-ClickUpRunningTimeEntry {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(HelpMessage = 'ClickUp member ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Assignee
+        [UInt64]$Assignee
     )
 
     if ($PSBoundParameters.ContainsKey('Assignee')) {
@@ -207,7 +207,7 @@ function Get-ClickUpTimeEntryTags {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/tags"
@@ -255,7 +255,7 @@ function New-ClickUpTimeEntry {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(HelpMessage = 'If you want to reference a task by its custom task ID, this value must be true.')]
         [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs = $false,
@@ -273,10 +273,10 @@ function New-ClickUpTimeEntry {
         [bool]$Billable,
         [Parameter(Mandatory = $true, HelpMessage = 'Duration of the new ClickUp time entry in seconds.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Duration,
+        [UInt64]$Duration,
         [Parameter(HelpMessage = 'ClickUp member assigned to the new ClickUp time entry.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Assignee,
+        [UInt64]$Assignee,
         [Parameter(HelpMessage = 'ClickUp task ID to assign the time entry to.')]
         [ValidateNotNullOrEmpty()]
         [string]$TaskID
@@ -471,7 +471,7 @@ function Start-ClickUpTimeEntry() {
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp team Id.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', HelpMessage = 'ClickUp team Id.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', HelpMessage = 'ClickUp time entry ID.')]
         [ValidateNotNullOrEmpty()]
         [UInt64]$TimerID,
@@ -544,7 +544,7 @@ function Stop-ClickUpTimeEntry() {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $TimeEntry = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/time_entries/stop"
@@ -599,7 +599,7 @@ function Set-ClickUpTimeEntry() {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [ValidateNotNullOrEmpty()]
         [UInt64]$TimerID,
@@ -626,7 +626,7 @@ function Set-ClickUpTimeEntry() {
         [bool]$Billable,
         [Parameter(HelpMessage = 'Duration of the new ClickUp time entry in seconds.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$Duration,
+        [UInt64]$Duration,
         [Parameter(HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs
@@ -701,7 +701,7 @@ function Remove-ClickUpTimeEntry {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp time entry ID.')]
         [ValidateNotNullOrEmpty()]
         [UInt64]$TimerID

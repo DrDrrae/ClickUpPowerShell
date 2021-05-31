@@ -55,7 +55,7 @@ function Get-ClickUpListMembers {
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID
+        [UInt64]$ListID
     )
 
     $ListMembers = Invoke-ClickUpAPIGet -Endpoint "list/$TaskID/member"

@@ -26,7 +26,7 @@ function Get-ClickUpWebhooks {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Webhooks = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/webhook"
@@ -82,10 +82,10 @@ function New-ClickUpWebhook {
         [string[]]$Events = '*',
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp spaces.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FilterToSpaceID,
+        [UInt64]$FilterToSpaceID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp folders.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FilterToFolderID,
+        [UInt64]$FilterToFolderID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp lists.')]
         [ValidateNotNullOrEmpty()]
         [string]$FilterToListID,
@@ -175,10 +175,10 @@ function Set-ClickUpWebhook {
         [string]$Status,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp spaces.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FilterToSpaceID,
+        [UInt64]$FilterToSpaceID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp folders.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$FilterToFolderID,
+        [UInt64]$FilterToFolderID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp lists.')]
         [ValidateNotNullOrEmpty()]
         [string]$FilterToListID,

@@ -36,7 +36,7 @@ function Get-ClickUpTaskComments {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -109,7 +109,7 @@ function Get-ClickUpListComments {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID
+        [UInt64]$ListID
     )
 
     $Comments = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/comment"
@@ -148,7 +148,7 @@ function Set-ClickUpListComment {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp comment ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$CommentID,
+        [UInt64]$CommentID,
         [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the parameters of the ClickUp list comment that are to be changed.')]
         [ValidateNotNullOrEmpty()]
         [hashtable]$Body
@@ -181,7 +181,7 @@ function Remove-ClickUpListComment {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp comment ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$CommentID
+        [UInt64]$CommentID
     )
 
     if ($PSCmdlet.ShouldProcess($CommentID)) {
@@ -264,7 +264,7 @@ function New-ClickUpTaskComment {
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -396,7 +396,7 @@ function New-ClickUpListComment {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp list ID.')]
         [ValidateNotNullOrEmpty()]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a list.')]
         [ValidateNotNullOrEmpty()]
         [hashtable]$Body
