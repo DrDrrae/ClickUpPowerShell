@@ -25,6 +25,7 @@ function Get-ClickUpView {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp view ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID
     )
 
@@ -59,6 +60,7 @@ function Get-ClickUpTeamViews {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -93,6 +95,7 @@ function Get-ClickUpSpaceViews {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID
     )
 
@@ -127,6 +130,7 @@ function Get-ClickUpListViews {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID
     )
 
@@ -161,6 +165,7 @@ function Get-ClickUpListViews {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID
     )
 
@@ -204,8 +209,10 @@ function Get-ClickUpViewTaks {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp view ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID,
         [Parameter(HelpMessage = 'Page number to return.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Page = 0
     )
 
@@ -254,8 +261,10 @@ function New-ClickUpTeamView {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -300,8 +309,10 @@ function New-ClickUpSpaceView {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -346,8 +357,10 @@ function New-ClickUpListView {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -392,8 +405,10 @@ function New-ClickUpListViews {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to create.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -438,8 +453,10 @@ function Set-ClickUpView {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp view ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the setting and parameters to update.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -473,6 +490,7 @@ function Remove-ClickUpView {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'lickUp view ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID
     )
 

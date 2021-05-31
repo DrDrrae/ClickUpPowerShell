@@ -25,6 +25,7 @@ function Get-ClickUpWebhooks {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -74,16 +75,22 @@ function Get-ClickUpWebhooks {
 function New-ClickUpWebhook {
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'URL to send the webhook to.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Endpoint,
         [Parameter(HelpMessage = 'Array of events to subscribe to.')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Events = '*',
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp spaces.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FilterToSpaceID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp folders.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FilterToFolderID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp lists.')]
+        [ValidateNotNullOrEmpty()]
         [string]$FilterToListID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp tasks.')]
+        [ValidateNotNullOrEmpty()]
         [string]$FilterToTaskID
     )
 
@@ -155,21 +162,28 @@ function New-ClickUpWebhook {
 function Set-ClickUpWebhook {
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp webhook ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$WebhookID,
         [Parameter(HelpMessage = 'URL to send the webhook to.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Endpoint,
         [Parameter(HelpMessage = 'Array of events to subscribe to.')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Events,
         [Parameter(HelpMessage = 'Set to "active" to re-activate the webhook.')]
         [ValidateSet('active')]
         [string]$Status,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp spaces.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FilterToSpaceID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp folders.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FilterToFolderID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp lists.')]
+        [ValidateNotNullOrEmpty()]
         [string]$FilterToListID,
         [Parameter(HelpMessage = 'Filter subscribed events to one or more ClickUp tasks.')]
+        [ValidateNotNullOrEmpty()]
         [string]$FilterToTaskID
     )
 
@@ -227,6 +241,7 @@ function Remove-ClickUpWebhook {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp webhook ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$WebhookID
     )
 

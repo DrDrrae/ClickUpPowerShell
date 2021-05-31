@@ -65,81 +65,102 @@ function Get-ClickUpTasks {
     [CmdletBinding(DefaultParameterSetName = 'ListID')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'ListID', HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ListID,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'TeamID', HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TeamID,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'If set to true, will return archived ClickUp tasks in addition to non-archived tasks.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Archived = $false,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'The page number to return.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'The page number to return.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Page = 0,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'The property of the task to order the returned results by.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'The property of the task to order the returned results by.')]
         [ValidateSet('id', 'created', 'updated', 'due_date')]
+        [ValidateNotNullOrEmpty()]
         [string]$OrderBy = 'created',
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Set to true to order the list in reverse order.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Set to true to order the list in reverse order.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Reverse = $false,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Set to true to return subtasks.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Set to true to return subtasks.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Subtasks = $false,
 
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Array of ClickUp space IDs to return the tasks of.')]
+        [ValidateNotNullOrEmpty()]
         [int[]]$SpaceIDs,
 
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Array of ClickUp space IDs to return the tasks of.')]
+        [ValidateNotNullOrEmpty()]
         [int[]]$ProjectIDs,
 
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Array of ClickUp list IDs to return the tasks of.')]
+        [ValidateNotNullOrEmpty()]
         [int[]]$ListIDs,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Array of the statuses to return the tasks of.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Array of the statuses to return the tasks of.')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Statuses,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Set to true to return closed tasks in addition to open tasks.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Set to true to return closed tasks in addition to open tasks.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$IncludeClosed = $false,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks which are assigned to an array of ClickUp team member IDs.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks which are assigned to an array of ClickUp team member IDs.')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Assignees,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks with due date greater than this date and time.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks with due date greater than this date and time.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$DueDateGreaterThan,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks with due date less than this date and time.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks with due date less than this date and time.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$DueDateLessThan,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks with date created greater than this date and time.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks with date created greater than this date and time.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$DateCreatedGreaterThan,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks with date created less than this date and time.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks with date created less than this date and time.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$DateCreatedLessThan,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks with date updated greater than this date and time.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks with date updated greater than this date and time.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$DateUpdatedGreaterThan,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks with date updated less than this date and time.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks with date updated less than this date and time.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$DateUpdatedLessThan,
 
         [Parameter(ParameterSetName = 'ListID', HelpMessage = 'Return tasks with these custom fields.')]
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'Return tasks with these custom fields.')]
+        [ValidateNotNullOrEmpty()]
         [array]$CustomFields,
 
         [Parameter(ParameterSetName = 'TeamID', HelpMessage = 'If you want to reference a task by its custom task ID, this value must be true')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs
     )
 
@@ -231,14 +252,18 @@ function Get-ClickUpTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to $true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Set to true to include sub-tasks.')]
         [Parameter(ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true to include sub-tasks.')]
-        $IncludeSubtasks = $false
+        [ValidateNotNullOrEmpty()]
+        [bool]$IncludeSubtasks = $false
     )
 
     $QueryString = @{
@@ -289,14 +314,18 @@ function Get-ClickUpTaskTimeInStatus {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to $true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Set to true to include sub-tasks.')]
         [Parameter(ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true to include sub-tasks.')]
-        $IncludeSubtasks = $false
+        [ValidateNotNullOrEmpty()]
+        [bool]$IncludeSubtasks = $false
     )
 
     $QueryString = @{
@@ -343,10 +372,13 @@ function Get-ClickUpTaskTimeInStatusBulk {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to $true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -437,38 +469,55 @@ function New-ClickUpTask {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'Description of the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Description,
         [Parameter(HelpMessage = 'ClickUp member IDs of the users to be assigned to the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [int[]]$Assignees,
         [Parameter(HelpMessage = 'Tags to add to the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Tags,
         [Parameter(HelpMessage = 'Status to set to the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Status,
         [Parameter(HelpMessage = 'Priority to set to the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Priority,
         [Parameter(HelpMessage = 'Due date to set to the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$DueDate,
         [Parameter(HelpMessage = 'Set to true to include a time for the due date instead of just a date.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$DueDateTime = $false,
         [Parameter(HelpMessage = 'The time estimate in minutes.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TimeEstimate,
         [Parameter(HelpMessage = 'Start date to set to the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [datetime]$StartDate,
         [Parameter(HelpMessage = 'Set to true to include a time for the start date instead of just a date.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$StartDateTime = $false,
         [Parameter(HelpMessage = 'If set to true, creation notifications will be sent to everyone including the creator of the task.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$NotifyAll,
         [Parameter(HelpMessage = 'ClickUp task ID to set as the parent of the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Parent,
         [Parameter(HelpMessage = 'A ClickUp task ID to create a linked dependency on the new task.')]
+        [ValidateNotNullOrEmpty()]
         [string]$LinksTo,
         [Parameter(HelpMessage = 'If required custom fields are checked when creating the new ClickUp task.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CheckRequiredCustomFields,
         [Parameter(HelpMessage = 'A hashtable array containing the custom fields and their properties to set.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable[]]$CustomFields
     )
 
@@ -591,13 +640,17 @@ function Set-ClickUpTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'A hashtable containing the properties of the task ID to update.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'A hashtable containing the properties of the task ID to update.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -646,10 +699,13 @@ function Remove-ClickUpTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 

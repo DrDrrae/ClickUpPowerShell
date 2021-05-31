@@ -32,13 +32,17 @@ function New-ClickUpChecklist {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The name of the new ClickUp checklist.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The name of the new ClickUp checklist.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -92,10 +96,13 @@ function Set-ClickUpChecklist {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistID,
         [Parameter(HelpMessage = 'The new name of the ClickUp checklist.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'The zero-based position of the checklist.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Position
     )
 
@@ -136,6 +143,7 @@ function Remove-ClickUpChecklist {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistID
     )
 
@@ -175,10 +183,13 @@ function New-ClickUpChecklistItem {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'The ClickUp checklist ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$CheckListID,
         [Parameter(Mandatory = $True, HelpMessage = 'The name of the new ClickUp checklist item')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'The ClickUp user ID of the user to assign the checklist item to.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Assignee
     )
 
@@ -231,16 +242,22 @@ function Set-ClickUpChecklistItem {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistID,
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist item ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistItemId,
         [Parameter(HelpMessage = 'The new name of the ClickUp checklist item.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'The ClickUp user ID of the user to assign the checklist item to.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Assignee,
         [Parameter(HelpMessage = 'If the checklist item is resolved or not.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Resolved,
         [Parameter(HelpMessage = 'Another checklist item that you want to nest the target checklist item underneath.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Parent
     )
 
@@ -289,8 +306,10 @@ function Remove-ClickUpCheckListItem {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistID,
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp checklist item ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistItemId
     )
 

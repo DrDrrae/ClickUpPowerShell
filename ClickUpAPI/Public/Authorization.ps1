@@ -78,10 +78,13 @@ function New-ClickUpAccessToken {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp OAuth app client id.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ClientID,
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp OAuth app client secret.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ClientSecret,
         [Parameter(Mandatory = $True, HelpMessage = 'Code given in redirect url.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Code
     )
 

@@ -26,6 +26,7 @@ function Get-ClickUpCustomFields {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ListID
     )
 
@@ -72,16 +73,21 @@ function Set-ClickUpCustomFieldValue {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp custom field ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'ClickUp custom field ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$FieldID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'Value to set to the custom field.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Value to set to the custom field.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Value,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -137,13 +143,17 @@ function Remove-ClickUpCustomFieldValue {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp custom field ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'ClickUp custom field ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$FieldID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 

@@ -22,6 +22,7 @@ function Get-ClickUpGoals {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -53,6 +54,7 @@ function Get-ClickUpGoal {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp goal ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GoalID
     )
 
@@ -97,17 +99,24 @@ function New-ClickUpGoal {
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
         [UInt32]$TeamID,
+        [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the ClickUp team goal to create.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'The due-date of the ClickUp team goal.')]
+        [ValidateNotNullOrEmpty()]
         [DateTime]$DueDate,
         [Parameter(HelpMessage = 'Description of the ClickUp team goal.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Description,
         [Parameter(HelpMessage = 'If set to true, allows multiple owners.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$MultipleOwners,
         [Parameter(HelpMessage = 'The ClickUp team member ID for the owner(s) of the team goal.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32[]]$Owners,
         [Parameter(HelpMessage = 'The color of the team goal in hex notation. i.e. "#32a852"')]
+        [ValidateNotNullOrEmpty()]
         [string]$Color
     )
 
@@ -171,18 +180,25 @@ function Set-ClickUpGoal {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp goal ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GoalID,
         [Parameter(HelpMessage = 'New name of the ClickUp team goal being updated.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'The due-date of the ClickUp team goal.')]
+        [ValidateNotNullOrEmpty()]
         [DateTime]$DueDate,
         [Parameter(HelpMessage = 'Description of the ClickUp team goal.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Description,
         [Parameter(HelpMessage = 'If set to true, allows multiple owners.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$MultipleOwners,
         [Parameter(HelpMessage = 'The ClickUp team member ID for the owner(s) of the team goal.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32[]]$Owners,
         [Parameter(HelpMessage = 'The color of the team goal in hex notation. i.e. "#32a852"')]
+        [ValidateNotNullOrEmpty()]
         [string]$Color
     )
 
@@ -234,6 +250,7 @@ function Remove-ClickUpGoal {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp goal ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$GoalID
     )
 
@@ -282,23 +299,31 @@ function New-ClickUpKeyResult {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp goal ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$GoalID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the ClickUp key result.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'The ClickUp team member ID for the owner(s) of the team goal.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32[]]$Owners,
         [Parameter(HelpMessage = 'Type of the key result.')]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter(HelpMessage = 'Current step.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$StepsStart,
         [Parameter(HelpMessage = 'Number of steps to reach the end.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$StepsEnd,
         [Parameter(HelpMessage = 'Unit of the key result.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Unit,
         [Parameter(HelpMessage = 'If specified, will attach the task resource to the goal.')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$TaskIDs,
         [Parameter(HelpMessage = 'If specified, will attach the list resource to the goal.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32[]]$ListIDs
     )
 
@@ -376,27 +401,37 @@ function Set-ClickUpKeyResult {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp key result ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$KeyResultID,
         [Parameter(HelpMessage = 'New name of the ClickUp key result.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'Note to add to the ClickUp key result.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Note,
         [Parameter(HelpMessage = 'The ClickUp team member ID for the owner(s) of the team goal.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32[]]$Owners,
         [Parameter(HelpMessage = 'Type of the key result.')]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter(HelpMessage = 'Step number to start at.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$StepsStart,
         [Parameter(HelpMessage = 'Number of steps to reach the end.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$StepsEnd,
         [Parameter(HelpMessage = 'Current step.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$StepsCurrent,
         [Parameter(HelpMessage = 'Unit of the key result.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Unit,
         [Parameter(HelpMessage = 'If specified, will attach the task resource to the goal.')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$TaskIDs,
         [Parameter(HelpMessage = 'If specified, will attach the list resource to the goal.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32[]]$ListIDs
     )
 
@@ -460,6 +495,7 @@ function Remove-ClickUpKeyResult {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp key result ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$KeyResultID
     )
 

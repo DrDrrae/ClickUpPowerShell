@@ -27,8 +27,10 @@ function Get-ClickUpFolders {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [bool]$Archived = $false
     )
 
@@ -64,6 +66,7 @@ function Get-ClickUpFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID
     )
 
@@ -97,8 +100,10 @@ function New-ClickUpFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'The name of the ClickUp folder to be created.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Name
     )
 
@@ -136,8 +141,10 @@ function Set-ClickUpFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID,
         [Parameter(Mandatory = $true, HelpMessage = 'The new name of the ClickUp folder.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Name
     )
 
@@ -172,6 +179,7 @@ function Remove-ClickUpFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID
     )
 

@@ -44,18 +44,23 @@ function Add-ClickUpDependency {
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependsOn,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependendencyOf,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -121,18 +126,23 @@ function Remove-ClickUpDependency {
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" depends on.')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependsOn,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" is a dependency of.')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependendencyOf,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -190,13 +200,17 @@ function Add-ClickUpTaskLink {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be linked to.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be linked to.')]
+        [ValidateNotNullOrEmpty()]
         [string]$LinksTo,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -246,13 +260,17 @@ function Remove-ClickUpTaskLink {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be removed from linked to.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'The ClickUp task ID that the task ID referenced by "TaskID" should be removed from linked to.')]
+        [ValidateNotNullOrEmpty()]
         [string]$LinksTo,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 

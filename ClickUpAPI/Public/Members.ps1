@@ -22,6 +22,7 @@ function Get-ClickUpTaskMembers {
     [OutputType([hashtable])]
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID
     )
 
@@ -53,6 +54,7 @@ function Get-ClickUpListMembers {
     [OutputType([hashtable])]
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID
     )
 

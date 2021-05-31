@@ -27,8 +27,10 @@ function Get-ClickUpTaskTemplates {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(HelpMessage = 'The page number to return.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Page = 0
     )
 
@@ -71,10 +73,13 @@ function New-ClickUpTaskFromTemplate {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$TemplateID,
         [Parameter(HelpMessage = 'ClickUp template ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name
     )
 

@@ -27,8 +27,10 @@ function Get-ClickUpSpaces {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(HelpMessage = 'If set to true, will returned archived spaces in addition to non-archived spaces.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Archived = $false
     )
 
@@ -64,6 +66,7 @@ function Get-ClickUpSpace {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID
     )
     $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
@@ -122,34 +125,49 @@ function New-ClickUpSpace {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the new ClickUp space.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'Set to true to enable the multiple assignees ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$MultipleAssignees = $false,
         [Parameter(HelpMessage = 'Set to true to enable the due dates ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureDueDates = $false,
         [Parameter(HelpMessage = 'Set to true to enable the start dates ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureStartDate = $false,
         [Parameter(HelpMessage = 'Set to true to enable the remap due dates ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureRemapDueDates = $false,
         [Parameter(HelpMessage = 'Set to true to enable the remap closed due date ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureRemapClosedDueDate = $false,
         [Parameter(HelpMessage = 'Set to true to enable the time tracking ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureTimeTracking = $false,
         [Parameter(HelpMessage = 'Set to true to enable the tags ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureTags = $false,
         [Parameter(HelpMessage = 'Set to true to enable the time estimates ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureTimeEstimates = $false,
         [Parameter(HelpMessage = 'Set to true to enable the checklist ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureChecklist = $false,
         [Parameter(HelpMessage = 'Set to true to enable the custom fields ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureCustomFields = $false,
         [Parameter(HelpMessage = 'Set to true to enable the remap dependencies ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureRemapDependencies = $false,
         [Parameter(HelpMessage = 'Set to true to enable the dependency warning ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeatureDependencyWarning = $false,
         [Parameter(HelpMessage = 'Set to true to enable the portfolios ClickUp app.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$FeaturePortfolios = $false
     )
     $Body = @{
@@ -283,8 +301,10 @@ function Set-ClickUpSpace {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Hashtable containing the settings and/or properties to change on the ClickUp space.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -316,6 +336,7 @@ function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID
     )
 

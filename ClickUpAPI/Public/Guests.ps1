@@ -24,8 +24,10 @@ function Get-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID
     )
 
@@ -68,14 +70,19 @@ function Add-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $True, HelpMessage = 'The email address of the guest to invite.')]
+        [ValidateNotNullOrEmpty()]
         [string]$GuestEmail,
         [Parameter(HelpMessage = 'Whether the guest can edit tags.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CanEditTags = $false,
         [Parameter(HelpMessage = 'Whether the guest can see time spent.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CanSeeTimeSpent = $false,
         [Parameter(HelpMessage = 'Wheter the guest can see time estimated.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CanSeeTimeEstimated = $false
     )
 
@@ -127,16 +134,22 @@ function Set-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $True, HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID,
         [Parameter(HelpMessage = 'The new username of the guest.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Username,
         [Parameter(HelpMessage = 'Whether the guest can edit tags.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CanEditTags = $false,
         [Parameter(HelpMessage = 'Whether the guest can see time spent.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CanSeeTimeSpent = $false,
         [Parameter(HelpMessage = 'Whether the guest can see time estimated.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CanSeeTimeEstimated = $false
     )
 
@@ -171,7 +184,7 @@ function Set-ClickUpGuest {
 .PARAMETER PermissionLevel
     Permission level of the guest added to the task.
 .PARAMETER CustomTaskIDs
-    Set to trrrrrrrrrrrrrrrrrrrrue if the task ID provided is a custom ID.
+    Set to true if the task ID provided is a custom ID.
 .PARAMETER TeamID
     Required ClickUp team ID if -CustomTaskIDs is set to true.
 .EXAMPLE
@@ -198,17 +211,20 @@ function Add-ClickUpGuestToTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp guest ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'ClickUp guest ID.')]
-        [UInt32]$GuestID,
+        [ValidateNotNullOrEmpty()][UInt32]$GuestID,
         [Parameter(ParameterSetName = 'TaskID', HelpMessage = 'Permission level of the guest added to the task.')]
         [Parameter(ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Permission level of the guest added to the task.')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read',
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -260,8 +276,10 @@ function Add-ClickUpGuestToList {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID,
         [Parameter(HelpMessage = 'Permission level of the guest added to the task.')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -307,8 +325,10 @@ function Add-ClickUpGuestToFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID,
         [Parameter(HelpMessage = 'Permission level of the guest added to the task.')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -349,8 +369,10 @@ function Remove-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID
     )
 
@@ -391,13 +413,17 @@ function Remove-ClickUpGuestFromTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'ClickUp guest ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -442,8 +468,10 @@ function Remove-ClickUpGuestFromList {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID
     )
 
@@ -479,8 +507,10 @@ function Remove-ClickUpGuestFromFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$FolderID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp guest ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$GuestID
     )
 

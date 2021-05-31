@@ -32,13 +32,17 @@ function New-ClickUpTaskAttachment {
     param(
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs', HelpMessage = 'The ClickUp TaskID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The ClickUp custom TaskID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs', HelpMessage = 'The path to the attachment to upload.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The path to the attachment to upload.')]
+        [ValidateScript( { Test-Path $_ })]
         [string]$AttachmentPath,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 

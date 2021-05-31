@@ -29,10 +29,13 @@ function Get-ClickUpTaskComments {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -73,6 +76,7 @@ function Get-ClickUpChatViewComments {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp view ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID
     )
 
@@ -104,6 +108,7 @@ function Get-ClickUpListComments {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID
     )
 
@@ -142,8 +147,10 @@ function Set-ClickUpListComment {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp comment ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$CommentID,
         [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the parameters of the ClickUp list comment that are to be changed.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -173,6 +180,7 @@ function Remove-ClickUpListComment {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp comment ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$CommentID
     )
 
@@ -245,13 +253,17 @@ function New-ClickUpTaskComment {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'The ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'The custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a task.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a task.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -320,8 +332,10 @@ function New-ClickUpChatViewComment {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp view ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID,
         [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a view.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -381,8 +395,10 @@ function New-ClickUpListComment {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'The ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'A hashtable containing the contents and parameters of the ClickUp comment to be created on a list.')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 

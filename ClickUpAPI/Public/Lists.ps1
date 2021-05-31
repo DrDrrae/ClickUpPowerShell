@@ -29,11 +29,14 @@ function Get-ClickUpLists {
     [CmdletBinding(DefaultParameterSetName = 'FolderID')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', HelpMessage = 'ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', HelpMessage = 'Clickup space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'If set to true, will returned archived lists in addition to non-archived lists.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'If set to true, will returned archived lists in addition to non-archived lists.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Archived = $false
     )
 
@@ -129,29 +132,38 @@ function New-ClickUpList {
     [CmdletBinding(DefaultParameterSetName = 'FolderID')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', HelpMessage = 'ClickUp folder ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', HelpMessage = 'Clickup space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', HelpMessage = 'Name of the new ClickUp list.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', HelpMessage = 'Name of the new ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'Content of the new ClickUp list.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'Content of the new ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Content,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'Due date of the new ClickUp list.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'Due date of the new ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [DateTime]$DueDate,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'If set to true, will set the due date to also include a time instead of just a date.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'If set to true, will set the due date to also include a time instead of just a date.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$DueDateTime = $false,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'Priority of the new ClickUp list.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'Priority of the new ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [UInt16]$Priorty,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'Member ID of the ClickUp user to assign the list to.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'Member ID of the ClickUp user to assign the list to.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Assignee,
         [Parameter(ParameterSetName = 'FolderID', HelpMessage = 'Status of the new ClickUp list.')]
         [Parameter(ParameterSetName = 'SpaceID', HelpMessage = 'Status of the new ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Status
     )
 
@@ -227,20 +239,28 @@ function Set-ClickUpList {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ListID,
         [Parameter(HelpMessage = 'New name of the ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(HelpMessage = 'New content of the ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [string]$Content,
         [Parameter(HelpMessage = 'New due date of the ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [DateTime]$DueDate,
         [Parameter(HelpMessage = 'If set to true, will set the due date to also include a time instead of just a date.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$DueDateTime = $false,
         [Parameter(HelpMessage = 'New priority of the ClickUp list.')]
+        [ValidateNotNullOrEmpty()]
         [UInt16]$Priorty,
         [Parameter(HelpMessage = 'Member ID of the ClickUp user to assign the list to.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$Assignee,
         [Parameter(HelpMessage = 'Set to true to remove the current status.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$UnsetStatus
     )
 
@@ -294,6 +314,7 @@ function Remove-ClickUpList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID
     )
     if ($PSCmdlet.ShouldProcess($ListID)) {
@@ -327,8 +348,10 @@ function Add-ClickUpTaskToList {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID
     )
 
@@ -360,8 +383,10 @@ function Remove-ClickUpTaskFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp list ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$ListID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID
     )
 

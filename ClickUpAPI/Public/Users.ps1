@@ -28,8 +28,10 @@ function Get-ClickUpUser {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp user ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$UserID
     )
 
@@ -72,10 +74,13 @@ function Add-ClickUpUser {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'Email address of the user to invite.')]
+        [ValidateNotNullOrEmpty()]
         [string]$EmailAddress,
         [Parameter(HelpMessage = 'Set to true to make the invited user an admin.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Admin = $false
     )
 
@@ -125,12 +130,16 @@ function Set-ClickUpUser {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp user ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$UserID,
         [Parameter(HelpMessage = 'Email address of the user to invite.')]
+        [ValidateNotNullOrEmpty()]
         [string]$EmailAddress,
         [Parameter(HelpMessage = 'Set to true to make the invited user an admin.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$Admin = $false
     )
 
@@ -173,8 +182,10 @@ function Remove-ClickUpUser {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp team ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID,
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp user ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$UserID
     )
 

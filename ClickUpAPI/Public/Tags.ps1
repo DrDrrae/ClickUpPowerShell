@@ -22,6 +22,7 @@ function Get-ClickUpTags {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID
     )
 
@@ -59,12 +60,16 @@ function New-ClickUpTag {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the new ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter(HelpMessage = 'Foreground color of the new ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ForegroundColor,
         [Parameter(HelpMessage = 'Background color of the new ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$BackgroundColor
     )
 
@@ -115,14 +120,19 @@ function Set-ClickUpTag {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter(HelpMessage = 'New name of the clickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$NewName,
         [Parameter(HelpMessage = 'New foreground color of the ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$ForegroundColor,
         [Parameter(HelpMessage = 'New background color of the ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$BackgroundColor
     )
 
@@ -166,8 +176,10 @@ function Remove-ClickUpTag {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, HelpMessage = 'ClickUp space ID.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$SpaceID,
         [Parameter(Mandatory = $true, HelpMessage = 'Name of the ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName
     )
 
@@ -209,13 +221,17 @@ function Add-ClickUpTagToTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs', HelpMessage = 'ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs', HelpMessage = 'Name of the ClickUp tag.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Name of the ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
@@ -264,13 +280,17 @@ function Remove-ClickUpTagFromTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs', HelpMessage = 'ClickUp task ID.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Custom ClickUp task ID.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskIDs', HelpMessage = 'Name of the ClickUp tag.')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Name of the ClickUp tag.')]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Set to true if the task ID provided is a custom ID.')]
+        [ValidateNotNullOrEmpty()]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', HelpMessage = 'Required ClickUp team ID if -CustomTaskIDs is set to true.')]
+        [ValidateNotNullOrEmpty()]
         [UInt32]$TeamID
     )
 
