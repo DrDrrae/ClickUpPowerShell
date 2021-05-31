@@ -1,0 +1,67 @@
+---
+external help file: ClickUpAPI-help.xml
+Module Name: ClickUpAPI
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-list-views.html
+schema: 2.0.0
+---
+
+# Get-ClickUpListViews
+
+## SYNOPSIS
+Get ClickUp list views.
+
+## SYNTAX
+
+```
+Get-ClickUpListViews [-ListID] <UInt32> [<CommonParameters>]
+```
+
+## DESCRIPTION
+Get ClickUp list views.
+
+## EXAMPLES
+
+### EXAMPLE 1
+```
+Get-ClickUpListViews -ListID 124
+Get ClickUp list views with list ID "124".
+```
+
+## PARAMETERS
+
+### -ListID
+{{ Fill ListID Description }}
+
+```yaml
+Type: UInt32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+### None
+## OUTPUTS
+
+### System.Management.Automation.PSCustomObject
+## NOTES
+See the link for information.
+
+Only webhooks that were created by the authenticated user will be returned on this endpoint.
+
+## RELATED LINKS
+
+[https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-list-views.html](https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-list-views.html)
+
