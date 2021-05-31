@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+https: //jsapi.apiary.io/apis/clickup20/reference/0/webhooks/update-webhook.html
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/update-webhook.html
 schema: 2.0.0
 ---
 

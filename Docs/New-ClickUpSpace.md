@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/create-space.html
 schema: 2.0.0
 ---
@@ -13,11 +13,11 @@ Create a new ClickUp Space.
 ## SYNTAX
 
 ```
-New-ClickUpSpace [-TeamID] <UInt32> [-Name] <String> [[-Multiple_Assignees] <Boolean>]
+New-ClickUpSpace [-TeamID] <UInt32> [-Name] <String> [[-MultipleAssignees] <Boolean>]
  [[-FeatureDueDates] <Boolean>] [[-FeatureStartDate] <Boolean>] [[-FeatureRemapDueDates] <Boolean>]
  [[-FeatureRemapClosedDueDate] <Boolean>] [[-FeatureTimeTracking] <Boolean>] [[-FeatureTags] <Boolean>]
  [[-FeatureTimeEstimates] <Boolean>] [[-FeatureChecklist] <Boolean>] [[-FeatureCustomFields] <Boolean>]
- [[-FeatureRemapdependencies] <Boolean>] [[-FeatureDependencyWarning] <Boolean>]
+ [[-FeatureRemapDependencies] <Boolean>] [[-FeatureDependencyWarning] <Boolean>]
  [[-FeaturePortfolios] <Boolean>] [<CommonParameters>]
 ```
 
@@ -64,8 +64,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Multiple_Assignees
-{{ Fill Multiple_Assignees Description }}
+### -MultipleAssignees
+Set to true to enable the multiple assignees ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -74,7 +74,7 @@ Aliases:
 
 Required: False
 Position: 3
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -214,7 +214,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -FeatureRemapdependencies
+### -FeatureRemapDependencies
 {{ Fill FeatureRemapdependencies Description }}
 
 ```yaml

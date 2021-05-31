@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+https: //jsapi.apiary.io/apis/clickup20/reference/0/custom-fields/remove-custom-field-value.html
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/custom-fields.html
-https://jsapi.apiary.io/apis/clickup20/reference/0/custom-fields/remove-custom-field-value.html
 schema: 2.0.0
 ---
 
@@ -13,15 +13,20 @@ Remove a ClickUp custom field value.
 
 ## SYNTAX
 
-### CustomTaskID
+### CustomTaskIDs
 ```
-Remove-ClickUpCustomFieldValue -TaskID <String> -FieldID <String> -CustomTaskID <Boolean> -TeamID <UInt32>
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpCustomFieldValue -TaskID <String> -CustomTaskIDs <Boolean> -TeamID <UInt32> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### TaskID
 ```
 Remove-ClickUpCustomFieldValue -TaskID <String> -FieldID <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### CustomTaskID
+```
+Remove-ClickUpCustomFieldValue -FieldID <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,7 +54,7 @@ Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provide
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: CustomTaskIDs, TaskID
 Aliases:
 
 Required: True
@@ -64,7 +69,7 @@ ClickUp custom field ID.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: TaskID, CustomTaskID
 Aliases:
 
 Required: True
@@ -74,12 +79,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CustomTaskID
-{{ Fill CustomTaskID Description }}
+### -CustomTaskIDs
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean
-Parameter Sets: CustomTaskID
+Parameter Sets: CustomTaskIDs
 Aliases:
 
 Required: True
@@ -94,7 +99,7 @@ Required ClickUp team ID if -CustomTaskIDs is set to $true.
 
 ```yaml
 Type: UInt32
-Parameter Sets: CustomTaskID
+Parameter Sets: CustomTaskIDs
 Aliases:
 
 Required: True

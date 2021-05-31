@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-bulk-tasks'-time-in-status.html
 schema: 2.0.0
 ---
@@ -14,13 +14,12 @@ Get a ClickUp bulk task's time in status.
 
 ### TaskID (Default)
 ```
-Get-ClickUpTaskTimeInStatusBulk -TaskID <String[]> [<CommonParameters>]
+Get-ClickUpTaskTimeInStatusBulk -TaskID <String> [<CommonParameters>]
 ```
 
 ### CustomTaskIDs
 ```
-Get-ClickUpTaskTimeInStatusBulk -TaskID <String[]> -CustomTaskIDs <Boolean> -TeamID <UInt32>
- [<CommonParameters>]
+Get-ClickUpTaskTimeInStatusBulk -TaskID <String> -CustomTaskIDs <Boolean> -TeamID <UInt32> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,7 +45,7 @@ Get multiple ClickUp task's time in status with custom IDs "CustomTaskID 1", "Cu
 {{ Fill TaskID Description }}
 
 ```yaml
-Type: String[]
+Type: String
 Parameter Sets: (All)
 Aliases:
 

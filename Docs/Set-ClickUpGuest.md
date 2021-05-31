@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/edit-guest-on-workspace.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Update ClickUp guest on workspace.
 ## SYNTAX
 
 ```
-Set-ClickUpGuest [-TeamID] <UInt32> [[-Username] <String>] [[-CanEditTags] <Boolean>]
+Set-ClickUpGuest [-TeamID] <UInt32> [-GuestID] <UInt32> [[-Username] <String>] [[-CanEditTags] <Boolean>]
  [[-CanSeeTimeSpent] <Boolean>] [[-CanSeeTimeEstimated] <Boolean>] [<CommonParameters>]
 ```
 
@@ -51,6 +51,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -GuestID
+ClickUp guest ID.
+
+```yaml
+Type: UInt32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Username
 {{ Fill Username Description }}
 
@@ -60,7 +75,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -75,7 +90,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -90,7 +105,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -105,7 +120,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 6
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False

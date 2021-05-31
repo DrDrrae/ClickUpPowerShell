@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-task.html
 schema: 2.0.0
 ---
@@ -14,12 +14,12 @@ Get a ClickUp task.
 
 ### TaskID (Default)
 ```
-Get-ClickUpTask -TaskID <String> [-IncludeSubtasks <Object>] [<CommonParameters>]
+Get-ClickUpTask -TaskID <String> [-IncludeSubtasks <Boolean>] [<CommonParameters>]
 ```
 
 ### CustomTaskIDs
 ```
-Get-ClickUpTask -TaskID <String> -CustomTaskIDs <Boolean> -TeamID <UInt32> [-IncludeSubtasks <Object>]
+Get-ClickUpTask -TaskID <String> -CustomTaskIDs <Boolean> -TeamID <UInt32> [-IncludeSubtasks <Boolean>]
  [<CommonParameters>]
 ```
 
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 {{ Fill IncludeSubtasks Description }}
 
 ```yaml
-Type: Object
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 

@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+https: //jsapi.apiary.io/apis/clickup20/reference/0/lists/get-folderless-lists.html
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/lists/get-lists.html
-https://jsapi.apiary.io/apis/clickup20/reference/0/lists/get-folderless-lists.html
 schema: 2.0.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-task.html
 schema: 2.0.0
 ---
@@ -14,14 +14,13 @@ Remove ClickUp guest from task.
 
 ### TaskID (Default)
 ```
-Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt32> [-PermissionLevel <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### CustomTaskIDs
 ```
-Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt32> [-PermissionLevel <String>]
- -CustomTaskIDs <Boolean> -TeamID <UInt32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt32> -CustomTaskIDs <Boolean> -TeamID <UInt32>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,21 +62,6 @@ Aliases:
 Required: True
 Position: Named
 Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PermissionLevel
-{{ Fill PermissionLevel Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Read
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

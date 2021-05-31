@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-task's-time-in-status.html
 schema: 2.0.0
 ---
@@ -14,13 +14,13 @@ Get a ClickUp task's time in status.
 
 ### TaskID (Default)
 ```
-Get-ClickUpTaskTimeInStatus -TaskID <String> [-IncludeSubtasks <Object>] [<CommonParameters>]
+Get-ClickUpTaskTimeInStatus -TaskID <String> [-IncludeSubtasks <Boolean>] [<CommonParameters>]
 ```
 
 ### CustomTaskIDs
 ```
 Get-ClickUpTaskTimeInStatus -TaskID <String> -CustomTaskIDs <Boolean> -TeamID <UInt32>
- [-IncludeSubtasks <Object>] [<CommonParameters>]
+ [-IncludeSubtasks <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 {{ Fill IncludeSubtasks Description }}
 
 ```yaml
-Type: Object
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 

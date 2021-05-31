@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html
 schema: 2.0.0
 ---
@@ -12,9 +12,15 @@ Add ClickUp guest to list.
 
 ## SYNTAX
 
+### TaskID (Default)
 ```
-Add-ClickUpGuestToTask [-ListID] <UInt32> [-GuestID] <UInt32> [[-PermissionLevel] <String>]
- [<CommonParameters>]
+Add-ClickUpGuestToTask -TaskID <String> -GuestID <UInt32> [-PermissionLevel <String>] [<CommonParameters>]
+```
+
+### CustomTaskIDs
+```
+Add-ClickUpGuestToTask -TaskID <String> -GuestID <UInt32> [-PermissionLevel <String>] -CustomTaskIDs <Boolean>
+ -TeamID <UInt32> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,17 +42,17 @@ Add ClickUp guest user with ID "403" to list with ID "1427" with permission leve
 
 ## PARAMETERS
 
-### -ListID
-{{ Fill ListID Description }}
+### -TaskID
+The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
 
 ```yaml
-Type: UInt32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
-Default value: 0
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -60,7 +66,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: Named
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -75,8 +81,38 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: Read
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomTaskIDs
+Set to true if the task ID provided is a custom ID.
+
+```yaml
+Type: Boolean
+Parameter Sets: CustomTaskIDs
+Aliases:
+
+Required: True
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TeamID
+Required ClickUp team ID if -CustomTaskIDs is set to true.
+
+```yaml
+Type: UInt32
+Parameter Sets: CustomTaskIDs
+Aliases:
+
+Required: True
+Position: Named
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
