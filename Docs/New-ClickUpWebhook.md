@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/webhooks/create-webhook.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/create-webhook.html
 schema: 2.0.0
 ---
 
@@ -14,8 +14,8 @@ Create a new ClickUp webhook.
 ## SYNTAX
 
 ```
-New-ClickUpWebhook [-Endpoint] <String> [[-Events] <String[]>] [[-FilterToSpaceID] <UInt32>]
- [[-FilterToFolderID] <UInt32>] [[-FilterToListID] <String>] [[-FilterToTaskID] <String>] [<CommonParameters>]
+New-ClickUpWebhook [-Endpoint] <String> [[-Events] <String[]>] [[-FilterToSpaceID] <UInt64>]
+ [[-FilterToFolderID] <UInt64>] [[-FilterToListID] <String>] [[-FilterToTaskID] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,7 +43,7 @@ Create a new ClickUp webhook that subscribes to task with ID "9hx" task creation
 ## PARAMETERS
 
 ### -Endpoint
-{{ Fill Endpoint Description }}
+URL to send the webhook to.
 
 ```yaml
 Type: String
@@ -58,7 +58,7 @@ Accept wildcard characters: False
 ```
 
 ### -Events
-{{ Fill Events Description }}
+Array of events to subscribe to.
 
 ```yaml
 Type: String[]
@@ -73,10 +73,10 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToSpaceID
-{{ Fill FilterToSpaceID Description }}
+Filter subscribed events to one or more ClickUp spaces.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -88,10 +88,10 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToFolderID
-{{ Fill FilterToFolderID Description }}
+Filter subscribed events to one or more ClickUp folders.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToListID
-{{ Fill FilterToListID Description }}
+Filter subscribed events to one or more ClickUp lists.
 
 ```yaml
 Type: String
@@ -118,7 +118,7 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToTaskID
-{{ Fill FilterToTaskID Description }}
+Filter subscribed events to one or more ClickUp tasks.
 
 ```yaml
 Type: String

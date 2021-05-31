@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/comments/create-list-comment.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Create ClickUp list comment.
 ## SYNTAX
 
 ```
-New-ClickUpListComment [-ListID] <UInt32> [-Body] <Hashtable> [<CommonParameters>]
+New-ClickUpListComment [-ListID] <UInt64> [-Body] <Hashtable> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,7 +62,7 @@ Create new ClickUp task comment with formatting on task with ID "124".
 The ClickUp list ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

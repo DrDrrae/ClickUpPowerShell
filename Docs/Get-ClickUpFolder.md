@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/folders/get-folder.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Get properties on a particular ClickUp folder.
 ## SYNTAX
 
 ```
-Get-ClickUpFolder [-FolderID] <UInt32> [<CommonParameters>]
+Get-ClickUpFolder [-FolderID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,7 +33,7 @@ Get ClickUp folder with ID "11111111".
 The ClickUp folder ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

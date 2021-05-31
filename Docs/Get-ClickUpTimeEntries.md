@@ -13,7 +13,7 @@ Get ClickUp time entries.
 ## SYNTAX
 
 ```
-Get-ClickUpTimeEntries [-TeamID] <UInt32> [[-StartDate] <DateTime>] [[-EndDate] <DateTime>]
+Get-ClickUpTimeEntries [-TeamID] <UInt64> [[-StartDate] <DateTime>] [[-EndDate] <DateTime>]
  [[-Assignees] <UInt32[]>] [<CommonParameters>]
 ```
 
@@ -38,10 +38,10 @@ Get ClickUp Time Entries for ClickUp team with ID "512" between December 1st, 20
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartDate
-{{ Fill StartDate Description }}
+Start date and time of the time entries range.
 
 ```yaml
 Type: DateTime
@@ -68,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -EndDate
-{{ Fill EndDate Description }}
+End date and time of the time entries range.
 
 ```yaml
 Type: DateTime
@@ -83,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -Assignees
-{{ Fill Assignees Description }}
+ClickUp member IDs to return the time entries of.
 
 ```yaml
 Type: UInt32[]

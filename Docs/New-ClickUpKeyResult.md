@@ -14,7 +14,7 @@ Create a ClickUp key result.
 
 ```
 New-ClickUpKeyResult [-GoalID] <String> [-Name] <String> [[-Owners] <UInt32[]>] [[-Type] <String>]
- [[-StepsStart] <UInt32>] [[-StepsEnd] <UInt32>] [[-Unit] <String>] [[-TaskIDs] <String[]>]
+ [[-StepsStart] <UInt64>] [[-StepsEnd] <UInt64>] [[-Unit] <String>] [[-TaskIDs] <String[]>]
  [[-ListIDs] <UInt32[]>] [<CommonParameters>]
 ```
 
@@ -32,7 +32,7 @@ Create a new ClickUp key result for goal with ID "e53a033c".
 ## PARAMETERS
 
 ### -GoalID
-{{ Fill GoalID Description }}
+ClickUp goal ID.
 
 ```yaml
 Type: String
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the ClickUp key result.
 
 ```yaml
 Type: String
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Owners
-{{ Fill Owners Description }}
+The ClickUp team member ID for the owner(s) of the team goal.
 
 ```yaml
 Type: UInt32[]
@@ -77,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-{{ Fill Type Description }}
+Type of the key result.
 
 ```yaml
 Type: String
@@ -92,10 +92,10 @@ Accept wildcard characters: False
 ```
 
 ### -StepsStart
-{{ Fill StepsStart Description }}
+Step number to start at.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -107,10 +107,10 @@ Accept wildcard characters: False
 ```
 
 ### -StepsEnd
-{{ Fill StepsEnd Description }}
+Number of steps to reach the end.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -122,7 +122,7 @@ Accept wildcard characters: False
 ```
 
 ### -Unit
-{{ Fill Unit Description }}
+Unit of the key result.
 
 ```yaml
 Type: String
@@ -137,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -TaskIDs
-{{ Fill TaskIDs Description }}
+If specified, will attach the task resource to the goal.
 
 ```yaml
 Type: String[]
@@ -152,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -ListIDs
-{{ Fill ListIDs Description }}
+If specified, will attach the list resource to the goal.
 
 ```yaml
 Type: UInt32[]

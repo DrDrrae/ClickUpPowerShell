@@ -1,7 +1,7 @@
 ---
 external help file: ClickUpAPI-help.xml
 Module Name: ClickUpAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/add-tags-from-time-entries.html
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/users/invite-user-to-workspace.html
 schema: 2.0.0
 ---
 

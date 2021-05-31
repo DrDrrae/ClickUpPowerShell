@@ -13,7 +13,7 @@ Change settings of a ClickUp Space
 ## SYNTAX
 
 ```
-Set-ClickUpSpace [-SpaceID] <UInt32> [-Body] <Hashtable> [<CommonParameters>]
+Set-ClickUpSpace [-SpaceID] <UInt64> [-Body] <Hashtable> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,10 +61,10 @@ Will enable the due dates feature and disable the time tracking and custom field
 ## PARAMETERS
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-{{ Fill Body Description }}
+Hashtable containing the settings and/or properties to change on the ClickUp space.
 
 ```yaml
 Type: Hashtable

@@ -13,7 +13,7 @@ Remove a ClickUp list.
 ## SYNTAX
 
 ```
-Remove-ClickUpList [-ListID] <UInt32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpList [-ListID] <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Delete a ClickUp list with ID "124".
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+ClickUp list ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

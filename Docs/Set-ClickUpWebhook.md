@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/webhooks/update-webhook.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/update-webhook.html
 schema: 2.0.0
 ---
 
@@ -15,7 +15,7 @@ Create a new ClickUp webhook.
 
 ```
 Set-ClickUpWebhook [-WebhookID] <String> [[-Endpoint] <String>] [[-Events] <String[]>] [[-Status] <String>]
- [[-FilterToSpaceID] <UInt32>] [[-FilterToFolderID] <UInt32>] [[-FilterToListID] <String>]
+ [[-FilterToSpaceID] <UInt64>] [[-FilterToFolderID] <UInt64>] [[-FilterToListID] <String>]
  [[-FilterToTaskID] <String>] [<CommonParameters>]
 ```
 
@@ -44,7 +44,7 @@ Updates a ClickUp webhook with ID "4b67ac88" that subscribes to task with ID "9h
 ## PARAMETERS
 
 ### -WebhookID
-{{ Fill WebhookID Description }}
+ClickUp webhook ID.
 
 ```yaml
 Type: String
@@ -59,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -Endpoint
-{{ Fill Endpoint Description }}
+URL to send the webhook to.
 
 ```yaml
 Type: String
@@ -74,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -Events
-{{ Fill Events Description }}
+Array of events to subscribe to.
 
 ```yaml
 Type: String[]
@@ -89,7 +89,7 @@ Accept wildcard characters: False
 ```
 
 ### -Status
-{{ Fill Status Description }}
+Set to "active" to re-activate the webhook.
 
 ```yaml
 Type: String
@@ -104,10 +104,10 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToSpaceID
-{{ Fill FilterToSpaceID Description }}
+Filter subscribed events to one or more ClickUp spaces.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -119,10 +119,10 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToFolderID
-{{ Fill FilterToFolderID Description }}
+Filter subscribed events to one or more ClickUp folders.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -134,7 +134,7 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToListID
-{{ Fill FilterToListID Description }}
+Filter subscribed events to one or more ClickUp lists.
 
 ```yaml
 Type: String
@@ -149,7 +149,7 @@ Accept wildcard characters: False
 ```
 
 ### -FilterToTaskID
-{{ Fill FilterToTaskID Description }}
+Filter subscribed events to one or more ClickUp tasks.
 
 ```yaml
 Type: String

@@ -13,7 +13,7 @@ Update a ClickUp space tag.
 ## SYNTAX
 
 ```
-Set-ClickUpTag [-SpaceID] <UInt32> [-TagName] <String> [[-NewName] <String>] [[-ForegroundColor] <String>]
+Set-ClickUpTag [-SpaceID] <UInt64> [-TagName] <String> [[-NewName] <String>] [[-ForegroundColor] <String>]
  [[-BackgroundColor] <String>] [<CommonParameters>]
 ```
 
@@ -31,10 +31,10 @@ Update a ClickUp tag with name "Tag Name" for space with ID "512" to the name "U
 ## PARAMETERS
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -TagName
-{{ Fill TagName Description }}
+Name of the ClickUp tag.
 
 ```yaml
 Type: String
@@ -61,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -NewName
-{{ Fill NewName Description }}
+New name of the clickUp tag.
 
 ```yaml
 Type: String
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -ForegroundColor
-{{ Fill ForegroundColor Description }}
+New foreground color of the ClickUp tag.
 
 ```yaml
 Type: String
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -BackgroundColor
-{{ Fill BackgroundColor Description }}
+New background color of the ClickUp tag.
 
 ```yaml
 Type: String

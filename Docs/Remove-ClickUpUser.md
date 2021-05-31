@@ -1,46 +1,62 @@
 ---
 external help file: ClickUpAPI-help.xml
 Module Name: ClickUpAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/delete-webhook.html
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/users/remove-user-from-workspace.html
 schema: 2.0.0
 ---
 
-# Remove-ClickUpWebhook
+# Remove-ClickUpUser
 
 ## SYNOPSIS
-Remove a ClickUp webhook.
+Update ClickUp user on a workspace.
 
 ## SYNTAX
 
 ```
-Remove-ClickUpWebhook [-WebhookID] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpUser [-TeamID] <UInt64> [-UserID] <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Remove a ClickUp webhook.
+Update ClickUp user on a workspace.
+
+The following user routes are only available to enterprise teams.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-ClickUpWebhook -WebhookID 4b67ac88
-Remove a ClickUp webhook with ID "4b67ac88".
+Remove-ClickUpUser -TeamID 333 -UserID 403
+Remove user with ID "403" from ClickUp team with ID "333".
 ```
 
 ## PARAMETERS
 
-### -WebhookID
-ClickUp webhook ID.
+### -TeamID
+ClickUp team ID.
 
 ```yaml
-Type: String
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
-Default value: None
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserID
+ClickUp user ID.
+
+```yaml
+Type: UInt64
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -86,13 +102,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSCustomObject
 ## NOTES
-See the link for information.
+See the link for more information.
 
-Only webhooks that were created by the authenticated user will be returned on this endpoint.
+The following user routes are only available to enterprise teams.
 
 ## RELATED LINKS
 
-[https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/delete-webhook.html](https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/delete-webhook.html)
+[https://jsapi.apiary.io/apis/clickup20/reference/0/users/remove-user-from-workspace.html](https://jsapi.apiary.io/apis/clickup20/reference/0/users/remove-user-from-workspace.html)
 

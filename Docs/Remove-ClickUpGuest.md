@@ -13,7 +13,7 @@ Remove ClickUp guest from workspace.
 ## SYNTAX
 
 ```
-Remove-ClickUpGuest [-TeamID] <UInt32> [-GuestID] <UInt32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpGuest [-TeamID] <UInt64> [-GuestID] <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Remove ClickUp guest with Id "403" from team with ID "333".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -45,10 +45,10 @@ Accept wildcard characters: False
 ```
 
 ### -GuestID
-{{ Fill GuestID Description }}
+ClickUp guest ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/custom-fields/remove-custom-field-value.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/custom-fields.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/custom-fields/remove-custom-field-value.html
 schema: 2.0.0
 ---
 
@@ -15,7 +15,7 @@ Remove a ClickUp custom field value.
 
 ### CustomTaskIDs
 ```
-Remove-ClickUpCustomFieldValue -TaskID <String> -CustomTaskIDs <Boolean> -TeamID <UInt32> [-WhatIf] [-Confirm]
+Remove-ClickUpCustomFieldValue -TaskID <String> -CustomTaskIDs <Boolean> -TeamID <UInt64> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
@@ -95,10 +95,10 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-Required ClickUp team ID if -CustomTaskIDs is set to $true.
+Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: CustomTaskIDs
 Aliases:
 

@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/views/get-list-views.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-list-views.html
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Get ClickUp list views.
 ## SYNTAX
 
 ```
-Get-ClickUpListViews [-ListID] <UInt32> [<CommonParameters>]
+Get-ClickUpListViews [-ListID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,10 +31,10 @@ Get ClickUp list views with list ID "124".
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+ClickUp list ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

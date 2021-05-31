@@ -1,37 +1,45 @@
 ---
 external help file: ClickUpAPI-help.xml
 Module Name: ClickUpAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/tags/create-space-tag.html
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/users/edit-user-on-workspace.html
 schema: 2.0.0
 ---
 
-# New-ClickUpTag
+# Set-ClickUpUser
 
 ## SYNOPSIS
-Create a new ClickUp space tag.
+Update ClickUp user on a workspace.
 
 ## SYNTAX
 
 ```
-New-ClickUpTag [-SpaceID] <UInt64> [-TagName] <String> [[-ForegroundColor] <String>]
- [[-BackgroundColor] <String>] [<CommonParameters>]
+Set-ClickUpUser [-TeamID] <UInt64> [-UserID] <UInt64> [[-EmailAddress] <String>] [[-Admin] <Boolean>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Create a new ClickUp space tag.
+Update ClickUp user on a workspace.
+
+The following user routes are only available to enterprise teams.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-ClickUpTag -SpaceID 512 -Name "Tag Name" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
-Create a new ClickUp tag for space with ID "512" with the name "Tag Name", foreground color white, and background color black.
+Set-ClickUpUser -TeamID 333 -UserID 403 -EmailAddress 'newuser@example.com'
+Update user with ID "403" with new email address "newuser@example.com".
+```
+
+### EXAMPLE 2
+```
+Set-ClickUpUser -TeamID 333 -UserID 403 -Admin
+Update user with ID "403" and make them an administrator.
 ```
 
 ## PARAMETERS
 
-### -SpaceID
-ClickUp space ID.
+### -TeamID
+ClickUp team ID.
 
 ```yaml
 Type: UInt64
@@ -45,23 +53,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TagName
-Name of the new ClickUp tag.
+### -UserID
+ClickUp user ID.
 
 ```yaml
-Type: String
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 2
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ForegroundColor
-Foreground color of the new ClickUp tag.
+### -EmailAddress
+Email address of the user to invite.
 
 ```yaml
 Type: String
@@ -75,17 +83,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -BackgroundColor
-Background color of the new ClickUp tag.
+### -Admin
+Set to true to make the invited user an admin.
 
 ```yaml
-Type: String
+Type: Boolean
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 4
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -100,9 +108,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSCustomObject
 ## NOTES
-See the link for information.
+See the link for more information.
+
+The following user routes are only available to enterprise teams.
 
 ## RELATED LINKS
 
-[https://jsapi.apiary.io/apis/clickup20/reference/0/tags/create-space-tag.html](https://jsapi.apiary.io/apis/clickup20/reference/0/tags/create-space-tag.html)
+[https://jsapi.apiary.io/apis/clickup20/reference/0/users/edit-user-on-workspace.html](https://jsapi.apiary.io/apis/clickup20/reference/0/users/edit-user-on-workspace.html)
 

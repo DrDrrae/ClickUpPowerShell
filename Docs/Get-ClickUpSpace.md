@@ -13,7 +13,7 @@ Get the details on a single ClickUp Space.
 ## SYNTAX
 
 ```
-Get-ClickUpSpace [-SpaceID] <UInt32> [<CommonParameters>]
+Get-ClickUpSpace [-SpaceID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Returns the data on the ClickUp Space with ID "11111111"
 ## PARAMETERS
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

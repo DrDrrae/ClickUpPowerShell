@@ -13,7 +13,7 @@ Get a single ClickUp time entry.
 ## SYNTAX
 
 ```
-Get-ClickUpTimeEntry [-TeamID] <UInt32> [-TimerID] <UInt64> [<CommonParameters>]
+Get-ClickUpTimeEntry [-TeamID] <UInt64> [-TimerID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Get a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID 
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -TimerID
-{{ Fill TimerID Description }}
+ClickUp time entry ID.
 
 ```yaml
 Type: UInt64

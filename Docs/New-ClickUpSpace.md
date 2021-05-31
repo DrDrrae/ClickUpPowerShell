@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/create-space.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Create a new ClickUp Space.
 ## SYNTAX
 
 ```
-New-ClickUpSpace [-TeamID] <UInt32> [-Name] <String> [[-MultipleAssignees] <Boolean>]
+New-ClickUpSpace [-TeamID] <UInt64> [-Name] <String> [[-MultipleAssignees] <Boolean>]
  [[-FeatureDueDates] <Boolean>] [[-FeatureStartDate] <Boolean>] [[-FeatureRemapDueDates] <Boolean>]
  [[-FeatureRemapClosedDueDate] <Boolean>] [[-FeatureTimeTracking] <Boolean>] [[-FeatureTags] <Boolean>]
  [[-FeatureTimeEstimates] <Boolean>] [[-FeatureChecklist] <Boolean>] [[-FeatureCustomFields] <Boolean>]
@@ -35,10 +35,10 @@ Creates a new ClickUp Space with the name "New Clickup Space" and the Multiple A
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -50,7 +50,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the new ClickUp space.
 
 ```yaml
 Type: String
@@ -80,7 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -FeatureDueDates
-{{ Fill FeatureDueDates Description }}
+Set to true to enable the due dates ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -89,13 +89,13 @@ Aliases:
 
 Required: False
 Position: 4
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureStartDate
-{{ Fill FeatureStartDate Description }}
+Set to true to enable the start dates ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -110,7 +110,7 @@ Accept wildcard characters: False
 ```
 
 ### -FeatureRemapDueDates
-{{ Fill FeatureRemapDueDates Description }}
+Set to true to enable the remap due dates ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -119,13 +119,13 @@ Aliases:
 
 Required: False
 Position: 6
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureRemapClosedDueDate
-{{ Fill FeatureRemapClosedDueDate Description }}
+Set to true to enable the remap closed due date ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -134,13 +134,13 @@ Aliases:
 
 Required: False
 Position: 7
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureTimeTracking
-{{ Fill FeatureTimeTracking Description }}
+Set to true to enable the time tracking ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -149,13 +149,13 @@ Aliases:
 
 Required: False
 Position: 8
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureTags
-{{ Fill FeatureTags Description }}
+Set to true to enable the tags ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -164,13 +164,13 @@ Aliases:
 
 Required: False
 Position: 9
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureTimeEstimates
-{{ Fill FeatureTimeEstimates Description }}
+Set to true to enable the time estimates ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -179,13 +179,13 @@ Aliases:
 
 Required: False
 Position: 10
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureChecklist
-{{ Fill FeatureChecklist Description }}
+Set to true to enable the checklist ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -194,13 +194,13 @@ Aliases:
 
 Required: False
 Position: 11
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureCustomFields
-{{ Fill FeatureCustomFields Description }}
+Set to true to enable the custom fields ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -209,13 +209,13 @@ Aliases:
 
 Required: False
 Position: 12
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureRemapDependencies
-{{ Fill FeatureRemapdependencies Description }}
+Set to true to enable the remap dependencies ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -224,13 +224,13 @@ Aliases:
 
 Required: False
 Position: 13
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeatureDependencyWarning
-{{ Fill FeatureDependencyWarning Description }}
+Set to true to enable the dependency warning ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -239,13 +239,13 @@ Aliases:
 
 Required: False
 Position: 14
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FeaturePortfolios
-{{ Fill FeaturePortfolios Description }}
+Set to true to enable the portfolios ClickUp app.
 
 ```yaml
 Type: Boolean
@@ -254,7 +254,7 @@ Aliases:
 
 Required: False
 Position: 15
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-legacy/get-filtered-team-tasks.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-tasks.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-legacy/get-filtered-team-tasks.html
 schema: 2.0.0
 ---
 
@@ -15,7 +15,7 @@ Get all ClickUp tasks under a particular list.
 
 ### ListID (Default)
 ```
-Get-ClickUpTasks -ListID <String> [-Archived <Boolean>] [-Page <UInt32>] [-OrderBy <String>]
+Get-ClickUpTasks -ListID <String> [-Archived <Boolean>] [-Page <UInt64>] [-OrderBy <String>]
  [-Reverse <Boolean>] [-Subtasks <Boolean>] [-Statuses <String[]>] [-IncludeClosed <Boolean>]
  [-Assignees <String[]>] [-DueDateGreaterThan <DateTime>] [-DueDateLessThan <DateTime>]
  [-DateCreatedGreaterThan <DateTime>] [-DateCreatedLessThan <DateTime>] [-DateUpdatedGreaterThan <DateTime>]
@@ -24,7 +24,7 @@ Get-ClickUpTasks -ListID <String> [-Archived <Boolean>] [-Page <UInt32>] [-Order
 
 ### TeamID
 ```
-Get-ClickUpTasks -TeamID <String> [-Page <UInt32>] [-OrderBy <String>] [-Reverse <Boolean>]
+Get-ClickUpTasks -TeamID <String> [-Page <UInt64>] [-OrderBy <String>] [-Reverse <Boolean>]
  [-Subtasks <Boolean>] [-SpaceIDs <Int32[]>] [-ProjectIDs <Int32[]>] [-ListIDs <Int32[]>]
  [-Statuses <String[]>] [-IncludeClosed <Boolean>] [-Assignees <String[]>] [-DueDateGreaterThan <DateTime>]
  [-DueDateLessThan <DateTime>] [-DateCreatedGreaterThan <DateTime>] [-DateCreatedLessThan <DateTime>]
@@ -52,7 +52,7 @@ Get all ClickUp task under List with ID "22222222" and various other options.
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+ClickUp list ID.
 
 ```yaml
 Type: String
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
 Type: String
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Archived
-{{ Fill Archived Description }}
+If set to true, will return archived ClickUp tasks in addition to non-archived tasks.
 
 ```yaml
 Type: Boolean
@@ -97,10 +97,10 @@ Accept wildcard characters: False
 ```
 
 ### -Page
-{{ Fill Page Description }}
+The page number to return.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -112,7 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -OrderBy
-{{ Fill OrderBy Description }}
+The property of the task to order the returned results by.
 
 ```yaml
 Type: String
@@ -127,7 +127,7 @@ Accept wildcard characters: False
 ```
 
 ### -Reverse
-{{ Fill Reverse Description }}
+Set to true to order the list in reverse order.
 
 ```yaml
 Type: Boolean
@@ -142,7 +142,7 @@ Accept wildcard characters: False
 ```
 
 ### -Subtasks
-{{ Fill Subtasks Description }}
+Set to true to return subtasks.
 
 ```yaml
 Type: Boolean
@@ -157,7 +157,7 @@ Accept wildcard characters: False
 ```
 
 ### -SpaceIDs
-{{ Fill SpaceIDs Description }}
+Array of ClickUp space IDs to return the tasks of.
 
 ```yaml
 Type: Int32[]
@@ -172,7 +172,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectIDs
-{{ Fill ProjectIDs Description }}
+Array of ClickUp project IDs to return the tasks of.
 
 ```yaml
 Type: Int32[]
@@ -187,7 +187,7 @@ Accept wildcard characters: False
 ```
 
 ### -ListIDs
-{{ Fill ListIDs Description }}
+Array of ClickUp list IDs to return the tasks of.
 
 ```yaml
 Type: Int32[]
@@ -202,7 +202,7 @@ Accept wildcard characters: False
 ```
 
 ### -Statuses
-{{ Fill Statuses Description }}
+Array of the statuses to return the tasks of.
 
 ```yaml
 Type: String[]
@@ -217,7 +217,7 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeClosed
-{{ Fill IncludeClosed Description }}
+Set to true to return closed tasks in addition to open tasks.
 
 ```yaml
 Type: Boolean
@@ -232,7 +232,7 @@ Accept wildcard characters: False
 ```
 
 ### -Assignees
-{{ Fill Assignees Description }}
+Return tasks which are assigned to an array of ClickUp team member IDs.
 
 ```yaml
 Type: String[]
@@ -247,7 +247,7 @@ Accept wildcard characters: False
 ```
 
 ### -DueDateGreaterThan
-{{ Fill DueDateGreaterThan Description }}
+Return tasks with due date greater than this date and time.
 
 ```yaml
 Type: DateTime
@@ -262,7 +262,7 @@ Accept wildcard characters: False
 ```
 
 ### -DueDateLessThan
-{{ Fill DueDateLessThan Description }}
+Return tasks with due date less than this date and time.
 
 ```yaml
 Type: DateTime
@@ -277,7 +277,7 @@ Accept wildcard characters: False
 ```
 
 ### -DateCreatedGreaterThan
-{{ Fill DateCreatedGreaterThan Description }}
+Return tasks with date created greater than this date and time.
 
 ```yaml
 Type: DateTime
@@ -292,7 +292,7 @@ Accept wildcard characters: False
 ```
 
 ### -DateCreatedLessThan
-{{ Fill DateCreatedLessThan Description }}
+Return tasks with date created less than this date and time.
 
 ```yaml
 Type: DateTime
@@ -307,7 +307,7 @@ Accept wildcard characters: False
 ```
 
 ### -DateUpdatedGreaterThan
-{{ Fill DateUpdatedGreaterThan Description }}
+Return tasks with date updated greater than this date and time.
 
 ```yaml
 Type: DateTime
@@ -322,7 +322,7 @@ Accept wildcard characters: False
 ```
 
 ### -DateUpdatedLessThan
-{{ Fill DateUpdatedLessThan Description }}
+Return tasks with date updated less than this date and time.
 
 ```yaml
 Type: DateTime
@@ -337,7 +337,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomFields
-{{ Fill CustomFields Description }}
+Return tasks with these custom fields.
 
 ```yaml
 Type: Array
@@ -352,7 +352,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskIDs
-{{ Fill CustomTaskIDs Description }}
+If you want to reference a task by its custom task ID, this value must be true
 
 ```yaml
 Type: Boolean

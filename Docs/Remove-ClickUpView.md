@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/views/get-view.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-view.html
 schema: 2.0.0
 ---
 
@@ -31,7 +31,7 @@ Get a ClickUp view with ID "3c".
 ## PARAMETERS
 
 ### -ViewID
-{{ Fill ViewID Description }}
+ClickUp view ID.
 
 ```yaml
 Type: String

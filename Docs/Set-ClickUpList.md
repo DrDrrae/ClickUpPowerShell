@@ -14,7 +14,7 @@ Update a ClickUp list.
 
 ```
 Set-ClickUpList [-ListID] <String> [[-Name] <String>] [[-Content] <String>] [[-DueDate] <DateTime>]
- [[-DueDateTime] <Boolean>] [[-Priorty] <UInt16>] [[-Assignee] <UInt32>] [[-UnsetStatus] <Boolean>]
+ [[-DueDateTime] <Boolean>] [[-Priorty] <UInt16>] [[-Assignee] <UInt64>] [[-UnsetStatus] <Boolean>]
  [<CommonParameters>]
 ```
 
@@ -38,7 +38,7 @@ Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+ClickUp list ID.
 
 ```yaml
 Type: String
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+New name of the ClickUp list.
 
 ```yaml
 Type: String
@@ -68,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -Content
-{{ Fill Content Description }}
+New content of the ClickUp list.
 
 ```yaml
 Type: String
@@ -83,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -DueDate
-{{ Fill DueDate Description }}
+New due date of the ClickUp list.
 
 ```yaml
 Type: DateTime
@@ -98,7 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -DueDateTime
-{{ Fill DueDateTime Description }}
+If set to true, will set the due date to also include a time instead of just a date.
 
 ```yaml
 Type: Boolean
@@ -113,7 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -Priorty
-{{ Fill Priorty Description }}
+New priority of the ClickUp list.
 
 ```yaml
 Type: UInt16
@@ -128,10 +128,10 @@ Accept wildcard characters: False
 ```
 
 ### -Assignee
-{{ Fill Assignee Description }}
+Member ID of the ClickUp user to assign the list to.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -143,7 +143,7 @@ Accept wildcard characters: False
 ```
 
 ### -UnsetStatus
-{{ Fill UnsetStatus Description }}
+Set to true to remove the current status.
 
 ```yaml
 Type: Boolean

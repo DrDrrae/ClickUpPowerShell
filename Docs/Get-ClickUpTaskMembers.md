@@ -30,7 +30,7 @@ Get ClickUp task members from task with ID "9hz".
 ## PARAMETERS
 
 ### -TaskID
-{{ Fill TaskID Description }}
+ClickUp task ID.
 
 ```yaml
 Type: String

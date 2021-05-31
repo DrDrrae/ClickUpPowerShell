@@ -19,7 +19,7 @@ Set-ClickUpTask -TaskID <String> -Body <Hashtable> [<CommonParameters>]
 
 ### CustomTaskIDs
 ```
-Set-ClickUpTask -TaskID <String> -Body <Hashtable> -CustomTaskIDs <Boolean> -TeamID <UInt32>
+Set-ClickUpTask -TaskID <String> -Body <Hashtable> -CustomTaskIDs <Boolean> -TeamID <UInt64>
  [<CommonParameters>]
 ```
 
@@ -64,7 +64,8 @@ Updated the task with ID "9hx".
 ## PARAMETERS
 
 ### -TaskID
-{{ Fill TaskID Description }}
+The ClickUp task ID.
+Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
 
 ```yaml
 Type: String
@@ -79,7 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-{{ Fill Body Description }}
+A hashtable containing the properties of the task ID to update.
 
 ```yaml
 Type: Hashtable
@@ -94,7 +95,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskIDs
-{{ Fill CustomTaskIDs Description }}
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean
@@ -109,10 +110,10 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-{{ Fill TeamID Description }}
+Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: CustomTaskIDs
 Aliases:
 

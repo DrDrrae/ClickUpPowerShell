@@ -19,7 +19,7 @@ New-ClickUpChecklist -TaskID <String> -Name <String> [<CommonParameters>]
 
 ### CustomTaskIDs
 ```
-New-ClickUpChecklist -TaskID <String> -Name <String> -CustomTaskIDs <Boolean> -TeamID <UInt32>
+New-ClickUpChecklist -TaskID <String> -Name <String> -CustomTaskIDs <Boolean> -TeamID <UInt64>
  [<CommonParameters>]
 ```
 
@@ -74,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskIDs
-Set to $true if the task ID provided is a custom ID.
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean
@@ -89,10 +89,10 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-Required ClickUp team ID if -CustomTaskIDs is set to $true.
+Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: CustomTaskIDs
 Aliases:
 

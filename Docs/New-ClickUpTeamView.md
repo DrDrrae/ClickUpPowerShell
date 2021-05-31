@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/views/create-team-view.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/create-team-view.html
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Create new ClickUp team view.
 ## SYNTAX
 
 ```
-New-ClickUpTeamView [-TeamID] <UInt32> [-Body] <Hashtable> [<CommonParameters>]
+New-ClickUpTeamView [-TeamID] <UInt64> [-Body] <Hashtable> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,10 +39,10 @@ Create new ClickUp team view for team with ID "512".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -54,7 +54,7 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-{{ Fill Body Description }}
+Hashtable containing the setting and parameters to create.
 
 ```yaml
 Type: Hashtable

@@ -19,7 +19,7 @@ Remove-ClickUpTaskLink -TaskID <String> -LinksTo <String> [-WhatIf] [-Confirm] [
 
 ### CustomTaskID
 ```
-Remove-ClickUpTaskLink -TaskID <String> -LinksTo <String> -CustomTaskID <Boolean> -TeamID <UInt32> [-WhatIf]
+Remove-ClickUpTaskLink -TaskID <String> -LinksTo <String> -CustomTaskID <Boolean> -TeamID <UInt64> [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -74,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskID
-{{ Fill CustomTaskID Description }}
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean
@@ -89,10 +89,10 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-Required ClickUp team ID if -CustomTaskIDs is set to $true.
+Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: CustomTaskID
 Aliases:
 

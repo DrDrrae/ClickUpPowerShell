@@ -13,7 +13,7 @@ Get the details on all ClickUp Spaces in a team.
 ## SYNTAX
 
 ```
-Get-ClickUpSpaces [-TeamID] <UInt32> [[-Archived] <Boolean>] [<CommonParameters>]
+Get-ClickUpSpaces [-TeamID] <UInt64> [[-Archived] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,10 +36,10 @@ Returns the data on all the ClickUp Spaces with the Team ID "11111111" including
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -51,7 +51,7 @@ Accept wildcard characters: False
 ```
 
 ### -Archived
-{{ Fill Archived Description }}
+If set to true, will returned archived spaces in addition to non-archived spaces.
 
 ```yaml
 Type: Boolean

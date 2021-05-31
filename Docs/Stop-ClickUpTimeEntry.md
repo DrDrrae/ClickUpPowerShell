@@ -13,7 +13,7 @@ Stop ClickUp time entries.
 ## SYNTAX
 
 ```
-Stop-ClickUpTimeEntry [-TeamID] <UInt32> [<CommonParameters>]
+Stop-ClickUpTimeEntry [-TeamID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Stop ClickUp time entries for Team with ID "512".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

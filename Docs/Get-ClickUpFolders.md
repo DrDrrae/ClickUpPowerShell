@@ -13,7 +13,7 @@ Get all ClickUp Folders.
 ## SYNTAX
 
 ```
-Get-ClickUpFolders [-SpaceID] <UInt32> [[-Archived] <Boolean>] [<CommonParameters>]
+Get-ClickUpFolders [-SpaceID] <UInt64> [[-Archived] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,7 +39,7 @@ Get all ClickUp folders under ClickUp Space with ID "11111111" including archive
 The ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -51,7 +51,7 @@ Accept wildcard characters: False
 ```
 
 ### -Archived
-If set to $true, will return archived spaces in addition to non-archived spaced.
+If set to true, will return archived spaces in addition to non-archived spaced.
 
 ```yaml
 Type: Boolean

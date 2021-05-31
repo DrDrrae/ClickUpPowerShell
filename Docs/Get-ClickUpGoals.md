@@ -13,7 +13,7 @@ Get all ClickUp team goals.
 ## SYNTAX
 
 ```
-Get-ClickUpGoals [-TeamID] <UInt32> [<CommonParameters>]
+Get-ClickUpGoals [-TeamID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Get all ClickUp team goals for team with ID "123".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

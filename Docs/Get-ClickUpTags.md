@@ -13,7 +13,7 @@ Get all ClickUp space tags.
 ## SYNTAX
 
 ```
-Get-ClickUpTags [-SpaceID] <UInt32> [<CommonParameters>]
+Get-ClickUpTags [-SpaceID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Get all ClickUp tags for space with ID "512".
 ## PARAMETERS
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

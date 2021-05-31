@@ -13,7 +13,7 @@ Get ClickUp guest.
 ## SYNTAX
 
 ```
-Get-ClickUpGuest [-TeamID] <UInt32> [-GuestID] <UInt32> [<CommonParameters>]
+Get-ClickUpGuest [-TeamID] <UInt64> [-GuestID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,16 +24,16 @@ Get ClickUp guest.
 ### EXAMPLE 1
 ```
 Get-ClickUpGuest -TeamID 333 -GuestID 403
-Guest ClickUp guest user with ID "403" for team with ID "333".
+guest ClickUp guest user with ID "403" for team with ID "333".
 ```
 
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -45,10 +45,10 @@ Accept wildcard characters: False
 ```
 
 ### -GuestID
-{{ Fill GuestID Description }}
+ClickUp guest ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

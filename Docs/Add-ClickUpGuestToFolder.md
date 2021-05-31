@@ -13,7 +13,7 @@ Add ClickUp guest to folder.
 ## SYNTAX
 
 ```
-Add-ClickUpGuestToFolder [-FolderID] <UInt32> [-GuestID] <UInt32> [[-PermissionLevel] <String>]
+Add-ClickUpGuestToFolder [-FolderID] <UInt64> [-GuestID] <UInt64> [[-PermissionLevel] <String>]
  [<CommonParameters>]
 ```
 
@@ -37,10 +37,10 @@ Add ClickUp guest user with ID "403" to folder with ID "1057" with permission le
 ## PARAMETERS
 
 ### -FolderID
-{{ Fill FolderID Description }}
+ClickUp folder ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -52,10 +52,10 @@ Accept wildcard characters: False
 ```
 
 ### -GuestID
-{{ Fill GuestID Description }}
+ClickUp guest ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -PermissionLevel
-{{ Fill PermissionLevel Description }}
+Permission level of the guest added to the folder.
 
 ```yaml
 Type: String

@@ -14,7 +14,7 @@ Update a ClickUp key result.
 
 ```
 Set-ClickUpKeyResult [-KeyResultID] <String> [[-Name] <String>] [[-Note] <String>] [[-Owners] <UInt32[]>]
- [[-Type] <String>] [[-StepsStart] <UInt32>] [[-StepsEnd] <UInt32>] [[-StepsCurrent] <UInt32>]
+ [[-Type] <String>] [[-StepsStart] <UInt64>] [[-StepsEnd] <UInt64>] [[-StepsCurrent] <UInt64>]
  [[-Unit] <String>] [[-TaskIDs] <String[]>] [[-ListIDs] <UInt32[]>] [<CommonParameters>]
 ```
 
@@ -32,7 +32,7 @@ Update a ClickUp key result with ID "947d46ed".
 ## PARAMETERS
 
 ### -KeyResultID
-{{ Fill KeyResultID Description }}
+ClickUp key result ID.
 
 ```yaml
 Type: String
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+New name of the ClickUp key result.
 
 ```yaml
 Type: String
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Note
-{{ Fill Note Description }}
+Note to add to the ClickUp key result.
 
 ```yaml
 Type: String
@@ -77,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -Owners
-{{ Fill Owners Description }}
+The ClickUp team member ID for the owner(s) of the team goal.
 
 ```yaml
 Type: UInt32[]
@@ -92,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-{{ Fill Type Description }}
+Type of the key result.
 
 ```yaml
 Type: String
@@ -107,10 +107,10 @@ Accept wildcard characters: False
 ```
 
 ### -StepsStart
-{{ Fill StepsStart Description }}
+Step number to start at.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -122,10 +122,10 @@ Accept wildcard characters: False
 ```
 
 ### -StepsEnd
-{{ Fill StepsEnd Description }}
+Number of steps to reach the end.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -137,10 +137,10 @@ Accept wildcard characters: False
 ```
 
 ### -StepsCurrent
-{{ Fill StepsCurrent Description }}
+Current step.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -152,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -Unit
-{{ Fill Unit Description }}
+Unit of the key result.
 
 ```yaml
 Type: String
@@ -167,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -TaskIDs
-{{ Fill TaskIDs Description }}
+If specified, will attach the task resource to the goal.
 
 ```yaml
 Type: String[]
@@ -182,7 +182,7 @@ Accept wildcard characters: False
 ```
 
 ### -ListIDs
-{{ Fill ListIDs Description }}
+If specified, will attach the list resource to the goal.
 
 ```yaml
 Type: UInt32[]

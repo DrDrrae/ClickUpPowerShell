@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/views/update-view.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/update-view.html
 schema: 2.0.0
 ---
 
@@ -39,7 +39,7 @@ Update aClickUp view with ID "124".
 ## PARAMETERS
 
 ### -ViewID
-{{ Fill ViewID Description }}
+ClickUp view ID.
 
 ```yaml
 Type: String
@@ -54,7 +54,7 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-{{ Fill Body Description }}
+Hashtable containing the setting and parameters to update.
 
 ```yaml
 Type: Hashtable

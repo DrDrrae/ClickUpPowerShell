@@ -13,7 +13,7 @@ Get a single ClickUp list.
 ## SYNTAX
 
 ```
-Get-ClickUpList [-ListID] <UInt32> [<CommonParameters>]
+Get-ClickUpList [-ListID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Get a ClickUp list with ID "456".
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+Clickup list ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

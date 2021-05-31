@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/edit-checklist.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Update a ClickUp checklist.
 ## SYNTAX
 
 ```
-Set-ClickUpChecklist [-ChecklistID] <String> [[-Name] <String>] [[-Position] <UInt32>] [<CommonParameters>]
+Set-ClickUpChecklist [-ChecklistID] <String> [[-Name] <String>] [[-Position] <UInt64>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,7 +72,7 @@ Zero-based index of the order you want the checklist to exist on the task.
 If you want the checklist to be in the first position, pass 0.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

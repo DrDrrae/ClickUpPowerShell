@@ -13,7 +13,7 @@ Get all tags from ClickUp time entries.
 ## SYNTAX
 
 ```
-Get-ClickUpTimeEntryTags [-TeamID] <UInt32> [<CommonParameters>]
+Get-ClickUpTimeEntryTags [-TeamID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Get time entry tags for ClickUp team with ID "512".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

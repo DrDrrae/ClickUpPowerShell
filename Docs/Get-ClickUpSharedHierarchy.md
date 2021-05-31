@@ -13,7 +13,7 @@ Get ClickUp shared hierarchy.
 ## SYNTAX
 
 ```
-Get-ClickUpSharedHierarchy [-TeamID] <UInt32> [<CommonParameters>]
+Get-ClickUpSharedHierarchy [-TeamID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,10 +32,10 @@ Returns all ClickUp resources you have access to where you don't have access to 
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

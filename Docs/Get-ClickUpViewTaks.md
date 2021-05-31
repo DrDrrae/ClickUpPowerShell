@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/views/get-view-tasks.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-view-tasks.html
 schema: 2.0.0
 ---
 
@@ -14,11 +14,15 @@ Get ClickUp view tasks.
 ## SYNTAX
 
 ```
-Get-ClickUpViewTaks [-ViewID] <String> [[-Page] <UInt32>] [<CommonParameters>]
+Get-ClickUpViewTaks [-ViewID] <String> [[-Page] <UInt64>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Get ClickUp view tasks.
+
+This request will always return paged responses.
+If you do not include the page parameter, it will return page 0.
+Each page includes 30 tasks.
 
 ## EXAMPLES
 
@@ -37,7 +41,7 @@ Get ClickUp view tasks with ID "3c" staring on page "2".
 ## PARAMETERS
 
 ### -ViewID
-{{ Fill ViewID Description }}
+ClickUp view ID.
 
 ```yaml
 Type: String
@@ -52,10 +56,10 @@ Accept wildcard characters: False
 ```
 
 ### -Page
-{{ Fill Page Description }}
+Page number to return.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -77,6 +81,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### System.Management.Automation.PSCustomObject
 ## NOTES
 See the link for information.
+
+This request will always return paged responses.
+If you do not include the page parameter, it will return page 0.
+Each page includes 30 tasks.
 
 Only webhooks that were created by the authenticated user will be returned on this endpoint.
 

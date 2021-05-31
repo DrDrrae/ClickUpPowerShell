@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/folders/create-folder.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Create a ClickUp folder in a particular space.
 ## SYNTAX
 
 ```
-New-ClickUpFolder [-SpaceID] <UInt32> [-Name] <UInt32> [<CommonParameters>]
+New-ClickUpFolder [-SpaceID] <UInt64> [-Name] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,7 +33,7 @@ Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with
 The ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -48,7 +48,7 @@ Accept wildcard characters: False
 The name of the ClickUp folder to be created.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

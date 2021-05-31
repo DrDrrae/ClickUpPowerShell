@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/edit-guest-on-workspace.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Update ClickUp guest on workspace.
 ## SYNTAX
 
 ```
-Set-ClickUpGuest [-TeamID] <UInt32> [-GuestID] <UInt32> [[-Username] <String>] [[-CanEditTags] <Boolean>]
+Set-ClickUpGuest [-TeamID] <UInt64> [-GuestID] <UInt64> [[-Username] <String>] [[-CanEditTags] <Boolean>]
  [[-CanSeeTimeSpent] <Boolean>] [[-CanSeeTimeEstimated] <Boolean>] [<CommonParameters>]
 ```
 
@@ -37,10 +37,10 @@ Update ClickUp guest user's permissions to edit tags, see time spent, and see ti
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -55,7 +55,7 @@ Accept wildcard characters: False
 ClickUp guest ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -Username
-{{ Fill Username Description }}
+The new username of the guest.
 
 ```yaml
 Type: String
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -CanEditTags
-{{ Fill CanEditTags Description }}
+Whether the guest can edit tags.
 
 ```yaml
 Type: Boolean
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -CanSeeTimeSpent
-{{ Fill CanSeeTimeSpent Description }}
+Whether the guest can see time spent.
 
 ```yaml
 Type: Boolean
@@ -112,7 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -CanSeeTimeEstimated
-{{ Fill CanSeeTimeEstimated Description }}
+Whether the guest can see time estimated.
 
 ```yaml
 Type: Boolean

@@ -13,7 +13,7 @@ Remove ClickUp guest from list.
 ## SYNTAX
 
 ```
-Remove-ClickUpGuestFromList [-ListID] <String> [-GuestID] <UInt32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpGuestFromList [-ListID] <String> [-GuestID] <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,7 +30,7 @@ Remove ClickUp guest with Id "403" from list with ID "c04".
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+ClickUp list ID.
 
 ```yaml
 Type: String
@@ -45,10 +45,10 @@ Accept wildcard characters: False
 ```
 
 ### -GuestID
-{{ Fill GuestID Description }}
+ClickUp guest ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

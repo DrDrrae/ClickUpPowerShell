@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/create-checklist-item.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Create a new ClickUp checklist item.
 ## SYNTAX
 
 ```
-New-ClickUpChecklistItem [-CheckListID] <String> [-Name] <String> [[-Assignee] <UInt32>] [<CommonParameters>]
+New-ClickUpChecklistItem [-CheckListID] <String> [-Name] <String> [[-Assignee] <UInt64>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,7 +69,7 @@ Accept wildcard characters: False
 The ClickUp user ID of the user to assign the checklist item to.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

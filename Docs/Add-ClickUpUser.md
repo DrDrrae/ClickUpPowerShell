@@ -1,23 +1,23 @@
 ---
 external help file: ClickUpAPI-help.xml
 Module Name: ClickUpAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/users/get-user.html
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/users/invite-user-to-workspace.html
 schema: 2.0.0
 ---
 
-# Get-ClickUpUser
+# Add-ClickUpUser
 
 ## SYNOPSIS
-Get ClickUp user.
+Add ClickUp user to a workspace.
 
 ## SYNTAX
 
 ```
-Get-ClickUpUser [-TeamID] <UInt64> [-UserID] <UInt64> [<CommonParameters>]
+Add-ClickUpUser [-TeamID] <UInt64> [-EmailAddress] <String> [[-Admin] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get ClickUp user.
+Add ClickUp user to a workspace.
 
 The following user routes are only available to enterprise teams.
 
@@ -25,8 +25,14 @@ The following user routes are only available to enterprise teams.
 
 ### EXAMPLE 1
 ```
-Get-ClickUpUser -TeamID 333 -UserID 403
-Get ClickUp user with ID "403" under team with ID "333".
+Add-ClickUpUser -TeamID 333 -EmailAddress 'user@example.com'
+Invite user with email address "user@example.com" to ClickUp team with ID "333".
+```
+
+### EXAMPLE 2
+```
+Add-ClickUpUser -TeamID 333 -EmailAddress 'user@example.com' -Admin $true
+Invite user with email address "user@example.com" to ClickUp team with ID "333" and make them an administrator.
 ```
 
 ## PARAMETERS
@@ -46,17 +52,32 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserID
-ClickUp user ID.
+### -EmailAddress
+Email address of the user to invite.
 
 ```yaml
-Type: UInt64
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 2
-Default value: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Admin
+Set to true to make the invited user an admin.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -77,5 +98,5 @@ The following user routes are only available to enterprise teams.
 
 ## RELATED LINKS
 
-[https://jsapi.apiary.io/apis/clickup20/reference/0/users/get-user.html](https://jsapi.apiary.io/apis/clickup20/reference/0/users/get-user.html)
+[https://jsapi.apiary.io/apis/clickup20/reference/0/users/invite-user-to-workspace.html](https://jsapi.apiary.io/apis/clickup20/reference/0/users/invite-user-to-workspace.html)
 

@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/edit-checklist-item.html
 schema: 2.0.0
 ---
@@ -14,7 +14,7 @@ Update a ClickUp checklist item.
 
 ```
 Set-ClickUpChecklistItem [-ChecklistID] <String> [-ChecklistItemId] <String> [[-Name] <String>]
- [[-Assignee] <UInt32>] [[-Resolved] <Boolean>] [[-Parent] <String>] [<CommonParameters>]
+ [[-Assignee] <UInt64>] [[-Resolved] <Boolean>] [[-Parent] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,7 +85,7 @@ Accept wildcard characters: False
 The ClickUp user ID of the user to assign the checklist item to.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

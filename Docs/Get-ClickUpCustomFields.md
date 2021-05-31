@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/custom-fields/get-accessible-custom-fields.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/custom-fields.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/custom-fields/get-accessible-custom-fields.html
 schema: 2.0.0
 ---
 

@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/lists/get-folderless-lists.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/lists/get-lists.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/lists/get-folderless-lists.html
 schema: 2.0.0
 ---
 
@@ -15,12 +15,12 @@ Get all ClickUp lists.
 
 ### FolderID (Default)
 ```
-Get-ClickUpLists -FolderID <UInt32> [-Archived <Boolean>] [<CommonParameters>]
+Get-ClickUpLists -FolderID <UInt64> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ### SpaceID
 ```
-Get-ClickUpLists -SpaceID <UInt32> [-Archived <Boolean>] [<CommonParameters>]
+Get-ClickUpLists -SpaceID <UInt64> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,10 +43,10 @@ Get ClickUp lists under folder with ID "456" including archived lists.
 ## PARAMETERS
 
 ### -FolderID
-{{ Fill FolderID Description }}
+ClickUp folder ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: FolderID
 Aliases:
 
@@ -58,10 +58,10 @@ Accept wildcard characters: False
 ```
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+Clickup space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: SpaceID
 Aliases:
 
@@ -73,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Archived
-{{ Fill Archived Description }}
+If set to true, will returned archived lists in addition to non-archived lists.
 
 ```yaml
 Type: Boolean

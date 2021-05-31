@@ -13,7 +13,7 @@ Get all comments on a ClickUp list.
 ## SYNTAX
 
 ```
-Get-ClickUpListComments [-ListID] <UInt32> [<CommonParameters>]
+Get-ClickUpListComments [-ListID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Get ClickUp chat view comments for view with ID "3c".
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+The ClickUp list ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

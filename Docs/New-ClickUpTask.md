@@ -13,9 +13,9 @@ Create a new ClickUp task.
 ## SYNTAX
 
 ```
-New-ClickUpTask [-ListID] <UInt32> [-Name] <String> [[-Description] <String>] [[-Assignees] <Int32[]>]
- [[-Tags] <String[]>] [[-Status] <String>] [[-Priority] <UInt32>] [[-DueDate] <DateTime>]
- [[-DueDateTime] <Boolean>] [[-TimeEstimate] <UInt32>] [[-StartDate] <DateTime>] [[-StartDateTime] <Boolean>]
+New-ClickUpTask [-ListID] <UInt64> [-Name] <String> [[-Description] <String>] [[-Assignees] <Int32[]>]
+ [[-Tags] <String[]>] [[-Status] <String>] [[-Priority] <UInt64>] [[-DueDate] <DateTime>]
+ [[-DueDateTime] <Boolean>] [[-TimeEstimate] <UInt64>] [[-StartDate] <DateTime>] [[-StartDateTime] <Boolean>]
  [[-NotifyAll] <Boolean>] [[-Parent] <String>] [[-LinksTo] <String>] [[-CheckRequiredCustomFields] <Boolean>]
  [[-CustomFields] <Hashtable[]>] [<CommonParameters>]
 ```
@@ -37,13 +37,29 @@ New-ClickUpTask -ListID 22222222 -Name 'This is another new task' -Description "
 Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
 ```
 
+### EXAMPLE 3
+```
+$CustomFields = @(
+>> @{
+>> id = "0a52c486-5f05-403b-b4fd-c512ff05131c"
+>> value = 23
+>> },
+>> @{
+>> id = "03efda77-c7a0-42d3-8afd-fd546353c2f5"
+>> value = "Text field input"
+>> }
+>> )
+PS C:\> New-ClickUpTask -ListID 11111111 -Name 'This is a new task' -CheckRequiredCustomFields $true -CustomFields $CustomFields
+Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111" with two custom fields set.
+```
+
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+ClickUp list ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -55,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the new ClickUp task.
 
 ```yaml
 Type: String
@@ -70,7 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+Description of the new ClickUp task.
 
 ```yaml
 Type: String
@@ -85,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -Assignees
-{{ Fill Assignees Description }}
+ClickUp member IDs of the users to be assigned to the new ClickUp task.
 
 ```yaml
 Type: Int32[]
@@ -100,7 +116,7 @@ Accept wildcard characters: False
 ```
 
 ### -Tags
-{{ Fill Tags Description }}
+Tags to add to the new ClickUp task.
 
 ```yaml
 Type: String[]
@@ -115,7 +131,7 @@ Accept wildcard characters: False
 ```
 
 ### -Status
-{{ Fill Status Description }}
+Status to set to the new ClickUp task.
 
 ```yaml
 Type: String
@@ -130,10 +146,10 @@ Accept wildcard characters: False
 ```
 
 ### -Priority
-{{ Fill Priority Description }}
+Priority to set to the new ClickUp task.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -145,7 +161,7 @@ Accept wildcard characters: False
 ```
 
 ### -DueDate
-{{ Fill DueDate Description }}
+Due date to set to the new ClickUp task.
 
 ```yaml
 Type: DateTime
@@ -160,7 +176,7 @@ Accept wildcard characters: False
 ```
 
 ### -DueDateTime
-{{ Fill DueDateTime Description }}
+Set to true to include a time for the due date instead of just a date.
 
 ```yaml
 Type: Boolean
@@ -175,10 +191,10 @@ Accept wildcard characters: False
 ```
 
 ### -TimeEstimate
-{{ Fill TimeEstimate Description }}
+The time estimate in minutes.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -190,7 +206,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartDate
-{{ Fill StartDate Description }}
+Start date to set to the new ClickUp task.
 
 ```yaml
 Type: DateTime
@@ -205,7 +221,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartDateTime
-{{ Fill StartDateTime Description }}
+Set to true to include a time for the start date instead of just a date.
 
 ```yaml
 Type: Boolean
@@ -220,7 +236,7 @@ Accept wildcard characters: False
 ```
 
 ### -NotifyAll
-{{ Fill NotifyAll Description }}
+If set to true, creation notifications will be sent to everyone including the creator of the task.
 
 ```yaml
 Type: Boolean
@@ -235,7 +251,7 @@ Accept wildcard characters: False
 ```
 
 ### -Parent
-{{ Fill Parent Description }}
+ClickUp task ID to set as the parent of the new ClickUp task.
 
 ```yaml
 Type: String
@@ -250,7 +266,7 @@ Accept wildcard characters: False
 ```
 
 ### -LinksTo
-{{ Fill LinksTo Description }}
+A ClickUp task ID to create a linked dependency on the new task.
 
 ```yaml
 Type: String
@@ -265,7 +281,7 @@ Accept wildcard characters: False
 ```
 
 ### -CheckRequiredCustomFields
-{{ Fill CheckRequiredCustomFields Description }}
+If required custom fields are checked when creating the new ClickUp task.
 
 ```yaml
 Type: Boolean
@@ -280,7 +296,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomFields
-{{ Fill CustomFields Description }}
+A hashtable array containing the custom fields and their properties to set.
 
 ```yaml
 Type: Hashtable[]

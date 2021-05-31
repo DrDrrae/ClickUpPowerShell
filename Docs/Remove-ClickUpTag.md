@@ -13,7 +13,7 @@ Get all ClickUp space tags.
 ## SYNTAX
 
 ```
-Remove-ClickUpTag [-SpaceID] <UInt32> [-TagName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpTag [-SpaceID] <UInt64> [-TagName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Remove a ClickUp tag with name "Tag Name" for space with ID "512".
 ## PARAMETERS
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -TagName
-{{ Fill TagName Description }}
+Name of the ClickUp tag.
 
 ```yaml
 Type: String

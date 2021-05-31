@@ -13,9 +13,9 @@ Update a ClickUp time entry.
 ## SYNTAX
 
 ```
-Set-ClickUpTimeEntry [-TeamID] <UInt32> [-TimerID] <UInt64> [[-Description] <String>] [[-Tags] <Hashtable[]>]
+Set-ClickUpTimeEntry [-TeamID] <UInt64> [-TimerID] <UInt64> [[-Description] <String>] [[-Tags] <Hashtable[]>]
  [[-TagAction] <String>] [[-StartDate] <String>] [[-EndDate] <String>] [-TaskID] <String>
- [[-Billable] <Boolean>] [[-Duration] <UInt32>] [[-CustomTaskIDs] <Boolean>] [<CommonParameters>]
+ [[-Billable] <Boolean>] [[-Duration] <UInt64>] [[-CustomTaskIDs] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,10 +38,10 @@ Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -TimerID
-{{ Fill TimerID Description }}
+ClickUp time entry ID.
 
 ```yaml
 Type: UInt64
@@ -68,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+Description to change the time entry to.
 
 ```yaml
 Type: String
@@ -83,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -Tags
-{{ Fill Tags Description }}
+ClickUp tags to add to the ClickUp time entry.
 
 ```yaml
 Type: Hashtable[]
@@ -98,7 +98,8 @@ Accept wildcard characters: False
 ```
 
 ### -TagAction
-{{ Fill TagAction Description }}
+Action to perform on the tags referenced in the -Tags parameter.
+Can be replace, add, or remove.
 
 ```yaml
 Type: String
@@ -113,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartDate
-{{ Fill StartDate Description }}
+Start date and time of the ClickUp time entry.
 
 ```yaml
 Type: String
@@ -128,7 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### -EndDate
-{{ Fill EndDate Description }}
+End date and time of the ClickUp time entry.
 
 ```yaml
 Type: String
@@ -143,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -TaskID
-{{ Fill TaskID Description }}
+ClickUp task ID.
 
 ```yaml
 Type: String
@@ -158,7 +159,7 @@ Accept wildcard characters: False
 ```
 
 ### -Billable
-{{ Fill Billable Description }}
+Set to true to make the time entry billable.
 
 ```yaml
 Type: Boolean
@@ -173,10 +174,10 @@ Accept wildcard characters: False
 ```
 
 ### -Duration
-{{ Fill Duration Description }}
+Duration of the new ClickUp time entry in seconds.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -188,7 +189,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskIDs
-{{ Fill CustomTaskIDs Description }}
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean

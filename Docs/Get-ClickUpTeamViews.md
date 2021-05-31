@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/views/get-team-views.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-team-views.html
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Get ClickUp team views.
 ## SYNTAX
 
 ```
-Get-ClickUpTeamViews [-TeamID] <UInt32> [<CommonParameters>]
+Get-ClickUpTeamViews [-TeamID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,10 +31,10 @@ Get ClickUp team views with team ID "512".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

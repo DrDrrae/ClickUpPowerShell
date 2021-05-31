@@ -1,49 +1,56 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickupAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html
+Module Name: ClickUpAPI
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-task.html
 schema: 2.0.0
 ---
 
 # Add-ClickUpGuestToTask
 
 ## SYNOPSIS
-Add ClickUp guest to list.
+Add ClickUp guest to task.
 
 ## SYNTAX
 
 ### TaskID (Default)
 ```
-Add-ClickUpGuestToTask -TaskID <String> -GuestID <UInt32> [-PermissionLevel <String>] [<CommonParameters>]
+Add-ClickUpGuestToTask -TaskID <String> -GuestID <UInt64> [-PermissionLevel <String>] [<CommonParameters>]
 ```
 
 ### CustomTaskIDs
 ```
-Add-ClickUpGuestToTask -TaskID <String> -GuestID <UInt32> [-PermissionLevel <String>] -CustomTaskIDs <Boolean>
- -TeamID <UInt32> [<CommonParameters>]
+Add-ClickUpGuestToTask -TaskID <String> -GuestID <UInt64> [-PermissionLevel <String>] -CustomTaskIDs <Boolean>
+ -TeamID <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Add ClickUp guest to list.
+Add ClickUp guest to task.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Add-ClickUpGuestToList -ListID 1427 -GuestID 403
-Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "read".
+Add-ClickUpGuestToTask -TaskID c04 -GuestID 403
+Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "read".
 ```
 
 ### EXAMPLE 2
 ```
-Add-ClickUpGuestToList -ListID 1427 -GuestID 403 -PermissionLevel edit
-Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "edit".
+Add-ClickUpGuestToTask -TaskID c04 -GuestID 403 -PermissionLevel edit
+Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "edit".
+```
+
+### EXAMPLE 3
+```
+Add-ClickUpGuestToTask -TaskID CustomID -GuestID 403 -CustomTaskIDs $true -TeamID 123 -PermissionLevel edit.
+Add ClickUp guest user with  custom ID "CustomID" to task with ID "c04" with permission level "edit".
 ```
 
 ## PARAMETERS
 
 ### -TaskID
-The ClickUp task ID. Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
+The ClickUp task ID.
+Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
 
 ```yaml
 Type: String
@@ -58,10 +65,10 @@ Accept wildcard characters: False
 ```
 
 ### -GuestID
-{{ Fill GuestID Description }}
+ClickUp guest ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -73,7 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -PermissionLevel
-{{ Fill PermissionLevel Description }}
+Permission level of the guest added to the task.
 
 ```yaml
 Type: String
@@ -106,7 +113,7 @@ Accept wildcard characters: False
 Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: CustomTaskIDs
 Aliases:
 
@@ -131,5 +138,5 @@ See the link for information.
 
 ## RELATED LINKS
 
-[https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html](https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html)
+[https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-task.html](https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-task.html)
 

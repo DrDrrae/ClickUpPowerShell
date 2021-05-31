@@ -30,7 +30,7 @@ Remove ClickUp key result with ID "947d46ed".
 ## PARAMETERS
 
 ### -KeyResultID
-{{ Fill KeyResultID Description }}
+ClickUp key result ID.
 
 ```yaml
 Type: String

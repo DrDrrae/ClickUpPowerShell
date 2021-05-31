@@ -36,7 +36,7 @@ Add the tag with name "name of tag" and "second tag name" to ClickUp time entrie
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
 Type: String
@@ -51,7 +51,7 @@ Accept wildcard characters: False
 ```
 
 ### -TimeEntryIDs
-{{ Fill TimeEntryIDs Description }}
+Array of ClickUp time entry IDs to assign tags to.
 
 ```yaml
 Type: UInt64[]
@@ -66,7 +66,7 @@ Accept wildcard characters: False
 ```
 
 ### -Tags
-{{ Fill Tags Description }}
+Name of ClickUp tag to add to the time entries.
 
 ```yaml
 Type: String[]

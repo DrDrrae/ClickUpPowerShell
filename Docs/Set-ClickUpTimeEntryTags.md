@@ -24,20 +24,20 @@ Update tag names from ClickUp time entries.
 
 ### EXAMPLE 1
 ```
-Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222 -Tags "name of tag"
-Add the tag with name "name of tag" to ClickUp time entry with ID "2222222222222222222".
+Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag name" -NewTagName "new tag name"
+Change the ClickUp tag with name "old tag name" to "new tag name".
 ```
 
 ### EXAMPLE 2
 ```
-Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
-Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
+Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag name" TagBackgroundColor "#000000" -TagForegroundColor "#ffffff"
+Change the ClickUp tag with name "old tag name" foreground color to white and background color to black.
 ```
 
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
 Type: String
@@ -52,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -OldTagName
-{{ Fill OldTagName Description }}
+Old name of the ClickUp tag to change.
 
 ```yaml
 Type: String
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -NewTagName
-{{ Fill NewTagName Description }}
+New name of the ClickUp tag.
 
 ```yaml
 Type: String
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -TagBackgroundColor
-{{ Fill TagBackgroundColor Description }}
+Background color of the ClickUp tag in hex format.
 
 ```yaml
 Type: String
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -TagForegroundColor
-{{ Fill TagForegroundColor Description }}
+Foreground color of the ClickUp tag in nex format.
 
 ```yaml
 Type: String

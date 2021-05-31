@@ -1,15 +1,16 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/webhooks/get-webhooks.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/get-webhooks.html
 schema: 2.0.0
 ---
 
 # Import-ClickUpModuleSettings
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieves the ClickUp module settings from a file in the user's profile.
+Can be exported later.
 
 ## SYNTAX
 
@@ -18,16 +19,16 @@ Import-ClickUpModuleSettings [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves the ClickUp module settings including the ClickUp API Key and JSON conversion depth from a file in the user's profile.
+Can be exported later.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Import-ClickUpModuleSettings
+Imports the ClickUp module settings from the user's profile into the current session.
+```
 
 ## PARAMETERS
 
@@ -37,11 +38,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
-### System.Management.Automation.PSCustomObject
-
+### System.Void
 ## NOTES
 
 ## RELATED LINKS

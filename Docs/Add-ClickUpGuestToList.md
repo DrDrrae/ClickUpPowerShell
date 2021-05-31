@@ -1,46 +1,52 @@
 ---
 external help file: ClickUpAPI-help.xml
 Module Name: ClickUpAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-folder.html
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html
 schema: 2.0.0
 ---
 
-# Remove-ClickUpGuestFromFolder
+# Add-ClickUpGuestToList
 
 ## SYNOPSIS
-Remove ClickUp guest from folder.
+Add ClickUp guest to list.
 
 ## SYNTAX
 
 ```
-Remove-ClickUpGuestFromFolder [-FolderID] <String> [-GuestID] <UInt64> [-WhatIf] [-Confirm]
+Add-ClickUpGuestToList [-ListID] <UInt64> [-GuestID] <UInt64> [[-PermissionLevel] <String>]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Remove ClickUp guest from folder.
+Add ClickUp guest to list.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-ClickUpGuestFromFolder -FolderID 1057 -GuestID 403
-Remove ClickUp guest with Id "403" from folder with ID "1057".
+Add-ClickUpGuestToList -ListID 1427 -GuestID 403
+Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "read".
+```
+
+### EXAMPLE 2
+```
+Add-ClickUpGuestToList -ListID 1427 -GuestID 403 -PermissionLevel edit
+Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "edit".
 ```
 
 ## PARAMETERS
 
-### -FolderID
-ClickUp folder ID.
+### -ListID
+ClickUp list ID.
 
 ```yaml
-Type: String
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -60,33 +66,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -PermissionLevel
+Permission level of the guest added to the task.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
-Aliases: wi
+Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
+Position: 3
+Default value: Read
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -105,5 +95,5 @@ See the link for information.
 
 ## RELATED LINKS
 
-[https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-folder.html](https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-folder.html)
+[https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html](https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html)
 

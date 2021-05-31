@@ -13,7 +13,7 @@ Get all ClickUp task templates.
 ## SYNTAX
 
 ```
-Get-ClickUpTaskTemplates [-TeamID] <UInt32> [[-Page] <UInt32>] [<CommonParameters>]
+Get-ClickUpTaskTemplates [-TeamID] <UInt64> [[-Page] <UInt64>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,10 +36,10 @@ Get all ClickUp team goals for team with ID "123" starting on page 2.
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -51,10 +51,10 @@ Accept wildcard characters: False
 ```
 
 ### -Page
-{{ Fill Page Description }}
+The page number to return.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

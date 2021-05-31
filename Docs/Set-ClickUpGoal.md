@@ -13,7 +13,7 @@ Create a ClickUp team goal.
 ## SYNTAX
 
 ```
-Set-ClickUpGoal [-GoalID] <UInt32> [[-Name] <String>] [[-DueDate] <DateTime>] [[-Description] <String>]
+Set-ClickUpGoal [-GoalID] <UInt64> [[-Name] <String>] [[-DueDate] <DateTime>] [[-Description] <String>]
  [[-MultipleOwners] <Boolean>] [[-Owners] <UInt32[]>] [[-Color] <String>] [<CommonParameters>]
 ```
 
@@ -31,10 +31,10 @@ Update ClickUp goal with ID "e53a033c" name to "Updated Goal Name".
 ## PARAMETERS
 
 ### -GoalID
-{{ Fill GoalID Description }}
+ClickUp goal ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+New name of the ClickUp team goal being updated.
 
 ```yaml
 Type: String
@@ -61,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -DueDate
-{{ Fill DueDate Description }}
+The due-date of the ClickUp team goal.
 
 ```yaml
 Type: DateTime
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+Description of the ClickUp team goal.
 
 ```yaml
 Type: String
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -MultipleOwners
-{{ Fill MultipleOwners Description }}
+If set to true, allows multiple owners.
 
 ```yaml
 Type: Boolean
@@ -106,7 +106,7 @@ Accept wildcard characters: False
 ```
 
 ### -Owners
-{{ Fill Owners Description }}
+The ClickUp team member ID for the owner(s) of the team goal.
 
 ```yaml
 Type: UInt32[]
@@ -121,7 +121,9 @@ Accept wildcard characters: False
 ```
 
 ### -Color
-{{ Fill Color Description }}
+The color of the team goal in hex notation.
+i.e.
+"#32a852"
 
 ```yaml
 Type: String

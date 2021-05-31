@@ -1,14 +1,14 @@
 ---
 external help file: ClickUpAPI-help.xml
 Module Name: ClickUpAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-bulk-tasks'-time-in-status.html
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/teams/get-teams.html
 schema: 2.0.0
 ---
 
 # Get-ClickUpTeam
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get all ClickUp teams.
 
 ## SYNTAX
 
@@ -17,16 +17,15 @@ Get-ClickUpTeam [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get all ClickUp teams.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-ClickUpTeam
+Get all ClickUp teams the authorized user has access to.
+```
 
 ## PARAMETERS
 
@@ -36,11 +35,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Management.Automation.PSCustomObject
-
 ## NOTES
+See the link for information.
 
 ## RELATED LINKS
+
+[https://jsapi.apiary.io/apis/clickup20/reference/0/teams/get-teams.html](https://jsapi.apiary.io/apis/clickup20/reference/0/teams/get-teams.html)
+

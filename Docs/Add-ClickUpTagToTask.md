@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/tags/add-tag-to-task.html
 schema: 2.0.0
 ---
@@ -19,7 +19,7 @@ Add-ClickUpTagToTask -TaskID <String> -TagName <String> [<CommonParameters>]
 
 ### CustomTaskIDs
 ```
-Add-ClickUpTagToTask -TaskID <String> -TagName <String> -CustomTaskIDs <Boolean> -TeamID <UInt32>
+Add-ClickUpTagToTask -TaskID <String> -TagName <String> -CustomTaskIDs <Boolean> -TeamID <UInt64>
  [<CommonParameters>]
 ```
 
@@ -43,7 +43,8 @@ Add ClickUp tag with name "name" to task with custom ID "Custom Task ID".
 ## PARAMETERS
 
 ### -TaskID
-{{ Fill TaskID Description }}
+ClickUp task ID.
+Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
 
 ```yaml
 Type: String
@@ -58,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -TagName
-{{ Fill TagName Description }}
+Name of the ClickUp tag.
 
 ```yaml
 Type: String
@@ -73,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskIDs
-{{ Fill CustomTaskIDs Description }}
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean
@@ -88,10 +89,10 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-{{ Fill TeamID Description }}
+Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: CustomTaskIDs
 Aliases:
 

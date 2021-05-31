@@ -30,7 +30,7 @@ Remove ClickUp goal with ID "e53a033c".
 ## PARAMETERS
 
 ### -GoalID
-{{ Fill GoalID Description }}
+ClickUp goal ID.
 
 ```yaml
 Type: String

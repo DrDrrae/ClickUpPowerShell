@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/views/get-space-views.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-space-views.html
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Get ClickUp space views.
 ## SYNTAX
 
 ```
-Get-ClickUpSpaceViews [-SpaceID] <UInt32> [<CommonParameters>]
+Get-ClickUpSpaceViews [-SpaceID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,10 +31,10 @@ Get ClickUp space views with space ID "790".
 ## PARAMETERS
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

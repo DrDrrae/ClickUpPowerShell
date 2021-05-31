@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-task.html
 schema: 2.0.0
 ---
@@ -14,12 +14,12 @@ Remove ClickUp guest from task.
 
 ### TaskID (Default)
 ```
-Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### CustomTaskIDs
 ```
-Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt32> -CustomTaskIDs <Boolean> -TeamID <UInt32>
+Remove-ClickUpGuestFromTask -TaskID <String> -GuestID <UInt64> -CustomTaskIDs <Boolean> -TeamID <UInt64>
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -37,7 +37,8 @@ Remove ClickUp guest with Id "403" from task with ID "1427".
 ## PARAMETERS
 
 ### -TaskID
-{{ Fill TaskID Description }}
+The ClickUp task ID.
+Could also be a custom ID with the -CustomTaskIDs and -TeamID parameters provided.
 
 ```yaml
 Type: String
@@ -52,10 +53,10 @@ Accept wildcard characters: False
 ```
 
 ### -GuestID
-{{ Fill GuestID Description }}
+ClickUp guest ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -67,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskIDs
-{{ Fill CustomTaskIDs Description }}
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean
@@ -82,10 +83,10 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-{{ Fill TeamID Description }}
+Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: CustomTaskIDs
 Aliases:
 

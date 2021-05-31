@@ -19,7 +19,7 @@ Add-ClickUpDependency -TaskID <String> -DependsOn <String> [<CommonParameters>]
 
 ### DependendencyOfCustomTaskID
 ```
-Add-ClickUpDependency -TaskID <String> -DependendencyOf <String> -CustomTaskID <Boolean> -TeamID <UInt32>
+Add-ClickUpDependency -TaskID <String> -DependendencyOf <String> -CustomTaskID <Boolean> -TeamID <UInt64>
  [<CommonParameters>]
 ```
 
@@ -30,7 +30,7 @@ Add-ClickUpDependency -TaskID <String> -DependendencyOf <String> [<CommonParamet
 
 ### DependsOnCustomTaskID
 ```
-Add-ClickUpDependency -TaskID <String> -DependsOn <String> -CustomTaskID <Boolean> -TeamID <UInt32>
+Add-ClickUpDependency -TaskID <String> -DependsOn <String> -CustomTaskID <Boolean> -TeamID <UInt64>
  [<CommonParameters>]
 ```
 
@@ -112,7 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomTaskID
-{{ Fill CustomTaskID Description }}
+Set to true if the task ID provided is a custom ID.
 
 ```yaml
 Type: Boolean
@@ -127,10 +127,10 @@ Accept wildcard characters: False
 ```
 
 ### -TeamID
-Required ClickUp team ID if -CustomTaskIDs is set to $true.
+Required ClickUp team ID if -CustomTaskIDs is set to true.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: DependendencyOfCustomTaskID, DependsOnCustomTaskID
 Aliases:
 

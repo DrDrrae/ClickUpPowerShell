@@ -1,6 +1,6 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickUpAPI
+Module Name: ClickupAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/folders/create-folder.html
 schema: 2.0.0
 ---
@@ -13,7 +13,7 @@ Update the name of a ClickUp Folder.
 ## SYNTAX
 
 ```
-Set-ClickUpFolder [-FolderID] <UInt32> [-Name] <UInt32> [<CommonParameters>]
+Set-ClickUpFolder [-FolderID] <UInt64> [-Name] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,7 +33,7 @@ Change the name of the ClickUp folder with ID "11111111" to "Change Folder Name"
 The ClickUp folder ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -48,7 +48,7 @@ Accept wildcard characters: False
 The new name of the ClickUp folder.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

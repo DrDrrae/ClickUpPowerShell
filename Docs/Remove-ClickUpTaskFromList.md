@@ -13,7 +13,7 @@ Remove a ClickUp task from a list.
 ## SYNTAX
 
 ```
-Remove-ClickUpTaskFromList [-ListID] <UInt32> [-TaskID] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpTaskFromList [-ListID] <UInt64> [-TaskID] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Add ClickUp task with ID "9hz" to list with ID "123".
 ## PARAMETERS
 
 ### -ListID
-{{ Fill ListID Description }}
+ClickUp list ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -TaskID
-{{ Fill TaskID Description }}
+ClickUp task ID.
 
 ```yaml
 Type: String

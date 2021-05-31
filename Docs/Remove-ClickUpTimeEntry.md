@@ -13,7 +13,7 @@ Remove a ClickUp time entry.
 ## SYNTAX
 
 ```
-Remove-ClickUpTimeEntry [-TeamID] <UInt32> [-TimerID] <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickUpTimeEntry [-TeamID] <UInt64> [-TimerID] <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,10 +30,10 @@ Remove a ClickUp time entry with ID "2222222222222222222".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -TimerID
-{{ Fill TimerID Description }}
+ClickUp time entry ID.
 
 ```yaml
 Type: UInt64

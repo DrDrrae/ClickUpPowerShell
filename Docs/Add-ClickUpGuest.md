@@ -13,7 +13,7 @@ Invite ClickUp guest to workspace.
 ## SYNTAX
 
 ```
-Add-ClickUpGuest [-TeamID] <UInt32> [-GuestEmail] <String> [[-CanEditTags] <Boolean>]
+Add-ClickUpGuest [-TeamID] <UInt64> [-GuestEmail] <String> [[-CanEditTags] <Boolean>]
  [[-CanSeeTimeSpent] <Boolean>] [[-CanSeeTimeEstimated] <Boolean>] [<CommonParameters>]
 ```
 
@@ -37,10 +37,10 @@ Add ClickUp guest user with email "guest@example.com" for team with ID "333" and
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
@@ -52,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -GuestEmail
-{{ Fill GuestEmail Description }}
+The email address of the guest to invite.
 
 ```yaml
 Type: String
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -CanEditTags
-{{ Fill CanEditTags Description }}
+Whether the guest can edit tags.
 
 ```yaml
 Type: Boolean
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -CanSeeTimeSpent
-{{ Fill CanSeeTimeSpent Description }}
+Whether the guest can see time spent.
 
 ```yaml
 Type: Boolean
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -CanSeeTimeEstimated
-{{ Fill CanSeeTimeEstimated Description }}
+Wheter the guest can see time estimated.
 
 ```yaml
 Type: Boolean

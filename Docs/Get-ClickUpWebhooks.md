@@ -1,8 +1,8 @@
 ---
 external help file: ClickUpAPI-help.xml
-https: //jsapi.apiary.io/apis/clickup20/reference/0/webhooks/get-webhooks.html
-Module Name: ClickupAPI
+Module Name: ClickUpAPI
 online version: https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
+https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/get-webhooks.html
 schema: 2.0.0
 ---
 
@@ -14,7 +14,7 @@ Get all ClickUp webhooks.
 ## SYNTAX
 
 ```
-Get-ClickUpWebhooks [-TeamID] <UInt32> [<CommonParameters>]
+Get-ClickUpWebhooks [-TeamID] <UInt64> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,10 +31,10 @@ Get all ClickUp webhooks for team with ID "123".
 ## PARAMETERS
 
 ### -TeamID
-{{ Fill TeamID Description }}
+ClickUp team ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 

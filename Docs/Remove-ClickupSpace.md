@@ -1,46 +1,45 @@
 ---
 external help file: ClickUpAPI-help.xml
-Module Name: ClickupAPI
-online version: https://jsapi.apiary.io/apis/clickup20/reference/0/lists/delete-list.html
+Module Name: ClickUpAPI
+online version: https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/delete-space.html
 schema: 2.0.0
 ---
 
 # Remove-ClickupSpace
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove a ClickUp Space
 
 ## SYNTAX
 
 ```
-Remove-ClickupSpace [-SpaceID] <UInt32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ClickupSpace [-SpaceID] <UInt64> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Remove a ClickUp Space
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Set-ClickUpSpace -SpaceID 11111111
+Remove ClickUp space with ID "11111111".
+```
 
 ## PARAMETERS
 
 ### -SpaceID
-{{ Fill SpaceID Description }}
+ClickUp space ID.
 
 ```yaml
-Type: UInt32
+Type: UInt64
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -82,10 +81,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
-### System.Object
+### System.Management.Automation.PSCustomObject
 ## NOTES
+See the link for information.
 
 ## RELATED LINKS
+
+[https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/delete-space.html](https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/delete-space.html)
+
