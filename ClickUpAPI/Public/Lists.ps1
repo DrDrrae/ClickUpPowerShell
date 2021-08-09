@@ -152,9 +152,9 @@ function New-ClickUpList {
     }
 
     if ($PSBoundParameters.ContainsKey('FolderID')) {
-        $List = Invoke-ClickUpAPIPost -Endpoint 'folder/$FolderID/list' -Body $Body
+        $List = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/list" -Body $Body
     } elseif ($PSBoundParameters.ContainsKey('SpaceID')) {
-        $List = Invoke-ClickUpAPIPost -Endpoint 'space/$SpaceID/list' -Body $Body
+        $List = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/list" -Body $Body
     }
     Return $List
 }
