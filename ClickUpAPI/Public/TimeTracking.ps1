@@ -37,8 +37,8 @@ function Get-ClickUpTimeEntries {
     if ($PSBoundParameters.ContainsKey('StartDate')) {
         $QueryString.Add('start_date', $(Get-DatePosixMilliseconds -DateTime $StartDate))
     }
-    if ($PSBoundParameters.ContainsKey('StartDate')) {
-        $QueryString.Add('start_date', $(Get-DatePosixMilliseconds -DateTime $StartDate))
+    if ($PSBoundParameters.ContainsKey('EndDate')) {
+        $QueryString.Add('end_date', $(Get-DatePosixMilliseconds -DateTime $EndDate))
     }
     if ($PSBoundParameters.ContainsKey('Assignees')) {
         $QueryString.Add('assignee', $($Assignees -join ','))
