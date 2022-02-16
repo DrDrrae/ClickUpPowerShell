@@ -29,10 +29,28 @@ function Get-ClickUpTimeEntries {
         [Parameter()]
         [DateTime]$EndDate,
         [Parameter()]
-        [UInt32[]]$Assignees
+        [UInt32[]]$Assignees,
+        [Parameter()]
+        [Bool]$IncludeTaskTags = $false,
+        [Parameter()]
+        [Bool]$IncludeLocationNames = $false,
+        [Parameter()]
+        [UInt32]$SpaceID,
+        [Parameter()]
+        [UInt32]$FolderID,
+        [Parameter()]
+        [UInt32]$ListID,
+        [Parameter()]
+        [UInt32]$TaskID,
+        [Parameter()]
+        [bool]$CustomTaskIDs = $false
     )
 
-    $QueryString = @{}
+    $QueryString = @{
+        'include_task_tags' = $IncludeTaskTags
+        'include_location_names' = $IncludeLocationNames
+
+    }
 
     if ($PSBoundParameters.ContainsKey('StartDate')) {
         $QueryString.Add('start_date', $(Get-DatePosixMilliseconds -DateTime $StartDate))
@@ -42,6 +60,22 @@ function Get-ClickUpTimeEntries {
     }
     if ($PSBoundParameters.ContainsKey('Assignees')) {
         $QueryString.Add('assignee', $($Assignees -join ','))
+    }
+    if ($PSBoundParameters.ContainsKey('SpaceID')) {
+        $QueryString.Add('space_id', $SpaceID)
+    }
+    if ($PSBoundParameters.ContainsKey('FolderID')) {
+        $QueryString.Add('folder_id', $FolderID)
+    }
+    if ($PSBoundParameters.ContainsKey('ListID')) {
+        $QueryString.Add('list_id', $ListID)
+    }
+    if ($PSBoundParameters.ContainsKey('TaskID')) {
+        $QueryString.Add('task_id', $TaskID)
+    }
+    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+        $QueryString.Add('custom_task_ids', $CustomTaskIDs)
+        $QueryString.Add('team_id', $TeamID)
     }
 
     $TimeTracking = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/time_entries"
