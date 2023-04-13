@@ -23,9 +23,9 @@ function Get-ClickUpLists {
     [CmdletBinding(DefaultParameterSetName = 'FolderID')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [UInt32]$FolderID,
+        [long]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [UInt32]$SpaceID,
+        [long]$SpaceID,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [bool]$Archived = $false
@@ -64,7 +64,7 @@ function Get-ClickUpList {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID
+        [long]$ListID
     )
 
     $List = Invoke-ClickUpAPIGet -Endpoint "list/$ListID"
@@ -102,9 +102,9 @@ function New-ClickUpList {
     [CmdletBinding(DefaultParameterSetName = 'FolderID')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [UInt32]$FolderID,
+        [long]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [UInt32]$SpaceID,
+        [long]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
         [string]$Name,
@@ -248,7 +248,7 @@ function Remove-ClickUpList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID
+        [long]$ListID
     )
     if ($PSCmdlet.ShouldProcess($ListID)) {
         Invoke-ClickUpAPIDelete -Endpoint "list/$ListID"
@@ -276,7 +276,7 @@ function Add-ClickUpTaskToList {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID,
+        [long]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$TaskID
     )
@@ -305,7 +305,7 @@ function Remove-ClickUpTaskFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID,
+        [long]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$TaskID
     )
