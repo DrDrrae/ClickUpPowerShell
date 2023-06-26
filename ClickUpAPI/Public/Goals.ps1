@@ -19,7 +19,7 @@ function Get-ClickUpGoals {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
@@ -47,7 +47,7 @@ function Get-ClickUpGoal {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$GoalID
+        [UInt64]$GoalID
     )
 
     $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
@@ -75,7 +75,7 @@ function New-ClickUpGoal {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [Uint32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
@@ -85,7 +85,7 @@ function New-ClickUpGoal {
         [Parameter()]
         [bool]$MultipleOwners,
         [Parameter()]
-        [UInt32[]]$Owners,
+        [UInt64[]]$Owners,
         [Parameter()]
         [string]$Color
     )
@@ -135,7 +135,7 @@ function Set-ClickUpGoal {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [Uint32]$GoalID,
+        [UInt64]$GoalID,
         [Parameter()]
         [string]$Name,
         [Parameter()]
@@ -145,7 +145,7 @@ function Set-ClickUpGoal {
         [Parameter()]
         [bool]$MultipleOwners,
         [Parameter()]
-        [UInt32[]]$Owners,
+        [UInt64[]]$Owners,
         [Parameter()]
         [string]$Color
     )
@@ -229,20 +229,20 @@ function New-ClickUpKeyResult {
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
-        [UInt32[]]$Owners,
+        [UInt64[]]$Owners,
         [Parameter()]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
-        [UInt32]$StepsStart,
+        [UInt64]$StepsStart,
         [Parameter()]
-        [UInt32]$StepsEnd,
+        [UInt64]$StepsEnd,
         [Parameter()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
         [Parameter()]
-        [UInt32[]]$ListIDs
+        [UInt64[]]$ListIDs
     )
 
     $Body = @{
@@ -302,22 +302,22 @@ function Set-ClickUpKeyResult {
         [Parameter()]
         [string]$Note,
         [Parameter()]
-        [UInt32[]]$Owners,
+        [UInt64[]]$Owners,
         [Parameter()]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
-        [UInt32]$StepsStart,
+        [UInt64]$StepsStart,
         [Parameter()]
-        [UInt32]$StepsEnd,
+        [UInt64]$StepsEnd,
         [Parameter()]
-        [UInt32]$StepsCurrent,
+        [UInt64]$StepsCurrent,
         [Parameter()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
         [Parameter()]
-        [UInt32[]]$ListIDs
+        [UInt64[]]$ListIDs
     )
 
     $Body = @{}

@@ -70,7 +70,7 @@ function Set-ClickUpCustomFieldValue {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -124,7 +124,7 @@ function Remove-ClickUpCustomFieldValue {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {

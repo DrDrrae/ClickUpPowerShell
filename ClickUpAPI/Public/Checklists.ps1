@@ -30,7 +30,7 @@ function New-ClickUpChecklist {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Body = @{
@@ -78,7 +78,7 @@ function Set-ClickUpChecklist {
         [Parameter()]
         [string]$Name,
         [Parameter()]
-        [UInt32]$Position
+        [UInt64]$Position
     )
 
     $Body = @{}
@@ -151,7 +151,7 @@ function New-ClickUpChecklistItem {
         [Parameter(Mandatory = $True)]
         [string]$Name,
         [Parameter()]
-        [UInt32]$Assignee
+        [UInt64]$Assignee
     )
 
     $Body = @{
@@ -196,7 +196,7 @@ function Set-ClickUpChecklistItem {
         [Parameter()]
         [string]$Name,
         [Parameter()]
-        [UInt32]$Assignee,
+        [UInt64]$Assignee,
         [Parameter()]
         [bool]$Resolved,
         [Parameter()]

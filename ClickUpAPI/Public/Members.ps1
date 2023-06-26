@@ -49,7 +49,7 @@ function Get-ClickUpListMembers {
     [OutputType([hashtable])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID
+        [UInt64]$ListID
     )
 
     $ListMembers = Invoke-ClickUpAPIGet -Endpoint "list/$TaskID/member"

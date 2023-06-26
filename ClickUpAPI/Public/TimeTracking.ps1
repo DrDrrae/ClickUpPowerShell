@@ -23,25 +23,25 @@ function Get-ClickUpTimeEntries {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter()]
         [DateTime]$StartDate,
         [Parameter()]
         [DateTime]$EndDate,
         [Parameter()]
-        [UInt32[]]$Assignees,
+        [UInt64[]]$Assignees,
         [Parameter()]
         [Bool]$IncludeTaskTags = $false,
         [Parameter()]
         [Bool]$IncludeLocationNames = $false,
         [Parameter()]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter()]
-        [UInt32]$FolderID,
+        [UInt64]$FolderID,
         [Parameter()]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter()]
-        [UInt32]$TaskID,
+        [UInt64]$TaskID,
         [Parameter()]
         [bool]$CustomTaskIDs = $false
     )
@@ -104,7 +104,7 @@ function Get-ClickUpTimeEntry {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true)]
         [UInt64]$TimerID
     )
@@ -135,7 +135,7 @@ function Get-ClickUpTimeEntryHistory {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true)]
         [UInt64]$TimerID
     )
@@ -169,9 +169,9 @@ function Get-ClickUpRunningTimeEntry {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter()]
-        [UInt32]$Assignee
+        [UInt64]$Assignee
     )
 
     if ($PSBoundParameters.ContainsKey('Assignee')) {
@@ -208,7 +208,7 @@ function Get-ClickUpTimeEntryTags {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/tags"
@@ -237,7 +237,7 @@ function New-ClickUpTimeEntry {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter()]
         [bool]$CustomTaskIDs = $false,
         [Parameter()]
@@ -249,9 +249,9 @@ function New-ClickUpTimeEntry {
         [Parameter()]
         [bool]$Billable,
         [Parameter(Mandatory = $true)]
-        [UInt32]$Duration,
+        [UInt64]$Duration,
         [Parameter()]
-        [UInt32]$Assignee,
+        [UInt64]$Assignee,
         [Parameter()]
         [string]$TaskID
     )
@@ -405,7 +405,7 @@ function Start-ClickUpTimeEntry() {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
         [UInt64]$TimerID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
@@ -469,7 +469,7 @@ function Stop-ClickUpTimeEntry() {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $TimeEntry = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/time_entries/stop"
@@ -501,7 +501,7 @@ function Set-ClickUpTimeEntry() {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true)]
         [UInt64]$TimerID,
         [Parameter()]
@@ -520,7 +520,7 @@ function Set-ClickUpTimeEntry() {
         [Parameter()]
         [bool]$Billable,
         [Parameter()]
-        [UInt32]$Duration,
+        [UInt64]$Duration,
         [Parameter()]
         [bool]$CustomTaskIDs
     )
@@ -588,7 +588,7 @@ function Remove-ClickUpTimeEntry {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true)]
         [UInt64]$TimerID
     )

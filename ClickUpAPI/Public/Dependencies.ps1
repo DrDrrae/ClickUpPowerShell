@@ -46,7 +46,7 @@ function Add-ClickUpDependency {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -113,7 +113,7 @@ function Remove-ClickUpDependency {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $QueryString = @{}
@@ -169,7 +169,7 @@ function Add-ClickUpTaskLink {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -217,7 +217,7 @@ function Remove-ClickUpTaskLink {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $QueryString = @{}

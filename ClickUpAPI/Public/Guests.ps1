@@ -20,9 +20,9 @@ function Get-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $True)]
-        [UInt32]$GuestID
+        [UInt64]$GuestID
     )
 
     $Guest = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/guest/$GuestID"
@@ -54,7 +54,7 @@ function Add-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $True)]
         [string]$GuestEmail,
         [Parameter()]
@@ -101,7 +101,7 @@ function Set-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter()]
         [string]$Username,
         [Parameter()]
@@ -163,7 +163,7 @@ function Add-ClickUpGuestToTask {
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt32]$GuestID,
+        [UInt64]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -171,7 +171,7 @@ function Add-ClickUpGuestToTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Body = @{
@@ -216,9 +216,9 @@ function Add-ClickUpGuestToTask {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true)]
-        [UInt32]$GuestID,
+        [UInt64]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -257,9 +257,9 @@ function Add-ClickUpGuestToFolder {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$FolderID,
+        [UInt64]$FolderID,
         [Parameter(Mandatory = $true)]
-        [UInt32]$GuestID,
+        [UInt64]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -295,9 +295,9 @@ function Remove-ClickUpGuest {
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true)]
-        [UInt32]$GuestID
+        [UInt64]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID)) {
@@ -332,7 +332,7 @@ function Remove-ClickUpGuestFromTask {
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt32]$GuestID,
+        [UInt64]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -340,7 +340,7 @@ function Remove-ClickUpGuestFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -382,7 +382,7 @@ function Remove-ClickUpGuestFromList {
         [Parameter(Mandatory = $true)]
         [string]$ListID,
         [Parameter(Mandatory = $true)]
-        [UInt32]$GuestID
+        [UInt64]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID)) {
@@ -415,7 +415,7 @@ function Remove-ClickUpGuestFromFolder {
         [Parameter(Mandatory = $true)]
         [string]$FolderID,
         [Parameter(Mandatory = $true)]
-        [UInt32]$GuestID
+        [UInt64]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID)) {

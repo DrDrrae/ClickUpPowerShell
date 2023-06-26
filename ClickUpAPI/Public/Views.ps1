@@ -53,7 +53,7 @@ function Get-ClickUpTeamViews {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/view"
@@ -84,7 +84,7 @@ function Get-ClickUpSpaceViews {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$SpaceID
+        [UInt64]$SpaceID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID/view"
@@ -115,7 +115,7 @@ function Get-ClickUpListViews {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$FolderID
+        [UInt64]$FolderID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "folder/$FolderID/view"
@@ -146,7 +146,7 @@ function Get-ClickUpListViews {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID
+        [UInt64]$ListID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/view"
@@ -182,7 +182,7 @@ function Get-ClickUpViewTaks {
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
         [Parameter()]
-        [UInt32]$Page = 0
+        [UInt64]$Page = 0
     )
 
     $QueryString = @{
@@ -225,7 +225,7 @@ function New-ClickUpTeamView {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -266,7 +266,7 @@ function New-ClickUpSpaceView {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$SpaceID,
+        [UInt64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -307,7 +307,7 @@ function New-ClickUpListView {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$FolderID,
+        [UInt64]$FolderID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -348,7 +348,7 @@ function New-ClickUpListViews {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )

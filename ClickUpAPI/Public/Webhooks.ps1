@@ -22,7 +22,7 @@ function Get-ClickUpWebhooks {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID
+        [UInt64]$TeamID
     )
 
     $Webhooks = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/webhook"
@@ -63,9 +63,9 @@ function New-ClickUpWebhook {
         [Parameter()]
         [string[]]$Events = '*',
         [Parameter()]
-        [UInt32]$FilterToSpaceID,
+        [UInt64]$FilterToSpaceID,
         [Parameter()]
-        [UInt32]$FilterToFolderID,
+        [UInt64]$FilterToFolderID,
         [Parameter()]
         [string]$FilterToListID,
         [Parameter()]
@@ -133,9 +133,9 @@ function Set-ClickUpWebhook {
         [ValidateSet('active')]
         [string]$Status,
         [Parameter()]
-        [UInt32]$FilterToSpaceID,
+        [UInt64]$FilterToSpaceID,
         [Parameter()]
-        [UInt32]$FilterToFolderID,
+        [UInt64]$FilterToFolderID,
         [Parameter()]
         [string]$FilterToListID,
         [Parameter()]

@@ -22,9 +22,9 @@ function Get-ClickUpTaskTemplates {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$TeamID,
+        [UInt64]$TeamID,
         [Parameter()]
-        [UInt32]$Page = 0
+        [UInt64]$Page = 0
     )
 
     $QueryString = @{
@@ -59,7 +59,7 @@ function New-ClickUpTaskFromTemplate {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt32]$ListID,
+        [UInt64]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$TemplateID,
         [Parameter()]
