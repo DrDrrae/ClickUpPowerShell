@@ -27,7 +27,7 @@ function Get-ClickUpTaskComments {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [uint64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -92,7 +92,7 @@ function Get-ClickUpListComments {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$ListID
+        [uint64]$ListID
     )
 
     $Comments = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/comment"
@@ -125,7 +125,7 @@ function Set-ClickUpListComment {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$CommentID,
+        [uint64]$CommentID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -154,7 +154,7 @@ function Remove-ClickUpListComment {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$CommentID
+        [uint64]$CommentID
     )
 
     if ($PSCmdlet.ShouldProcess($CommentID)) {
@@ -225,7 +225,7 @@ function New-ClickUpTaskComment {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [uint64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -344,7 +344,7 @@ function New-ClickUpListComment {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$ListID,
+        [uint64]$ListID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )

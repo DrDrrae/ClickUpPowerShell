@@ -22,7 +22,7 @@ function Get-ClickUpSpaces {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID,
+        [uint64]$TeamID,
         [Parameter()]
         [bool]$Archived = $false
     )
@@ -56,7 +56,7 @@ function Get-ClickUpSpace {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID
+        [uint64]$SpaceID
     )
     $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
     Return $Space
@@ -83,7 +83,7 @@ function New-ClickUpSpace {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID,
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [bool]$Multiple_Assignees = $true,
@@ -226,7 +226,7 @@ function Set-ClickUpSpace {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -239,7 +239,7 @@ function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID
+        [uint64]$SpaceID
     )
 
     if ($PSCmdlet.ShouldProcess($SpaceID)) {

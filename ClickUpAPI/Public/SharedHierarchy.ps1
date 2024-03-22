@@ -21,7 +21,7 @@ function Get-ClickUpSharedHierarchy {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID
+        [uint64]$TeamID
     )
 
     $SharedHierarchy = Invoke-ClickUpAPIGet-Endpoint "team/$TeamID/shared"

@@ -33,7 +33,7 @@ function Get-ClickUpTasks {
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
-        [int]$Page = 0,
+        [uint64]$Page = 0,
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
@@ -49,13 +49,13 @@ function Get-ClickUpTasks {
         [bool]$Subtasks = $false,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [int[]]$SpaceIDs,
+        [uint64[]]$SpaceIDs,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [int[]]$ProjectIDs,
+        [uint64[]]$ProjectIDs,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [int[]]$ListIDs,
+        [uint64[]]$ListIDs,
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
@@ -185,7 +185,7 @@ function Get-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID,
+        [uint64]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -235,7 +235,7 @@ function Get-ClickUpTaskTimeInStatus {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID,
+        [uint64]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -283,7 +283,7 @@ function Get-ClickUpTaskTimeInStatusBulk {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [uint64]$TeamID
     )
 
     $QueryString = @{
@@ -325,17 +325,17 @@ function New-ClickUpTask {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$ListID,
+        [uint64]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [string]$Description,
-        [int[]]$Assignees,
+        [uint64[]]$Assignees,
         [string[]]$Tags,
         [string]$Status,
-        [int]$Priority,
+        [uint64]$Priority,
         [datetime]$DueDate,
         [bool]$DueDateTime = $false,
-        [int]$TimeEstimate,
+        [uint64]$TimeEstimate,
         [datetime]$StartDate,
         [bool]$StartDateTime = $false,
         [bool]$NotifyAll,
@@ -462,7 +462,7 @@ function Set-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [uint64]$TeamID
     )
 
 
@@ -508,7 +508,7 @@ function Remove-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [int]$TeamID
+        [uint64]$TeamID
     )
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {

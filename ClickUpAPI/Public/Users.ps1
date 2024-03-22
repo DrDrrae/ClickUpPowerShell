@@ -2,9 +2,9 @@
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$TeamID,
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
-        [int]$UserID
+        [uint64]$UserID
     )
 
     Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/user/$UserID"

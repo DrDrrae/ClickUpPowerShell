@@ -22,7 +22,7 @@ function Get-ClickUpFolders {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [uint64]$SpaceID,
         [Parameter()]
         [bool]$Archived = $false
     )
@@ -56,7 +56,7 @@ function Get-ClickUpFolder {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$FolderID
+        [uint64]$FolderID
     )
 
     $Folder = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "folder/$FolderID"
@@ -84,9 +84,9 @@ function New-ClickUpFolder {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$SpaceID,
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
-        [int]$Name
+        [uint64]$Name
     )
 
     $Body = @{
@@ -118,9 +118,9 @@ function Set-ClickUpFolder {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$FolderID,
+        [uint64]$FolderID,
         [Parameter(Mandatory = $true)]
-        [int]$Name
+        [uint64]$Name
     )
 
     $Body = @{
@@ -152,7 +152,7 @@ function Remove-ClickUpFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [int]$FolderID
+        [uint64]$FolderID
     )
 
     if ($PSCmdlet.ShouldProcess($FolderID)) {
