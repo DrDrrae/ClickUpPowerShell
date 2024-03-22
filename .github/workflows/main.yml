@@ -14,4 +14,4 @@ jobs:
         with:
           token: ${{ secrets.GALLERY_API_KEY }}
           target: gallery
-          path: src
+          path: ClickUpAPI
