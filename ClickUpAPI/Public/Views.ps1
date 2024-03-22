@@ -190,7 +190,7 @@ function Get-ClickUpViewTaks {
     }
 
     $Views = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "view/$ViewID/task"
-    Return $Views.views
+    Return $Views.tasks
 }
 
 <#
