@@ -176,7 +176,7 @@ function Get-ClickUpListViews {
     https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
     https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-view-tasks.html
 #>
-function Get-ClickUpViewTaks {
+function Get-ClickUpViewTasks {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
