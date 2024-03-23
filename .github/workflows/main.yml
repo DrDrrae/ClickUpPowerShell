@@ -25,4 +25,4 @@ jobs:
         shell: pwsh
         run: |
           ./build_scripts/build.ps1
-          Publish-Module -path ./jtAz -NuGetApiKey $env:NUGET_KEY -Verbose          
+          Publish-Module -path ./ClickUpAPI -NuGetApiKey $env:NUGET_KEY -Verbose          
