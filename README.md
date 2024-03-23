@@ -2,6 +2,16 @@
 
 This PowerShell module wraps around and eases the use of the [ClickUp API](https://clickup.com/api) in PowerShell scripts and projects.
 
+## Install
+
+```
+Install-Module -Name ClickupAPI
+```
+
+
+[https://www.powershellgallery.com/packages/ClickupAPI/](https://www.powershellgallery.com/packages/ClickupAPI/)
+
+
 ## Roadmap
 
 ### API endpoints
