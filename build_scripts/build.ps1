@@ -2,7 +2,7 @@ $Global:ErrorActionPreference = 'Stop'
 $Global:VerbosePreference = 'SilentlyContinue'
 
 $buildVersion = $env:BUILDVER
-$manifestPath = "./ClickUpAPI/ClickUpAPI.psd1"
+$manifestPath = "./ClickUpAPI/ClickupAPI.psd1"
 $publicFuncFolderPath = './ClickUpAPI/Public'
 
 
