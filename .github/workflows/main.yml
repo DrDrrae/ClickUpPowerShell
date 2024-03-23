@@ -1,17 +1,28 @@
-name: Publish to PowerShell Gallery
+# This is a basic workflow to help you get started with Actions
 
+name: CI
+
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches:
-      - main
+    branches: [ main ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  publish:
-    runs-on: windows-latest
+  publish-to-gallery:
+    runs-on: ubuntu-latest
     steps:
-      - name: Publish PowerShell
-        uses: natescherer/publish-powershell-action@v1.1.1
-        with:
-          token: ${{ secrets.GALLERY_API_KEY }}
-          target: gallery
-          path: ClickUpAPI
+      - uses: actions/checkout@v2
+      - name: Build and publish
+      # API key generated in PSGallery
+        env:
+          NUGET_KEY: ${{ secrets.GALLERY_API_KEY }}
+          BUILDVER: '1.0.0'
+        shell: pwsh
+        run: |
+          ./build_scripts/build.ps1
+          Publish-Module -path ./jtAz -NuGetApiKey $env:NUGET_KEY -Verbose          
