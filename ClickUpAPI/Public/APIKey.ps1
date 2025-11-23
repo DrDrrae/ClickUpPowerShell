@@ -1,4 +1,26 @@
-﻿function Add-ClickUpAPIKey {
+﻿<#
+.SYNOPSIS
+    Adds a ClickUp API key to the current session.
+
+.DESCRIPTION
+    The Add-ClickUpAPIKey cmdlet securely stores the provided ClickUp API key in a global variable for use by other cmdlets in this module.
+    The key is converted to a SecureString and stored in a read-only global variable named 'ClickUpAPIKey'.
+
+.PARAMETER APIKey
+    The ClickUp API key to be stored. This parameter is mandatory and can be piped.
+
+.EXAMPLE
+    Add-ClickUpAPIKey -APIKey "pk_12345678_ABCDEF1234567890"
+
+    Stores the provided API key in the session.
+
+.INPUTS
+    System.String. You can pipe a string containing the API key to this cmdlet.
+
+.OUTPUTS
+    None. This cmdlet does not return any output.
+#>
+function Add-ClickUpAPIKey {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
@@ -31,6 +53,25 @@
     }
 }
 
+<#
+.SYNOPSIS
+    Removes the stored ClickUp API key.
+
+.DESCRIPTION
+    The Remove-ClickUpAPIKey cmdlet removes the global variable containing the ClickUp API key from the current session.
+    This action requires confirmation if the ConfirmImpact is set to High (default).
+
+.EXAMPLE
+    Remove-ClickUpAPIKey
+
+    Removes the stored API key from the session.
+
+.INPUTS
+    None.
+
+.OUTPUTS
+    None.
+#>
 function Remove-ClickUpAPIKey {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param ()
@@ -51,6 +92,25 @@ function Remove-ClickUpAPIKey {
     end {}
 }
 
+<#
+.SYNOPSIS
+    Retrieves the stored ClickUp API key.
+
+.DESCRIPTION
+    The Get-ClickUpAPIKey cmdlet retrieves the SecureString containing the ClickUp API key from the global variable.
+    If no key is stored, it throws an error.
+
+.EXAMPLE
+    $Key = Get-ClickUpAPIKey
+
+    Retrieves the stored API key and assigns it to the $Key variable.
+
+.INPUTS
+    None.
+
+.OUTPUTS
+    System.Security.SecureString. Returns the stored API key as a SecureString.
+#>
 function Get-ClickUpAPIKey {
     [CmdletBinding()]
     param ()
