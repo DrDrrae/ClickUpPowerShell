@@ -20,10 +20,29 @@
         }
         $Response = Invoke-RestMethod @InvokeParams
         if ($Response) {
-            Return $Response
+            return $Response
         }
     } catch {
-        $_
+        $ErrorMessage = "Failed to invoke ClickUp API request. Method: $Method, URI: $URI"
+
+        # Attempt to extract more detailed error information from the response
+        if ($_.Exception.Response) {
+            try {
+                $Stream = $_.Exception.Response.GetResponseStream()
+                if ($Stream) {
+                    $Reader = [System.IO.StreamReader]::new($Stream)
+                    $ResponseBody = $Reader.ReadToEnd()
+                    $ErrorMessage += ". Response: $ResponseBody"
+                }
+            } catch {
+                # Ignore errors reading the response stream
+            }
+        } else {
+            $ErrorMessage += ". Error: $($_.Exception.Message)"
+        }
+
+        Write-Error $ErrorMessage
+        throw $ErrorMessage
     }
 }
 
@@ -113,14 +132,37 @@ function Invoke-ClickUpAPIPostAttachment {
     }
 
     $InvokeParams = @{
-            Body        = $Body
-            ContentType = "multipart/form-data; boundary=`"$Boundary`""
-            Headers     = @{
-                Authorization = Get-ClickUpAPIKeyInsecure -APIKey $ClickUpAPIKey
-            }
-            Method      = 'post'
-            Uri         = $URI
+        Body        = $Body
+        ContentType = "multipart/form-data; boundary=`"$Boundary`""
+        Headers     = @{
+            Authorization = Get-ClickUpAPIKeyInsecure -APIKey $ClickUpAPIKey
         }
-    $Response = Invoke-RestMethod @InvokeParams
-    return $Response
+        Method      = 'post'
+        Uri         = $URI
+    }
+
+    try {
+        $Response = Invoke-RestMethod @InvokeParams
+        return $Response
+    } catch {
+        $ErrorMessage = "Failed to upload attachment to $URI"
+
+        if ($_.Exception.Response) {
+            try {
+                $Stream = $_.Exception.Response.GetResponseStream()
+                if ($Stream) {
+                    $Reader = [System.IO.StreamReader]::new($Stream)
+                    $ResponseBody = $Reader.ReadToEnd()
+                    $ErrorMessage += ". Response: $ResponseBody"
+                }
+            } catch {
+                # Ignore errors reading the response stream
+            }
+        } else {
+            $ErrorMessage += ". Error: $($_.Exception.Message)"
+        }
+
+        Write-Error $ErrorMessage
+        throw $ErrorMessage
+    }
 }
