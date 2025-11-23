@@ -19,8 +19,13 @@ function Get-ClickUpAuthorizedUser {
     [CmdletBinding()]
     param ()
 
-    $User = Invoke-ClickUpAPIGet -Endpoint 'user'
-    return $User.user
+    try {
+        $User = Invoke-ClickUpAPIGet -Endpoint 'user'
+        return $User.user
+    } catch {
+        Write-Error "Failed to get authorized user. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -46,8 +51,13 @@ function Get-ClickUpAuthorizedWorkspaces {
     [Alias('Get-ClickUpAuthorizedTeams')]
     param ()
 
-    $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
-    return $Teams.teams
+    try {
+        $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
+        return $Teams.teams
+    } catch {
+        Write-Error "Failed to get authorized workspaces. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -84,6 +94,11 @@ function New-ClickUpAccessToken {
         code          = $Code
     }
 
-    $AccessToken = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint 'oath/token'
-    return $AccessToken
+    try {
+        $AccessToken = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint 'oath/token'
+        return $AccessToken
+    } catch {
+        Write-Error "Failed to get access token. Error: $_"
+        throw
+    }
 }
