@@ -24,7 +24,7 @@
 
     To create a waiting on dependency, pass the property depends_on in the body. To create a blocking dependency, pass the property dependency_of. Both can not be passed in the same request.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/dependencies/add-dependency.html
+    https://developer.clickup.com/reference/adddependency
 #>
 function Add-ClickUpDependency {
     [CmdletBinding(DefaultParameterSetName = 'DependsOnTaskID')]
@@ -49,6 +49,8 @@ function Add-ClickUpDependency {
         [UInt64]$TeamID
     )
 
+    Write-Verbose "Entering Add-ClickUpDependency with TaskID: $TaskID"
+
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
         $QueryString = @{
             custom_task_ids = $CustomTaskIDs
@@ -68,7 +70,12 @@ function Add-ClickUpDependency {
         }
     }
 
-    Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/dependency" -Body $Body
+    try {
+        Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/dependency" -Body $Body
+    } catch {
+        Write-Error "Failed to add dependency for TaskID: $TaskID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -91,7 +98,7 @@ function Add-ClickUpDependency {
 
     One and only one of depends_on or dependency_of must be passed in the query params.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/dependencies/delete-dependency.html
+    https://developer.clickup.com/reference/deletedependency
 #>
 function Remove-ClickUpDependency {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'DependsOnTaskID')]
@@ -116,6 +123,8 @@ function Remove-ClickUpDependency {
         [UInt64]$TeamID
     )
 
+    Write-Verbose "Entering Remove-ClickUpDependency with TaskID: $TaskID"
+
     $QueryString = @{}
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -132,7 +141,12 @@ function Remove-ClickUpDependency {
     }
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {
-        Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/dependency"
+        try {
+            Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/dependency"
+        } catch {
+            Write-Error "Failed to remove dependency for TaskID: $TaskID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -154,7 +168,7 @@ function Remove-ClickUpDependency {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/dependencies/add-task-link.html
+    https://developer.clickup.com/reference/addtasklink
 #>
 function Add-ClickUpTaskLink {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
@@ -172,6 +186,8 @@ function Add-ClickUpTaskLink {
         [UInt64]$TeamID
     )
 
+    Write-Verbose "Entering Add-ClickUpTaskLink with TaskID: $TaskID, LinksTo: $LinksTo"
+
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
         $QueryString = @{
             custom_task_ids = $CustomTaskIDs
@@ -181,7 +197,12 @@ function Add-ClickUpTaskLink {
         $QueryString = @{}
     }
 
-    Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
+    try {
+        Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
+    } catch {
+        Write-Error "Failed to add task link between $TaskID and $LinksTo. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -202,7 +223,7 @@ function Add-ClickUpTaskLink {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/dependencies/delete-task-link.html
+    https://developer.clickup.com/reference/deletetasklink
 #>
 function Remove-ClickUpTaskLink {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
@@ -219,6 +240,8 @@ function Remove-ClickUpTaskLink {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [UInt64]$TeamID
     )
+
+    Write-Verbose "Entering Remove-ClickUpTaskLink with TaskID: $TaskID, LinksTo: $LinksTo"
 
     $QueryString = @{}
 
@@ -239,6 +262,11 @@ function Remove-ClickUpTaskLink {
     }
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {
-        Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
+        try {
+            Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
+        } catch {
+            Write-Error "Failed to remove task link between $TaskID and $LinksTo. Error: $_"
+            throw $_
+        }
     }
 }
