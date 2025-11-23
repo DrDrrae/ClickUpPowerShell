@@ -23,6 +23,13 @@ function Get-ClickUpCustomTaskTypes {
         [uint64]$TeamID
     )
 
-    $CustomTaskTypes = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/custom_item"
-    return $CustomTaskTypes.custom_items
+    Write-Verbose "Retrieving custom task types for TeamID: $TeamID"
+    try {
+        $CustomTaskTypes = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/custom_item"
+        Write-Verbose 'Successfully retrieved custom task types.'
+        return $CustomTaskTypes.custom_items
+    } catch {
+        Write-Error "Failed to retrieve custom task types. Error: $_"
+        throw
+    }
 }
