@@ -16,7 +16,7 @@
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/get-task-comments.html
+    https://developer.clickup.com/reference/gettaskcomments
 #>
 function Get-ClickUpTaskComments {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
@@ -65,7 +65,7 @@ function Get-ClickUpTaskComments {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/get-chat-view-comments.html
+    https://developer.clickup.com/reference/getchatviewcomments
 #>
 function Get-ClickUpChatViewComments {
     [CmdletBinding()]
@@ -100,7 +100,7 @@ function Get-ClickUpChatViewComments {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/get-list-comments.html
+    https://developer.clickup.com/reference/getlistcomments
 #>
 function Get-ClickUpListComments {
     [CmdletBinding()]
@@ -116,6 +116,41 @@ function Get-ClickUpListComments {
         return $Comments.comments
     } catch {
         Write-Error "Failed to retrieve list comments. Error: $_"
+        throw
+    }
+}
+
+<#
+.SYNOPSIS
+    Get all threadded comments.
+.DESCRIPTION
+    Get all threadded comments.
+.EXAMPLE
+    PS C:\> Get-ClickUpThreadedComments -CommentID 123
+    Get ClickUp threadded comments for comment with ID "123".
+.INPUTS
+    None
+.OUTPUTS
+    System.Object Hashtable.
+.NOTES
+    See the link for information.
+.LINK
+    https://developer.clickup.com/reference/getthreadedcomments
+#>
+function Get-ClickUpThreadedComments {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [uint64]$CommentID
+    )
+
+    Write-Verbose "Retrieving comments for comment '$CommentID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Endpoint "comment/$CommentID/reply"
+        Write-Verbose 'Comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve threaded comments. Error: $_"
         throw
     }
 }
@@ -140,7 +175,7 @@ function Get-ClickUpListComments {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/update-comment.html
+    https://developer.clickup.com/reference/updatecomment
 #>
 function Set-ClickUpListComment {
     [CmdletBinding()]
@@ -176,7 +211,7 @@ function Set-ClickUpListComment {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/delete-comment.html
+    https://developer.clickup.com/reference/deletecomment
 #>
 function Remove-ClickUpListComment {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -246,7 +281,7 @@ function Remove-ClickUpListComment {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/create-task-comment.html
+    https://developer.clickup.com/reference/createtaskcomment
 #>
 function New-ClickUpTaskComment {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
@@ -324,7 +359,7 @@ function New-ClickUpTaskComment {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/create-chat-view-comment.html
+    https://developer.clickup.com/reference/createchatviewcomment
 #>
 function New-ClickUpChatViewComment {
     [CmdletBinding()]
@@ -387,7 +422,7 @@ function New-ClickUpChatViewComment {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/create-list-comment.html
+    https://developer.clickup.com/reference/createlistcomment
 #>
 function New-ClickUpListComment {
     [CmdletBinding()]
@@ -405,6 +440,56 @@ function New-ClickUpListComment {
         return $Comment
     } catch {
         Write-Error "Failed to create list comment. Error: $_"
+        throw
+    }
+}
+
+<#
+.SYNOPSIS
+    Create ClickUp threaded comment.
+.DESCRIPTION
+    Create ClickUp threaded comment.
+.EXAMPLE
+    PS C:\> $Body = @{
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
+    >> }
+    PS C:\> New-ClickUpThreadedComment -CommentID 124 -Body $Body
+    Create new ClickUp threaded comment on comment with ID "124".
+.EXAMPLE
+    PS C:\> $Body = @{
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
+    >> }
+    PS C:\> New-ClickUpThreadedComment -CommentID 124 -Body $Body
+    Create new ClickUp threaded comment on comment with ID "124".
+.INPUTS
+    None
+.OUTPUTS
+    System.Object Hashtable.
+.NOTES
+    See the link for information.
+.LINK
+    https://developer.clickup.com/reference/createthreadedcomment
+#>
+function New-ClickUpThreadedComment {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [uint64]$CommentID,
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Body
+    )
+
+    Write-Verbose "Creating threaded comment on comment '$CommentID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Endpoint "comment/$CommentID/reply" -Body $Body
+        Write-Verbose 'Threaded comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create threaded comment. Error: $_"
         throw
     }
 }
