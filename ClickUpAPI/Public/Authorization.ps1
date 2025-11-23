@@ -13,39 +13,41 @@
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/authorization/get-authorized-user.html
+    https://developer.clickup.com/reference/getauthorizeduser
 #>
 function Get-ClickUpAuthorizedUser {
     [CmdletBinding()]
     param ()
 
     $User = Invoke-ClickUpAPIGet -Endpoint 'user'
-    Return $User.user
+    return $User.user
 }
 
 <#
 .SYNOPSIS
-    Get ClickUp authorized teams.
+    Get ClickUp authorized workspaces.
 .DESCRIPTION
-    Get ClickUp authorized teams.
+    Get ClickUp authorized workspaces.
 .EXAMPLE
-    PS C:\> Get-ClickUpAuthorizedTeams
-    Get the authorized teams for this token
+    PS C:\> Get-ClickUpAuthorizedWorkspaces
+    Get the authorized workspaces for this token
 .INPUTS
     None
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
     See the link for information.
+    https://developer.clickup.com/docs/faq#what-is-a-team
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/authorization/get-authorized-teams.html
+    https://developer.clickup.com/reference/getauthorizedteams
 #>
-function Get-ClickUpAuthorizedTeams {
+function Get-ClickUpAuthorizedWorkspaces {
     [CmdletBinding()]
+    [Alias('Get-ClickUpAuthorizedTeams')]
     param ()
 
     $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
-    Return $Teams.teams
+    return $Teams.teams
 }
 
 <#
@@ -63,7 +65,7 @@ function Get-ClickUpAuthorizedTeams {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/authorization/get-access-token.html
+    https://developer.clickup.com/reference/getaccesstoken
 #>
 function New-ClickUpAccessToken {
     [CmdletBinding()]
@@ -83,5 +85,5 @@ function New-ClickUpAccessToken {
     }
 
     $AccessToken = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint 'oath/token'
-    Return $AccessToken
+    return $AccessToken
 }
