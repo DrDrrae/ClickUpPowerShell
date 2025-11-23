@@ -39,8 +39,15 @@ function Get-ClickUpTaskComments {
         $QueryString = @{}
     }
 
-    $Comments = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/comment"
-    Return $Comments.comments
+    Write-Verbose "Retrieving comments for task '$TaskID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/comment"
+        Write-Verbose 'Comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve task comments. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -67,8 +74,15 @@ function Get-ClickUpChatViewComments {
         [string]$ViewID
     )
 
-    $Comments = Invoke-ClickUpAPIGet -Endpoint "view/$ViewID/comment"
-    Return $Comments.comments
+    Write-Verbose "Retrieving comments for chat view '$ViewID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Endpoint "view/$ViewID/comment"
+        Write-Verbose 'Chat view comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve chat view comments. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -95,8 +109,15 @@ function Get-ClickUpListComments {
         [uint64]$ListID
     )
 
-    $Comments = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/comment"
-    Return $Comments.comments
+    Write-Verbose "Retrieving comments for list '$ListID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/comment"
+        Write-Verbose 'List comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve list comments. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -130,7 +151,14 @@ function Set-ClickUpListComment {
         [hashtable]$Body
     )
 
-    Invoke-ClickUpAPIPut -Endpoint "comment/$CommentID"
+    Write-Verbose "Updating comment '$CommentID'..."
+    try {
+        Invoke-ClickUpAPIPut -Endpoint "comment/$CommentID" -Body $Body
+        Write-Verbose 'Comment updated successfully.'
+    } catch {
+        Write-Error "Failed to update comment. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -157,8 +185,15 @@ function Remove-ClickUpListComment {
         [uint64]$CommentID
     )
 
-    if ($PSCmdlet.ShouldProcess($CommentID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "comment/$CommentID"
+    if ($PSCmdlet.ShouldProcess($CommentID, 'Delete Comment')) {
+        Write-Verbose "Deleting comment '$CommentID'..."
+        try {
+            Invoke-ClickUpAPIDelete -Endpoint "comment/$CommentID"
+            Write-Verbose 'Comment deleted successfully.'
+        } catch {
+            Write-Error "Failed to delete comment. Error: $_"
+            throw
+        }
     }
 }
 
@@ -237,8 +272,15 @@ function New-ClickUpTaskComment {
         $QueryString = @{}
     }
 
-    $Comment = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint 'task/$TaskID/comment' -Body $Body
-    Return $Comment
+    Write-Verbose "Creating comment on task '$TaskID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/comment" -Body $Body
+        Write-Verbose 'Task comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create task comment. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -293,8 +335,15 @@ function New-ClickUpChatViewComment {
         [hashtable]$Body
     )
 
-    $Comment = Invoke-ClickUpAPIPost -Endpoint 'view/$ViewID/comment' -Body $Body
-    Return $Comment
+    Write-Verbose "Creating comment on chat view '$ViewID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Endpoint "view/$ViewID/comment" -Body $Body
+        Write-Verbose 'Chat view comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create chat view comment. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -349,6 +398,13 @@ function New-ClickUpListComment {
         [hashtable]$Body
     )
 
-    $Comment = Invoke-ClickUpAPIPost -Endpoint 'list/$ListID/comment' -Body $Body
-    Return $Comment
+    Write-Verbose "Creating comment on list '$ListID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/comment" -Body $Body
+        Write-Verbose 'List comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create list comment. Error: $_"
+        throw
+    }
 }
