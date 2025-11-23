@@ -5,10 +5,10 @@
     Get all comments on a ClickUp task.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID 9hz
-    Get all ClickUp comments under task with ID "9hz"
+    Get all ClickUp task comments under task with ID "9hz"
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID CustomID -CustomTaskIDs $true -TeamID 123
-    Get all ClickUp comments under task with custom ID "CustomID".
+    Get all ClickUp task comments under task with custom ID "CustomID".
 .INPUTS
     None
 .OUTPUTS
@@ -92,7 +92,7 @@ function Get-ClickUpChatViewComments {
     Get all comments on a ClickUp list.
 .EXAMPLE
     PS C:\> Get-ClickUpListComments -ListID 123
-    Get ClickUp chat view comments for view with ID "3c".
+    Get ClickUp list comments for list with ID "123".
 .INPUTS
     None
 .OUTPUTS
@@ -127,7 +127,7 @@ function Get-ClickUpListComments {
     Get all threadded comments.
 .EXAMPLE
     PS C:\> Get-ClickUpThreadedComments -CommentID 123
-    Get ClickUp threadded comments for comment with ID "123".
+    Get ClickUp threaded comments for comment with ID "123".
 .INPUTS
     None
 .OUTPUTS
@@ -162,9 +162,9 @@ function Get-ClickUpThreadedComments {
     Update ClickUp comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Updated comment text"
-    >> assignee = 183
-    >> resolved = $true
+    >>     comment_text = "Updated comment text"
+    >>     assignee = 183
+    >>     resolved = $true
     >> }
     PS C:\> Set-ClickUpComment -CommentID 456 -Body $Body
     Update comment with ID "456".
@@ -239,41 +239,28 @@ function Remove-ClickUpListComment {
     Create ClickUp task comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpTaskComment -TaskID 9hz -Body $Body
     Create new ClickUp task comment on task with ID "9hz".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpTaskComment -TaskID 'CustomTaskID' -Body $Body -CustomTaskIDs $true -TeamID 1111111
     Create new ClickUp task comment on task with custom id "CustomTaskID".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment = @(
-    >> @{
-    >> text = "bold text",
-    >> attributes = @{
-    >>     bold = $true
-    >>     }
-    >> },
-    >> @{
-    >> text = "italic text",
-    >>  attributes = @{
-    >>     italic = $true
-    >>     }
-    >> }
-    >> )
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpTaskComment -TaskID 9hz -Body $Body
-    Create new ClickUp task comment with formatting on task with ID "9hz".
+    Create new ClickUp task comment on task with ID "9hz".
 .INPUTS
     None
 .OUTPUTS
@@ -325,33 +312,20 @@ function New-ClickUpTaskComment {
     Create ClickUp chat view comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Chat view comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpChatViewComment -TaskID 3c -Body $Body
     Create new ClickUp chat view comment on chat view with ID "3c".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment = @(
-    >> @{
-    >> text = "bold text",
-    >> attributes = @{
-    >>     bold = $true
-    >>     }
-    >> },
-    >> @{
-    >> text = "italic text",
-    >>  attributes = @{
-    >>     italic = $true
-    >>     }
-    >> }
-    >> )
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Chat view comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpChatViewComment -ViewID 3c -Body $Body
-    Create new ClickUp chat view comment with formatting on chat view with ID "3c".
+    Create new ClickUp chat view comment on chat view with ID "3c".
 .INPUTS
     None
 .OUTPUTS
@@ -388,33 +362,20 @@ function New-ClickUpChatViewComment {
     Create ClickUp list comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "List comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpListComment -ListID 124 -Body $Body
-    Create new ClickUp task comment on list with ID "124".
+    Create new ClickUp list comment on list with ID "124".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment = @(
-    >> @{
-    >> text = "bold text",
-    >> attributes = @{
-    >>     bold = $true
-    >>     }
-    >> },
-    >> @{
-    >> text = "italic text",
-    >>  attributes = @{
-    >>     italic = $true
-    >>     }
-    >> }
-    >> )
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "List comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpListComment -ListID 124 -Body $Body
-    Create new ClickUp task comment with formatting on task with ID "124".
+    Create new ClickUp list comment with formatting on list with ID "124".
 .INPUTS
     None
 .OUTPUTS
@@ -451,7 +412,7 @@ function New-ClickUpListComment {
     Create ClickUp threaded comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >>     comment_text = "Task comment content"
+    >>     comment_text = "Threaded comment content"
     >>     assignee = 183
     >>     notify_all = $true
     >> }
@@ -459,7 +420,7 @@ function New-ClickUpListComment {
     Create new ClickUp threaded comment on comment with ID "124".
 .EXAMPLE
     PS C:\> $Body = @{
-    >>     comment_text = "Task comment content"
+    >>     comment_text = "Threaded comment content"
     >>     assignee = 183
     >>     notify_all = $true
     >> }
