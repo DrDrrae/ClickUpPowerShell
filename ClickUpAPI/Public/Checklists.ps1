@@ -16,7 +16,7 @@
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/create-checklist.html
+    https://developer.clickup.com/reference/createchecklist
 #>
 function New-ClickUpChecklist {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
@@ -46,8 +46,15 @@ function New-ClickUpChecklist {
         $QueryString = @{}
     }
 
-    $Checklist = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/checklist" -Body $Body
-    return $Checklist.checklist
+    Write-Verbose "Creating new checklist '$Name' on task '$TaskID'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/checklist" -Body $Body
+        Write-Verbose 'Checklist created successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to create checklist. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -68,7 +75,7 @@ function New-ClickUpChecklist {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/edit-checklist.html
+    https://developer.clickup.com/reference/editchecklist
 #>
 function Set-ClickUpChecklist {
     [CmdletBinding()]
@@ -90,8 +97,15 @@ function Set-ClickUpChecklist {
         $Body.Add('position', $Position)
     }
 
-    $Checklist = Invoke-ClickUpAPIPut -Endpoint 'checklist/$ChecklistID' -Body $Body
-    return $Checklist.checklist
+    Write-Verbose "Updating checklist '$ChecklistID'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPut -Endpoint "checklist/$ChecklistID" -Body $Body
+        Write-Verbose 'Checklist updated successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to update checklist. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -109,7 +123,7 @@ function Set-ClickUpChecklist {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/delete-checklist.html
+    https://developer.clickup.com/reference/deletechecklist
 #>
 function Remove-ClickUpChecklist {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -118,8 +132,15 @@ function Remove-ClickUpChecklist {
         [string]$ChecklistID
     )
 
-    if ($PSCmdlet.ShouldProcess($ChecklistID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "checklist/$CheckListID"
+    if ($PSCmdlet.ShouldProcess($ChecklistID, 'Delete Checklist')) {
+        Write-Verbose "Deleting checklist '$ChecklistID'..."
+        try {
+            Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID"
+            Write-Verbose 'Checklist deleted successfully.'
+        } catch {
+            Write-Error "Failed to delete checklist. Error: $_"
+            throw
+        }
     }
 }
 
@@ -141,7 +162,7 @@ function Remove-ClickUpChecklist {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/create-checklist-item.html
+    https://developer.clickup.com/reference/createchecklistitem
 #>
 function New-ClickUpChecklistItem {
     [CmdletBinding()]
@@ -162,8 +183,15 @@ function New-ClickUpChecklistItem {
         $Body.Add('assignee', $Assignee)
     }
 
-    $Checklist = Invoke-ClickUpAPIPost -Endpoint "checklist/$CheckListID/checklist_item" -Body $Body
-    $Checklist.checklist
+    Write-Verbose "Creating new checklist item '$Name' in checklist '$CheckListID'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPost -Endpoint "checklist/$CheckListID/checklist_item" -Body $Body
+        Write-Verbose 'Checklist item created successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to create checklist item. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -184,7 +212,7 @@ function New-ClickUpChecklistItem {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/edit-checklist-item.html
+    https://developer.clickup.com/reference/editchecklistitem
 #>
 function Set-ClickUpChecklistItem {
     [CmdletBinding()]
@@ -218,8 +246,15 @@ function Set-ClickUpChecklistItem {
         $Body.Add('parent', $Parent)
     }
 
-    $Checklist = Invoke-ClickupAPIPut -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId" -Body $Body
-    $CheckList.checklist
+    Write-Verbose "Updating checklist item '$ChecklistItemId'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPut -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId" -Body $Body
+        Write-Verbose 'Checklist item updated successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to update checklist item. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -237,7 +272,7 @@ function Set-ClickUpChecklistItem {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/delete-checklist-item.html
+    https://developer.clickup.com/reference/deletechecklistitem
 #>
 function Remove-ClickUpCheckListItem {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -248,7 +283,14 @@ function Remove-ClickUpCheckListItem {
         [string]$ChecklistItemId
     )
 
-    if ($PSCmdlet.ShouldProcess($ChecklistID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId"
+    if ($PSCmdlet.ShouldProcess("$ChecklistID - $ChecklistItemId", 'Delete Checklist Item')) {
+        Write-Verbose "Deleting checklist item '$ChecklistItemId' from checklist '$ChecklistID'..."
+        try {
+            Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId"
+            Write-Verbose 'Checklist item deleted successfully.'
+        } catch {
+            Write-Error "Failed to delete checklist item. Error: $_"
+            throw
+        }
     }
 }
