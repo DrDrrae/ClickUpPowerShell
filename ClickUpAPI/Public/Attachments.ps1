@@ -60,12 +60,19 @@ function New-ClickUpTaskAttachment {
         [UInt64]$TeamID
     )
 
-    $FileBytes = [System.IO.File]::ReadAllBytes($AttachmentPath)
+    Write-Verbose "Reading attachment from: $AttachmentPath"
+    try {
+        $FileBytes = [System.IO.File]::ReadAllBytes($AttachmentPath)
+    } catch {
+        throw "Failed to read attachment file at '$AttachmentPath'. Error: $_"
+    }
+
     $FileName = $AttachmentPath | Split-Path -Leaf
     $FileEnc = [System.Text.Encoding]::GetEncoding('ISO-8859-1').GetString($FileBytes)
     $Boundary = [System.Guid]::NewGuid().ToString()
     $LF = "`r`n"
 
+    Write-Verbose "Constructing multipart form data with boundary: $Boundary"
     $Body = (
         "--$Boundary",
         "Content-Disposition: form-data; name=`"attachment`"; filename=`"$FileName`"",
@@ -86,5 +93,11 @@ function New-ClickUpTaskAttachment {
         $QueryString = @{}
     }
 
-    Invoke-ClickUpAPIPostAttachment -Arguments $QueryString -Endpoint "task/$TaskID/attachment" -Body $Body -Boundary $Boundary
+    Write-Verbose "Uploading attachment '$FileName' to task '$TaskID'"
+    try {
+        Invoke-ClickUpAPIPostAttachment -Arguments $QueryString -Endpoint "task/$TaskID/attachment" -Body $Body -Boundary $Boundary
+    } catch {
+        Write-Error "Failed to upload attachment to task '$TaskID'. Error: $_"
+        throw
+    }
 }
