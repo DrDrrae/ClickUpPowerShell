@@ -113,6 +113,7 @@ function Remove-ClickUpAPIKey {
 #>
 function Get-ClickUpAPIKey {
     [CmdletBinding()]
+    [OutputType([System.Security.SecureString])]
     param ()
 
     begin {}
