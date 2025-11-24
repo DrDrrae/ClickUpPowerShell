@@ -79,6 +79,7 @@ function Get-ClickUpAuthorizedWorkspaces {
 #>
 function New-ClickUpAccessToken {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$ClientID,
