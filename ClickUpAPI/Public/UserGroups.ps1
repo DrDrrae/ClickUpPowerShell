@@ -35,8 +35,16 @@ function Get-ClickupUserGroups {
         $Arguments.Add('group_ids', $GroupIDs)
     }
 
-    $Groups = Invoke-ClickUpAPIGet -Endpoint 'group' -Arguments $Arguments
-    return $Groups.groups
+    Write-Verbose 'Entering Get-ClickupUserGroups'
+    try {
+        Write-Verbose "Getting user groups for team ID: $TeamID"
+        $Groups = Invoke-ClickUpAPIGet -Endpoint 'group' -Arguments $Arguments
+        Write-Verbose 'Successfully retrieved user groups'
+        return $Groups.groups
+    } catch {
+        Write-Error "Error in Get-ClickupUserGroups: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -82,8 +90,16 @@ function New-ClickUpUserGroup {
         $Body.Add('handle', $Handle)
     }
 
-    $Group = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/group" -Body $Body
-    return $Group
+    Write-Verbose 'Entering New-ClickUpUserGroup'
+    try {
+        Write-Verbose "Creating user group '$Name' for team ID: $TeamID"
+        $Group = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/group" -Body $Body
+        Write-Verbose 'Successfully created user group'
+        return $Group
+    } catch {
+        Write-Error "Error in New-ClickUpUserGroup: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -134,8 +150,16 @@ function Set-ClickUpUserGroup {
             })
     }
 
-    $Group = Invoke-ClickUpAPIPut -Endpoint "group/$GroupID" -Body $Body
-    return $Group
+    Write-Verbose 'Entering Set-ClickUpUserGroup'
+    try {
+        Write-Verbose "Updating user group with ID: $GroupID"
+        $Group = Invoke-ClickUpAPIPut -Endpoint "group/$GroupID" -Body $Body
+        Write-Verbose 'Successfully updated user group'
+        return $Group
+    } catch {
+        Write-Error "Error in Set-ClickUpUserGroup: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -162,7 +186,15 @@ function Remove-ClickUpUserGroup {
         [string]$GroupID
     )
 
+    Write-Verbose 'Entering Remove-ClickUpUserGroup'
     if ($PSCmdlet.ShouldProcess($GroupID)) {
-        $null = Invoke-ClickUpAPIDelete -Endpoint "group/$GroupID"
+        try {
+            Write-Verbose "Removing user group with ID: $GroupID"
+            $null = Invoke-ClickUpAPIDelete -Endpoint "group/$GroupID"
+            Write-Verbose 'Successfully removed user group'
+        } catch {
+            Write-Error "Error in Remove-ClickUpUserGroup: $($_.Exception.Message)"
+            throw $_
+        }
     }
 }
