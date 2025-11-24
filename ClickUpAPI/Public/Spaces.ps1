@@ -34,7 +34,7 @@ function Get-ClickUpSpaces {
     try {
         Write-Verbose "Getting spaces for team ID: $TeamID (Archived: $Archived)"
         $QueryString = @{
-            $Archived = $Archived
+            archived = $Archived
         }
 
         $Spaces = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/space"
