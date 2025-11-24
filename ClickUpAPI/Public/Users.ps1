@@ -33,8 +33,16 @@ function Get-ClickUpUser {
         include_shared = $IncludeShared
     }
 
-    $User = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/user/$UserID" -Arguments $QueryString
-    return $User.member
+    Write-Verbose 'Entering Get-ClickUpUser'
+    try {
+        Write-Verbose "Getting user with ID: $UserID for team ID: $TeamID"
+        $User = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/user/$UserID" -Arguments $QueryString
+        Write-Verbose 'Successfully retrieved user'
+        return $User.member
+    } catch {
+        Write-Error "Error in Get-ClickUpUser: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -82,9 +90,17 @@ function New-ClickUpUser {
         $Body.Add('custom_role_id', $CustomRoleID)
     }
 
-    #https://api.clickup.com/api/v2/team/{team_id}/user
-    $User = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/user" -Body $Body
-    return $User
+    Write-Verbose 'Entering New-ClickUpUser'
+    try {
+        Write-Verbose "Inviting user '$Email' to team ID: $TeamID"
+        #https://api.clickup.com/api/v2/team/{team_id}/user
+        $User = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/user" -Body $Body
+        Write-Verbose 'Successfully invited user'
+        return $User
+    } catch {
+        Write-Error "Error in New-ClickUpUser: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -131,8 +147,16 @@ function Set-ClickUpUser {
         $Body.Add('custom_role_id', $CustomRoleID)
     }
 
-    $User = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/user/$UserID" -Body $Body
-    return $User.member
+    Write-Verbose 'Entering Set-ClickUpUser'
+    try {
+        Write-Verbose "Updating user with ID: $UserID for team ID: $TeamID"
+        $User = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/user/$UserID" -Body $Body
+        Write-Verbose 'Successfully updated user'
+        return $User.member
+    } catch {
+        Write-Error "Error in Set-ClickUpUser: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 
@@ -156,7 +180,7 @@ function Set-ClickUpUser {
     https://developer.clickup.com/reference/removeuserfromworkspace
 #>
 function Remove-ClickUpUser {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
@@ -165,6 +189,16 @@ function Remove-ClickUpUser {
         [uint64]$UserID
     )
 
-    $User = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/user/$UserID"
-    return $User.team
+    Write-Verbose 'Entering Remove-ClickUpUser'
+    if ($PSCmdlet.ShouldProcess($UserID)) {
+        try {
+            Write-Verbose "Removing user with ID: $UserID from team ID: $TeamID"
+            $User = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/user/$UserID"
+            Write-Verbose 'Successfully removed user'
+            return $User.team
+        } catch {
+            Write-Error "Error in Remove-ClickUpUser: $($_.Exception.Message)"
+            throw $_
+        }
+    }
 }
