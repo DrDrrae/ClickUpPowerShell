@@ -47,32 +47,35 @@ Import-ClickUpModuleSettings
 
 | API Reference | Code | Docs | Error Handling | Tested | Comments |
 | ------------- | ---- | ---- | --- | ------ | -------- |
-| Attachments   | ✅    | 🟡    | ✅    |         |          |
+| Attachments   | ✅    | 🟡    | ✅    |        |          |
 | Authorization | ✅    | 🟡    | ✅    |        |          |
-| Checklists    | ✅    | 🟡    | ✅    |         |          |
-| Comments      | ✅    | 🟡    | ✅    |         |          |
+| Checklists    | ✅    | 🟡    | ✅    |        |          |
+| Comments      | ✅    | 🟡    | ✅    |        |          |
 | Custom Fields | ✅    | 🟡    | ✅    |        |          |
+| Custom Task Types | ✅    | 🟡    | ✅    |        |          |
 | Dependencies  | ✅    | 🟡    | ✅    |        |          |
-| Folders       | ✅    | 🟡    | ✅    |         |          |
+| Folders       | ✅    | 🟡    | ✅    |        |          |
 | Goals         | ✅    | 🟡    | ✅    |        |          |
 | Guests        | ✅    | 🟡    | ✅    |        | Enterprise only |
-| Lists         | ✅    | 🟡    | ✅    |         |          |
+| Lists         | ✅    | 🟡    | ✅    |        |          |
 | Members       | ✅    | 🟡    | ✅    |        |          |
+| Roles         | ✅    | 🟡    | ✅    |        |          |
 | Shared Hierarchy | ✅    | 🟡    | ✅    |        |          |
-| Spaces        | ✅    | 🟡    | ✅    |         |          |
+| Spaces        | ✅    | 🟡    | ✅    |        |          |
 | Tags          | ✅    | 🟡    | ✅    |        |          |
-| Tasks         | ✅    | 🟡    | ✅    |         |          |
+| Tasks         | ✅    | 🟡    | ✅    |        |          |
 | Task Templates |✅    | 🟡    | ✅    |        |          |
-| Teams         | ✅    | 🟡    | ✅    |         |          |
+| Teams         | ✅    | 🟡    | ✅    |        |          |
 | Time Tracking | ✅    | 🟡    | ✅    |        | Partial implementation only. v2.0 will be implemented only. Legacy will not be implemented. |
-| Users         | ✅    | 🟡    | ✅    |         | Enterprise only |
+| User Groups   | ✅    | 🟡    | ✅    |        |          |     
+| Users         | ✅    | 🟡    | ✅    |        | Enterprise only |
 | Views         | ✅    | 🟡    | ✅    |        |          |
 | Webhooks      | ✅    | 🟡    | ✅    |        |          |
 
 ### Other
 
-| API Reference | Code | Docs | Tested | Comments |
-| ------------- | ---- | ---- | ------ | -------- |
-| Authentication      |      |      |        |          |
-| Rate Limit          |      |      |        |          |
-| Error Handling      |      |      |        |          |
+| API Reference  | Code | Docs | Tested | Comments |
+| -------------  | ---- | ---- | ------ | -------- |
+| Authentication |      |      |        |          |
+| Rate Limit     |      |      |        |          |
+| Error Handling |      |      |        |          |
