@@ -25,8 +25,16 @@ function Get-ClickUpTaskMembers {
         [string]$TaskID
     )
 
-    $TaskMembers = Invoke-ClickUpAPIGet -Endpoint "task/$TaskID/member"
-    return $TaskMembers.members
+    Write-Verbose 'Entering Get-ClickUpTaskMembers'
+    try {
+        Write-Verbose "Getting members for task ID: $TaskID"
+        $TaskMembers = Invoke-ClickUpAPIGet -Endpoint "task/$TaskID/member"
+        Write-Verbose 'Successfully retrieved task members'
+        return $TaskMembers.members
+    } catch {
+        Write-Error "Error in Get-ClickUpTaskMembers: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -56,6 +64,14 @@ function Get-ClickUpListMembers {
         [UInt64]$ListID
     )
 
-    $ListMembers = Invoke-ClickUpAPIGet -Endpoint "list/$TaskID/member"
-    return $ListMembers.members
+    Write-Verbose 'Entering Get-ClickUpListMembers'
+    try {
+        Write-Verbose "Getting members for list ID: $ListID"
+        $ListMembers = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/member"
+        Write-Verbose 'Successfully retrieved list members'
+        return $ListMembers.members
+    } catch {
+        Write-Error "Error in Get-ClickUpListMembers: $($_.Exception.Message)"
+        throw $_
+    }
 }
