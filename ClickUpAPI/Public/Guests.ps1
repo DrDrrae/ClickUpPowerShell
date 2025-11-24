@@ -290,7 +290,7 @@ function Add-ClickUpGuestToList {
     https://developer.clickup.com/reference/addguesttofolder
 #>
 function Add-ClickUpGuestToFolder {
-    [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [CmdletBinding()]
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
