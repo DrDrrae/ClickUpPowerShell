@@ -25,6 +25,14 @@ function Get-ClickUpCustomRoles {
         [UInt64]$TeamID
     )
 
-    $Roles = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/customroles"
-    return $Roles.custom_roles
+    Write-Verbose 'Entering Get-ClickUpCustomRoles'
+    try {
+        Write-Verbose "Getting custom roles for team ID: $TeamID"
+        $Roles = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/customroles"
+        Write-Verbose 'Successfully retrieved custom roles'
+        return $Roles.custom_roles
+    } catch {
+        Write-Error "Error in Get-ClickUpCustomRoles: $($_.Exception.Message)"
+        throw $_
+    }
 }
