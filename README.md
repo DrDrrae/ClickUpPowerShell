@@ -4,12 +4,37 @@ This PowerShell module wraps around and eases the use of the [ClickUp API](https
 
 ## Install
 
-```
+```powershell
 Install-Module -Name ClickupAPI
 ```
 
 
 [https://www.powershellgallery.com/packages/ClickupAPI/](https://www.powershellgallery.com/packages/ClickupAPI/)
+
+
+## Usage
+
+```powershell
+# Imports the ClickUp module.
+Import-Module ClickupAPI
+
+# Adds a ClickUp API key to the current session.
+Add-ClickUpAPIKey -Key "your_api_key"
+
+# Exports the ClickUp module settings to a configuration file.
+Export-ClickUpModuleSettings
+```
+
+
+```powershell
+# Imports the ClickUp module.
+Import-Module ClickupAPI
+
+# Imports the ClickUp module settings from a configuration file.
+Import-ClickUpModuleSettings
+```
+
+
 
 
 ## Roadmap
