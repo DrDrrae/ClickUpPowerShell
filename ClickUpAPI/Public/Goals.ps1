@@ -13,7 +13,7 @@
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/get-goals.html
+    https://developer.clickup.com/reference/getgoals
 #>
 function Get-ClickUpGoals {
     [CmdletBinding()]
@@ -22,8 +22,15 @@ function Get-ClickUpGoals {
         [UInt64]$TeamID
     )
 
-    $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
-    Return $Goals.goals
+    Write-Verbose "Getting all goals for team ID: $TeamID"
+    try {
+        $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
+        Write-Verbose "Successfully retrieved $($Goals.goals.Count) goals."
+        return $Goals.goals
+    } catch {
+        Write-Error "Failed to get goals for team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -41,7 +48,7 @@ function Get-ClickUpGoals {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/get-goal.html
+    https://developer.clickup.com/reference/getgoal
 #>
 function Get-ClickUpGoal {
     [CmdletBinding()]
@@ -50,8 +57,15 @@ function Get-ClickUpGoal {
         [UInt64]$GoalID
     )
 
-    $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
-    Return $Goal.goal
+    Write-Verbose "Getting goal with ID: $GoalID"
+    try {
+        $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
+        Write-Verbose "Successfully retrieved goal: $($Goal.goal.name)"
+        return $Goal.goal
+    } catch {
+        Write-Error "Failed to get goal with ID $GoalID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -69,7 +83,7 @@ function Get-ClickUpGoal {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/create-goal.html
+    https://developer.clickup.com/reference/creategoal
 #>
 function New-ClickUpGoal {
     [CmdletBinding()]
@@ -110,15 +124,22 @@ function New-ClickUpGoal {
         $Body.Add('color', $Color)
     }
 
-    $Goal = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/goal" -Body $Body
-    Return $Goal.goal
+    Write-Verbose "Creating new goal '$Name' for team ID: $TeamID"
+    try {
+        $Goal = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/goal" -Body $Body
+        Write-Verbose "Successfully created goal: $($Goal.goal.name) (ID: $($Goal.goal.id))"
+        return $Goal.goal
+    } catch {
+        Write-Error "Failed to create goal '$Name'. Error: $_"
+        throw $_
+    }
 }
 
 <#
 .SYNOPSIS
-    Create a ClickUp team goal.
+    Update a ClickUp team goal.
 .DESCRIPTION
-    Create a ClickUp team goal.
+    Update a ClickUp team goal.
 .EXAMPLE
     PS C:\> Set-ClickUpGoal -GoalID e53a033c -Name "Updated Goal Name"
     Update ClickUp goal with ID "e53a033c" name to "Updated Goal Name".
@@ -129,7 +150,7 @@ function New-ClickUpGoal {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/update-goal.html
+    https://developer.clickup.com/reference/updategoal
 #>
 function Set-ClickUpGoal {
     [CmdletBinding()]
@@ -171,8 +192,15 @@ function Set-ClickUpGoal {
         $Body.Add('color', $Color)
     }
 
-    $Goal = Invoke-ClickUpAPIPut -Endpoint "goal/$GoalID" -Body $Body
-    Return $Goal.goal
+    Write-Verbose "Updating goal with ID: $GoalID"
+    try {
+        $Goal = Invoke-ClickUpAPIPut -Endpoint "goal/$GoalID" -Body $Body
+        Write-Verbose "Successfully updated goal: $($Goal.goal.name)"
+        return $Goal.goal
+    } catch {
+        Write-Error "Failed to update goal with ID $GoalID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -190,7 +218,7 @@ function Set-ClickUpGoal {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/delete-goal.html
+    https://developer.clickup.com/reference/deletegoal
 #>
 function Remove-ClickUpGoal {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -199,8 +227,15 @@ function Remove-ClickUpGoal {
         [string]$GoalID
     )
 
-    if ($PSCmdlet.ShouldProcess($CommentID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "goal/$GoalID"
+    if ($PSCmdlet.ShouldProcess($GoalID, 'Remove Goal')) {
+        Write-Verbose "Removing goal with ID: $GoalID"
+        try {
+            Invoke-ClickUpAPIDelete -Endpoint "goal/$GoalID"
+            Write-Verbose "Successfully removed goal with ID: $GoalID"
+        } catch {
+            Write-Error "Failed to remove goal with ID $GoalID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -219,7 +254,7 @@ function Remove-ClickUpGoal {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/create-key-result.html
+    https://developer.clickup.com/reference/createkeyresult
 #>
 function New-ClickUpKeyResult {
     [CmdletBinding()]
@@ -271,8 +306,15 @@ function New-ClickUpKeyResult {
         $Body.Add('list_ids', $ListIDs)
     }
 
-    $KeyResult = Invoke-ClickUpAPIPost -Endpoint "goal/$GoalID/key_result" -Body $Body
-    Return $KeyResult.key_result
+    Write-Verbose "Creating new key result '$Name' for goal ID: $GoalID"
+    try {
+        $KeyResult = Invoke-ClickUpAPIPost -Endpoint "goal/$GoalID/key_result" -Body $Body
+        Write-Verbose "Successfully created key result: $($KeyResult.key_result.name) (ID: $($KeyResult.key_result.id))"
+        return $KeyResult.key_result
+    } catch {
+        Write-Error "Failed to create key result '$Name'. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -290,7 +332,7 @@ function New-ClickUpKeyResult {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/edit-key-result.html
+    https://developer.clickup.com/reference/editkeyresult
 #>
 function Set-ClickUpKeyResult {
     [CmdletBinding()]
@@ -353,8 +395,15 @@ function Set-ClickUpKeyResult {
         $Body.Add('list_ids', $ListIDs)
     }
 
-    $KeyResult = Invoke-ClickUpAPIPut -Endpoint 'key_result/$KeyResultID' -Body $Body
-    Return $KeyResult.key_result
+    Write-Verbose "Updating key result with ID: $KeyResultID"
+    try {
+        $KeyResult = Invoke-ClickUpAPIPut -Endpoint "key_result/$KeyResultID" -Body $Body
+        Write-Verbose "Successfully updated key result: $($KeyResult.key_result.name)"
+        return $KeyResult.key_result
+    } catch {
+        Write-Error "Failed to update key result with ID $KeyResultID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -372,7 +421,7 @@ function Set-ClickUpKeyResult {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/delete-key-result.html
+    https://developer.clickup.com/reference/deletekeyresult
 #>
 function Remove-ClickUpKeyResult {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -381,7 +430,14 @@ function Remove-ClickUpKeyResult {
         [string]$KeyResultID
     )
 
-    if ($PSCmdlet.ShouldProcess($KeyResultID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "key_result/$KeyResultID"
+    if ($PSCmdlet.ShouldProcess($KeyResultID, 'Remove Key Result')) {
+        Write-Verbose "Removing key result with ID: $KeyResultID"
+        try {
+            Invoke-ClickUpAPIDelete -Endpoint "key_result/$KeyResultID"
+            Write-Verbose "Successfully removed key result with ID: $KeyResultID"
+        } catch {
+            Write-Error "Failed to remove key result with ID $KeyResultID. Error: $_"
+            throw $_
+        }
     }
 }
