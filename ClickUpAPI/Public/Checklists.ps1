@@ -20,6 +20,7 @@
 #>
 function New-ClickUpChecklist {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -79,6 +80,7 @@ function New-ClickUpChecklist {
 #>
 function Set-ClickUpChecklist {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
@@ -127,6 +129,7 @@ function Set-ClickUpChecklist {
 #>
 function Remove-ClickUpChecklist {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID
@@ -166,6 +169,7 @@ function Remove-ClickUpChecklist {
 #>
 function New-ClickUpChecklistItem {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$CheckListID,
@@ -216,6 +220,7 @@ function New-ClickUpChecklistItem {
 #>
 function Set-ClickUpChecklistItem {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
@@ -276,6 +281,7 @@ function Set-ClickUpChecklistItem {
 #>
 function Remove-ClickUpCheckListItem {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
