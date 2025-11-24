@@ -23,8 +23,16 @@ function Get-ClickUpTeam {
     [OutputType([System.Object], [System.Array])]
     param ()
 
-    $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
-    return $Teams.teams
+    Write-Verbose 'Entering Get-ClickUpTeam'
+    try {
+        Write-Verbose 'Getting all teams'
+        $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
+        Write-Verbose 'Successfully retrieved teams'
+        return $Teams.teams
+    } catch {
+        Write-Error "Error in Get-ClickUpTeam: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -53,8 +61,16 @@ function Get-ClickUpTeamPlan {
         [UInt64]$TeamID
     )
 
-    $Plan = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/plan"
-    return $Plan
+    Write-Verbose 'Entering Get-ClickUpTeamPlan'
+    try {
+        Write-Verbose "Getting plan for team ID: $TeamID"
+        $Plan = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/plan"
+        Write-Verbose 'Successfully retrieved team plan'
+        return $Plan
+    } catch {
+        Write-Error "Error in Get-ClickUpTeamPlan: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -83,6 +99,14 @@ function Get-ClickUpTeamSeats {
         [UInt64]$TeamID
     )
 
-    $Seats = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/seats"
-    return $Seats
+    Write-Verbose 'Entering Get-ClickUpTeamSeats'
+    try {
+        Write-Verbose "Getting seats for team ID: $TeamID"
+        $Seats = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/seats"
+        Write-Verbose 'Successfully retrieved team seats'
+        return $Seats
+    } catch {
+        Write-Error "Error in Get-ClickUpTeamSeats: $($_.Exception.Message)"
+        throw $_
+    }
 }
