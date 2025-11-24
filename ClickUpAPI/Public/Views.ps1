@@ -23,8 +23,16 @@ function Get-ClickUpView {
         [string]$ViewID
     )
 
-    $View = Invoke-ClickUpAPIGet -Endpoint "view/$ViewID"
-    return $View.view
+    Write-Verbose 'Entering Get-ClickUpView'
+    try {
+        Write-Verbose "Getting view with ID: $ViewID"
+        $View = Invoke-ClickUpAPIGet -Endpoint "view/$ViewID"
+        Write-Verbose 'Successfully retrieved view'
+        return $View.view
+    } catch {
+        Write-Error "Error in Get-ClickUpView: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -54,8 +62,16 @@ function Get-ClickUpTeamViews {
         [UInt64]$TeamID
     )
 
-    $Views = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/view"
-    return $Views.views
+    Write-Verbose 'Entering Get-ClickUpTeamViews'
+    try {
+        Write-Verbose "Getting views for team ID: $TeamID"
+        $Views = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/view"
+        Write-Verbose 'Successfully retrieved team views'
+        return $Views.views
+    } catch {
+        Write-Error "Error in Get-ClickUpTeamViews: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -85,8 +101,16 @@ function Get-ClickUpSpaceViews {
         [UInt64]$SpaceID
     )
 
-    $Views = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID/view"
-    return $Views.views
+    Write-Verbose 'Entering Get-ClickUpSpaceViews'
+    try {
+        Write-Verbose "Getting views for space ID: $SpaceID"
+        $Views = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID/view"
+        Write-Verbose 'Successfully retrieved space views'
+        return $Views.views
+    } catch {
+        Write-Error "Error in Get-ClickUpSpaceViews: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -108,7 +132,7 @@ function Get-ClickUpSpaceViews {
 .LINK
     https://developer.clickup.com/reference/getfolderviews
 #>
-function Get-ClickUpListViews {
+function Get-ClickUpFolderViews {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
@@ -116,8 +140,16 @@ function Get-ClickUpListViews {
         [UInt64]$FolderID
     )
 
-    $Views = Invoke-ClickUpAPIGet -Endpoint "folder/$FolderID/view"
-    return $Views.views
+    Write-Verbose 'Entering Get-ClickUpFolderViews'
+    try {
+        Write-Verbose "Getting views for folder ID: $FolderID"
+        $Views = Invoke-ClickUpAPIGet -Endpoint "folder/$FolderID/view"
+        Write-Verbose 'Successfully retrieved folder views'
+        return $Views.views
+    } catch {
+        Write-Error "Error in Get-ClickUpFolderViews: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -147,8 +179,16 @@ function Get-ClickUpListViews {
         [UInt64]$ListID
     )
 
-    $Views = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/view"
-    return $Views.views
+    Write-Verbose 'Entering Get-ClickUpListViews'
+    try {
+        Write-Verbose "Getting views for list ID: $ListID"
+        $Views = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/view"
+        Write-Verbose 'Successfully retrieved list views'
+        return $Views.views
+    } catch {
+        Write-Error "Error in Get-ClickUpListViews: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -187,8 +227,16 @@ function Get-ClickUpViewTasks {
         page = $Page
     }
 
-    $Views = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "view/$ViewID/task"
-    return $Views.tasks
+    Write-Verbose 'Entering Get-ClickUpViewTasks'
+    try {
+        Write-Verbose "Getting tasks for view ID: $ViewID (Page: $Page)"
+        $Views = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "view/$ViewID/task"
+        Write-Verbose 'Successfully retrieved view tasks'
+        return $Views.tasks
+    } catch {
+        Write-Error "Error in Get-ClickUpViewTasks: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -226,8 +274,16 @@ function New-ClickUpTeamView {
         [hashtable]$Body
     )
 
-    $View = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/view" -Body $Body
-    return $View.view
+    Write-Verbose 'Entering New-ClickUpTeamView'
+    try {
+        Write-Verbose "Creating new view for team ID: $TeamID"
+        $View = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/view" -Body $Body
+        Write-Verbose 'Successfully created team view'
+        return $View.view
+    } catch {
+        Write-Error "Error in New-ClickUpTeamView: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -265,8 +321,16 @@ function New-ClickUpSpaceView {
         [hashtable]$Body
     )
 
-    $View = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/view" -Body $Body
-    return $View.view
+    Write-Verbose 'Entering New-ClickUpSpaceView'
+    try {
+        Write-Verbose "Creating new view for space ID: $SpaceID"
+        $View = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/view" -Body $Body
+        Write-Verbose 'Successfully created space view'
+        return $View.view
+    } catch {
+        Write-Error "Error in New-ClickUpSpaceView: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -283,7 +347,7 @@ function New-ClickUpSpaceView {
     >> dir = 1
     >> }
     >> }
-    PS C:\> Get-ClickUpFolderViews -FolderID 124 -Body $Body
+    PS C:\> New-ClickUpFolderView -FolderID 124 -Body $Body
     Create new ClickUp folder view for folder with ID "124".
 .INPUTS
     None. This cmdlet does not accept any input.
@@ -304,8 +368,16 @@ function New-ClickUpFolderView {
         [hashtable]$Body
     )
 
-    $View = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/view" -Body $Body
-    return $View.view
+    Write-Verbose 'Entering New-ClickUpFolderView'
+    try {
+        Write-Verbose "Creating new view for folder ID: $FolderID"
+        $View = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/view" -Body $Body
+        Write-Verbose 'Successfully created folder view'
+        return $View.view
+    } catch {
+        Write-Error "Error in New-ClickUpFolderView: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -322,7 +394,7 @@ function New-ClickUpFolderView {
     >> dir = 1
     >> }
     >> }
-    PS C:\> Get-ClickUpListViews -ListID 124 -Body $Body
+    PS C:\> New-ClickUpListView -ListID 124 -Body $Body
     Create new ClickUp list view for list with ID "124".
 .INPUTS
     None. This cmdlet does not accept any input.
@@ -343,8 +415,16 @@ function New-ClickUpListView {
         [hashtable]$Body
     )
 
-    $View = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/view" -Body $Body
-    return $View.view
+    Write-Verbose 'Entering New-ClickUpListView'
+    try {
+        Write-Verbose "Creating new view for list ID: $ListID"
+        $View = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/view" -Body $Body
+        Write-Verbose 'Successfully created list view'
+        return $View.view
+    } catch {
+        Write-Error "Error in New-ClickUpListView: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -382,8 +462,16 @@ function Set-ClickUpView {
         [hashtable]$Body
     )
 
-    $View = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/view" -Body $Body
-    return $View.view
+    Write-Verbose 'Entering Set-ClickUpView'
+    try {
+        Write-Verbose "Updating view with ID: $ViewID"
+        $View = Invoke-ClickUpAPIPut -Endpoint "view/$ViewID" -Body $Body
+        Write-Verbose 'Successfully updated view'
+        return $View.view
+    } catch {
+        Write-Error "Error in Set-ClickUpView: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -410,7 +498,15 @@ function Remove-ClickUpView {
         [string]$ViewID
     )
 
+    Write-Verbose 'Entering Remove-ClickUpView'
     if ($PSCmdlet.ShouldProcess($ViewID)) {
-        $null = Invoke-ClickUpAPIDelete -Endpoint "view/$ViewID"
+        try {
+            Write-Verbose "Removing view with ID: $ViewID"
+            $null = Invoke-ClickUpAPIDelete -Endpoint "view/$ViewID"
+            Write-Verbose 'Successfully removed view'
+        } catch {
+            Write-Error "Error in Remove-ClickUpView: $($_.Exception.Message)"
+            throw $_
+        }
     }
 }
