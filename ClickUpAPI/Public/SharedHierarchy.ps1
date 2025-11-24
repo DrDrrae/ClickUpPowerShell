@@ -27,6 +27,14 @@ function Get-ClickUpSharedHierarchy {
         [uint64]$TeamID
     )
 
-    $SharedHierarchy = Invoke-ClickUpAPIGet-Endpoint "team/$TeamID/shared"
-    return $SharedHierarchy.shared
+    Write-Verbose 'Entering Get-ClickUpSharedHierarchy'
+    try {
+        Write-Verbose "Getting shared hierarchy for team ID: $TeamID"
+        $SharedHierarchy = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/shared"
+        Write-Verbose 'Successfully retrieved shared hierarchy'
+        return $SharedHierarchy.shared
+    } catch {
+        Write-Error "Error in Get-ClickUpSharedHierarchy: $($_.Exception.Message)"
+        throw $_
+    }
 }
