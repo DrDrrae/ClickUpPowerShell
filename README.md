@@ -47,30 +47,30 @@ Import-ClickUpModuleSettings
 
 | API Reference | Code | Docs | Error Handling | Tested | Comments |
 | ------------- | ---- | ---- | --- | ------ | -------- |
-| Attachments   | ✅    | 🟡    | ✅    |        |          |
-| Authorization | ✅    | 🟡    | ✅    |        |          |
-| Checklists    | ✅    | 🟡    | ✅    |        |          |
-| Comments      | ✅    | 🟡    | ✅    |        |          |
-| Custom Fields | ✅    | 🟡    | ✅    |        |          |
-| Custom Task Types | ✅    | 🟡    | ✅    |        |          |
-| Dependencies  | ✅    | 🟡    | ✅    |        |          |
-| Folders       | ✅    | 🟡    | ✅    |        |          |
-| Goals         | ✅    | 🟡    | ✅    |        |          |
-| Guests        | ✅    | 🟡    | ✅    |        | Enterprise only |
-| Lists         | ✅    | 🟡    | ✅    |        |          |
-| Members       | ✅    | 🟡    | ✅    |        |          |
-| Roles         | ✅    | 🟡    | ✅    |        |          |
-| Shared Hierarchy | ✅    | 🟡    | ✅    |        |          |
-| Spaces        | ✅    | 🟡    | ✅    |        |          |
-| Tags          | ✅    | 🟡    | ✅    |        |          |
-| Tasks         | ✅    | 🟡    | ✅    |        |          |
-| Task Templates |✅    | 🟡    | ✅    |        |          |
-| Teams         | ✅    | 🟡    | ✅    |        |          |
-| Time Tracking | ✅    | 🟡    | ✅    |        | Partial implementation only. v2.0 will be implemented only. Legacy will not be implemented. |
-| User Groups   | ✅    | 🟡    | ✅    |        |          |     
-| Users         | ✅    | 🟡    | ✅    |        | Enterprise only |
-| Views         | ✅    | 🟡    | ✅    |        |          |
-| Webhooks      | ✅    | 🟡    | ✅    |        |          |
+| Attachments   | ✅    | ✅    | ✅    |        |          |
+| Authorization | ✅    | ✅    | ✅    |        |          |
+| Checklists    | ✅    | ✅    | ✅    |        |          |
+| Comments      | ✅    | ✅    | ✅    |        |          |
+| Custom Fields | ✅    | ✅    | ✅    |        |          |
+| Custom Task Types | ✅    | ✅    | ✅    |        |          |
+| Dependencies  | ✅    | ✅    | ✅    |        |          |
+| Folders       | ✅    | ✅    | ✅    |        |          |
+| Goals         | ✅    | ✅    | ✅    |        |          |
+| Guests        | ✅    | ✅    | ✅    |        | Enterprise only |
+| Lists         | ✅    | ✅    | ✅    |        |          |
+| Members       | ✅    | ✅    | ✅    |        |          |
+| Roles         | ✅    | ✅    | ✅    |        |          |
+| Shared Hierarchy | ✅    | ✅    | ✅    |        |          |
+| Spaces        | ✅    | ✅    | ✅    |        |          |
+| Tags          | ✅    | ✅    | ✅    |        |          |
+| Tasks         | ✅    | ✅    | ✅    |        |          |
+| Task Templates |✅    | ✅    | ✅    |        |          |
+| Teams         | ✅    | ✅    | ✅    |        |          |
+| Time Tracking | ✅    | ✅    | ✅    |        | Partial implementation only. v2.0 will be implemented only. Legacy will not be implemented. |
+| User Groups   | ✅    | ✅    | ✅    |        |          |     
+| Users         | ✅    | ✅    | ✅    |        | Enterprise only |
+| Views         | ✅    | ✅    | ✅    |        |          |
+| Webhooks      | ✅    | ✅    | ✅    |        |          |
 
 ### Other
 
