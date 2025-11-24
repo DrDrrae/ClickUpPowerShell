@@ -10,9 +10,11 @@
     PS C:\> Get-ClickUpCustomFields -FolderID 456
     Get all ClickUp custom fields for folder with ID "456".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
@@ -20,7 +22,7 @@
 #>
 function Get-ClickUpCustomFields {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'ListID')]
         [ulong]$ListID,
@@ -62,9 +64,9 @@ function Get-ClickUpCustomFields {
     PS C:\> Set-ClickUpCustomFieldValue -TaskID CustomID -FieldID b955c4dc -Value 80 -CustomTaskIDs $true -TeamID 123
     Set the ClickUp custom field under task with custom ID "CustomID" and field with ID "b955c4dc" to value "80".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object
 .NOTES
     See the link for information.
 
@@ -74,7 +76,7 @@ function Get-ClickUpCustomFields {
 #>
 function Set-ClickUpCustomFieldValue {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
@@ -107,8 +109,9 @@ function Set-ClickUpCustomFieldValue {
     }
 
     try {
-        Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/field/$FieldID" -Body $Body
+        $CustomFieldValue = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/field/$FieldID" -Body $Body
         Write-Verbose 'Successfully set custom field value.'
+        return $CustomFieldValue
     } catch {
         Write-Error "Failed to set custom field value. Error: $_"
         throw
@@ -127,9 +130,9 @@ function Set-ClickUpCustomFieldValue {
     PS C:\> Set-ClickUpCustomFieldValue -TaskID CustomID -FieldID b955c4dc -Value 80 -CustomTaskIDs $true -TeamID 123
     Remove the ClickUp custom field under task with custom ID "CustomID" and field with ID "b955c4dc".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -137,7 +140,6 @@ function Set-ClickUpCustomFieldValue {
 #>
 function Remove-ClickUpCustomFieldValue {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
@@ -165,7 +167,7 @@ function Remove-ClickUpCustomFieldValue {
 
     if ($PSCmdlet.ShouldProcess($FieldID, 'Remove Custom Field Value')) {
         try {
-            Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/field/$FieldID"
+            $Null = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/field/$FieldID"
             Write-Verbose 'Successfully removed custom field value.'
         } catch {
             Write-Error "Failed to remove custom field value. Error: $_"

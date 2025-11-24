@@ -10,11 +10,11 @@
     PS C:\> Get-ClickUpTaskComments -TaskID CustomID -CustomTaskIDs $true -TeamID 123
     Get all ClickUp task comments under task with custom ID "CustomID".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .OUTPUTS
-    System.Array.
+    System.Array
 .NOTES
     See the link for information.
 .LINK
@@ -62,11 +62,11 @@ function Get-ClickUpTaskComments {
     PS C:\> Get-ClickUpChatViewComments -ViewID 3c
     Get ClickUp chat view comments for view with ID "3c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .OUTPUTS
-    System.Array.
+    System.Array
 .NOTES
     See the link for information.
 .LINK
@@ -100,11 +100,11 @@ function Get-ClickUpChatViewComments {
     PS C:\> Get-ClickUpListComments -ListID 123
     Get ClickUp list comments for list with ID "123".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .OUTPUTS
-    System.Array.
+    System.Array
 .NOTES
     See the link for information.
 .LINK
@@ -138,11 +138,11 @@ function Get-ClickUpListComments {
     PS C:\> Get-ClickUpThreadedComments -CommentID 123
     Get ClickUp threaded comments for comment with ID "123".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .OUTPUTS
-    System.Array.
+    System.Array
 .NOTES
     See the link for information.
 .LINK
@@ -181,15 +181,15 @@ function Get-ClickUpThreadedComments {
     PS C:\> Set-ClickUpComment -CommentID 456 -Body $Body
     Update comment with ID "456".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    None
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
     https://developer.clickup.com/reference/updatecomment
 #>
-function Set-ClickUpListComment {
+function Set-ClickUpComment {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -200,7 +200,7 @@ function Set-ClickUpListComment {
 
     Write-Verbose "Updating comment '$CommentID'..."
     try {
-        Invoke-ClickUpAPIPut -Endpoint "comment/$CommentID" -Body $Body
+        $Null = Invoke-ClickUpAPIPut -Endpoint "comment/$CommentID" -Body $Body
         Write-Verbose 'Comment updated successfully.'
     } catch {
         Write-Error "Failed to update comment. Error: $_"
@@ -217,9 +217,9 @@ function Set-ClickUpListComment {
     PS C:\> Remove-ClickUpComment -CommentID 456
     Delete comment with ID "456".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    None
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -235,7 +235,7 @@ function Remove-ClickUpListComment {
     if ($PSCmdlet.ShouldProcess($CommentID, 'Delete Comment')) {
         Write-Verbose "Deleting comment '$CommentID'..."
         try {
-            Invoke-ClickUpAPIDelete -Endpoint "comment/$CommentID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "comment/$CommentID"
             Write-Verbose 'Comment deleted successfully.'
         } catch {
             Write-Error "Failed to delete comment. Error: $_"
@@ -274,9 +274,9 @@ function Remove-ClickUpListComment {
     PS C:\> New-ClickUpTaskComment -TaskID 9hz -Body $Body
     Create new ClickUp task comment on task with ID "9hz".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -340,9 +340,9 @@ function New-ClickUpTaskComment {
     PS C:\> New-ClickUpChatViewComment -ViewID 3c -Body $Body
     Create new ClickUp chat view comment on chat view with ID "3c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -391,9 +391,9 @@ function New-ClickUpChatViewComment {
     PS C:\> New-ClickUpListComment -ListID 124 -Body $Body
     Create new ClickUp list comment with formatting on list with ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -442,9 +442,9 @@ function New-ClickUpListComment {
     PS C:\> New-ClickUpThreadedComment -CommentID 124 -Body $Body
     Create new ClickUp threaded comment on comment with ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK

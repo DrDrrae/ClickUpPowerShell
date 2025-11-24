@@ -16,9 +16,9 @@
     PS C:\> Add-ClickUpDependency -TaskID "CustomTaskID 1" -DependencyOf "CustomTaskID 2" -CustomTaskID $true -TeamID 123
     Add ClickUp task with ID "CustomTaskID 1" as a dependency of ClickUp task with ID "CustomTaskID 2".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 
@@ -28,7 +28,6 @@
 #>
 function Add-ClickUpDependency {
     [CmdletBinding(DefaultParameterSetName = 'DependsOnTaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
@@ -71,7 +70,7 @@ function Add-ClickUpDependency {
     }
 
     try {
-        Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/dependency" -Body $Body
+        $Null = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/dependency" -Body $Body
     } catch {
         Write-Error "Failed to add dependency for TaskID: $TaskID. Error: $_"
         throw $_
@@ -90,9 +89,9 @@ function Add-ClickUpDependency {
     PS C:\> Remove-ClickUpDependency -TaskID 9hv -DependencyOf 9hz
     Remove ClickUp task with ID "9hv" as a dependency of ClickUp task with ID "9hz".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 
@@ -102,7 +101,6 @@ function Add-ClickUpDependency {
 #>
 function Remove-ClickUpDependency {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'DependsOnTaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
@@ -142,7 +140,7 @@ function Remove-ClickUpDependency {
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {
         try {
-            Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/dependency"
+            $Null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/dependency"
         } catch {
             Write-Error "Failed to remove dependency for TaskID: $TaskID. Error: $_"
             throw $_
@@ -162,9 +160,9 @@ function Remove-ClickUpDependency {
     PS C:\> Add-ClickUpTaskLink -TaskID "CustomTaskID 1" -LinksTo "CustomTaskID 2" -CustomTaskID $true -TeamID 123
     Add ClickUp task with ID "CustomTaskID 2" as a link to ClickUp task with ID "CustomTaskID 1".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -198,7 +196,7 @@ function Add-ClickUpTaskLink {
     }
 
     try {
-        Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
+        $Null = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
     } catch {
         Write-Error "Failed to add task link between $TaskID and $LinksTo. Error: $_"
         throw $_
@@ -217,9 +215,9 @@ function Add-ClickUpTaskLink {
     PS C:\> Remove-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Remove ClickUp task with ID "CustomTaskID 2" as a link to ClickUp task with ID "CustomTaskID 1".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -227,7 +225,6 @@ function Add-ClickUpTaskLink {
 #>
 function Remove-ClickUpTaskLink {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
@@ -263,7 +260,7 @@ function Remove-ClickUpTaskLink {
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {
         try {
-            Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
+            $Null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/link/$LinksTo/"
         } catch {
             Write-Error "Failed to remove task link between $TaskID and $LinksTo. Error: $_"
             throw $_

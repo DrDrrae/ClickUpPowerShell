@@ -7,9 +7,9 @@
     PS C:\> Get-ClickUpGoals -TeamID 123
     Get all ClickUp team goals for team with ID "123".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -17,6 +17,7 @@
 #>
 function Get-ClickUpGoals {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$TeamID
@@ -42,9 +43,9 @@ function Get-ClickUpGoals {
     PS C:\> Get-ClickUpGoal -GoalID e53a033c
     Get a ClickUp team goal with ID "e53a033c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -52,6 +53,7 @@ function Get-ClickUpGoals {
 #>
 function Get-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$GoalID
@@ -77,9 +79,9 @@ function Get-ClickUpGoal {
     PS C:\> New-ClickUpGoal -TeamID 123 -Name 'Goal Name' -DueDate "12/31/2021 17:00"
     Create a new ClickUp goal for team with ID "123" with the name of "Goal Name" and the due date of "December 31st, 2021 at 5:00 PM."
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -87,6 +89,7 @@ function Get-ClickUpGoal {
 #>
 function New-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$TeamID,
@@ -144,9 +147,9 @@ function New-ClickUpGoal {
     PS C:\> Set-ClickUpGoal -GoalID e53a033c -Name "Updated Goal Name"
     Update ClickUp goal with ID "e53a033c" name to "Updated Goal Name".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -154,6 +157,7 @@ function New-ClickUpGoal {
 #>
 function Set-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$GoalID,
@@ -212,9 +216,9 @@ function Set-ClickUpGoal {
     PS C:\> Remove-ClickUpGoal -GoalID e53a033c
     Remove ClickUp goal with ID "e53a033c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -230,7 +234,7 @@ function Remove-ClickUpGoal {
     if ($PSCmdlet.ShouldProcess($GoalID, 'Remove Goal')) {
         Write-Verbose "Removing goal with ID: $GoalID"
         try {
-            Invoke-ClickUpAPIDelete -Endpoint "goal/$GoalID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "goal/$GoalID"
             Write-Verbose "Successfully removed goal with ID: $GoalID"
         } catch {
             Write-Error "Failed to remove goal with ID $GoalID. Error: $_"
@@ -248,9 +252,9 @@ function Remove-ClickUpGoal {
     PS C:\> New-ClickUpKeyResult -GoalID e53a033c -Name 'New Key Result Name' -Owners 183 -Type number -StepsStart 0 -StepsEnd 10 -Unit km
     Create a new ClickUp key result for goal with ID "e53a033c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -258,6 +262,7 @@ function Remove-ClickUpGoal {
 #>
 function New-ClickUpKeyResult {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$GoalID,
@@ -326,9 +331,9 @@ function New-ClickUpKeyResult {
     PS C:\> Set-ClickUpKeyResult -KeyResultID 947d46ed -StepsCurrent 5 -Note 'Target achieved'
     Update a ClickUp key result with ID "947d46ed".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -336,6 +341,7 @@ function New-ClickUpKeyResult {
 #>
 function Set-ClickUpKeyResult {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$KeyResultID,
@@ -415,9 +421,9 @@ function Set-ClickUpKeyResult {
     PS C:\> Remove-ClickUpKeyResult -KeyResultID 947d46ed
     Remove ClickUp key result with ID "947d46ed".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -433,7 +439,7 @@ function Remove-ClickUpKeyResult {
     if ($PSCmdlet.ShouldProcess($KeyResultID, 'Remove Key Result')) {
         Write-Verbose "Removing key result with ID: $KeyResultID"
         try {
-            Invoke-ClickUpAPIDelete -Endpoint "key_result/$KeyResultID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "key_result/$KeyResultID"
             Write-Verbose "Successfully removed key result with ID: $KeyResultID"
         } catch {
             Write-Error "Failed to remove key result with ID $KeyResultID. Error: $_"

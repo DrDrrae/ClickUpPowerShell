@@ -7,23 +7,26 @@
     PS C:\> Get-ClickUpTags -SpaceID 512
     Get all ClickUp tags for space with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tags/get-space-tags.html
+    https://developer.clickup.com/reference/getspacetags
 #>
 function Get-ClickUpTags {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$SpaceID
     )
 
     $Tags = Invoke-ClickUpAPIGet-Endpoint "space/$SpaceID/tag"
-    Return $Tags.tags
+    return $Tags.tags
 }
 
 <#
@@ -35,13 +38,13 @@ function Get-ClickUpTags {
     PS C:\> New-ClickUpTag -SpaceID 512 -Name "Tag Name" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
     Create a new ClickUp tag for space with ID "512" with the name "Tag Name", foreground color white, and background color black.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tags/create-space-tag.html
+    https://developer.clickup.com/reference/createspacetag
 #>
 function New-ClickUpTag {
     [CmdletBinding()]
@@ -67,7 +70,7 @@ function New-ClickUpTag {
         $Body.Add('tag_bg', $BackgroundColor)
     }
 
-    Invoke-ClickUpAPIPost-Endpoint "space/$SpaceID/tag" -Body $Body
+    $null = Invoke-ClickUpAPIPost-Endpoint "space/$SpaceID/tag" -Body $Body
 }
 
 
@@ -80,9 +83,9 @@ function New-ClickUpTag {
     PS C:\> Set-ClickUpTag -SpaceID 512 -TagName "Tag Name" -NewName "Updated Tag" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
     Update a ClickUp tag with name "Tag Name" for space with ID "512" to the name "Updated Tag", foreground color to white, and background color to black.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -90,6 +93,7 @@ function New-ClickUpTag {
 #>
 function Set-ClickUpTag {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$SpaceID,
@@ -115,25 +119,26 @@ function Set-ClickUpTag {
         $Body.Add('tag_bg', $BackgroundColor)
     }
 
-    Invoke-ClickUpAPIPut-Endpoint "space/$SpaceID/tag/$TagName" -Body $Body
+    $Tag = Invoke-ClickUpAPIPut-Endpoint "space/$SpaceID/tag/$TagName" -Body $Body
+    return $Tag.tag
 }
 
 <#
 .SYNOPSIS
-    Get all ClickUp space tags.
+    Remove a ClickUp space tag.
 .DESCRIPTION
-    Get all ClickUp space tags.
+    Remove a ClickUp space tag.
 .EXAMPLE
     PS C:\> Remove-ClickUpTag -SpaceID 512 -TagName "Tag name"
     Remove a ClickUp tag with name "Tag Name" for space with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tags/delete-space-tag.html
+    https://developer.clickup.com/reference/deletespacetag
 #>
 function Remove-ClickUpTag {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -145,7 +150,7 @@ function Remove-ClickUpTag {
     )
 
     if ($PSCmdlet.ShouldProcess($Name)) {
-        Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID/tag/$TagName"
+        $Null = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID/tag/$TagName"
     }
 }
 
@@ -161,13 +166,13 @@ function Remove-ClickUpTag {
     PS C:\> Add-ClickUpTagToTask -TaskID "Custom Task ID" -TagName "name" -CustomTaskIDs $true -TeamID 123
     Add ClickUp tag with name "name" to task with custom ID "Custom Task ID".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tags/add-tag-to-task.html
+    https://developer.clickup.com/reference/addtagtotask
 #>
 function Add-ClickUpTagToTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskIDs')]
@@ -193,7 +198,7 @@ function Add-ClickUpTagToTask {
         $QueryString = @{}
     }
 
-    Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
+    $null = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
 }
 
 <#
@@ -208,13 +213,13 @@ function Add-ClickUpTagToTask {
     PS C:\> Remove-ClickUpTagToTask -TaskID "Custom Task ID" -TagName "name" -CustomTaskIDs $true -TeamID 123
     Remove ClickUp tag with name "name" to task with custom ID "Custom Task ID".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tags/remove-tag-from-task.html
+    https://developer.clickup.com/reference/removetagfromtask
 #>
 function Remove-ClickUpTagFromTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID', SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -241,6 +246,6 @@ function Remove-ClickUpTagFromTask {
     }
 
     if ($PSCmdlet.ShouldProcess($TaskID)) {
-        Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
+        $null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
     }
 }

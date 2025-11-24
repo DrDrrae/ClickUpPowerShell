@@ -10,9 +10,9 @@
     PS C:\> New-ClickUpChecklist -TaskID CustomID -CustomTaskIDs $true -TeamID 123 -Name "Checklist"
     Create a new checklist on ClickUp task with custom ID "CustomID" with name "Checklist".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -70,9 +70,9 @@ function New-ClickUpChecklist {
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -Name "Update Checklist." -Position 3
     Update ClickUp checklist with ID "b955c4dc" to new name "Update Checklist." and position 3.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -119,9 +119,9 @@ function Set-ClickUpChecklist {
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc
     Remove ClickUp checklist with ID "b955c4dc".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -138,7 +138,7 @@ function Remove-ClickUpChecklist {
     if ($PSCmdlet.ShouldProcess($ChecklistID, 'Delete Checklist')) {
         Write-Verbose "Deleting checklist '$ChecklistID'..."
         try {
-            Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID"
             Write-Verbose 'Checklist deleted successfully.'
         } catch {
             Write-Error "Failed to delete checklist. Error: $_"
@@ -159,9 +159,9 @@ function Remove-ClickUpChecklist {
     PS C:\> New-ClickUpChecklist -CheckListID b955c4dc -Name "Checklist item" -Assignee 183
     Create a new checklist item on ClickUp Checklist with ID "b955c4dc" with name "Checklist item" and assign it to member with ID "183."
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -210,9 +210,9 @@ function New-ClickUpChecklistItem {
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8 -Name "Update Checklist item." -Assignee 183
     Update ClickUp checklist item with ID "21e08dc8" under checklist with ID "b955c4dc" to new name "Update Checklist item." and assign it to member with ID "183."
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -271,9 +271,9 @@ function Set-ClickUpChecklistItem {
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8
     Remove ClickUp checklist with ID "b955c4dc".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -292,7 +292,7 @@ function Remove-ClickUpCheckListItem {
     if ($PSCmdlet.ShouldProcess("$ChecklistID - $ChecklistItemId", 'Delete Checklist Item')) {
         Write-Verbose "Deleting checklist item '$ChecklistItemId' from checklist '$ChecklistID'..."
         try {
-            Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId"
             Write-Verbose 'Checklist item deleted successfully.'
         } catch {
             Write-Error "Failed to delete checklist item. Error: $_"

@@ -2,40 +2,40 @@
 .SYNOPSIS
     Get all ClickUp webhooks.
 .DESCRIPTION
-    Get all ClickUp webhooks.
+    View the webhooks created via the API for a Workspace. This endpoint returns webhooks created by the authenticated user.
 .EXAMPLE
     PS C:\> Get-ClickUpWebhooks -TeamID 123
     Get all ClickUp webhooks for team with ID "123".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 
     Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/get-webhooks.html
+    https://developer.clickup.com/reference/getwebhooks
 #>
 function Get-ClickUpWebhooks {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$TeamID
     )
 
     $Webhooks = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/webhook"
-    Return $Webhooks.webhooks
+    return $Webhooks.webhooks
 }
 
 <#
 .SYNOPSIS
     Create a new ClickUp webhook.
 .DESCRIPTION
-    Create a new ClickUp webhook.
-
-    You may filter the location of resources that get sent to a webhook by passing an optional space_id, folder_id, list_id, or task_id in the body of the request. Without specifying any events, all event types will be sent to the webhook. However, you can filter for specific actions by sending an events array. To subscribe to specific events, pass an array of events that you want to subscribe to, otherwise pass "*" to subscribe to everything.
+    Set up a webhook to monitor for events.
 .EXAMPLE
     PS C:\> New-ClickUpWebhook -Endpoint 'https://www.example.com/webhook'
     Create a new ClickUp webhook that subscribes to all resources and events. Posts information to the URL "https://www.example.com/webhook".
@@ -43,20 +43,23 @@ function Get-ClickUpWebhooks {
     PS C:\> New-ClickUpWebhook -Endpoint 'https://www.example.com/webhook' -Events 'taskCreated','taskUpdated','taskDeleted' -FilterToTaskID 9hx
     Create a new ClickUp webhook that subscribes to task with ID "9hx" task creation, update, and deletion events. Posts information to the URL "https://www.example.com/webhook".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 
     Only webhooks that were created by the authenticated user will be returned on this endpoint.
 
+    We do not have a dedicated IP address for webhooks. We use our domain name and dynamic addressing.f
+
     You may filter the location of resources that get sent to a webhook by passing an optional space_id, folder_id, list_id, or task_id in the body of the request. Without specifying any events, all event types will be sent to the webhook. However, you can filter for specific actions by sending an events array. To subscribe to specific events, pass an array of events that you want to subscribe to, otherwise pass "*" to subscribe to everything.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/create-webhook.html
+    https://developer.clickup.com/reference/createwebhook
 #>
 function New-ClickUpWebhook {
+    [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$Endpoint,
@@ -91,16 +94,14 @@ function New-ClickUpWebhook {
     }
 
     $Webhook = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/webhook" -Body $Body
-    Return $Webhook
+    return $Webhook
 }
 
 <#
 .SYNOPSIS
-    Create a new ClickUp webhook.
+    Update a ClickUp webhook.
 .DESCRIPTION
-    Create a new ClickUp webhook.
-
-    You may filter the location of resources that get sent to a webhook by passing an optional space_id, folder_id, list_id, or task_id in the body of the request. Without specifying any events, all event types will be sent to the webhook. However, you can filter for specific actions by sending an events array. To subscribe to specific events, pass an array of events that you want to subscribe to, otherwise pass "*" to subscribe to everything.
+    Update a webhook to change the events to be monitored.
 .EXAMPLE
     PS C:\> Set-ClickUpWebhook -WebhookID 4b67ac88 -Endpoint 'https://www.example.com/webhook'
     Updates a ClickUp webhook with ID "4b67ac88" that subscribes to all resources and events. Posts information to the URL "https://www.example.com/webhook".
@@ -108,7 +109,7 @@ function New-ClickUpWebhook {
     PS C:\> Set-ClickUpWebhook -WebhookID 4b67ac88 -Endpoint 'https://www.example.com/webhook' -Events 'taskCreated','taskUpdated','taskDeleted' -FilterToTaskID 9hx
     Updates a ClickUp webhook with ID "4b67ac88" that subscribes to task with ID "9hx" task creation, update, and deletion events. Posts information to the URL "https://www.example.com/webhook".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
@@ -118,10 +119,11 @@ function New-ClickUpWebhook {
 
     You may filter the location of resources that get sent to a webhook by passing an optional space_id, folder_id, list_id, or task_id in the body of the request. Without specifying any events, all event types will be sent to the webhook. However, you can filter for specific actions by sending an events array. To subscribe to specific events, pass an array of events that you want to subscribe to, otherwise pass "*" to subscribe to everything.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/update-webhook.html
+    https://developer.clickup.com/reference/updatewebhook
 #>
 function Set-ClickUpWebhook {
+    [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$WebhookID,
@@ -167,7 +169,7 @@ function Set-ClickUpWebhook {
     }
 
     $Webhook = Invoke-ClickUpAPIPut -Endpoint "webhook/$WebhookID" -Body $Body
-    Return $Webhook
+    return $Webhook
 }
 
 <#
@@ -179,16 +181,15 @@ function Set-ClickUpWebhook {
     PS C:\> Remove-ClickUpWebhook -WebhookID 4b67ac88
     Remove a ClickUp webhook with ID "4b67ac88".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 
     Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/webhooks/delete-webhook.html
+    https://developer.clickup.com/reference/deletewebhook
 #>
 function Remove-ClickUpWebhook {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -198,6 +199,6 @@ function Remove-ClickUpWebhook {
     )
 
     if ($PSCmdlet.ShouldProcess($WebhookID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "webhook/$WebhookID"
+        $null = Invoke-ClickUpAPIDelete -Endpoint "webhook/$WebhookID"
     }
 }

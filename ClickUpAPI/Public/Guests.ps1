@@ -7,9 +7,9 @@
     PS C:\> Get-ClickUpGuest -TeamID 333 -GuestID 403
     Guest ClickUp guest user with ID "403" for team with ID "333".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -17,7 +17,7 @@
 #>
 function Get-ClickUpGuest {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [UInt64]$TeamID,
@@ -48,9 +48,9 @@ function Get-ClickUpGuest {
     PS C:\> Add-ClickUpGuest -TeamID 333 -GuestEmail 'guest@example.com' -CanEditTags $true -CanSeeTimeSpent $true -CanSeeTimeEstimated $true
     Add ClickUp guest user with email "guest@example.com" for team with ID "333" and give them access to edit tags, see time spent, and see time estimated.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -58,7 +58,7 @@ function Get-ClickUpGuest {
 #>
 function Add-ClickUpGuest {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [UInt64]$TeamID,
@@ -102,9 +102,9 @@ function Add-ClickUpGuest {
     PS C:\> Set-ClickUpGuest -TeamID 333 -GuestID 403 -CanEditTags $true -CanSeeTimeSpent $true -CanSeeTimeEstimated $true
     Update ClickUp guest user's permissions to edit tags, see time spent, and see time estimated for guest with ID "403".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -112,7 +112,7 @@ function Add-ClickUpGuest {
 #>
 function Set-ClickUpGuest {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [UInt64]$TeamID,
@@ -169,17 +169,17 @@ function Set-ClickUpGuest {
     PS C:\> Add-ClickUpGuestToTask -TaskID CustomID -GuestID 403 -CustomTaskIDs $true -TeamID 123 -PermissionLevel edit.
     Add ClickUp guest user with  custom ID "CustomID" to task with ID "c04" with permission level "edit".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-task.html
+    https://developer.clickup.com/reference/addguesttotask
 #>
 function Add-ClickUpGuestToTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -233,9 +233,9 @@ function Add-ClickUpGuestToTask {
     PS C:\> Add-ClickUpGuestToList -ListID 1427 -GuestID 403 -PermissionLevel edit
     Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "edit".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -243,7 +243,7 @@ function Add-ClickUpGuestToTask {
 #>
 function Add-ClickUpGuestToList {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$ListID,
@@ -281,9 +281,9 @@ function Add-ClickUpGuestToList {
     PS C:\> Add-ClickUpGuestToList -FolderID 1057 -GuestID 403 -PermissionLevel edit
     Add ClickUp guest user with ID "403" to folder with ID "1057" with permission level "edit".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -291,7 +291,7 @@ function Add-ClickUpGuestToList {
 #>
 function Add-ClickUpGuestToFolder {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$FolderID,
@@ -326,9 +326,9 @@ function Add-ClickUpGuestToFolder {
     PS C:\> Remove-ClickUpGuest -TeamID 333 -GuestID 403
     Remove ClickUp guest with Id "403" from team with ID "333".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -336,7 +336,7 @@ function Add-ClickUpGuestToFolder {
 #>
 function Remove-ClickUpGuest {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$TeamID,
@@ -366,9 +366,9 @@ function Remove-ClickUpGuest {
     PS C:\> Remove-ClickUpGuestFromTask -TaskID 1427 -GuestID 403
     Remove ClickUp guest with Id "403" from task with ID "1427".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -376,7 +376,7 @@ function Remove-ClickUpGuest {
 #>
 function Remove-ClickUpGuestFromTask {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -425,9 +425,9 @@ function Remove-ClickUpGuestFromTask {
     PS C:\> Remove-ClickUpGuestFromList -ListID c04 -GuestID 403
     Remove ClickUp guest with Id "403" from list with ID "c04".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -435,7 +435,7 @@ function Remove-ClickUpGuestFromTask {
 #>
 function Remove-ClickUpGuestFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ListID,
@@ -465,9 +465,9 @@ function Remove-ClickUpGuestFromList {
     PS C:\> Remove-ClickUpGuestFromFolder -FolderID 1057 -GuestID 403
     Remove ClickUp guest with Id "403" from folder with ID "1057".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -475,7 +475,7 @@ function Remove-ClickUpGuestFromList {
 #>
 function Remove-ClickUpGuestFromFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$FolderID,

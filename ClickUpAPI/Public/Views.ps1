@@ -7,57 +7,55 @@
     PS C:\> Get-ClickUpView -ViewID 3c
     Get a ClickUp view with ID "3c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-view.html
+    https://developer.clickup.com/reference/getview
 #>
 function Get-ClickUpView {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID
     )
 
     $View = Invoke-ClickUpAPIGet -Endpoint "view/$ViewID"
-    Return $View.view
+    return $View.view
 }
 
 <#
 .SYNOPSIS
     Get ClickUp team views.
 .DESCRIPTION
-    Get ClickUp team views.
+    View the task and page views available at the Everything Level of a Workspace.
 .EXAMPLE
     PS C:\> Get-ClickUpTeamViews -TeamID 512
     Get ClickUp team views with team ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-team-views.html
+    https://developer.clickup.com/reference/getview
 #>
 function Get-ClickUpTeamViews {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$TeamID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/view"
-    Return $Views.views
+    return $Views.views
 }
 
 <#
@@ -69,26 +67,26 @@ function Get-ClickUpTeamViews {
     PS C:\> Get-ClickUpSpaceViews -SpaceID 790
     Get ClickUp space views with space ID "790".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-space-views.html
+    https://developer.clickup.com/reference/getspaceviews
 #>
 function Get-ClickUpSpaceViews {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$SpaceID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID/view"
-    Return $Views.views
+    return $Views.views
 }
 
 <#
@@ -100,26 +98,26 @@ function Get-ClickUpSpaceViews {
     PS C:\> Get-ClickUpFolderViews -FolderID 124
     Get ClickUp folder views with folder ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-folder-views.html
+    https://developer.clickup.com/reference/getfolderviews
 #>
 function Get-ClickUpListViews {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$FolderID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "folder/$FolderID/view"
-    Return $Views.views
+    return $Views.views
 }
 
 <#
@@ -131,26 +129,26 @@ function Get-ClickUpListViews {
     PS C:\> Get-ClickUpListViews -ListID 124
     Get ClickUp list views with list ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-list-views.html
+    https://developer.clickup.com/reference/getlistviews
 #>
 function Get-ClickUpListViews {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$ListID
     )
 
     $Views = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/view"
-    Return $Views.views
+    return $Views.views
 }
 
 <#
@@ -165,19 +163,19 @@ function Get-ClickUpListViews {
     PS C:\> Get-ClickUpViewTasks -ViewID 3c -Page 2
     Get ClickUp view tasks with ID "3c" staring on page "2".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-view-tasks.html
+    https://developer.clickup.com/reference/getviewtasks
 #>
 function Get-ClickUpViewTasks {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
@@ -190,14 +188,14 @@ function Get-ClickUpViewTasks {
     }
 
     $Views = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "view/$ViewID/task"
-    Return $Views.tasks
+    return $Views.tasks
 }
 
 <#
 .SYNOPSIS
     Create new ClickUp team view.
 .DESCRIPTION
-    Create new ClickUp team view.
+    Add a List, Board, Calendar, Table, Timeline, Workload, Activity, Map, Chat, or Gantt view at the Everything Level of a Workspace.
 .EXAMPLE
     PS C:\> $body = @{
     >> name = "new team view name"
@@ -210,19 +208,17 @@ function Get-ClickUpViewTasks {
     PS C:\> New-ClickUpTeamView -TeamID 512 -Body $Body
     Create new ClickUp team view for team with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/create-team-view.html
+    https://developer.clickup.com/reference/createteamview
 #>
 function New-ClickUpTeamView {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$TeamID,
@@ -231,14 +227,14 @@ function New-ClickUpTeamView {
     )
 
     $View = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/view" -Body $Body
-    Return $View.view
+    return $View.view
 }
 
 <#
 .SYNOPSIS
     Create new ClickUp space view.
 .DESCRIPTION
-    Create new ClickUp space view.
+    Add a List, Board, Calendar, Table, Timeline, Workload, Activity, Map, Chat, or Gantt view to a Space.
 .EXAMPLE
     PS C:\> $body = @{
     >> name = "new space view name"
@@ -251,19 +247,17 @@ function New-ClickUpTeamView {
     PS C:\> New-ClickUpSpaceView -SpaceID 790 -Body $Body
     Create new ClickUp space view for space with ID "790".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/create-space-view.html
+    https://developer.clickup.com/reference/createspaceview
 #>
 function New-ClickUpSpaceView {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$SpaceID,
@@ -272,7 +266,7 @@ function New-ClickUpSpaceView {
     )
 
     $View = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/view" -Body $Body
-    Return $View.view
+    return $View.view
 }
 
 <#
@@ -292,19 +286,17 @@ function New-ClickUpSpaceView {
     PS C:\> Get-ClickUpFolderViews -FolderID 124 -Body $Body
     Create new ClickUp folder view for folder with ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/create-folder-view.html
+    https://developer.clickup.com/reference/createfolderview
 #>
-function New-ClickUpListView {
+function New-ClickUpFolderView {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$FolderID,
@@ -312,15 +304,15 @@ function New-ClickUpListView {
         [hashtable]$Body
     )
 
-    $Views = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/view" -Body $Body
-    Return $Views.views
+    $View = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/view" -Body $Body
+    return $View.view
 }
 
 <#
 .SYNOPSIS
     Create new ClickUp list view.
 .DESCRIPTION
-    Create new ClickUp lsit view.
+    Add a List, Board, Calendar, Table, Timeline, Workload, Activity, Map, Chat, or Gantt view to a List.
 .EXAMPLE
     PS C:\> $body = @{
     >> name = "new list view name"
@@ -333,19 +325,17 @@ function New-ClickUpListView {
     PS C:\> Get-ClickUpListViews -ListID 124 -Body $Body
     Create new ClickUp list view for list with ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/create-list-view.html
+    https://developer.clickup.com/reference/createlistview
 #>
-function New-ClickUpListViews {
+function New-ClickUpListView {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [UInt64]$ListID,
@@ -353,8 +343,8 @@ function New-ClickUpListViews {
         [hashtable]$Body
     )
 
-    $Views = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/view" -Body $Body
-    Return $Views.views
+    $View = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/view" -Body $Body
+    return $View.view
 }
 
 <#
@@ -374,19 +364,17 @@ function New-ClickUpListViews {
     PS C:\> Set-ClickUpView -ViewID 3c -Body $Body
     Update aClickUp view with ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/update-view.html
+    https://developer.clickup.com/reference/updateview
 #>
 function Set-ClickUpView {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
@@ -394,8 +382,8 @@ function Set-ClickUpView {
         [hashtable]$Body
     )
 
-    $Views = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/view" -Body $Body
-    Return $Views.views
+    $View = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/view" -Body $Body
+    return $View.view
 }
 
 <#
@@ -405,18 +393,15 @@ function Set-ClickUpView {
     Remove a ClickUp view.
 .EXAMPLE
     PS C:\> Remove-ClickUpView -ViewID 3c
-    Get a ClickUp view with ID "3c".
+    Remove a ClickUp view with ID "3c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any value.
 .NOTES
     See the link for information.
-
-    Only webhooks that were created by the authenticated user will be returned on this endpoint.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/views/get-view.html
+    https://developer.clickup.com/reference/deleteview
 #>
 function Remove-ClickUpView {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -425,7 +410,7 @@ function Remove-ClickUpView {
         [string]$ViewID
     )
 
-    if ($PSCmdlet.ShouldProcess($WebhookID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "view/$ViewID"
+    if ($PSCmdlet.ShouldProcess($ViewID)) {
+        $null = Invoke-ClickUpAPIDelete -Endpoint "view/$ViewID"
     }
 }

@@ -36,7 +36,7 @@
     None. You cannot pipe objects to this cmdlet.
 
 .OUTPUTS
-    System.Management.Automation.PSCustomObject. Returns the response from the ClickUp API containing attachment details.
+    None. The cmdlet does not return any output.
 
 .NOTES
     API Reference: https://developer.clickup.com/reference/createtaskattachment
@@ -95,7 +95,7 @@ function New-ClickUpTaskAttachment {
 
     Write-Verbose "Uploading attachment '$FileName' to task '$TaskID'"
     try {
-        Invoke-ClickUpAPIPostAttachment -Arguments $QueryString -Endpoint "task/$TaskID/attachment" -Body $Body -Boundary $Boundary
+        $Null = Invoke-ClickUpAPIPostAttachment -Arguments $QueryString -Endpoint "task/$TaskID/attachment" -Body $Body -Boundary $Boundary
     } catch {
         Write-Error "Failed to upload attachment to task '$TaskID'. Error: $_"
         throw

@@ -7,9 +7,9 @@
     PS C:\> Get-ClickUpAuthorizedUser
     Get the user that belongs to this token
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -17,6 +17,7 @@
 #>
 function Get-ClickUpAuthorizedUser {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param ()
 
     try {
@@ -37,9 +38,11 @@ function Get-ClickUpAuthorizedUser {
     PS C:\> Get-ClickUpAuthorizedWorkspaces
     Get the authorized workspaces for this token
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
     https://developer.clickup.com/docs/faq#what-is-a-team
@@ -48,6 +51,7 @@ function Get-ClickUpAuthorizedUser {
 #>
 function Get-ClickUpAuthorizedWorkspaces {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     [Alias('Get-ClickUpAuthorizedTeams')]
     param ()
 
@@ -69,9 +73,9 @@ function Get-ClickUpAuthorizedWorkspaces {
     PS C:\> New-ClickUpAccessToken -ClientID "ClientID" -ClientSecret "ClientSecret" -Code "Code"
     Get a new ClickUp access token.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK

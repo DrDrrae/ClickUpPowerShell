@@ -10,17 +10,21 @@
     PS C:\> Get-ClickUpTasks -ListID 22222222 -Archived $true -Page 1 -OrderBy 'updated' -Statuses 'New','In Progress'
     Get all ClickUp task under List with ID "22222222" and various other options.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-tasks.html
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-legacy/get-filtered-team-tasks.html
+    https://developer.clickup.com/reference/gettasks
+.LINK
+    https://developer.clickup.com/reference/getfilteredteamtasks
 #>
 function Get-ClickUpTasks {
     [CmdletBinding(DefaultParameterSetName = 'ListID')]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'ListID')]
         [string]$ListID,
@@ -153,7 +157,7 @@ function Get-ClickUpTasks {
     } elseif ($PSBoundParameters.ContainsKey('TeamID')) {
         $Tasks = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/task"
     }
-    Return $Tasks.tasks
+    return $Tasks.tasks
 }
 
 <#
@@ -168,16 +172,17 @@ function Get-ClickUpTasks {
     PS C:\> Get-ClickUpTask -TaskID 9hz -CustomTaskIDs $true -TeamID 123
     Get a ClickUp task under List with ID "22222222" and various other options.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-task.html
+    https://developer.clickup.com/reference/gettask
 #>
 function Get-ClickUpTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -203,7 +208,7 @@ function Get-ClickUpTask {
     }
 
     $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID"
-    Return $Task
+    return $Task
 }
 
 <#
@@ -218,16 +223,17 @@ function Get-ClickUpTask {
     PS C:\> Get-ClickUpTaskTimeInStatus -TaskID "CustomTaskID" -CustomTaskIDs $true -TeamID 123
     Get a ClickUp task's time in status with custom ID "CustomTaskID".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-task's-time-in-status.html
+    https://developer.clickup.com/reference/gettaskstimeinstatus
 #>
 function Get-ClickUpTaskTimeInStatus {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -251,14 +257,14 @@ function Get-ClickUpTaskTimeInStatus {
     }
 
     $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/time_in_status"
-    Return $Task
+    return $Task
 }
 
 <#
 .SYNOPSIS
     Get a ClickUp bulk task's time in status.
 .DESCRIPTION
-    Get a ClickUp bulk task's time in status.
+    View how long two or more tasks have been in each status. The Total time in Status ClickApp must first be enabled by the Workspace owner or an admin.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID 9hz,3cuh,g4fs
     Get a ClickUp task's time in status with ID "9hz".
@@ -266,16 +272,17 @@ function Get-ClickUpTaskTimeInStatus {
     PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID "CustomTaskID 1","CustomTaskID 2","CustomTaskID 3" -CustomTaskIDs $true -TeamID 123
     Get multiple ClickUp task's time in status with custom IDs "CustomTaskID 1", "CustomTaskID 2", and "CustomTaskID 3".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/get-bulk-tasks'-time-in-status.html
+    https://developer.clickup.com/reference/getbulktaskstimeinstatus
 #>
 function Get-ClickUpTaskTimeInStatusBulk {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -298,7 +305,7 @@ function Get-ClickUpTaskTimeInStatusBulk {
     }
 
     $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint 'task/bulk_time_in_status/task_ids'
-    Return $Task
+    return $Task
 }
 
 <#
@@ -313,16 +320,17 @@ function Get-ClickUpTaskTimeInStatusBulk {
     PS C:\> New-ClickUpTask -ListID 22222222 -Name 'This is another new task' -Description "Description of the other new task" -Assignees 33333333 -Status 'Review' -Priority 1
     Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/create-task.html
+    https://developer.clickup.com/reference/createtask
 #>
 function New-ClickUpTask {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$ListID,
@@ -388,7 +396,8 @@ function New-ClickUpTask {
         $Body.Add('custom_fields', $CustomFields)
     }
 
-    Invoke-ClickUpAPIPost -Endpoint "list/$ListID/task" -Body $Body
+    $Task = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/task" -Body $Body
+    return $Task
 }
 
 <#
@@ -424,9 +433,9 @@ function New-ClickUpTask {
     PS C:\> Set-ClickUpTask -TaskID 9hx -Body $Body
     Updated the task with ID "9hx".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information on how to format the body.
 
@@ -448,10 +457,11 @@ Body format:
         "archived = false
     }
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/update-task.html
+    https://developer.clickup.com/reference/updatetask
 #>
 function Set-ClickUpTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -476,7 +486,7 @@ function Set-ClickUpTask {
     }
 
     $Task = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "task/$TaskID/" -Body $Body
-    Return $Task
+    return $Task
 }
 
 <#
@@ -491,13 +501,13 @@ function Set-ClickUpTask {
     PS C:\> Remove-ClickUpTask -TaskID 'CustomTaskID' -CustomTaskIDs $True -TeamID 1111111
     Remove the task with custom ID "CustomTaskID".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for more information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/tasks/update-task.html
+    https://developer.clickup.com/reference/deletetask
 #>
 function Remove-ClickUpTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID', SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -521,7 +531,80 @@ function Remove-ClickUpTask {
             $QueryString = @{}
         }
 
-        $Task = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID"
-        Return $Task
+        $Null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID"
     }
+}
+
+<#
+.SYNOPSIS
+    Merge ClickUp tasks.
+.DESCRIPTION
+    Merge ClickUp tasks.
+.EXAMPLE
+    PS C:\> New-ClickUpTask -ListID 11111111 -Name 'This is a new task'
+    Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111".
+.EXAMPLE
+    PS C:\> New-ClickUpTask -ListID 22222222 -Name 'This is another new task' -Description "Description of the other new task" -Assignees 33333333 -Status 'Review' -Priority 1
+    Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
+.INPUTS
+    None. This cmdlet does not accept any input.
+.OUTPUTS
+    None. This cmdlet does not return any output.
+.NOTES
+    See the link for information.
+.LINK
+    https://developer.clickup.com/reference/mergetasks
+#>
+function Merge-ClickUpTasks {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$TaskID,
+        [Parameter(Mandatory = $true)]
+        [string[]]$SourceTaskIDs
+    )
+
+    $Body = @{
+        source_task_ids = $SourceTaskIDs
+    }
+
+    $Null = Invoke-ClickUpAPIPost -Endpoint "task/$TaskID/merge" -Body $Body
+}
+
+<#
+.SYNOPSIS
+    Create Task From Template
+.DESCRIPTION
+    Create a new task using a task template defined in your workspace. Publicly shared templates must be added to your Workspace before you can use them with the public API.
+.EXAMPLE
+    PS C:\> New-ClickUpTaskFromTemplate -ListID 11111111 -Name 'This is a new task'
+    Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111".
+.EXAMPLE
+    PS C:\> New-ClickUpTaskFromTemplate -ListID 22222222 -Name 'This is another new task' -Description "Description of the other new task" -Assignees 33333333 -Status 'Review' -Priority 1
+    Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
+.INPUTS
+    None. This cmdlet does not accept any input.
+.OUTPUTS
+    None. This cmdlet does not return any output.
+.NOTES
+    See the link for information.
+.LINK
+    https://developer.clickup.com/reference/createtaskfromtemplate
+#>
+function New-ClickUpTaskFromTemplate {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [ulong]$ListID,
+        [Parameter(Mandatory = $true)]
+        [string]$TemplateID,
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    $Body = @{
+        name = $Name
+    }
+
+    $Null = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/taskTemplate/$TemplateID" -Body $Body
 }

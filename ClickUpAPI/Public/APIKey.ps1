@@ -42,7 +42,7 @@ function Add-ClickUpAPIKey {
 
         Write-Verbose "Setting global variable 'ClickUpAPIKey'..."
         try {
-            Set-Variable -Name 'ClickUpAPIKey' -Value $SecureAPIKey -Option ReadOnly -Scope Global -Force
+            $Null = Set-Variable -Name 'ClickUpAPIKey' -Value $SecureAPIKey -Option ReadOnly -Scope Global -Force
         } catch {
             Write-Error "Failed to set global variable 'ClickUpAPIKey'. Error: $_"
         }
@@ -67,10 +67,10 @@ function Add-ClickUpAPIKey {
     Removes the stored API key from the session.
 
 .INPUTS
-    None.
+    None. This cmdlet does not accept any input.
 
 .OUTPUTS
-    None.
+    None. This cmdlet does not return any output.
 #>
 function Remove-ClickUpAPIKey {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -82,7 +82,7 @@ function Remove-ClickUpAPIKey {
         if ($PSCmdlet.ShouldProcess('ClickUpAPIKey', 'Remove Global Variable')) {
             Write-Verbose "Removing global variable 'ClickUpAPIKey'..."
             try {
-                Remove-Variable -Name 'ClickUpAPIKey' -Scope Global -Force -ErrorAction Stop
+                $Null = Remove-Variable -Name 'ClickUpAPIKey' -Scope Global -Force -ErrorAction Stop
             } catch {
                 Write-Error "Failed to remove global variable 'ClickUpAPIKey'. Error: $_"
             }
@@ -106,7 +106,7 @@ function Remove-ClickUpAPIKey {
     Retrieves the stored API key and assigns it to the $Key variable.
 
 .INPUTS
-    None.
+    None. This cmdlet does not accept any input.
 
 .OUTPUTS
     System.Security.SecureString. Returns the stored API key as a SecureString.

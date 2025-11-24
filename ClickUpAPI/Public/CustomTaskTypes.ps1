@@ -8,9 +8,11 @@
     PS C:\> Get-ClickUpCustomTaskTypes -TeamID 123
     Get Clickup Custom Task Types for Team with ID "123".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Array.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
@@ -18,6 +20,7 @@
 #>
 function Get-ClickUpCustomTaskTypes {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$TeamID

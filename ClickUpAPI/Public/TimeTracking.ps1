@@ -10,7 +10,7 @@
     PS C:\> Get-ClickUpTimeEntries -TeamID 512 -StartDate "12/01/2021 00:00" -EndDate "12/31/2021 23:59"
     Get ClickUp Time Entries for ClickUp team with ID "512" between December 1st, 2021 12:00 AM and December 31, 2021 11:59 PM.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject.
 .NOTES
@@ -91,7 +91,7 @@ function Get-ClickUpTimeEntries {
     PS C:\> Get-ClickUpTimeEntry -TeamID 512 -TimerID 1963465985517105840
     Get a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -122,7 +122,7 @@ function Get-ClickUpTimeEntry {
     PS C:\> Get-ClickUpTimeEntryHistory -TeamID 512 -TimerID 1963465985517105840
     Get the history of a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -156,7 +156,7 @@ function Get-ClickUpTimeEntryHistory {
     PS C:\> Get-ClickUpRunningTimeEntry -TeamID 512 -Assignee 1234
     Get running time entries for ClickUp team with ID "512" assigned to assingee with ID "1234"
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -195,7 +195,7 @@ function Get-ClickUpRunningTimeEntry {
     PS C:\> Get-ClickUpTimeEntryTags -TeamID 512
     Get time entry tags for ClickUp team with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -224,7 +224,7 @@ function Get-ClickUpTimeEntryTags {
     PS C:\> New-ClickUpTimeEntry -TeamID 1111111 -Description 'this is a test time entry' -StartDate '12/31/2021 08:25' -Duration '600'
     Create a new ClickUp time entry starting December 31, 2021 8:25 AM with a duration of 10 minutes.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -305,7 +305,7 @@ function New-ClickUpTimeEntry {
     PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
     Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -345,7 +345,7 @@ function Add-ClickUpTimeEntryTags {
     PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
     Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -391,7 +391,7 @@ function Set-ClickUpTimeEntryTags {
     PS C:\> Start-ClickUpTimeEntry -TeamID 512 -TaskID 9hx -Description 'Time entry description' -Billable $true
     Start time entry for task with ID "9hx" and set description to "Time entry description" and billable set to true for team with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -456,7 +456,7 @@ function Start-ClickUpTimeEntry() {
     PS C:\> Stop-ClickUpTimeEntry -TeamID 512
     Stop ClickUp time entries for Team with ID "512".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -488,7 +488,7 @@ function Stop-ClickUpTimeEntry() {
     PS C:\> Set-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description.' -Tags 'Time Entry Tag' -TagAction 'add'
     Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time entry description." and adds the tag "Time Entry Tag".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES
@@ -575,7 +575,7 @@ function Set-ClickUpTimeEntry() {
     PS C:\> Remove-ClickUpTimeEntry -TeamID 1111111 -TimerID 2222222222222222222
     Remove a ClickUp time entry with ID "2222222222222222222".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Management.Automation.PSCustomObject
 .NOTES

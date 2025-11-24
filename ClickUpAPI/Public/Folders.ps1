@@ -10,7 +10,7 @@
     PS C:\> Get-ClickUpFolders -SpaceID 11111111 -Archived $true
     Get all ClickUp folders under ClickUp Space with ID "11111111" including archived.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
@@ -44,7 +44,7 @@ function Get-ClickUpFolders {
     PS C:\> Get-ClickUpFolder -FolderID 11111111
     Get ClickUp folder with ID "11111111".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
@@ -72,7 +72,7 @@ function Get-ClickUpFolder {
     PS C:\> New-ClickUpFolder -SpaceID 11111111 -Name 'New Folder Name'
     Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with ID "11111111".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
@@ -106,7 +106,7 @@ function New-ClickUpFolder {
     PS C:\> Set-ClickUpFolder -FolderID 11111111 -Name 'Change Folder Name'
     Change the name of the ClickUp folder with ID "11111111" to "Change Folder Name".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
@@ -140,7 +140,7 @@ function Set-ClickUpFolder {
     PS C:\> Remove-ClickUpFolder -FolderID 11111111
     Delete the ClickUp folder with ID "11111111".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
@@ -169,7 +169,7 @@ function Remove-ClickUpFolder {
     PS C:\> New-ClickUpFolderFromTemplate -SpaceID 11111111 -TemplateID 22222222 -Name 'New Folder Name'
     Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with ID "11111111".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES

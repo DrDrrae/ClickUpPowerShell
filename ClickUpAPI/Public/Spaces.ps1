@@ -10,16 +10,19 @@
     PS C:\> Get-ClickUpSpaces TeamID 11111111 -Archived $true
     Returns the data on all the ClickUp Spaces with the Team ID "11111111" including archived
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/get-spaces.html
+    https://developer.clickup.com/reference/getspaces
 #>
 function Get-ClickUpSpaces {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$TeamID,
@@ -32,7 +35,7 @@ function Get-ClickUpSpaces {
     }
 
     $Spaces = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/space"
-    Return $Spaces.spaces
+    return $Spaces.spaces
 }
 
 <#
@@ -44,22 +47,23 @@ function Get-ClickUpSpaces {
     PS C:\> Get-ClickUpSpace SpaceID 11111111
     Returns the data on the ClickUp Space with ID "11111111"
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/get-space.html
+    https://developer.clickup.com/reference/getspace
 #>
 function Get-ClickUpSpace {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$SpaceID
     )
     $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
-    Return $Space
+    return $Space
 }
 
 <#
@@ -71,16 +75,17 @@ function Get-ClickUpSpace {
     PS C:\> New-ClickUpSpace -TeamID 11111111 -Name 'New ClickUp Space' -Multiple_Assignees
     Creates a new ClickUp Space with the name "New Clickup Space" and the Multiple Assignees feature enabled.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/create-space.html
+    https://developer.clickup.com/reference/createspace
 #>
 function New-ClickUpSpace {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$TeamID,
@@ -137,7 +142,7 @@ function New-ClickUpSpace {
         }
     }
     $Space = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/space" -Body $Body
-    Return $Space
+    return $Space
 }
 
 <#
@@ -176,9 +181,9 @@ function New-ClickUpSpace {
     PS C:\> Set-ClickUpSpace -SpaceID 11111111 -Body $Body
     Will enable the due dates feature and disable the time tracking and custom fields features of space with ID "11111111".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information on how to format the body.
 
@@ -220,10 +225,11 @@ function New-ClickUpSpace {
         }
     }
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/spaces/update-space.html
+    https://developer.clickup.com/reference/updatespace
 #>
 function Set-ClickUpSpace {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$SpaceID,
@@ -232,9 +238,26 @@ function Set-ClickUpSpace {
     )
 
     $Space = Invoke-ClickUpAPIPut -Endpoint "space/$SpaceID" -Body $Body
-    Return $Space
+    return $Space
 }
 
+<#
+.SYNOPSIS
+    Remove a ClickUp Space
+.DESCRIPTION
+    Remove a ClickUp Space.
+.EXAMPLE
+    PS C:\> Remove-ClickupSpace -SpaceID 11111111
+    Removes the ClickUp Space with ID "11111111"
+.INPUTS
+    None. This cmdlet does not accept any input.
+.OUTPUTS
+    None. This cmdlet does not return any output.
+.NOTES
+    See the link for information.
+.LINK
+    https://developer.clickup.com/reference/deletespace
+#>
 function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
@@ -243,7 +266,6 @@ function Remove-ClickupSpace {
     )
 
     if ($PSCmdlet.ShouldProcess($SpaceID)) {
-        $Space = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID"
-        Return $Space
+        $Null = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID"
     }
 }
