@@ -13,7 +13,7 @@
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/get-guest.html
+    https://developer.clickup.com/reference/getguest
 #>
 function Get-ClickUpGuest {
     [CmdletBinding()]
@@ -25,8 +25,15 @@ function Get-ClickUpGuest {
         [UInt64]$GuestID
     )
 
-    $Guest = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/guest/$GuestID"
-    Return $Guest.guest
+    Write-Verbose "Getting guest with ID: $GuestID for team ID: $TeamID"
+    try {
+        $Guest = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/guest/$GuestID"
+        Write-Verbose "Successfully retrieved guest: $($Guest.guest.username) (ID: $($Guest.guest.id))"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to get guest with ID $GuestID for team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -47,7 +54,7 @@ function Get-ClickUpGuest {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/invite-guest-to-workspace.html
+    https://developer.clickup.com/reference/inviteguesttoworkspace
 #>
 function Add-ClickUpGuest {
     [CmdletBinding()]
@@ -72,8 +79,15 @@ function Add-ClickUpGuest {
         can_see_time_estimated = $CanSeeTimeEstimated
     }
 
-    $Team = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/guest" -Body $Body
-    Return $Team.team
+    Write-Verbose "Inviting guest '$GuestEmail' to team ID: $TeamID"
+    try {
+        $Team = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/guest" -Body $Body
+        Write-Verbose "Successfully invited guest '$GuestEmail' to team ID: $TeamID"
+        return $Team.team
+    } catch {
+        Write-Error "Failed to invite guest '$GuestEmail' to team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -94,7 +108,7 @@ function Add-ClickUpGuest {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/edit-guest-on-workspace.html
+    https://developer.clickup.com/reference/editguestonworkspace
 #>
 function Set-ClickUpGuest {
     [CmdletBinding()]
@@ -102,6 +116,8 @@ function Set-ClickUpGuest {
     param (
         [Parameter(Mandatory = $True)]
         [UInt64]$TeamID,
+        [Parameter(Mandatory = $True)]
+        [UInt64]$GuestID,
         [Parameter()]
         [string]$Username,
         [Parameter()]
@@ -127,8 +143,15 @@ function Set-ClickUpGuest {
         $Body.Add('can_see_time_estimated', $CanSeeTimeEstimated)
     }
 
-    $Guest = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/guest" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Updating guest with ID: $GuestID for team ID: $TeamID"
+    try {
+        $Guest = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully updated guest with ID: $GuestID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to update guest with ID $GuestID for team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -187,8 +210,15 @@ function Add-ClickUpGuestToTask {
         $QueryString = @{}
     }
 
-    $Guest = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Adding guest with ID: $GuestID to task ID: $TaskID"
+    try {
+        $Guest = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully added guest with ID: $GuestID to task ID: $TaskID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to add guest with ID $GuestID to task ID $TaskID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -209,10 +239,10 @@ function Add-ClickUpGuestToTask {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html
+    https://developer.clickup.com/reference/addguesttolist
 #>
-function Add-ClickUpGuestToTask {
-    [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+function Add-ClickUpGuestToList {
+    [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
@@ -228,8 +258,15 @@ function Add-ClickUpGuestToTask {
         permission_level = $PermissionLevel
     }
 
-    $Guest = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/guest/$GuestID" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Adding guest with ID: $GuestID to list ID: $ListID"
+    try {
+        $Guest = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully added guest with ID: $GuestID to list ID: $ListID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to add guest with ID $GuestID to list ID $ListID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -250,7 +287,7 @@ function Add-ClickUpGuestToTask {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-folder.html
+    https://developer.clickup.com/reference/addguesttofolder
 #>
 function Add-ClickUpGuestToFolder {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
@@ -269,8 +306,15 @@ function Add-ClickUpGuestToFolder {
         permission_level = $PermissionLevel
     }
 
-    $Guest = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/guest/$GuestID" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Adding guest with ID: $GuestID to folder ID: $FolderID"
+    try {
+        $Guest = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully added guest with ID: $GuestID to folder ID: $FolderID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to add guest with ID $GuestID to folder ID $FolderID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -288,7 +332,7 @@ function Add-ClickUpGuestToFolder {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-workspace.html
+    https://developer.clickup.com/reference/removeguestfromworkspace
 #>
 function Remove-ClickUpGuest {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -300,9 +344,16 @@ function Remove-ClickUpGuest {
         [UInt64]$GuestID
     )
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Team = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/guest/$GuestID"
-        $Team.team
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Workspace')) {
+        Write-Verbose "Removing guest with ID: $GuestID from team ID: $TeamID"
+        try {
+            $Team = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from team ID: $TeamID"
+            return $Team.team
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from team ID $TeamID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -321,7 +372,7 @@ function Remove-ClickUpGuest {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-task.html
+    https://developer.clickup.com/reference/removeguestfromtask
 #>
 function Remove-ClickUpGuestFromTask {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
@@ -352,9 +403,16 @@ function Remove-ClickUpGuestFromTask {
         $QueryString = @{}
     }
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Guest = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID"
-        $Guest.guest
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Task')) {
+        Write-Verbose "Removing guest with ID: $GuestID from task ID: $TaskID"
+        try {
+            $Guest = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from task ID: $TaskID"
+            return $Guest.guest
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from task ID $TaskID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -373,7 +431,7 @@ function Remove-ClickUpGuestFromTask {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-list.html
+    https://developer.clickup.com/reference/removeguestfromlist
 #>
 function Remove-ClickUpGuestFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -385,9 +443,16 @@ function Remove-ClickUpGuestFromList {
         [UInt64]$GuestID
     )
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Guest = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID/guest/$GuestID"
-        $Guest.guest
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from List')) {
+        Write-Verbose "Removing guest with ID: $GuestID from list ID: $ListID"
+        try {
+            $Guest = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from list ID: $ListID"
+            return $Guest.guest
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from list ID $ListID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -406,7 +471,7 @@ function Remove-ClickUpGuestFromList {
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-folder.html
+    https://developer.clickup.com/reference/removeguestfromfolder
 #>
 function Remove-ClickUpGuestFromFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -418,8 +483,15 @@ function Remove-ClickUpGuestFromFolder {
         [UInt64]$GuestID
     )
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Guest = Invoke-ClickUpAPIDelete -Endpoint "folder/$FolderID/guest/$GuestID"
-        $Guest.guest
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Folder')) {
+        Write-Verbose "Removing guest with ID: $GuestID from folder ID: $FolderID"
+        try {
+            $Guest = Invoke-ClickUpAPIDelete -Endpoint "folder/$FolderID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from folder ID: $FolderID"
+            return $Guest.guest
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from folder ID $FolderID. Error: $_"
+            throw $_
+        }
     }
 }
