@@ -78,8 +78,16 @@ function Get-ClickUpTimeEntries {
         $QueryString.Add('team_id', $TeamID)
     }
 
-    $TimeTracking = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/time_entries"
-    Return $TimeTracking.data
+    Write-Verbose 'Entering Get-ClickUpTimeEntries'
+    try {
+        Write-Verbose "Getting time entries for team ID: $TeamID"
+        $TimeTracking = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/time_entries"
+        Write-Verbose 'Successfully retrieved time entries'
+        Return $TimeTracking.data
+    } catch {
+        Write-Error "Error in Get-ClickUpTimeEntries: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -109,8 +117,16 @@ function Get-ClickUpTimeEntry {
         [UInt64]$TimerID
     )
 
-    $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/$TimerID"
-    Return $TimeTracking.data
+    Write-Verbose 'Entering Get-ClickUpTimeEntry'
+    try {
+        Write-Verbose "Getting time entry with ID: $TimerID for team ID: $TeamID"
+        $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/$TimerID"
+        Write-Verbose 'Successfully retrieved time entry'
+        Return $TimeTracking.data
+    } catch {
+        Write-Error "Error in Get-ClickUpTimeEntry: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -140,8 +156,16 @@ function Get-ClickUpTimeEntryHistory {
         [UInt64]$TimerID
     )
 
-    $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/$TimerID/history"
-    $TimeTracking.data
+    Write-Verbose 'Entering Get-ClickUpTimeEntryHistory'
+    try {
+        Write-Verbose "Getting time entry history for timer ID: $TimerID in team ID: $TeamID"
+        $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/$TimerID/history"
+        Write-Verbose 'Successfully retrieved time entry history'
+        Return $TimeTracking.data
+    } catch {
+        Write-Error "Error in Get-ClickUpTimeEntryHistory: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -182,8 +206,16 @@ function Get-ClickUpRunningTimeEntry {
         $QueryString = @{}
     }
 
-    $TimeTracking = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/time_entries/current"
-    Return $TimeTracking.data
+    Write-Verbose 'Entering Get-ClickUpRunningTimeEntry'
+    try {
+        Write-Verbose "Getting running time entry for team ID: $TeamID"
+        $TimeTracking = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/time_entries/current"
+        Write-Verbose 'Successfully retrieved running time entry'
+        Return $TimeTracking.data
+    } catch {
+        Write-Error "Error in Get-ClickUpRunningTimeEntry: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -211,8 +243,16 @@ function Get-ClickUpTimeEntryTags {
         [UInt64]$TeamID
     )
 
-    $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/tags"
-    Return $TimeTracking.data
+    Write-Verbose 'Entering Get-ClickUpTimeEntryTags'
+    try {
+        Write-Verbose "Getting time entry tags for team ID: $TeamID"
+        $TimeTracking = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/time_entries/tags"
+        Write-Verbose 'Successfully retrieved time entry tags'
+        Return $TimeTracking.data
+    } catch {
+        Write-Error "Error in Get-ClickUpTimeEntryTags: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -289,8 +329,16 @@ function New-ClickUpTimeEntry {
         $Body.Add('tid', $TaskID)
     }
 
-    $TimeEntry = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "team/$TeamID/time_entries" -Body $Body
-    Return $TimeEntry.data
+    Write-Verbose 'Entering New-ClickUpTimeEntry'
+    try {
+        Write-Verbose "Creating new time entry for team ID: $TeamID"
+        $TimeEntry = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "team/$TeamID/time_entries" -Body $Body
+        Write-Verbose 'Successfully created time entry'
+        Return $TimeEntry.data
+    } catch {
+        Write-Error "Error in New-ClickUpTimeEntry: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -330,7 +378,15 @@ function Add-ClickUpTimeEntryTags {
         tags           = $Tags
     }
 
-    Invoke-ClickUpAPIPost -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+    Write-Verbose 'Entering Add-ClickUpTimeEntryTags'
+    try {
+        Write-Verbose "Adding tags to time entries: $($TimeEntryIDs -join ', ') for team ID: $TeamID"
+        Invoke-ClickUpAPIPost -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+        Write-Verbose 'Successfully added tags to time entries'
+    } catch {
+        Write-Error "Error in Add-ClickUpTimeEntryTags: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -339,11 +395,11 @@ function Add-ClickUpTimeEntryTags {
 .DESCRIPTION
     Update tag names from ClickUp time entries.
 .EXAMPLE
-    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222 -Tags "name of tag"
-    Add the tag with name "name of tag" to ClickUp time entry with ID "2222222222222222222".
+    PS C:\> Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag" -NewTagName "new tag"
+    Rename the tag "old tag" to "new tag" for team with ID "1111111".
 .EXAMPLE
-    PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
-    Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
+    PS C:\> Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag" -NewTagName "new tag" -TagBackgroundColor "#FF0000" -TagForegroundColor "#FFFFFF"
+    Rename the tag "old tag" to "new tag" with custom colors for team with ID "1111111".
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
@@ -376,7 +432,15 @@ function Set-ClickUpTimeEntryTags {
         tag_fg   = $TagForegroundColor
     }
 
-    Invoke-ClickUpAPIPut -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+    Write-Verbose 'Entering Set-ClickUpTimeEntryTags'
+    try {
+        Write-Verbose "Updating tag name from '$OldTagName' to '$NewTagName' for team ID: $TeamID"
+        Invoke-ClickUpAPIPut -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+        Write-Verbose 'Successfully updated time entry tag'
+    } catch {
+        Write-Error "Error in Set-ClickUpTimeEntryTags: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -443,8 +507,16 @@ function Start-ClickUpTimeEntry() {
         $Body.Add('tags', $Tags)
     }
 
-    $TimeEntry = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "/team/$TeamID/time_entries/start/$TimerID" -Body $Body
-    Return $TimeEntry.data
+    Write-Verbose 'Entering Start-ClickUpTimeEntry'
+    try {
+        Write-Verbose "Starting time entry for team ID: $TeamID"
+        $TimeEntry = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "/team/$TeamID/time_entries/start/$TimerID" -Body $Body
+        Write-Verbose 'Successfully started time entry'
+        Return $TimeEntry.data
+    } catch {
+        Write-Error "Error in Start-ClickUpTimeEntry: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -472,8 +544,16 @@ function Stop-ClickUpTimeEntry() {
         [UInt64]$TeamID
     )
 
-    $TimeEntry = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/time_entries/stop"
-    $TimeEntry.data
+    Write-Verbose 'Entering Stop-ClickUpTimeEntry'
+    try {
+        Write-Verbose "Stopping time entry for team ID: $TeamID"
+        $TimeEntry = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/time_entries/stop" -Body @{}
+        Write-Verbose 'Successfully stopped time entry'
+        Return $TimeEntry.data
+    } catch {
+        Write-Error "Error in Stop-ClickUpTimeEntry: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -561,8 +641,16 @@ function Set-ClickUpTimeEntry() {
         $QueryString = @{}
     }
 
-    $TimeEntry = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "team/$TeamID/time_entries/stop" -Body $Body
-    $TimeEntry.data
+    Write-Verbose 'Entering Set-ClickUpTimeEntry'
+    try {
+        Write-Verbose "Updating time entry with timer ID: $TimerID for team ID: $TeamID"
+        $TimeEntry = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "team/$TeamID/time_entries/$TimerID" -Body $Body
+        Write-Verbose 'Successfully updated time entry'
+        Return $TimeEntry.data
+    } catch {
+        Write-Error "Error in Set-ClickUpTimeEntry: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 
@@ -593,8 +681,16 @@ function Remove-ClickUpTimeEntry {
         [UInt64]$TimerID
     )
 
+    Write-Verbose 'Entering Remove-ClickUpTimeEntry'
     if ($PSCmdlet.ShouldProcess($TimerID)) {
-        $TimeEntry = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/time_entries/$TimerID"
-        Return $TimeEntry.data
+        try {
+            Write-Verbose "Removing time entry with timer ID: $TimerID for team ID: $TeamID"
+            $TimeEntry = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/time_entries/$TimerID"
+            Write-Verbose 'Successfully removed time entry'
+            Return $TimeEntry.data
+        } catch {
+            Write-Error "Error in Remove-ClickUpTimeEntry: $($_.Exception.Message)"
+            throw $_
+        }
     }
 }
