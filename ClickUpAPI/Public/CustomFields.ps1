@@ -90,7 +90,7 @@ function Set-ClickUpCustomFieldValue {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Setting custom field value for TaskID: $TaskID, FieldID: $FieldID, Value: $Value"
@@ -151,7 +151,7 @@ function Remove-ClickUpCustomFieldValue {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Removing custom field value for TaskID: $TaskID, FieldID: $FieldID"

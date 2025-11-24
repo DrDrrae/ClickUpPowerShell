@@ -22,9 +22,9 @@ function Get-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
-        [uint64]$UserID,
+        [ulong]$UserID,
         [Parameter()]
         [bool]$IncludeShared = $true
     )
@@ -72,13 +72,13 @@ function New-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Email,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
         [Parameter()]
-        [UInt64]$CustomRoleID
+        [ulong]$CustomRoleID
     )
 
     $Body = @{
@@ -127,15 +127,15 @@ function Set-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
-        [uint64]$UserID,
+        [ulong]$UserID,
         [Parameter(Mandatory = $true)]
         [string]$Username,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
         [Parameter()]
-        [UInt64]$CustomRoleID
+        [ulong]$CustomRoleID
     )
 
     $Body = @{
@@ -184,9 +184,9 @@ function Remove-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
-        [uint64]$UserID
+        [ulong]$UserID
     )
 
     Write-Verbose 'Entering Remove-ClickUpUser'

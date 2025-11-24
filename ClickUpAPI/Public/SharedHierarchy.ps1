@@ -24,7 +24,7 @@ function Get-ClickUpSharedHierarchy {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpSharedHierarchy'

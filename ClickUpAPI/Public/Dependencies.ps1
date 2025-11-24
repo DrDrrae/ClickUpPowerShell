@@ -45,7 +45,7 @@ function Add-ClickUpDependency {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Entering Add-ClickUpDependency with TaskID: $TaskID"
@@ -118,7 +118,7 @@ function Remove-ClickUpDependency {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Entering Remove-ClickUpDependency with TaskID: $TaskID"
@@ -181,7 +181,7 @@ function Add-ClickUpTaskLink {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Entering Add-ClickUpTaskLink with TaskID: $TaskID, LinksTo: $LinksTo"
@@ -235,7 +235,7 @@ function Remove-ClickUpTaskLink {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Entering Remove-ClickUpTaskLink with TaskID: $TaskID, LinksTo: $LinksTo"

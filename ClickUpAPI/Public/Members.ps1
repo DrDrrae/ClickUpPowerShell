@@ -61,7 +61,7 @@ function Get-ClickUpListMembers {
     [OutputType([System.Object], [System.Array])]
     param(
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID
+        [ulong]$ListID
     )
 
     Write-Verbose 'Entering Get-ClickUpListMembers'

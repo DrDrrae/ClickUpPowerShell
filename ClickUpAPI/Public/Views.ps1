@@ -59,7 +59,7 @@ function Get-ClickUpTeamViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpTeamViews'
@@ -98,7 +98,7 @@ function Get-ClickUpSpaceViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$SpaceID
+        [ulong]$SpaceID
     )
 
     Write-Verbose 'Entering Get-ClickUpSpaceViews'
@@ -137,7 +137,7 @@ function Get-ClickUpFolderViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$FolderID
+        [ulong]$FolderID
     )
 
     Write-Verbose 'Entering Get-ClickUpFolderViews'
@@ -176,7 +176,7 @@ function Get-ClickUpListViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID
+        [ulong]$ListID
     )
 
     Write-Verbose 'Entering Get-ClickUpListViews'
@@ -220,7 +220,7 @@ function Get-ClickUpViewTasks {
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
         [Parameter()]
-        [UInt64]$Page = 0
+        [ulong]$Page = 0
     )
 
     $QueryString = @{
@@ -269,7 +269,7 @@ function New-ClickUpTeamView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -316,7 +316,7 @@ function New-ClickUpSpaceView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -363,7 +363,7 @@ function New-ClickUpFolderView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$FolderID,
+        [ulong]$FolderID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -410,7 +410,7 @@ function New-ClickUpListView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )

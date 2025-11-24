@@ -23,7 +23,7 @@ function Get-ClickUpCustomTaskTypes {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Retrieving custom task types for TeamID: $TeamID"

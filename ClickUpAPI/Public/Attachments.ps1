@@ -57,7 +57,7 @@ function New-ClickUpTaskAttachment {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose "Reading attachment from: $AttachmentPath"

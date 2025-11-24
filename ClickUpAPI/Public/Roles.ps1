@@ -22,7 +22,7 @@ function Get-ClickUpCustomRoles {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpCustomRoles'

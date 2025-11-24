@@ -22,7 +22,7 @@ function Get-ClickUpTags {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$SpaceID
+        [ulong]$SpaceID
     )
 
     Write-Verbose 'Entering Get-ClickUpTags'
@@ -58,7 +58,7 @@ function New-ClickUpTag {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName,
         [Parameter()]
@@ -112,7 +112,7 @@ function Set-ClickUpTag {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName,
         [Parameter()]
@@ -168,7 +168,7 @@ function Remove-ClickUpTag {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName
     )
@@ -218,7 +218,7 @@ function Add-ClickUpTagToTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Add-ClickUpTagToTask'
@@ -274,7 +274,7 @@ function Remove-ClickUpTagFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Remove-ClickUpTagFromTask'

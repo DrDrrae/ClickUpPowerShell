@@ -25,9 +25,9 @@ function Get-ClickUpTaskTemplates {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter()]
-        [UInt64]$Page = 0
+        [ulong]$Page = 0
     )
 
     Write-Verbose 'Entering Get-ClickUpTaskTemplates'

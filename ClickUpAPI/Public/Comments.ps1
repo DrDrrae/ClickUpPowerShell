@@ -30,7 +30,7 @@ function Get-ClickUpTaskComments {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -115,7 +115,7 @@ function Get-ClickUpListComments {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$ListID
+        [ulong]$ListID
     )
 
     Write-Verbose "Retrieving comments for list '$ListID'..."
@@ -153,7 +153,7 @@ function Get-ClickUpThreadedComments {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$CommentID
+        [ulong]$CommentID
     )
 
     Write-Verbose "Retrieving comments for comment '$CommentID'..."
@@ -193,7 +193,7 @@ function Set-ClickUpComment {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$CommentID,
+        [ulong]$CommentID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -229,7 +229,7 @@ function Remove-ClickUpListComment {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$CommentID
+        [ulong]$CommentID
     )
 
     if ($PSCmdlet.ShouldProcess($CommentID, 'Delete Comment')) {
@@ -295,7 +295,7 @@ function New-ClickUpTaskComment {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -404,7 +404,7 @@ function New-ClickUpListComment {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -455,7 +455,7 @@ function New-ClickUpThreadedComment {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$CommentID,
+        [ulong]$CommentID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )

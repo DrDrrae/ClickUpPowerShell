@@ -20,9 +20,9 @@ function Get-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $True)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
     Write-Verbose "Getting guest with ID: $GuestID for team ID: $TeamID"
@@ -61,7 +61,7 @@ function Add-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $True)]
         [string]$GuestEmail,
         [Parameter()]
@@ -115,9 +115,9 @@ function Set-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $True)]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter()]
         [string]$Username,
         [Parameter()]
@@ -186,7 +186,7 @@ function Add-ClickUpGuestToTask {
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -194,7 +194,7 @@ function Add-ClickUpGuestToTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     $Body = @{
@@ -246,9 +246,9 @@ function Add-ClickUpGuestToList {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -294,9 +294,9 @@ function Add-ClickUpGuestToFolder {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$FolderID,
+        [ulong]$FolderID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -339,9 +339,9 @@ function Remove-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Workspace')) {
@@ -383,7 +383,7 @@ function Remove-ClickUpGuestFromTask {
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -391,7 +391,7 @@ function Remove-ClickUpGuestFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -440,7 +440,7 @@ function Remove-ClickUpGuestFromList {
         [Parameter(Mandatory = $true)]
         [string]$ListID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from List')) {
@@ -480,7 +480,7 @@ function Remove-ClickUpGuestFromFolder {
         [Parameter(Mandatory = $true)]
         [string]$FolderID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Folder')) {

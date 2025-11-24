@@ -58,7 +58,7 @@ function Get-ClickUpTeamPlan {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpTeamPlan'
@@ -96,7 +96,7 @@ function Get-ClickUpTeamSeats {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpTeamSeats'

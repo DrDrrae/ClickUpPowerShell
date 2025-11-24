@@ -24,7 +24,7 @@ function Get-ClickUpWebhooks {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpWebhooks'
@@ -70,15 +70,15 @@ function New-ClickUpWebhook {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $True)]
         [string]$Endpoint,
         [Parameter()]
         [string[]]$Events = '*',
         [Parameter()]
-        [UInt64]$FilterToSpaceID,
+        [ulong]$FilterToSpaceID,
         [Parameter()]
-        [UInt64]$FilterToFolderID,
+        [ulong]$FilterToFolderID,
         [Parameter()]
         [string]$FilterToListID,
         [Parameter()]
@@ -153,9 +153,9 @@ function Set-ClickUpWebhook {
         [ValidateSet('active')]
         [string]$Status,
         [Parameter()]
-        [UInt64]$FilterToSpaceID,
+        [ulong]$FilterToSpaceID,
         [Parameter()]
-        [UInt64]$FilterToFolderID,
+        [ulong]$FilterToFolderID,
         [Parameter()]
         [string]$FilterToListID,
         [Parameter()]

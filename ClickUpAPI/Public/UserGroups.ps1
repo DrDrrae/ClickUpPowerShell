@@ -22,7 +22,7 @@ function Get-ClickupUserGroups {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter()]
         [string[]]$GroupIDs
     )
@@ -72,11 +72,11 @@ function New-ClickUpUserGroup {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter(Mandatory = $true)]
-        [UInt64[]]$Members,
+        [ulong[]]$Members,
         [Parameter()]
         [string]$Handle
     )
@@ -130,9 +130,9 @@ function Set-ClickUpUserGroup {
         [Parameter()]
         [string]$Handle,
         [Parameter()]
-        [UInt64[]]$AddMembers = @(),
+        [ulong[]]$AddMembers = @(),
         [Parameter()]
-        [UInt64[]]$RemoveMembers = @()
+        [ulong[]]$RemoveMembers = @()
     )
 
     $Body = @{}

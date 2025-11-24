@@ -32,9 +32,9 @@ function Get-ClickUpLists {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [UInt64]$FolderID,
+        [ulong]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [UInt64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [bool]$Archived = $false
@@ -83,7 +83,7 @@ function Get-ClickUpList {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID
+        [ulong]$ListID
     )
 
     Write-Verbose 'Entering Get-ClickUpList'
@@ -130,9 +130,9 @@ function New-ClickUpList {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [UInt64]$FolderID,
+        [ulong]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [UInt64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
         [string]$Name,
@@ -150,7 +150,7 @@ function New-ClickUpList {
         [UInt16]$Priorty,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
-        [UInt64]$Assignee,
+        [ulong]$Assignee,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [string]$Status
@@ -233,7 +233,7 @@ function Set-ClickUpList {
         [Parameter()]
         [UInt16]$Priorty,
         [Parameter()]
-        [UInt64]$Assignee,
+        [ulong]$Assignee,
         [Parameter()]
         [bool]$UnsetStatus
     )
@@ -295,7 +295,7 @@ function Remove-ClickUpList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID
+        [ulong]$ListID
     )
     Write-Verbose 'Entering Remove-ClickUpList'
     try {
@@ -334,7 +334,7 @@ function Add-ClickUpTaskToList {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$TaskID
     )
@@ -371,7 +371,7 @@ function Remove-ClickUpTaskFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$TaskID
     )
@@ -421,15 +421,15 @@ function New-ClickUpListFromTemplate {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [uint64]$FolderID,
+        [ulong]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [uint64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [uint64]$TemplateID,
+        [ulong]$TemplateID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [uint64]$Name,
+        [ulong]$Name,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [bool]$ReturnImmediately,

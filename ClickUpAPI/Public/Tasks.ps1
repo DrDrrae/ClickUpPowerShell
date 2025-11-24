@@ -37,7 +37,7 @@ function Get-ClickUpTasks {
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
-        [uint64]$Page = 0,
+        [ulong]$Page = 0,
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
@@ -53,13 +53,13 @@ function Get-ClickUpTasks {
         [bool]$Subtasks = $false,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [uint64[]]$SpaceIDs,
+        [ulong[]]$SpaceIDs,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [uint64[]]$ProjectIDs,
+        [ulong[]]$ProjectIDs,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [uint64[]]$ListIDs,
+        [ulong[]]$ListIDs,
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
@@ -199,7 +199,7 @@ function Get-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -258,7 +258,7 @@ function Get-ClickUpTaskTimeInStatus {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -317,7 +317,7 @@ function Get-ClickUpTaskTimeInStatusBulk {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     $QueryString = @{
@@ -368,17 +368,17 @@ function New-ClickUpTask {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [string]$Description,
-        [uint64[]]$Assignees,
+        [ulong[]]$Assignees,
         [string[]]$Tags,
         [string]$Status,
-        [uint64]$Priority,
+        [ulong]$Priority,
         [datetime]$DueDate,
         [bool]$DueDateTime = $false,
-        [uint64]$TimeEstimate,
+        [ulong]$TimeEstimate,
         [datetime]$StartDate,
         [bool]$StartDateTime = $false,
         [bool]$NotifyAll,
@@ -515,7 +515,7 @@ function Set-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
 
@@ -569,7 +569,7 @@ function Remove-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     Write-Verbose 'Entering Remove-ClickUpTask'

@@ -25,7 +25,7 @@ function Get-ClickUpSpaces {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter()]
         [bool]$Archived = $false
     )
@@ -68,7 +68,7 @@ function Get-ClickUpSpace {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$SpaceID
+        [ulong]$SpaceID
     )
 
     Write-Verbose 'Entering Get-ClickUpSpace'
@@ -105,7 +105,7 @@ function New-ClickUpSpace {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [bool]$Multiple_Assignees = $true,
@@ -258,7 +258,7 @@ function Set-ClickUpSpace {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$SpaceID,
+        [ulong]$SpaceID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -296,7 +296,7 @@ function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$SpaceID
+        [ulong]$SpaceID
     )
 
     Write-Verbose 'Entering Remove-ClickupSpace'
