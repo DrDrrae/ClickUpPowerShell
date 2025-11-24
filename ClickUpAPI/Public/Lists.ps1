@@ -40,16 +40,25 @@ function Get-ClickUpLists {
         [bool]$Archived = $false
     )
 
+    Write-Verbose 'Entering Get-ClickUpLists'
     $QueryString = @{
         $Archived = $Archived
     }
 
-    if ($PSBoundParameters.ContainsKey('FolderID')) {
-        $Lists = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "folder/$FolderID/list"
-    } elseif ($PSBoundParameters.ContainsKey('SpaceID')) {
-        $Lists = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "space/$SpaceID/list"
+    try {
+        if ($PSBoundParameters.ContainsKey('FolderID')) {
+            Write-Verbose "Getting lists for folder ID: $FolderID"
+            $Lists = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "folder/$FolderID/list"
+        } elseif ($PSBoundParameters.ContainsKey('SpaceID')) {
+            Write-Verbose "Getting lists for space ID: $SpaceID"
+            $Lists = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "space/$SpaceID/list"
+        }
+        Write-Verbose 'Successfully retrieved lists'
+        return $Lists.lists
+    } catch {
+        Write-Error "Error in Get-ClickUpLists: $($_.Exception.Message)"
+        throw $_
     }
-    return $Lists.lists
 }
 
 <#
@@ -77,8 +86,16 @@ function Get-ClickUpList {
         [UInt64]$ListID
     )
 
-    $List = Invoke-ClickUpAPIGet -Endpoint "list/$ListID"
-    return $List
+    Write-Verbose 'Entering Get-ClickUpList'
+    try {
+        Write-Verbose "Getting list with ID: $ListID"
+        $List = Invoke-ClickUpAPIGet -Endpoint "list/$ListID"
+        Write-Verbose 'Successfully retrieved list'
+        return $List
+    } catch {
+        Write-Error "Error in Get-ClickUpList: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -139,6 +156,7 @@ function New-ClickUpList {
         [string]$Status
     )
 
+    Write-Verbose 'Entering New-ClickUpList'
     $Body = @{
         name = $Name
     }
@@ -162,12 +180,20 @@ function New-ClickUpList {
         $Body.Add('status', $Status)
     }
 
-    if ($PSBoundParameters.ContainsKey('FolderID')) {
-        $List = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/list" -Body $Body
-    } elseif ($PSBoundParameters.ContainsKey('SpaceID')) {
-        $List = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/list" -Body $Body
+    try {
+        if ($PSBoundParameters.ContainsKey('FolderID')) {
+            Write-Verbose "Creating list '$Name' in folder ID: $FolderID"
+            $List = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/list" -Body $Body
+        } elseif ($PSBoundParameters.ContainsKey('SpaceID')) {
+            Write-Verbose "Creating list '$Name' in space ID: $SpaceID"
+            $List = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/list" -Body $Body
+        }
+        Write-Verbose 'Successfully created list'
+        return $List
+    } catch {
+        Write-Error "Error in New-ClickUpList: $($_.Exception.Message)"
+        throw $_
     }
-    return $List
 }
 
 <#
@@ -212,6 +238,7 @@ function Set-ClickUpList {
         [bool]$UnsetStatus
     )
 
+    Write-Verbose 'Entering Set-ClickUpList'
     $Body = @{}
 
     if ($PSBoundParameters.ContainsKey('Name')) {
@@ -236,7 +263,15 @@ function Set-ClickUpList {
         $Body.Add('unset_status', $UnsetStatus)
     }
 
-
+    try {
+        Write-Verbose "Updating list with ID: $ListID"
+        $List = Invoke-ClickUpAPIPut -Endpoint "list/$ListID" -Body $Body
+        Write-Verbose 'Successfully updated list'
+        return $List
+    } catch {
+        Write-Error "Error in Set-ClickUpList: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -262,8 +297,16 @@ function Remove-ClickUpList {
         [Parameter(Mandatory = $true)]
         [UInt64]$ListID
     )
-    if ($PSCmdlet.ShouldProcess($ListID)) {
-        $Null = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID"
+    Write-Verbose 'Entering Remove-ClickUpList'
+    try {
+        if ($PSCmdlet.ShouldProcess($ListID, 'Remove ClickUp List')) {
+            Write-Verbose "Removing list with ID: $ListID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID"
+            Write-Verbose 'Successfully removed list'
+        }
+    } catch {
+        Write-Error "Error in Remove-ClickUpList: $($_.Exception.Message)"
+        throw $_
     }
 }
 
@@ -296,7 +339,15 @@ function Add-ClickUpTaskToList {
         [string]$TaskID
     )
 
-    $Null = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/task/$TaskID"
+    Write-Verbose 'Entering Add-ClickUpTaskToList'
+    try {
+        Write-Verbose "Adding task $TaskID to list $ListID"
+        $Null = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/task/$TaskID"
+        Write-Verbose 'Successfully added task to list'
+    } catch {
+        Write-Error "Error in Add-ClickUpTaskToList: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -325,8 +376,16 @@ function Remove-ClickUpTaskFromList {
         [string]$TaskID
     )
 
-    if ($PSCmdlet.ShouldProcess($TaskID)) {
-        $Null = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID/task/$TaskID"
+    Write-Verbose 'Entering Remove-ClickUpTaskFromList'
+    try {
+        if ($PSCmdlet.ShouldProcess("Task: $TaskID, List: $ListID", 'Remove Task from List')) {
+            Write-Verbose "Removing task $TaskID from list $ListID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID/task/$TaskID"
+            Write-Verbose 'Successfully removed task from list'
+        }
+    } catch {
+        Write-Error "Error in Remove-ClickUpTaskFromList: $($_.Exception.Message)"
+        throw $_
     }
 }
 
@@ -464,6 +523,7 @@ function New-ClickUpListFromTemplate {
         [int]$Archived
     )
 
+    Write-Verbose 'Entering New-ClickUpListFromTemplate'
     $Body = @{
         name               = $Name
         return_immediately = $ReturnImmediately
@@ -557,11 +617,19 @@ function New-ClickUpListFromTemplate {
         $Body.Add('archived', $Archived)
     }
 
-    if ($PSBoundParameters.ContainsKey('FolderID')) {
-        $NewList = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/list_template/$TemplateID" -Body $Body
+    try {
+        if ($PSBoundParameters.ContainsKey('FolderID')) {
+            Write-Verbose "Creating list from template $TemplateID in folder $FolderID"
+            $NewList = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/list_template/$TemplateID" -Body $Body
+        }
+        if ($PSBoundParameters.ContainsKey('SpaceID')) {
+            Write-Verbose "Creating list from template $TemplateID in space $SpaceID"
+            $NewList = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/list_template/$TemplateID" -Body $Body
+        }
+        Write-Verbose 'Successfully created list from template'
+        return $NewList
+    } catch {
+        Write-Error "Error in New-ClickUpListFromTemplate: $($_.Exception.Message)"
+        throw $_
     }
-    if ($PSBoundParameters.ContainsKey('SpaceID')) {
-        $NewList = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/list_template/$TemplateID" -Body $Body
-    }
-    return $NewList
 }
