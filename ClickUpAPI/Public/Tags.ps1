@@ -25,8 +25,16 @@ function Get-ClickUpTags {
         [uint64]$SpaceID
     )
 
-    $Tags = Invoke-ClickUpAPIGet-Endpoint "space/$SpaceID/tag"
-    return $Tags.tags
+    Write-Verbose 'Entering Get-ClickUpTags'
+    try {
+        Write-Verbose "Getting tags for space ID: $SpaceID"
+        $Tags = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID/tag"
+        Write-Verbose 'Successfully retrieved tags'
+        return $Tags.tags
+    } catch {
+        Write-Error "Error in Get-ClickUpTags: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -59,18 +67,26 @@ function New-ClickUpTag {
         [string]$BackgroundColor
     )
 
-    $Body = @{
-        name = $TagName
-    }
+    Write-Verbose 'Entering New-ClickUpTag'
+    try {
+        Write-Verbose "Creating tag '$TagName' in space ID: $SpaceID"
+        $Body = @{
+            name = $TagName
+        }
 
-    if ($PSBoundParameters.ContainsKey('ForegroundColor')) {
-        $Body.Add('tag_fg', $ForegroundColor)
-    }
-    if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
-        $Body.Add('tag_bg', $BackgroundColor)
-    }
+        if ($PSBoundParameters.ContainsKey('ForegroundColor')) {
+            $Body.Add('tag_fg', $ForegroundColor)
+        }
+        if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
+            $Body.Add('tag_bg', $BackgroundColor)
+        }
 
-    $null = Invoke-ClickUpAPIPost-Endpoint "space/$SpaceID/tag" -Body $Body
+        $null = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/tag" -Body $Body
+        Write-Verbose 'Successfully created tag'
+    } catch {
+        Write-Error "Error in New-ClickUpTag: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 
@@ -107,20 +123,28 @@ function Set-ClickUpTag {
         [string]$BackgroundColor
     )
 
-    $Body = @{}
+    Write-Verbose 'Entering Set-ClickUpTag'
+    try {
+        Write-Verbose "Updating tag '$TagName' in space ID: $SpaceID"
+        $Body = @{}
 
-    if ($PSBoundParameters.ContainsKey('NewName')) {
-        $Body.Add('name', $NewName)
-    }
-    if ($PSBoundParameters.ContainsKey('ForegroundColor')) {
-        $Body.Add('tag_fg', $ForegroundColor)
-    }
-    if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
-        $Body.Add('tag_bg', $BackgroundColor)
-    }
+        if ($PSBoundParameters.ContainsKey('NewName')) {
+            $Body.Add('name', $NewName)
+        }
+        if ($PSBoundParameters.ContainsKey('ForegroundColor')) {
+            $Body.Add('tag_fg', $ForegroundColor)
+        }
+        if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
+            $Body.Add('tag_bg', $BackgroundColor)
+        }
 
-    $Tag = Invoke-ClickUpAPIPut-Endpoint "space/$SpaceID/tag/$TagName" -Body $Body
-    return $Tag.tag
+        $Tag = Invoke-ClickUpAPIPut -Endpoint "space/$SpaceID/tag/$TagName" -Body $Body
+        Write-Verbose 'Successfully updated tag'
+        return $Tag.tag
+    } catch {
+        Write-Error "Error in Set-ClickUpTag: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -149,8 +173,16 @@ function Remove-ClickUpTag {
         [string]$TagName
     )
 
-    if ($PSCmdlet.ShouldProcess($Name)) {
-        $Null = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID/tag/$TagName"
+    Write-Verbose 'Entering Remove-ClickUpTag'
+    try {
+        if ($PSCmdlet.ShouldProcess($TagName)) {
+            Write-Verbose "Removing tag '$TagName' from space ID: $SpaceID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID/tag/$TagName"
+            Write-Verbose 'Successfully removed tag'
+        }
+    } catch {
+        Write-Error "Error in Remove-ClickUpTag: $($_.Exception.Message)"
+        throw $_
     }
 }
 
@@ -189,16 +221,25 @@ function Add-ClickUpTagToTask {
         [uint64]$TeamID
     )
 
-    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
-        $QueryString = @{
-            custom_task_ids = $CustomTaskIDs
-            team_id         = $TeamID
+    Write-Verbose 'Entering Add-ClickUpTagToTask'
+    try {
+        Write-Verbose "Adding tag '$TagName' to task ID: $TaskID"
+        if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+            $QueryString = @{
+                custom_task_ids = $CustomTaskIDs
+                team_id         = $TeamID
+            }
+        } else {
+            $QueryString = @{
+            }
         }
-    } else {
-        $QueryString = @{}
-    }
 
-    $null = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
+        $null = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
+        Write-Verbose 'Successfully added tag to task'
+    } catch {
+        Write-Error "Error in Add-ClickUpTagToTask: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -236,16 +277,25 @@ function Remove-ClickUpTagFromTask {
         [uint64]$TeamID
     )
 
-    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
-        $QueryString = @{
-            custom_task_ids = $CustomTaskIDs
-            team_id         = $TeamID
+    Write-Verbose 'Entering Remove-ClickUpTagFromTask'
+    try {
+        if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+            $QueryString = @{
+                custom_task_ids = $CustomTaskIDs
+                team_id         = $TeamID
+            }
+        } else {
+            $QueryString = @{
+            }
         }
-    } else {
-        $QueryString = @{}
-    }
 
-    if ($PSCmdlet.ShouldProcess($TaskID)) {
-        $null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
+        if ($PSCmdlet.ShouldProcess($TaskID)) {
+            Write-Verbose "Removing tag '$TagName' from task ID: $TaskID"
+            $null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/tag/$TagName"
+            Write-Verbose 'Successfully removed tag from task'
+        }
+    } catch {
+        Write-Error "Error in Remove-ClickUpTagFromTask: $($_.Exception.Message)"
+        throw $_
     }
 }
