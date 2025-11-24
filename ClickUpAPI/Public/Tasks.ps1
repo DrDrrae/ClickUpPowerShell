@@ -152,12 +152,21 @@ function Get-ClickUpTasks {
         $QueryString.Add('custom_fields', $CustomFields)
     }
 
-    if ($PSBoundParameters.ContainsKey('ListID')) {
-        $Tasks = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "list/$ListID/task"
-    } elseif ($PSBoundParameters.ContainsKey('TeamID')) {
-        $Tasks = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/task"
+    Write-Verbose 'Entering Get-ClickUpTasks'
+    try {
+        if ($PSBoundParameters.ContainsKey('ListID')) {
+            Write-Verbose "Getting tasks for list ID: $ListID"
+            $Tasks = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "list/$ListID/task"
+        } elseif ($PSBoundParameters.ContainsKey('TeamID')) {
+            Write-Verbose "Getting tasks for team ID: $TeamID"
+            $Tasks = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/task"
+        }
+        Write-Verbose 'Successfully retrieved tasks'
+        return $Tasks.tasks
+    } catch {
+        Write-Error "Error in Get-ClickUpTasks: $($_.Exception.Message)"
+        throw $_
     }
-    return $Tasks.tasks
 }
 
 <#
@@ -207,8 +216,16 @@ function Get-ClickUpTask {
         }
     }
 
-    $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID"
-    return $Task
+    Write-Verbose 'Entering Get-ClickUpTask'
+    try {
+        Write-Verbose "Getting task with ID: $TaskID"
+        $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID"
+        Write-Verbose 'Successfully retrieved task'
+        return $Task
+    } catch {
+        Write-Error "Error in Get-ClickUpTask: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -251,13 +268,23 @@ function Get-ClickUpTaskTimeInStatus {
         include_subtasks = $IncludeSubtasks
     }
 
-    $QueryString += @{
-        custom_task_ids = $CustomTaskIDs
-        team_id         = $TeamID
+    if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
+        $QueryString += @{
+            custom_task_ids = $CustomTaskIDs
+            team_id         = $TeamID
+        }
     }
 
-    $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/time_in_status"
-    return $Task
+    Write-Verbose 'Entering Get-ClickUpTaskTimeInStatus'
+    try {
+        Write-Verbose "Getting time in status for task ID: $TaskID"
+        $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/time_in_status"
+        Write-Verbose 'Successfully retrieved task time in status'
+        return $Task
+    } catch {
+        Write-Error "Error in Get-ClickUpTaskTimeInStatus: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -304,8 +331,16 @@ function Get-ClickUpTaskTimeInStatusBulk {
         }
     }
 
-    $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint 'task/bulk_time_in_status/task_ids'
-    return $Task
+    Write-Verbose 'Entering Get-ClickUpTaskTimeInStatusBulk'
+    try {
+        Write-Verbose "Getting bulk time in status for task IDs: $($TaskID -join ', ')"
+        $Task = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint 'task/bulk_time_in_status/task_ids'
+        Write-Verbose 'Successfully retrieved bulk task time in status'
+        return $Task
+    } catch {
+        Write-Error "Error in Get-ClickUpTaskTimeInStatusBulk: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -396,8 +431,16 @@ function New-ClickUpTask {
         $Body.Add('custom_fields', $CustomFields)
     }
 
-    $Task = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/task" -Body $Body
-    return $Task
+    Write-Verbose 'Entering New-ClickUpTask'
+    try {
+        Write-Verbose "Creating new task '$Name' in list ID: $ListID"
+        $Task = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/task" -Body $Body
+        Write-Verbose 'Successfully created task'
+        return $Task
+    } catch {
+        Write-Error "Error in New-ClickUpTask: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -485,8 +528,16 @@ function Set-ClickUpTask {
         $QueryString = @{}
     }
 
-    $Task = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "task/$TaskID/" -Body $Body
-    return $Task
+    Write-Verbose 'Entering Set-ClickUpTask'
+    try {
+        Write-Verbose "Updating task with ID: $TaskID"
+        $Task = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "task/$TaskID/" -Body $Body
+        Write-Verbose 'Successfully updated task'
+        return $Task
+    } catch {
+        Write-Error "Error in Set-ClickUpTask: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -521,6 +572,7 @@ function Remove-ClickUpTask {
         [uint64]$TeamID
     )
 
+    Write-Verbose 'Entering Remove-ClickUpTask'
     if ($PSCmdlet.ShouldProcess($TaskID)) {
         if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
             $QueryString = @{
@@ -531,7 +583,14 @@ function Remove-ClickUpTask {
             $QueryString = @{}
         }
 
-        $Null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID"
+        try {
+            Write-Verbose "Removing task with ID: $TaskID"
+            $Null = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID"
+            Write-Verbose 'Successfully removed task'
+        } catch {
+            Write-Error "Error in Remove-ClickUpTask: $($_.Exception.Message)"
+            throw $_
+        }
     }
 }
 
@@ -539,13 +598,13 @@ function Remove-ClickUpTask {
 .SYNOPSIS
     Merge ClickUp tasks.
 .DESCRIPTION
-    Merge ClickUp tasks.
+    Merge multiple ClickUp tasks into a single task. The source tasks will be merged into the target task.
 .EXAMPLE
-    PS C:\> New-ClickUpTask -ListID 11111111 -Name 'This is a new task'
-    Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111".
+    PS C:\> Merge-ClickUpTasks -TaskID '9hz' -SourceTaskIDs '3cuh','g4fs'
+    Merges tasks with IDs "3cuh" and "g4fs" into the task with ID "9hz".
 .EXAMPLE
-    PS C:\> New-ClickUpTask -ListID 22222222 -Name 'This is another new task' -Description "Description of the other new task" -Assignees 33333333 -Status 'Review' -Priority 1
-    Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
+    PS C:\> Merge-ClickUpTasks -TaskID 'abc123' -SourceTaskIDs 'def456','ghi789','jkl012'
+    Merges three source tasks into the target task with ID "abc123".
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
@@ -568,7 +627,15 @@ function Merge-ClickUpTasks {
         source_task_ids = $SourceTaskIDs
     }
 
-    $Null = Invoke-ClickUpAPIPost -Endpoint "task/$TaskID/merge" -Body $Body
+    Write-Verbose 'Entering Merge-ClickUpTasks'
+    try {
+        Write-Verbose "Merging tasks $($SourceTaskIDs -join ', ') into task ID: $TaskID"
+        $Null = Invoke-ClickUpAPIPost -Endpoint "task/$TaskID/merge" -Body $Body
+        Write-Verbose 'Successfully merged tasks'
+    } catch {
+        Write-Error "Error in Merge-ClickUpTasks: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -577,11 +644,11 @@ function Merge-ClickUpTasks {
 .DESCRIPTION
     Create a new task using a task template defined in your workspace. Publicly shared templates must be added to your Workspace before you can use them with the public API.
 .EXAMPLE
-    PS C:\> New-ClickUpTaskFromTemplate -ListID 11111111 -Name 'This is a new task'
-    Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111".
+    PS C:\> New-ClickUpTaskFromTemplate -ListID 11111111 -TemplateID 'abc123' -Name 'Task from template'
+    Creates a new ClickUp Task called "Task from template" using the template with ID "abc123" under the list with ID "11111111".
 .EXAMPLE
-    PS C:\> New-ClickUpTaskFromTemplate -ListID 22222222 -Name 'This is another new task' -Description "Description of the other new task" -Assignees 33333333 -Status 'Review' -Priority 1
-    Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
+    PS C:\> New-ClickUpTaskFromTemplate -ListID 22222222 -TemplateID 'def456' -Name 'Another task from template'
+    Creates a new ClickUp Task called "Another task from template" using the template with ID "def456" under the list with ID "22222222".
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
@@ -606,5 +673,13 @@ function New-ClickUpTaskFromTemplate {
         name = $Name
     }
 
-    $Null = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/taskTemplate/$TemplateID" -Body $Body
+    Write-Verbose 'Entering New-ClickUpTaskFromTemplate'
+    try {
+        Write-Verbose "Creating task '$Name' from template ID: $TemplateID in list ID: $ListID"
+        $Null = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/taskTemplate/$TemplateID" -Body $Body
+        Write-Verbose 'Successfully created task from template'
+    } catch {
+        Write-Error "Error in New-ClickUpTaskFromTemplate: $($_.Exception.Message)"
+        throw $_
+    }
 }
