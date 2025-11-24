@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/createfolderview
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: New-ClickUpFolderView
 ---
 
-# Get-ClickUpThreadedComments
+# New-ClickUpFolderView
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Create new ClickUp folder view.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+New-ClickUpFolderView [-FolderID] <ulong> [-Body] <hashtable> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,49 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Create new ClickUp folder view.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+$body = @{
+>> name = "new folder view name"
+>> type = "list"
+>> grouping = @{
+>> field = 'status'
+>> dir = 1
+>> }
+>> }
+PS C:\> New-ClickUpFolderView -FolderID 124 -Body $Body
+Create new ClickUp folder view for folder with ID "124".
 
 ## PARAMETERS
 
-### -CommentID
+### -Body
 
-{{ Fill CommentID Description }}
+{{ Fill Body Description }}
+
+```yaml
+Type: System.Collections.Hashtable
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FolderID
+
+{{ Fill FolderID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -77,11 +106,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Object Hashtable.
 
 {{ Fill in the Description }}
 
-### System.Array
+### System.Object
 
 {{ Fill in the Description }}
 
@@ -92,4 +121,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/createfolderview)

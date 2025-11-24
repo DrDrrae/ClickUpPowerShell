@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: ''
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Import-ClickUpModuleSettings
 ---
 
-# Get-ClickUpThreadedComments
+# Import-ClickUpModuleSettings
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Imports the ClickUp module settings from a configuration file.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Import-ClickUpModuleSettings [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,37 +30,17 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Imports the ClickUp API key and JSON conversion depth settings from the secure XML configuration file.
+Sets the global variables 'ClickUpAPIKey' and 'ClickUpJSONConversionDepth'.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Import-ClickUpModuleSettings
+Imports the settings from the configuration file.
 
 ## PARAMETERS
-
-### -CommentID
-
-{{ Fill CommentID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
 
 ### CommonParameters
 
@@ -77,19 +57,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### None. This cmdlet does not return any output.
 
 {{ Fill in the Description }}
 
 ## NOTES
 
-See the link for information.
+If the configuration file is not found, it sets a default JSON conversion depth and prompts the user to run Add-ClickUpAPIKey.
 
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+{{ Fill in the related links here }}
+

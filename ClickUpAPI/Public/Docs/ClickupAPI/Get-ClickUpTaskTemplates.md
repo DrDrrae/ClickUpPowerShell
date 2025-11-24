@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/gettasktemplates
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpTaskTemplates
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpTaskTemplates
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get all ClickUp task templates.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpTaskTemplates [-TeamID] <ulong> [[-Page] <ulong>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,46 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get all ClickUp task templates.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpTaskTemplates -TeamID 512
+Get all ClickUp task templates for team with ID "512".
+
+### EXAMPLE 2
+
+Get-ClickUpTaskTemplates -TeamID 512 -Page 1
+Get all ClickUp task templates for team with ID "512" starting on page 2.
 
 ## PARAMETERS
 
-### -CommentID
+### -Page
 
-{{ Fill CommentID Description }}
+{{ Fill Page Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -92,4 +118,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/gettasktemplates)

@@ -1,28 +1,34 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://developer.clickup.com/reference/addguesttotask
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: Add-ClickUpGuestToTask
 ---
 
-# Set-ClickUpList
+# Add-ClickUpGuestToTask
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Add ClickUp guest to task.
 
 ## SYNTAX
 
-### __AllParameterSets
+### TaskID (Default)
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
+Add-ClickUpGuestToTask -TaskID <string> -GuestID <ulong> [-PermissionLevel <string>]
  [<CommonParameters>]
+```
+
+### CustomTaskIDs
+
+```
+Add-ClickUpGuestToTask -TaskID <string> -GuestID <ulong> -CustomTaskIDs <bool> -TeamID <ulong>
+ [-PermissionLevel <string>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,88 +38,30 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Add ClickUp guest to task.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
+Add-ClickUpGuestToTask -TaskID c04 -GuestID 403
+Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "read".
 
 ### EXAMPLE 2
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+Add-ClickUpGuestToTask -TaskID c04 -GuestID 403 -PermissionLevel edit
+Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "edit".
+
+### EXAMPLE 3
+
+Add-ClickUpGuestToTask -TaskID CustomID -GuestID 403 -CustomTaskIDs $true -TeamID 123 -PermissionLevel edit.
+Add ClickUp guest user with  custom ID "CustomID" to task with ID "c04" with permission level "edit".
 
 ## PARAMETERS
 
-### -Assignee
+### -CustomTaskIDs
 
-{{ Fill Assignee Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 6
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Content
-
-{{ Fill Content Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 2
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDate
-
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 3
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill CustomTaskIDs Description }}
 
 ```yaml
 Type: System.Boolean
@@ -121,29 +69,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 4
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -ListID
-
-{{ Fill ListID Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
+- Name: CustomTaskIDs
+  Position: Named
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -153,9 +80,63 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Name
+### -GuestID
 
-{{ Fill Name Description }}
+{{ Fill GuestID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -PermissionLevel
+
+{{ Fill PermissionLevel Description }}
+
+```yaml
+Type: System.String
+DefaultValue: read
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TaskID
+
+{{ Fill TaskID Description }}
 
 ```yaml
 Type: System.String
@@ -163,9 +144,15 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 1
-  IsRequired: false
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -174,40 +161,19 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -TeamID
 
-{{ Fill Priority Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
-Type: System.UInt16
+Type: System.UInt64
 DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 5
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -UnsetStatus
-
-{{ Fill UnsetStatus Description }}
-
-```yaml
-Type: System.Boolean
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 7
-  IsRequired: false
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -246,4 +212,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://developer.clickup.com/reference/addguesttotask)

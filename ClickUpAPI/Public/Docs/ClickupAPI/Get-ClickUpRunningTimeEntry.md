@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-running-time-entry.html
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpRunningTimeEntry
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpRunningTimeEntry
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get running ClickUp time entries.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpRunningTimeEntry [-TeamID] <ulong> [[-Assignee] <ulong>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,46 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get running ClickUp time entries.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpRunningTimeEntry -TeamID 512
+Get running time entries for ClickUp team with ID "512".
+
+### EXAMPLE 2
+
+Get-ClickUpRunningTimeEntry -TeamID 512 -Assignee 1234
+Get running time entries for ClickUp team with ID "512" assigned to assingee with ID "1234"
 
 ## PARAMETERS
 
-### -CommentID
+### -Assignee
 
-{{ Fill CommentID Description }}
+{{ Fill Assignee Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -77,11 +103,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### System.Management.Automation.PSCustomObject
 
 {{ Fill in the Description }}
 
@@ -92,4 +114,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-running-time-entry.html)

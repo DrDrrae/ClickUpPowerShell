@@ -21,7 +21,7 @@ Update a ClickUp list.
 
 ```
 Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
+ [[-DueDateTime] <bool>] [[-Priorty] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
  [<CommonParameters>]
 ```
 
@@ -174,13 +174,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -Priorty
 
-{{ Fill Priority Description }}
+{{ Fill Priorty Description }}
 
 ```yaml
 Type: System.UInt16
-DefaultValue: 0
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:

@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getcustomitems
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpCustomTaskTypes
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpCustomTaskTypes
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get Clickup Custom Task Types.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpCustomTaskTypes [-TeamID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,20 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get Clickup Custom Task Types.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpCustomTaskTypes -TeamID 123
+Get Clickup Custom Task Types for Team with ID "123".
 
 ## PARAMETERS
 
-### -CommentID
+### -TeamID
 
-{{ Fill CommentID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -92,4 +92,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getcustomitems)

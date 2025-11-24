@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getauthorizeduser
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpAuthorizedUser
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpAuthorizedUser
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get ClickUp authorized user.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpAuthorizedUser [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,37 +30,16 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get ClickUp authorized user.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpAuthorizedUser
+Get the user that belongs to this token
 
 ## PARAMETERS
-
-### -CommentID
-
-{{ Fill CommentID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
 
 ### CommonParameters
 
@@ -81,10 +60,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
-### System.Array
-
-{{ Fill in the Description }}
-
 ## NOTES
 
 See the link for information.
@@ -92,4 +67,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getauthorizeduser)

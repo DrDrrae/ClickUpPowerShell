@@ -1,28 +1,27 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://developer.clickup.com/reference/inviteguesttoworkspace
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: Add-ClickUpGuest
 ---
 
-# Set-ClickUpList
+# Add-ClickUpGuest
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Invite ClickUp guest to workspace.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
- [<CommonParameters>]
+Add-ClickUpGuest [-TeamID] <ulong> [-GuestEmail] <string> [[-CanEditTags] <bool>]
+ [[-CanSeeTimeSpent] <bool>] [[-CanSeeTimeEstimated] <bool>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,50 +31,29 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Invite ClickUp guest to workspace.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
+Add-ClickUpGuest -TeamID 333 -GuestEmail 'guest@example.com'
+Add ClickUp guest user with email "guest@example.com" for team with ID "333".
 
 ### EXAMPLE 2
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+Add-ClickUpGuest -TeamID 333 -GuestEmail 'guest@example.com' -CanEditTags $true -CanSeeTimeSpent $true -CanSeeTimeEstimated $true
+Add ClickUp guest user with email "guest@example.com" for team with ID "333" and give them access to edit tags, see time spent, and see time estimated.
 
 ## PARAMETERS
 
-### -Assignee
+### -CanEditTags
 
-{{ Fill Assignee Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 6
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Content
-
-{{ Fill Content Description }}
+{{ Fill CanEditTags Description }}
 
 ```yaml
-Type: System.String
-DefaultValue: ''
+Type: System.Boolean
+DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -90,30 +68,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDate
+### -CanSeeTimeEstimated
 
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 3
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill CanSeeTimeEstimated Description }}
 
 ```yaml
 Type: System.Boolean
@@ -132,19 +89,19 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -ListID
+### -CanSeeTimeSpent
 
-{{ Fill ListID Description }}
+{{ Fill CanSeeTimeSpent Description }}
 
 ```yaml
-Type: System.String
-DefaultValue: ''
+Type: System.Boolean
+DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
-  Position: 0
-  IsRequired: true
+  Position: 3
+  IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -153,9 +110,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Name
+### -GuestEmail
 
-{{ Fill Name Description }}
+{{ Fill GuestEmail Description }}
 
 ```yaml
 Type: System.String
@@ -165,7 +122,7 @@ Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 1
-  IsRequired: false
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -174,40 +131,19 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -TeamID
 
-{{ Fill Priority Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
-Type: System.UInt16
+Type: System.UInt64
 DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
-  Position: 5
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -UnsetStatus
-
-{{ Fill UnsetStatus Description }}
-
-```yaml
-Type: System.Boolean
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 7
-  IsRequired: false
+  Position: 0
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -246,4 +182,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://developer.clickup.com/reference/inviteguesttoworkspace)

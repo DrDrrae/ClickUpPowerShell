@@ -25,6 +25,7 @@
     See the link for information.
 .LINK
     https://developer.clickup.com/reference/getlists
+.LINK
     https://developer.clickup.com/reference/getfolderlesslists
 #>
 function Get-ClickUpLists {
@@ -107,13 +108,13 @@ function Get-ClickUpList {
     PS C:\> New-ClickUpList -FolderID 456 -Name "New ClickUp List"
     Create a ClickUp list called "New ClickUp List" under folder with ID "456".
 .EXAMPLE
-    PS C:\> New-ClickUpList -FolderID 456 -Name "New ClickUp List" -DueDate "12/31/2021" -Prority 2
+    PS C:\> New-ClickUpList -FolderID 456 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
     Create a ClickUp list called "New ClickUp List" under folder with ID "456" with a due date and priority.
 .EXAMPLE
     PS C:\> New-ClickUpList -SpaceID 789 -Name "New ClickUp List"
     Create a ClickUp list called "New ClickUp List" under space with ID "789".
 .EXAMPLE
-    PS C:\> New-ClickUpList -SpaceID 789 -Name "New ClickUp List" -DueDate "12/31/2021" -Prority 2
+    PS C:\> New-ClickUpList -SpaceID 789 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
     Create a ClickUp list called "New ClickUp List" under space with ID "789" with a due date and priority.
 .INPUTS
     None. This cmdlet does not accept any input.
@@ -123,6 +124,7 @@ function Get-ClickUpList {
     See the link for information.
 .LINK
     https://developer.clickup.com/reference/createlist
+.LINK
     https://developer.clickup.com/reference/createfolderlesslist
 #>
 function New-ClickUpList {
@@ -147,7 +149,7 @@ function New-ClickUpList {
         [bool]$DueDateTime = $false,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
-        [UInt16]$Priorty,
+        [UInt16]$Priority,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [ulong]$Assignee,
@@ -170,8 +172,8 @@ function New-ClickUpList {
     if ($PSBoundParameters.ContainsKey('DueDateTime')) {
         $Body.Add('due_date_time', $DueDateTime)
     }
-    if ($PSBoundParameters.ContainsKey('Priorty')) {
-        $Body.Add('priority', $Priorty)
+    if ($PSBoundParameters.ContainsKey('Priority')) {
+        $Body.Add('priority', $Priority)
     }
     if ($PSBoundParameters.ContainsKey('Assignee')) {
         $Body.Add('assignee', $Assignee)
@@ -205,7 +207,7 @@ function New-ClickUpList {
     PS C:\> Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
     Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
 .EXAMPLE
-    PS C:\> Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Prority 2
+    PS C:\> Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
     Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
 .INPUTS
     None. This cmdlet does not accept any input.
@@ -231,7 +233,7 @@ function Set-ClickUpList {
         [Parameter()]
         [bool]$DueDateTime = $false,
         [Parameter()]
-        [UInt16]$Priorty,
+        [UInt16]$Priority,
         [Parameter()]
         [ulong]$Assignee,
         [Parameter()]
@@ -253,8 +255,8 @@ function Set-ClickUpList {
     if ($PSBoundParameters.ContainsKey('DueDateTime')) {
         $Body.Add('due_date_time', $DueDateTime)
     }
-    if ($PSBoundParameters.ContainsKey('Priorty')) {
-        $Body.Add('priority', $Priorty)
+    if ($PSBoundParameters.ContainsKey('Priority')) {
+        $Body.Add('priority', $Priority)
     }
     if ($PSBoundParameters.ContainsKey('Assignee')) {
         $Body.Add('assignee', $Assignee)
@@ -396,10 +398,10 @@ function Remove-ClickUpTaskFromList {
     Create a new list using a list template in a Folder.
 .EXAMPLE
     PS C:\> New-ClickUpListFromTemplate -FolderID 123 -TemplateID 9hz -Name "New List"
-    Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediatly, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
+    Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
 .EXAMPLE
     PS C:\> New-ClickUpListFromTemplate -SpaceID 123 -TemplateID 9hz -Name "New List"
-    Create a new list using a list template in a Space. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediatly, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
+    Create a new list using a list template in a Space. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
@@ -407,7 +409,7 @@ function Remove-ClickUpTaskFromList {
 .NOTES
     See the link for information.
 
-    Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediatly, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
+    Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
 
     Create a new List using a List template within a Space. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request can be run asynchronously or synchronously via the return_immediately parameter.
 .LINK

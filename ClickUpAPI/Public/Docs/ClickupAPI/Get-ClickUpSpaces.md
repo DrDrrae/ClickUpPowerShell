@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getspaces
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpSpaces
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpSpaces
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get the details on all ClickUp Spaces in a team.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpSpaces [-TeamID] <ulong> [[-Archived] <bool>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,46 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get the details on all ClickUp Spaces in a team.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpSpaces TeamID 11111111
+Returns the data on all the ClickUp Spaces with the Team ID "11111111"
+
+### EXAMPLE 2
+
+Get-ClickUpSpaces TeamID 11111111 -Archived $true
+Returns the data on all the ClickUp Spaces with the Team ID "11111111" including archived
 
 ## PARAMETERS
 
-### -CommentID
+### -Archived
 
-{{ Fill CommentID Description }}
+{{ Fill Archived Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -92,4 +118,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getspaces)

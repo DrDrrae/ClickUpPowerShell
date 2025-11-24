@@ -1,28 +1,33 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://developer.clickup.com/reference/setcustomfieldvalue
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: Set-ClickUpCustomFieldValue
 ---
 
-# Set-ClickUpList
+# Set-ClickUpCustomFieldValue
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Set ClickUp custom field value.
 
 ## SYNTAX
 
-### __AllParameterSets
+### TaskID (Default)
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
- [<CommonParameters>]
+Set-ClickUpCustomFieldValue -TaskID <string> -FieldID <string> -Value <string> [<CommonParameters>]
+```
+
+### CustomTaskID
+
+```
+Set-ClickUpCustomFieldValue -TaskID <string> -FieldID <string> -Value <string> -CustomTaskIDs <bool>
+ -TeamID <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,88 +37,25 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Set ClickUp custom field value.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
+Set-ClickUpCustomFieldValue -TaskID 9hz -FieldID b955c4dc -Value 80
+Set the ClickUp custom field under task with ID "9hz" and field with ID "b955c4dc" to value "80".
 
 ### EXAMPLE 2
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+Set-ClickUpCustomFieldValue -TaskID CustomID -FieldID b955c4dc -Value 80 -CustomTaskIDs $true -TeamID 123
+Set the ClickUp custom field under task with custom ID "CustomID" and field with ID "b955c4dc" to value "80".
 
 ## PARAMETERS
 
-### -Assignee
+### -CustomTaskIDs
 
-{{ Fill Assignee Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 6
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Content
-
-{{ Fill Content Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 2
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDate
-
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 3
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill CustomTaskIDs Description }}
 
 ```yaml
 Type: System.Boolean
@@ -121,29 +63,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 4
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -ListID
-
-{{ Fill ListID Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
+- Name: CustomTaskID
+  Position: Named
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -153,9 +74,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Name
+### -FieldID
 
-{{ Fill Name Description }}
+{{ Fill FieldID Description }}
 
 ```yaml
 Type: System.String
@@ -163,9 +84,15 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 1
-  IsRequired: false
+- Name: CustomTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -174,19 +101,46 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -TaskID
 
-{{ Fill Priority Description }}
+{{ Fill TaskID Description }}
 
 ```yaml
-Type: System.UInt16
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: CustomTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
+
+```yaml
+Type: System.UInt64
 DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 5
-  IsRequired: false
+- Name: CustomTaskID
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -195,19 +149,25 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -UnsetStatus
+### -Value
 
-{{ Fill UnsetStatus Description }}
+{{ Fill Value Description }}
 
 ```yaml
-Type: System.Boolean
-DefaultValue: False
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 7
-  IsRequired: false
+- Name: CustomTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -231,10 +191,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object.
-
-{{ Fill in the Description }}
-
 ### System.Object
 
 {{ Fill in the Description }}
@@ -243,7 +199,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 See the link for information.
 
+The accessible fields can be found on the task object from the get task route.
+This is where you can retrieve the field_id.
+
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://developer.clickup.com/reference/setcustomfieldvalue)

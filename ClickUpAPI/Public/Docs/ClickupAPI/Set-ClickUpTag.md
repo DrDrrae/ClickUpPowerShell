@@ -1,28 +1,27 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/tags/edit-space-tag.html
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: Set-ClickUpTag
 ---
 
-# Set-ClickUpList
+# Set-ClickUpTag
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Update a ClickUp space tag.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
- [<CommonParameters>]
+Set-ClickUpTag [-SpaceID] <ulong> [-TagName] <string> [[-NewName] <string>]
+ [[-ForegroundColor] <string>] [[-BackgroundColor] <string>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,34 +31,29 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Update a ClickUp space tag.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
-
-### EXAMPLE 2
-
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+Set-ClickUpTag -SpaceID 512 -TagName "Tag Name" -NewName "Updated Tag" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
+Update a ClickUp tag with name "Tag Name" for space with ID "512" to the name "Updated Tag", foreground color to white, and background color to black.
 
 ## PARAMETERS
 
-### -Assignee
+### -BackgroundColor
 
-{{ Fill Assignee Description }}
+{{ Fill BackgroundColor Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
-  Position: 6
+  Position: 4
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -69,9 +63,30 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Content
+### -ForegroundColor
 
-{{ Fill Content Description }}
+{{ Fill ForegroundColor Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 3
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -NewName
+
+{{ Fill NewName Description }}
 
 ```yaml
 Type: System.String
@@ -90,55 +105,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDate
+### -SpaceID
 
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 3
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill SpaceID Description }}
 
 ```yaml
-Type: System.Boolean
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 4
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -ListID
-
-{{ Fill ListID Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
+Type: System.UInt64
+DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -153,9 +126,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Name
+### -TagName
 
-{{ Fill Name Description }}
+{{ Fill TagName Description }}
 
 ```yaml
 Type: System.String
@@ -165,49 +138,7 @@ Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 1
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Priority
-
-{{ Fill Priority Description }}
-
-```yaml
-Type: System.UInt16
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 5
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -UnsetStatus
-
-{{ Fill UnsetStatus Description }}
-
-```yaml
-Type: System.Boolean
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 7
-  IsRequired: false
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -246,4 +177,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://jsapi.apiary.io/apis/clickup20/reference/0/tags/edit-space-tag.html)

@@ -1,28 +1,27 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/change-tag-names-from-time-entries.html
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: Set-ClickUpTimeEntryTags
 ---
 
-# Set-ClickUpList
+# Set-ClickUpTimeEntryTags
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Update tag names from ClickUp time entries.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
- [<CommonParameters>]
+Set-ClickUpTimeEntryTags [-TeamID] <string> [-OldTagName] <string> [-NewTagName] <string>
+ [[-TagBackgroundColor] <string>] [[-TagForegroundColor] <string>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,46 +31,25 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Update tag names from ClickUp time entries.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
+Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag" -NewTagName "new tag"
+Rename the tag "old tag" to "new tag" for team with ID "1111111".
 
 ### EXAMPLE 2
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag" -NewTagName "new tag" -TagBackgroundColor "#FF0000" -TagForegroundColor "#FFFFFF"
+Rename the tag "old tag" to "new tag" with custom colors for team with ID "1111111".
 
 ## PARAMETERS
 
-### -Assignee
+### -NewTagName
 
-{{ Fill Assignee Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 6
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Content
-
-{{ Fill Content Description }}
+{{ Fill NewTagName Description }}
 
 ```yaml
 Type: System.String
@@ -81,7 +59,7 @@ Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 2
-  IsRequired: false
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -90,12 +68,33 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDate
+### -OldTagName
 
-{{ Fill DueDate Description }}
+{{ Fill OldTagName Description }}
 
 ```yaml
-Type: System.DateTime
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TagBackgroundColor
+
+{{ Fill TagBackgroundColor Description }}
+
+```yaml
+Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
@@ -111,13 +110,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDateTime
+### -TagForegroundColor
 
-{{ Fill DueDateTime Description }}
+{{ Fill TagForegroundColor Description }}
 
 ```yaml
-Type: System.Boolean
-DefaultValue: False
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -132,9 +131,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -ListID
+### -TeamID
 
-{{ Fill ListID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.String
@@ -145,69 +144,6 @@ ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Name
-
-{{ Fill Name Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 1
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Priority
-
-{{ Fill Priority Description }}
-
-```yaml
-Type: System.UInt16
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 5
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -UnsetStatus
-
-{{ Fill UnsetStatus Description }}
-
-```yaml
-Type: System.Boolean
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 7
-  IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -231,11 +167,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object.
-
-{{ Fill in the Description }}
-
-### System.Object
+### System.Management.Automation.PSCustomObject
 
 {{ Fill in the Description }}
 
@@ -246,4 +178,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/change-tag-names-from-time-entries.html)

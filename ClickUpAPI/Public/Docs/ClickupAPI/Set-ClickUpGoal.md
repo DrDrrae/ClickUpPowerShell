@@ -1,27 +1,27 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://developer.clickup.com/reference/updategoal
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: Set-ClickUpGoal
 ---
 
-# Set-ClickUpList
+# Set-ClickUpGoal
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Update a ClickUp team goal.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
+Set-ClickUpGoal [-GoalID] <ulong> [[-Name] <string>] [[-DueDate] <datetime>]
+ [[-Description] <string>] [[-MultipleOwners] <bool>] [[-Owners] <ulong[]>] [[-Color] <string>]
  [<CommonParameters>]
 ```
 
@@ -32,29 +32,24 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Update a ClickUp team goal.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
-
-### EXAMPLE 2
-
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+Set-ClickUpGoal -GoalID e53a033c -Name "Updated Goal Name"
+Update ClickUp goal with ID "e53a033c" name to "Updated Goal Name".
 
 ## PARAMETERS
 
-### -Assignee
+### -Color
 
-{{ Fill Assignee Description }}
+{{ Fill Color Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -69,9 +64,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Content
+### -Description
 
-{{ Fill Content Description }}
+{{ Fill Description Description }}
 
 ```yaml
 Type: System.String
@@ -80,7 +75,7 @@ SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
-  Position: 2
+  Position: 3
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -101,7 +96,7 @@ SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
-  Position: 3
+  Position: 2
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -111,9 +106,30 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDateTime
+### -GoalID
 
-{{ Fill DueDateTime Description }}
+{{ Fill GoalID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 0
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -MultipleOwners
+
+{{ Fill MultipleOwners Description }}
 
 ```yaml
 Type: System.Boolean
@@ -124,27 +140,6 @@ ParameterSets:
 - Name: (All)
   Position: 4
   IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -ListID
-
-{{ Fill ListID Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
-  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -174,39 +169,18 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -Owners
 
-{{ Fill Priority Description }}
+{{ Fill Owners Description }}
 
 ```yaml
-Type: System.UInt16
-DefaultValue: 0
+Type: System.UInt64[]
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 5
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -UnsetStatus
-
-{{ Fill UnsetStatus Description }}
-
-```yaml
-Type: System.Boolean
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 7
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -246,4 +220,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://developer.clickup.com/reference/updategoal)

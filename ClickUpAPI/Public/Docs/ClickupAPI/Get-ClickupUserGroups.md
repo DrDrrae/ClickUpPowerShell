@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getusergroups
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickupUserGroups
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickupUserGroups
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get all user groups in a Workspace.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickupUserGroups [-TeamID] <ulong> [[-GroupIDs] <string[]>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,41 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+View the user groups created via the API for a Workspace.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickupUserGroups -TeamID 123
+Get all user groups for team with ID "123".
 
 ## PARAMETERS
 
-### -CommentID
+### -GroupIDs
 
-{{ Fill CommentID Description }}
+{{ Fill GroupIDs Description }}
+
+```yaml
+Type: System.String[]
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -92,4 +113,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getusergroups)

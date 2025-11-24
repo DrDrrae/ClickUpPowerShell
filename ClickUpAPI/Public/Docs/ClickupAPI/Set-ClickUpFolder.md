@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/updatefolder
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Set-ClickUpFolder
 ---
 
-# Get-ClickUpThreadedComments
+# Set-ClickUpFolder
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Update the name of a ClickUp Folder.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Set-ClickUpFolder [-FolderID] <ulong> [-Name] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,20 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Update the name of a ClickUp Folder.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Set-ClickUpFolder -FolderID 11111111 -Name 'Change Folder Name'
+Change the name of the ClickUp folder with ID "11111111" to "Change Folder Name".
 
 ## PARAMETERS
 
-### -CommentID
+### -FolderID
 
-{{ Fill CommentID Description }}
+{{ Fill FolderID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -53,6 +53,27 @@ Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 0
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Name
+
+{{ Fill Name Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -77,11 +98,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### System.Object Hashtable.
 
 {{ Fill in the Description }}
 
@@ -92,4 +109,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/updatefolder)

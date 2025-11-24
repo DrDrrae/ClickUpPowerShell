@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getfolders
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpFolders
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpFolders
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get all ClickUp Folders.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpFolders [-SpaceID] <ulong> [[-Archived] <bool>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,46 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get all ClickUp Folders.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpFolders -SpaceID 11111111
+Get all ClickUp folders under ClickUp Space with ID "11111111".
+
+### EXAMPLE 2
+
+Get-ClickUpFolders -SpaceID 11111111 -Archived $true
+Get all ClickUp folders under ClickUp Space with ID "11111111" including archived.
 
 ## PARAMETERS
 
-### -CommentID
+### -Archived
 
-{{ Fill CommentID Description }}
+{{ Fill Archived Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -SpaceID
+
+{{ Fill SpaceID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -77,11 +103,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### System.Object Hashtable.
 
 {{ Fill in the Description }}
 
@@ -92,4 +114,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getfolders)

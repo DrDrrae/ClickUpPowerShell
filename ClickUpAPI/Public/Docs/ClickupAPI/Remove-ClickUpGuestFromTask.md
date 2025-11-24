@@ -1,28 +1,34 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://developer.clickup.com/reference/removeguestfromtask
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: Remove-ClickUpGuestFromTask
 ---
 
-# Set-ClickUpList
+# Remove-ClickUpGuestFromTask
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Remove ClickUp guest from task.
 
 ## SYNTAX
 
-### __AllParameterSets
+### TaskID (Default)
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
- [<CommonParameters>]
+Remove-ClickUpGuestFromTask -TaskID <string> -GuestID <ulong> [-PermissionLevel <string>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
+```
+
+### CustomTaskIDs
+
+```
+Remove-ClickUpGuestFromTask -TaskID <string> -GuestID <ulong> -CustomTaskIDs <bool> -TeamID <ulong>
+ [-PermissionLevel <string>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,55 +38,30 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Remove ClickUp guest from task.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
-
-### EXAMPLE 2
-
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+Remove-ClickUpGuestFromTask -TaskID 1427 -GuestID 403
+Remove ClickUp guest with Id "403" from task with ID "1427".
 
 ## PARAMETERS
 
-### -Assignee
+### -Confirm
 
-{{ Fill Assignee Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 6
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Content
-
-{{ Fill Content Description }}
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.String
+Type: System.Management.Automation.SwitchParameter
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- cf
 ParameterSets:
 - Name: (All)
-  Position: 2
+  Position: Named
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -90,30 +71,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDate
+### -CustomTaskIDs
 
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 3
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill CustomTaskIDs Description }}
 
 ```yaml
 Type: System.Boolean
@@ -121,29 +81,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 4
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -ListID
-
-{{ Fill ListID Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
+- Name: CustomTaskIDs
+  Position: Named
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -153,9 +92,63 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Name
+### -GuestID
 
-{{ Fill Name Description }}
+{{ Fill GuestID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -PermissionLevel
+
+{{ Fill PermissionLevel Description }}
+
+```yaml
+Type: System.String
+DefaultValue: read
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TaskID
+
+{{ Fill TaskID Description }}
 
 ```yaml
 Type: System.String
@@ -163,9 +156,15 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 1
-  IsRequired: false
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -174,19 +173,19 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -TeamID
 
-{{ Fill Priority Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
-Type: System.UInt16
+Type: System.UInt64
 DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
-  Position: 5
-  IsRequired: false
+- Name: CustomTaskIDs
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -195,18 +194,19 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -UnsetStatus
+### -WhatIf
 
-{{ Fill UnsetStatus Description }}
+Runs the command in a mode that only reports what would happen without performing the actions.
 
 ```yaml
-Type: System.Boolean
-DefaultValue: False
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- wi
 ParameterSets:
 - Name: (All)
-  Position: 7
+  Position: Named
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -246,4 +246,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://developer.clickup.com/reference/removeguestfromtask)

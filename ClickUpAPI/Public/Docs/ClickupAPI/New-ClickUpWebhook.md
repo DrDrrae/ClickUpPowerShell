@@ -1,28 +1,28 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/updatelist
+HelpUri: https://developer.clickup.com/reference/createwebhook
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Set-ClickUpList
+title: New-ClickUpWebhook
 ---
 
-# Set-ClickUpList
+# New-ClickUpWebhook
 
 ## SYNOPSIS
 
-Update a ClickUp list.
+Create a new ClickUp webhook.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
- [<CommonParameters>]
+New-ClickUpWebhook [-TeamID] <ulong> [-Endpoint] <string> [[-Events] <string[]>]
+ [[-FilterToSpaceID] <ulong>] [[-FilterToFolderID] <ulong>] [[-FilterToListID] <string>]
+ [[-FilterToTaskID] <string>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,35 +32,35 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Update a ClickUp list.
+Set up a webhook to monitor for events.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
+New-ClickUpWebhook -Endpoint 'https://www.example.com/webhook'
+Create a new ClickUp webhook that subscribes to all resources and events. Posts information to the URL "https://www.example.com/webhook".
 
 ### EXAMPLE 2
 
-Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+New-ClickUpWebhook -Endpoint 'https://www.example.com/webhook' -Events 'taskCreated','taskUpdated','taskDeleted' -FilterToTaskID 9hx
+Create a new ClickUp webhook that subscribes to task with ID "9hx" task creation, update, and deletion events. Posts information to the URL "https://www.example.com/webhook".
 
 ## PARAMETERS
 
-### -Assignee
+### -Endpoint
 
-{{ Fill Assignee Description }}
+{{ Fill Endpoint Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
-  Position: 6
-  IsRequired: false
+  Position: 1
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -69,13 +69,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Content
+### -Events
 
-{{ Fill Content Description }}
+{{ Fill Events Description }}
 
 ```yaml
-Type: System.String
-DefaultValue: ''
+Type: System.String[]
+DefaultValue: '*'
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -90,34 +90,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDate
+### -FilterToFolderID
 
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 3
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill FilterToFolderID Description }}
 
 ```yaml
-Type: System.Boolean
-DefaultValue: False
+Type: System.UInt64
+DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -132,55 +111,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -ListID
+### -FilterToListID
 
-{{ Fill ListID Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Name
-
-{{ Fill Name Description }}
+{{ Fill FilterToListID Description }}
 
 ```yaml
 Type: System.String
 DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 1
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Priority
-
-{{ Fill Priority Description }}
-
-```yaml
-Type: System.UInt16
-DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -195,19 +132,61 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -UnsetStatus
+### -FilterToSpaceID
 
-{{ Fill UnsetStatus Description }}
+{{ Fill FilterToSpaceID Description }}
 
 ```yaml
-Type: System.Boolean
-DefaultValue: False
+Type: System.UInt64
+DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
 - Name: (All)
-  Position: 7
+  Position: 3
   IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FilterToTaskID
+
+{{ Fill FilterToTaskID Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 6
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 0
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -231,10 +210,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object.
-
-{{ Fill in the Description }}
-
 ### System.Object
 
 {{ Fill in the Description }}
@@ -243,7 +218,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 See the link for information.
 
+Only webhooks that were created by the authenticated user will be returned on this endpoint.
+
+We do not have a dedicated IP address for webhooks.
+We use our domain name and dynamic addressing.f
+
+You may filter the location of resources that get sent to a webhook by passing an optional space_id, folder_id, list_id, or task_id in the body of the request.
+Without specifying any events, all event types will be sent to the webhook.
+However, you can filter for specific actions by sending an events array.
+To subscribe to specific events, pass an array of events that you want to subscribe to, otherwise pass "*" to subscribe to everything.
+
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/updatelist)
+- [](https://developer.clickup.com/reference/createwebhook)

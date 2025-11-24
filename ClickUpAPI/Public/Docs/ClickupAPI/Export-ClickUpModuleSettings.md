@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: ''
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Export-ClickUpModuleSettings
 ---
 
-# Get-ClickUpThreadedComments
+# Export-ClickUpModuleSettings
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Exports the ClickUp module settings to a configuration file.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Export-ClickUpModuleSettings [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,37 +30,17 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Exports the current ClickUp API key and JSON conversion depth settings to a secure XML configuration file.
+The file is saved in the user's profile directory under 'ClickUpAPI'.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Export-ClickUpModuleSettings
+Exports the current settings to the configuration file.
 
 ## PARAMETERS
-
-### -CommentID
-
-{{ Fill CommentID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
 
 ### CommonParameters
 
@@ -77,19 +57,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### None. This cmdlet does not return any output.
 
 {{ Fill in the Description }}
 
 ## NOTES
 
-See the link for information.
+The API key is saved as a secure string.
 
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+{{ Fill in the related links here }}
+

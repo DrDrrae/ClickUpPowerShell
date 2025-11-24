@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getgoals
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpGoals
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpGoals
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get all ClickUp team goals.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpGoals [-TeamID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,20 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get all ClickUp team goals.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpGoals -TeamID 123
+Get all ClickUp team goals for team with ID "123".
 
 ## PARAMETERS
 
-### -CommentID
+### -TeamID
 
-{{ Fill CommentID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -77,11 +77,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Object.
 
 {{ Fill in the Description }}
 
-### System.Array
+### System.Object
 
 {{ Fill in the Description }}
 
@@ -92,4 +92,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getgoals)

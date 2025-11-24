@@ -1,48 +1,35 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/createfolderlistfromtemplate
+HelpUri: https://developer.clickup.com/reference/createfolder
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: New-ClickUpListFromTemplate
+title: New-ClickUpFolderFromTemplate
 ---
 
-# New-ClickUpListFromTemplate
+# New-ClickUpFolderFromTemplate
 
 ## SYNOPSIS
 
-Create a new list using a list template in a Folder.
+Create a new Folder using a Folder template within a Space.
 
 ## SYNTAX
 
-### FolderID
+### __AllParameterSets
 
 ```
-New-ClickUpListFromTemplate -FolderID <ulong> -TemplateID <ulong> -Name <ulong>
- [-ReturnImmediately <bool>] [-Content <string>] [-TimeEstimate <bool>] [-Automation <bool>]
- [-IncludeViews <bool>] [-OldDueDate <bool>] [-OldStartDate <bool>] [-OldFollowers <bool>]
- [-CommentAttachments <bool>] [-RecurSettings <bool>] [-OldTags <bool>] [-OldStatuses <bool>]
- [-Subtasks <bool>] [-CustomType <bool>] [-OldAssignees <bool>] [-Attachments <bool>]
- [-Comment <bool>] [-OldStatus <bool>] [-ExternalDependencies <bool>] [-InternalDependencies <bool>]
- [-Priority <bool>] [-CustomFields <bool>] [-OldChecklists <bool>] [-Relationships <bool>]
- [-OldSubtaskAssignees <bool>] [-StartDate <datetime>] [-DueDate <datetime>]
- [-RemapStartDate <bool>] [-SkipWeekends <bool>] [-Archived <int>] [<CommonParameters>]
-```
-
-### SpaceID
-
-```
-New-ClickUpListFromTemplate -SpaceID <ulong> -TemplateID <ulong> -Name <ulong>
- [-ReturnImmediately <bool>] [-Content <string>] [-TimeEstimate <bool>] [-Automation <bool>]
- [-IncludeViews <bool>] [-OldDueDate <bool>] [-OldStartDate <bool>] [-OldFollowers <bool>]
- [-CommentAttachments <bool>] [-RecurSettings <bool>] [-OldTags <bool>] [-OldStatuses <bool>]
- [-Subtasks <bool>] [-CustomType <bool>] [-OldAssignees <bool>] [-Attachments <bool>]
- [-Comment <bool>] [-OldStatus <bool>] [-ExternalDependencies <bool>] [-InternalDependencies <bool>]
- [-Priority <bool>] [-CustomFields <bool>] [-OldChecklists <bool>] [-Relationships <bool>]
- [-OldSubtaskAssignees <bool>] [-StartDate <datetime>] [-DueDate <datetime>]
- [-RemapStartDate <bool>] [-SkipWeekends <bool>] [-Archived <int>] [<CommonParameters>]
+New-ClickUpFolderFromTemplate [-SpaceID] <ulong> [-TemplateID] <ulong> [-Name] <ulong>
+ [[-ReturnImmediately] <bool>] [[-Content] <string>] [[-TimeEstimate] <bool>] [[-Automation] <bool>]
+ [[-IncludeViews] <bool>] [[-OldDueDate] <bool>] [[-OldStartDate] <bool>] [[-OldFollowers] <bool>]
+ [[-CommentAttachments] <bool>] [[-RecurSettings] <bool>] [[-OldTags] <bool>]
+ [[-OldStatuses] <bool>] [[-Subtasks] <bool>] [[-CustomType] <bool>] [[-OldAssignees] <bool>]
+ [[-Attachments] <bool>] [[-Comment] <bool>] [[-OldStatus] <bool>] [[-ExternalDependencies] <bool>]
+ [[-InternalDependencies] <bool>] [[-Priority] <bool>] [[-CustomFields] <bool>]
+ [[-OldChecklists] <bool>] [[-Relationships] <bool>] [[-OldSubtaskAssignees] <bool>]
+ [[-StartDate] <datetime>] [[-DueDate] <datetime>] [[-RemapStartDate] <bool>]
+ [[-SkipWeekends] <bool>] [[-Archived] <int>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -52,19 +39,14 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Create a new list using a list template in a Folder.
+Create a new Folder using a Folder template within a Space.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-New-ClickUpListFromTemplate -FolderID 123 -TemplateID 9hz -Name "New List"
-Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
-
-### EXAMPLE 2
-
-New-ClickUpListFromTemplate -SpaceID 123 -TemplateID 9hz -Name "New List"
-Create a new list using a list template in a Space. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
+New-ClickUpFolderFromTemplate -SpaceID 11111111 -TemplateID 22222222 -Name 'New Folder Name'
+Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with ID "11111111".
 
 ## PARAMETERS
 
@@ -78,14 +60,8 @@ DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 32
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -105,14 +81,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 18
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -132,14 +102,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 6
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -159,14 +123,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 19
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -186,14 +144,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 11
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -213,14 +165,8 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 4
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -240,14 +186,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 24
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -267,14 +207,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 16
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -294,14 +228,8 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 29
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -321,36 +249,9 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
+- Name: (All)
+  Position: 21
   IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -FolderID
-
-{{ Fill FolderID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: FolderID
-  Position: Named
-  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -369,14 +270,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 7
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -396,14 +291,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 22
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -423,14 +312,8 @@ DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 2
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -450,14 +333,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 17
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -477,14 +354,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 25
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -504,14 +375,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 8
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -531,14 +396,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 10
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -558,14 +417,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 9
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -585,14 +438,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 20
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -612,14 +459,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 14
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -639,14 +480,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 27
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -666,14 +501,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 13
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -693,14 +522,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 23
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -720,14 +543,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 12
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -747,14 +564,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 26
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -774,14 +585,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 30
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -801,14 +606,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 3
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -828,14 +627,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 31
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -855,8 +648,8 @@ DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
+- Name: (All)
+  Position: 0
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -876,14 +669,8 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 28
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -903,14 +690,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 15
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -930,14 +711,8 @@ DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 1
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -957,14 +732,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 5
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -989,28 +758,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Object Hashtable.
 
 {{ Fill in the Description }}
 
 ## NOTES
 
-See the link for information.
-
-Create a new list using a list template in a Folder.
-Publicly shared templates must be added to your Workspace before you can use them with the public API.
-This request runs synchronously by default with return_immediately=true.
-The request returns the future List ID immediately, but the List may not be created when the response is sent.
-Small templates can be applied synchronously, which guarantees that all sub objects are created.
-In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
-
-Create a new List using a List template within a Space.
+Create a new Folder using a Folder template within a Space.
+This endpoint allows you to create a folder with all its nested assets (lists, tasks, etc.) from a predefined template available in your Workspace.
 Publicly shared templates must be added to your Workspace before you can use them with the public API.
 This request can be run asynchronously or synchronously via the return_immediately parameter.
 
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/createfolderlistfromtemplate)
-- [](https://developer.clickup.com/reference/createspacelistfromtemplate)
-- [](https://help.clickup.com/hc/en-us/articles/6326023965591-Add-a-template-to-your-library)
+- [](https://developer.clickup.com/reference/createfolder)

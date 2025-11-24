@@ -1,39 +1,48 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: >-
-  https://developer.clickup.com/reference/createlist
-
-  https://developer.clickup.com/reference/createfolderlesslist
+HelpUri: https://developer.clickup.com/reference/deletedependency
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: New-ClickUpList
+title: Remove-ClickUpDependency
 ---
 
-# New-ClickUpList
+# Remove-ClickUpDependency
 
 ## SYNOPSIS
 
-Create a ClickUp list.
+Remove ClickUp dependency.
 
 ## SYNTAX
 
-### FolderID (Default)
+### DependsOnTaskID (Default)
 
 ```
-New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
+Remove-ClickUpDependency -TaskID <string> -DependsOn <string> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
-### SpaceID
+### DependendencyOfCustomTaskID
 
 ```
-New-ClickUpList -SpaceID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
+Remove-ClickUpDependency -TaskID <string> -DependendencyOf <string> -CustomTaskID <bool>
+ -TeamID <ulong> [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### DependendencyOfTaskID
+
+```
+Remove-ClickUpDependency -TaskID <string> -DependendencyOf <string> [-WhatIf] [-Confirm]
  [<CommonParameters>]
+```
+
+### DependsOnCustomTaskID
+
+```
+Remove-ClickUpDependency -TaskID <string> -DependsOn <string> -CustomTaskID <bool> -TeamID <ulong>
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -43,76 +52,34 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Create a ClickUp list.
+Remove ClickUp dependency.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-New-ClickUpList -FolderID 456 -Name "New ClickUp List"
-Create a ClickUp list called "New ClickUp List" under folder with ID "456".
+Remove-ClickUpDependency -TaskID 9hv -DependsOn 9hz
+Remove ClickUp task with ID "9hz" as a dependency of ClickUp task with ID "9hv".
 
 ### EXAMPLE 2
 
-New-ClickUpList -FolderID 456 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-Create a ClickUp list called "New ClickUp List" under folder with ID "456" with a due date and priority.
-
-### EXAMPLE 3
-
-New-ClickUpList -SpaceID 789 -Name "New ClickUp List"
-Create a ClickUp list called "New ClickUp List" under space with ID "789".
-
-### EXAMPLE 4
-
-New-ClickUpList -SpaceID 789 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-Create a ClickUp list called "New ClickUp List" under space with ID "789" with a due date and priority.
+Remove-ClickUpDependency -TaskID 9hv -DependencyOf 9hz
+Remove ClickUp task with ID "9hv" as a dependency of ClickUp task with ID "9hz".
 
 ## PARAMETERS
 
-### -Assignee
+### -Confirm
 
-{{ Fill Assignee Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Content
-
-{{ Fill Content Description }}
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.String
+Type: System.Management.Automation.SwitchParameter
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- cf
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
+- Name: (All)
   Position: Named
   IsRequired: false
   ValueFromPipeline: false
@@ -123,36 +90,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDate
+### -CustomTaskID
 
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill CustomTaskID Description }}
 
 ```yaml
 Type: System.Boolean
@@ -160,34 +100,13 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
+- Name: DependendencyOfCustomTaskID
   Position: Named
-  IsRequired: false
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -FolderID
-
-{{ Fill FolderID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: FolderID
+- Name: DependsOnCustomTaskID
   Position: Named
   IsRequired: true
   ValueFromPipeline: false
@@ -198,9 +117,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Name
+### -DependendencyOf
 
-{{ Fill Name Description }}
+{{ Fill DependendencyOf Description }}
 
 ```yaml
 Type: System.String
@@ -208,61 +127,13 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
+- Name: DependendencyOfCustomTaskID
   Position: Named
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Priority
-
-{{ Fill Priority Description }}
-
-```yaml
-Type: System.UInt16
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -SpaceID
-
-{{ Fill SpaceID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
+- Name: DependendencyOfTaskID
   Position: Named
   IsRequired: true
   ValueFromPipeline: false
@@ -273,9 +144,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Status
+### -DependsOn
 
-{{ Fill Status Description }}
+{{ Fill DependsOn Description }}
 
 ```yaml
 Type: System.String
@@ -283,13 +154,101 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
+- Name: DependsOnCustomTaskID
   Position: Named
-  IsRequired: false
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
-- Name: FolderID
+- Name: DependsOnTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TaskID
+
+{{ Fill TaskID Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: DependendencyOfCustomTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: DependendencyOfTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: DependsOnCustomTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: DependsOnTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: DependendencyOfCustomTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: DependsOnCustomTaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -WhatIf
+
+Runs the command in a mode that only reports what would happen without performing the actions.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: ''
+SupportsWildcards: false
+Aliases:
+- wi
+ParameterSets:
+- Name: (All)
   Position: Named
   IsRequired: false
   ValueFromPipeline: false
@@ -315,11 +274,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object.
-
-{{ Fill in the Description }}
-
-### System.Object
+### None. This cmdlet does not return any output.
 
 {{ Fill in the Description }}
 
@@ -327,10 +282,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 See the link for information.
 
+One and only one of depends_on or dependency_of must be passed in the query params.
+
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist)
-- [https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist]()
+- [](https://developer.clickup.com/reference/deletedependency)

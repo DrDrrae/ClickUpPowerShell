@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getfolderviews
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpFolderViews
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpFolderViews
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get ClickUp folder views.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpFolderViews [-FolderID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,20 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get ClickUp folder views.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpFolderViews -FolderID 124
+Get ClickUp folder views with folder ID "124".
 
 ## PARAMETERS
 
-### -CommentID
+### -FolderID
 
-{{ Fill CommentID Description }}
+{{ Fill FolderID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -92,4 +92,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getfolderviews)

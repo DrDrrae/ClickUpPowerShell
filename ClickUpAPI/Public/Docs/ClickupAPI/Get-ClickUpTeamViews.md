@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getview
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpTeamViews
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpTeamViews
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get ClickUp team views.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpTeamViews [-TeamID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,20 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+View the task and page views available at the Everything Level of a Workspace.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpTeamViews -TeamID 512
+Get ClickUp team views with team ID "512".
 
 ## PARAMETERS
 
-### -CommentID
+### -TeamID
 
-{{ Fill CommentID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -92,4 +92,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getview)

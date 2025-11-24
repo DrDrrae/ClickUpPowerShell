@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-time-entry-history.html
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpTimeEntryHistory
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpTimeEntryHistory
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get the history of a single ClickUp time entry.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpTimeEntryHistory [-TeamID] <ulong> [-TimerID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,20 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get the history of a single ClickUp time entry.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpTimeEntryHistory -TeamID 512 -TimerID 1963465985517105840
+Get the history of a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID "512".
 
 ## PARAMETERS
 
-### -CommentID
+### -TeamID
 
-{{ Fill CommentID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -53,6 +53,27 @@ Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 0
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TimerID
+
+{{ Fill TimerID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -77,11 +98,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### System.Management.Automation.PSCustomObject
 
 {{ Fill in the Description }}
 
@@ -92,4 +109,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-time-entry-history.html)

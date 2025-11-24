@@ -1,39 +1,31 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: >-
-  https://developer.clickup.com/reference/createlist
-
-  https://developer.clickup.com/reference/createfolderlesslist
+HelpUri: https://developer.clickup.com/reference/createspace
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: New-ClickUpList
+title: New-ClickUpSpace
 ---
 
-# New-ClickUpList
+# New-ClickUpSpace
 
 ## SYNOPSIS
 
-Create a ClickUp list.
+Create a new ClickUp Space.
 
 ## SYNTAX
 
-### FolderID (Default)
+### __AllParameterSets
 
 ```
-New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
- [<CommonParameters>]
-```
-
-### SpaceID
-
-```
-New-ClickUpList -SpaceID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
- [<CommonParameters>]
+New-ClickUpSpace [-TeamID] <ulong> [-Name] <string> [[-Multiple_Assignees] <bool>]
+ [[-FeatureDueDates] <bool>] [[-FeatureStartDate] <bool>] [[-FeatureRemapDueDates] <bool>]
+ [[-FeatureRemapClosedDueDate] <bool>] [[-FeatureTimeTracking] <bool>] [[-FeatureTags] <bool>]
+ [[-FeatureTimeEstimates] <bool>] [[-FeatureChecklist] <bool>] [[-FeatureCustomFields] <bool>]
+ [[-FeatureRemapdependencies] <bool>] [[-FeatureDependencyWarning] <bool>]
+ [[-FeaturePortfolios] <bool>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -43,50 +35,29 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Create a ClickUp list.
+Create a new ClickUp Space.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-New-ClickUpList -FolderID 456 -Name "New ClickUp List"
-Create a ClickUp list called "New ClickUp List" under folder with ID "456".
-
-### EXAMPLE 2
-
-New-ClickUpList -FolderID 456 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-Create a ClickUp list called "New ClickUp List" under folder with ID "456" with a due date and priority.
-
-### EXAMPLE 3
-
-New-ClickUpList -SpaceID 789 -Name "New ClickUp List"
-Create a ClickUp list called "New ClickUp List" under space with ID "789".
-
-### EXAMPLE 4
-
-New-ClickUpList -SpaceID 789 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-Create a ClickUp list called "New ClickUp List" under space with ID "789" with a due date and priority.
+New-ClickUpSpace -TeamID 11111111 -Name 'New ClickUp Space' -Multiple_Assignees
+Creates a new ClickUp Space with the name "New Clickup Space" and the Multiple Assignees feature enabled.
 
 ## PARAMETERS
 
-### -Assignee
+### -FeatureChecklist
 
-{{ Fill Assignee Description }}
+{{ Fill FeatureChecklist Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.Boolean
+DefaultValue: True
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 10
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -96,24 +67,18 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Content
+### -FeatureCustomFields
 
-{{ Fill Content Description }}
+{{ Fill FeatureCustomFields Description }}
 
 ```yaml
-Type: System.String
-DefaultValue: ''
+Type: System.Boolean
+DefaultValue: True
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 11
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -123,24 +88,18 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDate
+### -FeatureDependencyWarning
 
-{{ Fill DueDate Description }}
+{{ Fill FeatureDependencyWarning Description }}
 
 ```yaml
-Type: System.DateTime
-DefaultValue: ''
+Type: System.Boolean
+DefaultValue: True
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 13
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -150,9 +109,114 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -DueDateTime
+### -FeatureDueDates
 
-{{ Fill DueDateTime Description }}
+{{ Fill FeatureDueDates Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 3
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FeaturePortfolios
+
+{{ Fill FeaturePortfolios Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 14
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FeatureRemapClosedDueDate
+
+{{ Fill FeatureRemapClosedDueDate Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 6
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FeatureRemapdependencies
+
+{{ Fill FeatureRemapdependencies Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 12
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FeatureRemapDueDates
+
+{{ Fill FeatureRemapDueDates Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 5
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FeatureStartDate
+
+{{ Fill FeatureStartDate Description }}
 
 ```yaml
 Type: System.Boolean
@@ -160,14 +224,8 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 4
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -177,19 +235,82 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -FolderID
+### -FeatureTags
 
-{{ Fill FolderID Description }}
+{{ Fill FeatureTags Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.Boolean
+DefaultValue: True
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: FolderID
-  Position: Named
-  IsRequired: true
+- Name: (All)
+  Position: 8
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FeatureTimeEstimates
+
+{{ Fill FeatureTimeEstimates Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 9
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FeatureTimeTracking
+
+{{ Fill FeatureTimeTracking Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 7
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Multiple_Assignees
+
+{{ Fill Multiple_Assignees Description }}
+
+```yaml
+Type: System.Boolean
+DefaultValue: True
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 2
+  IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -208,14 +329,8 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
+- Name: (All)
+  Position: 1
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -225,36 +340,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -TeamID
 
-{{ Fill Priority Description }}
-
-```yaml
-Type: System.UInt16
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -SpaceID
-
-{{ Fill SpaceID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -262,36 +350,9 @@ DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
-  Position: Named
+- Name: (All)
+  Position: 0
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Status
-
-{{ Fill Status Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -315,10 +376,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object.
-
-{{ Fill in the Description }}
-
 ### System.Object
 
 {{ Fill in the Description }}
@@ -330,7 +387,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist)
-- [https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist]()
+- [](https://developer.clickup.com/reference/createspace)

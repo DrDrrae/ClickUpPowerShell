@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getwebhooks
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpWebhooks
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpWebhooks
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get all ClickUp webhooks.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpWebhooks [-TeamID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,21 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+View the webhooks created via the API for a Workspace.
+This endpoint returns webhooks created by the authenticated user.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpWebhooks -TeamID 123
+Get all ClickUp webhooks for team with ID "123".
 
 ## PARAMETERS
 
-### -CommentID
+### -TeamID
 
-{{ Fill CommentID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -89,7 +90,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 See the link for information.
 
+Only webhooks that were created by the authenticated user will be returned on this endpoint.
+
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getwebhooks)

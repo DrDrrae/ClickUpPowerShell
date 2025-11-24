@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/addtasktolist
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Add-ClickUpTaskToList
 ---
 
-# Get-ClickUpThreadedComments
+# Add-ClickUpTaskToList
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Add a ClickUp task to a list.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Add-ClickUpTaskToList [-ListID] <ulong> [-TaskID] <string> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,20 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Add a ClickUp task to a list.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Add-ClickUpTaskToList -ListID 123 -TaskID 9hz
+Add ClickUp task with ID "9hz" to list with ID "123".
 
 ## PARAMETERS
 
-### -CommentID
+### -ListID
 
-{{ Fill CommentID Description }}
+{{ Fill ListID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -53,6 +53,27 @@ Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 0
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TaskID
+
+{{ Fill TaskID Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
   IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
@@ -77,19 +98,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### None. This cmdlet does not return any output.
 
 {{ Fill in the Description }}
 
 ## NOTES
 
 See the link for information.
+Note: This endpoint requires the Tasks in Multiple List ClickApp to be enabled.
 
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/addtasktolist)
+- [](https://help.clickup.com/hc/en-us/articles/6309958824727-Tasks-in-Multiple-Lists)

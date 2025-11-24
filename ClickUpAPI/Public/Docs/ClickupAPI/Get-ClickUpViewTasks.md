@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getviewtasks
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpViewTasks
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpViewTasks
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get ClickUp view tasks.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpViewTasks [-ViewID] <string> [[-Page] <ulong>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,24 +30,50 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get ClickUp view tasks.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpViewTasks -ViewID 3c
+Get a ClickUp view tasks with ID "3c".
+
+### EXAMPLE 2
+
+Get-ClickUpViewTasks -ViewID 3c -Page 2
+Get ClickUp view tasks with ID "3c" staring on page "2".
 
 ## PARAMETERS
 
-### -CommentID
+### -Page
 
-{{ Fill CommentID Description }}
+{{ Fill Page Description }}
 
 ```yaml
 Type: System.UInt64
 DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -ViewID
+
+{{ Fill ViewID Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -92,4 +118,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getviewtasks)

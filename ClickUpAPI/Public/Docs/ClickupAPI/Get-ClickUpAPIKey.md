@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: ''
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpAPIKey
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpAPIKey
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Retrieves the stored ClickUp API key.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpAPIKey [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,37 +30,18 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+The Get-ClickUpAPIKey cmdlet retrieves the SecureString containing the ClickUp API key from the global variable.
+If no key is stored, it throws an error.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+$Key = Get-ClickUpAPIKey
+
+Retrieves the stored API key and assigns it to the $Key variable.
 
 ## PARAMETERS
-
-### -CommentID
-
-{{ Fill CommentID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: 0
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
 
 ### CommonParameters
 
@@ -77,19 +58,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Security.SecureString. Returns the stored API key as a SecureString.
 
 {{ Fill in the Description }}
 
-### System.Array
+### System.Security.SecureString
 
 {{ Fill in the Description }}
 
 ## NOTES
 
-See the link for information.
-
-
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+{{ Fill in the related links here }}
+

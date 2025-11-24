@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/gettaskmembers
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpTaskMembers
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpTaskMembers
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get all ClickUp task members.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpTaskMembers [-TaskID] <string> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,24 +30,24 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get all ClickUp task members.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpTaskMembers -TaskId 9hz
+Get ClickUp task members from task with ID "9hz".
 
 ## PARAMETERS
 
-### -CommentID
+### -TaskID
 
-{{ Fill CommentID Description }}
+{{ Fill TaskID Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -92,4 +92,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/gettaskmembers)

@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/createfolder
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: New-ClickUpFolder
 ---
 
-# Get-ClickUpThreadedComments
+# New-ClickUpFolder
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Create a ClickUp folder in a particular space.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+New-ClickUpFolder [-SpaceID] <ulong> [-Name] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,41 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Create a ClickUp folder in a particular space.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+New-ClickUpFolder -SpaceID 11111111 -Name 'New Folder Name'
+Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with ID "11111111".
 
 ## PARAMETERS
 
-### -CommentID
+### -Name
 
-{{ Fill CommentID Description }}
+{{ Fill Name Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -SpaceID
+
+{{ Fill SpaceID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -77,11 +98,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### System.Object Hashtable.
 
 {{ Fill in the Description }}
 
@@ -92,4 +109,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/createfolder)

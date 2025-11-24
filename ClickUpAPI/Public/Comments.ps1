@@ -131,9 +131,9 @@ function Get-ClickUpListComments {
 
 <#
 .SYNOPSIS
-    Get all threadded comments.
+    Get all threaded comments.
 .DESCRIPTION
-    Get all threadded comments.
+    Get all threaded comments.
 .EXAMPLE
     PS C:\> Get-ClickUpThreadedComments -CommentID 123
     Get ClickUp threaded comments for comment with ID "123".

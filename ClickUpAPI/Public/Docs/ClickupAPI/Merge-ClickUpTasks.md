@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/mergetasks
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Merge-ClickUpTasks
 ---
 
-# Get-ClickUpThreadedComments
+# Merge-ClickUpTasks
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Merge ClickUp tasks.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Merge-ClickUpTasks [-TaskID] <string> [-SourceTaskIDs] <string[]> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,24 +30,51 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Merge multiple ClickUp tasks into a single task.
+The source tasks will be merged into the target task.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Merge-ClickUpTasks -TaskID '9hz' -SourceTaskIDs '3cuh','g4fs'
+Merges tasks with IDs "3cuh" and "g4fs" into the task with ID "9hz".
+
+### EXAMPLE 2
+
+Merge-ClickUpTasks -TaskID 'abc123' -SourceTaskIDs 'def456','ghi789','jkl012'
+Merges three source tasks into the target task with ID "abc123".
 
 ## PARAMETERS
 
-### -CommentID
+### -SourceTaskIDs
 
-{{ Fill CommentID Description }}
+{{ Fill SourceTaskIDs Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String[]
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TaskID
+
+{{ Fill TaskID Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -77,11 +104,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### None. This cmdlet does not return any output.
 
 {{ Fill in the Description }}
 
@@ -92,4 +115,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/mergetasks)

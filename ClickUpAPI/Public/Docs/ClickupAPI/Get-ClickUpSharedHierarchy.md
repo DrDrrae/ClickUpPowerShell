@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/sharedhierarchy
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpSharedHierarchy
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpSharedHierarchy
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get ClickUp shared hierarchy.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpSharedHierarchy [-TeamID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,22 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get ClickUp shared hierarchy.
+Returns all resources you have access to where you don't have access to its parent.
+For example, if you have a access to a shared task, but don't have access to its parent list, it will come back in this request.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpSharedHierarchy -TeamID 123
+Returns all ClickUp resources you have access to where you don't have access to its parent.
 
 ## PARAMETERS
 
-### -CommentID
+### -TeamID
 
-{{ Fill CommentID Description }}
+{{ Fill TeamID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -89,7 +91,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 See the link for information.
 
+Returns all resources you have access to where you don't have access to its parent.
+For example, if you have a access to a shared task, but don't have access to its parent list, it will come back in this request.
+
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/sharedhierarchy)

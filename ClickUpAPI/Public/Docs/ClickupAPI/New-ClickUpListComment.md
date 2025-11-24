@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/createlistcomment
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: New-ClickUpListComment
 ---
 
-# Get-ClickUpThreadedComments
+# New-ClickUpListComment
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Create ClickUp list comment.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+New-ClickUpListComment [-ListID] <ulong> [-Body] <hashtable> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,20 +30,56 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Create ClickUp list comment.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+$Body = @{
+>>     comment_text = "List comment content"
+>>     assignee = 183
+>>     notify_all = $true
+>> }
+PS C:\> New-ClickUpListComment -ListID 124 -Body $Body
+Create new ClickUp list comment on list with ID "124".
+
+### EXAMPLE 2
+
+$Body = @{
+>>     comment_text = "List comment content"
+>>     assignee = 183
+>>     notify_all = $true
+>> }
+PS C:\> New-ClickUpListComment -ListID 124 -Body $Body
+Create new ClickUp list comment with formatting on list with ID "124".
 
 ## PARAMETERS
 
-### -CommentID
+### -Body
 
-{{ Fill CommentID Description }}
+{{ Fill Body Description }}
+
+```yaml
+Type: System.Collections.Hashtable
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -ListID
+
+{{ Fill ListID Description }}
 
 ```yaml
 Type: System.UInt64
@@ -81,10 +117,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
-### System.Array
-
-{{ Fill in the Description }}
-
 ## NOTES
 
 See the link for information.
@@ -92,4 +124,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/createlistcomment)

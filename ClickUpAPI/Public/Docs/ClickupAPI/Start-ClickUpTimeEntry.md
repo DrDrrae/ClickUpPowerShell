@@ -1,39 +1,34 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: >-
-  https://developer.clickup.com/reference/createlist
-
-  https://developer.clickup.com/reference/createfolderlesslist
+HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/start-a-time-entry.html
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: New-ClickUpList
+title: Start-ClickUpTimeEntry
 ---
 
-# New-ClickUpList
+# Start-ClickUpTimeEntry
 
 ## SYNOPSIS
 
-Create a ClickUp list.
+Start a ClickUp time entry.
 
 ## SYNTAX
 
-### FolderID (Default)
+### TaskID (Default)
 
 ```
-New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
- [<CommonParameters>]
+Start-ClickUpTimeEntry -TeamID <ulong> -TaskID <string> [-Description <string>]
+ [-Tags <hashtable[]>] [-Billable <bool>] [-CustomTaskIDs <bool>] [<CommonParameters>]
 ```
 
-### SpaceID
+### TimerID
 
 ```
-New-ClickUpList -SpaceID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
- [<CommonParameters>]
+Start-ClickUpTimeEntry -TeamID <ulong> -TimerID <ulong> [-Description <string>]
+ [-Tags <hashtable[]>] [-Billable <bool>] [-CustomTaskIDs <bool>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -43,116 +38,25 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Create a ClickUp list.
+Start a ClickUp time entry.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-New-ClickUpList -FolderID 456 -Name "New ClickUp List"
-Create a ClickUp list called "New ClickUp List" under folder with ID "456".
+Start-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description'
+Start time entry with ID "2004673344540003570" and set description to "Time entry description" for team with ID "512".
 
 ### EXAMPLE 2
 
-New-ClickUpList -FolderID 456 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-Create a ClickUp list called "New ClickUp List" under folder with ID "456" with a due date and priority.
-
-### EXAMPLE 3
-
-New-ClickUpList -SpaceID 789 -Name "New ClickUp List"
-Create a ClickUp list called "New ClickUp List" under space with ID "789".
-
-### EXAMPLE 4
-
-New-ClickUpList -SpaceID 789 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-Create a ClickUp list called "New ClickUp List" under space with ID "789" with a due date and priority.
+Start-ClickUpTimeEntry -TeamID 512 -TaskID 9hx -Description 'Time entry description' -Billable $true
+Start time entry for task with ID "9hx" and set description to "Time entry description" and billable set to true for team with ID "512".
 
 ## PARAMETERS
 
-### -Assignee
+### -Billable
 
-{{ Fill Assignee Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Content
-
-{{ Fill Content Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDate
-
-{{ Fill DueDate Description }}
-
-```yaml
-Type: System.DateTime
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -DueDateTime
-
-{{ Fill DueDateTime Description }}
+{{ Fill Billable Description }}
 
 ```yaml
 Type: System.Boolean
@@ -160,88 +64,13 @@ DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
+- Name: TimerID
   Position: Named
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -FolderID
-
-{{ Fill FolderID Description }}
-
-```yaml
-Type: System.UInt64
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: FolderID
-  Position: Named
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Name
-
-{{ Fill Name Description }}
-
-```yaml
-Type: System.String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
-  Position: Named
-  IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Priority
-
-{{ Fill Priority Description }}
-
-```yaml
-Type: System.UInt16
-DefaultValue: 0
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: SpaceID
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-- Name: FolderID
+- Name: TaskID
   Position: Named
   IsRequired: false
   ValueFromPipeline: false
@@ -252,19 +81,25 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -SpaceID
+### -CustomTaskIDs
 
-{{ Fill SpaceID Description }}
+{{ Fill CustomTaskIDs Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.Boolean
+DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
+- Name: TimerID
   Position: Named
-  IsRequired: true
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -273,9 +108,9 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Status
+### -Description
 
-{{ Fill Status Description }}
+{{ Fill Description Description }}
 
 ```yaml
 Type: System.String
@@ -283,15 +118,111 @@ DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: SpaceID
+- Name: TimerID
   Position: Named
   IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
-- Name: FolderID
+- Name: TaskID
   Position: Named
   IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Tags
+
+{{ Fill Tags Description }}
+
+```yaml
+Type: System.Collections.Hashtable[]
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: TimerID
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TaskID
+
+{{ Fill TaskID Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: TaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TeamID
+
+{{ Fill TeamID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: TimerID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: TaskID
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -TimerID
+
+{{ Fill TimerID Description }}
+
+```yaml
+Type: System.UInt64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: TimerID
+  Position: Named
+  IsRequired: true
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
@@ -315,11 +246,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object.
-
-{{ Fill in the Description }}
-
-### System.Object
+### System.Management.Automation.PSCustomObject
 
 {{ Fill in the Description }}
 
@@ -330,7 +257,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist)
-- [https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist]()
+- [](https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/start-a-time-entry.html)

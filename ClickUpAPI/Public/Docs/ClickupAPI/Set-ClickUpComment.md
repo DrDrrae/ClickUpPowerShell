@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/updatecomment
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Set-ClickUpComment
 ---
 
-# Get-ClickUpThreadedComments
+# Set-ClickUpComment
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Update ClickUp comment.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Set-ClickUpComment [-CommentID] <ulong> [-Body] <hashtable> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,16 +30,42 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Update ClickUp comment.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+$Body = @{
+>>     comment_text = "Updated comment text"
+>>     assignee = 183
+>>     resolved = $true
+>> }
+PS C:\> Set-ClickUpComment -CommentID 456 -Body $Body
+Update comment with ID "456".
 
 ## PARAMETERS
+
+### -Body
+
+{{ Fill Body Description }}
+
+```yaml
+Type: System.Collections.Hashtable
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
 ### -CommentID
 
@@ -77,11 +103,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### None. This cmdlet does not return any output.
 
 {{ Fill in the Description }}
 
@@ -92,4 +114,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/updatecomment)

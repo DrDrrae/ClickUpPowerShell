@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/updateview
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Set-ClickUpView
 ---
 
-# Get-ClickUpThreadedComments
+# Set-ClickUpView
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Update ClickUp view.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Set-ClickUpView [-ViewID] <string> [-Body] <hashtable> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,24 +30,53 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Update ClickUp view.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+$body = @{
+>> name = "new list name"
+>> type = "list"
+>> grouping = @{
+>> field = 'status'
+>> dir = 1
+>> }
+>> }
+PS C:\> Set-ClickUpView -ViewID 3c -Body $Body
+Update aClickUp view with ID "124".
 
 ## PARAMETERS
 
-### -CommentID
+### -Body
 
-{{ Fill CommentID Description }}
+{{ Fill Body Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.Collections.Hashtable
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -ViewID
+
+{{ Fill ViewID Description }}
+
+```yaml
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -81,10 +110,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
-### System.Array
-
-{{ Fill in the Description }}
-
 ## NOTES
 
 See the link for information.
@@ -92,4 +117,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/updateview)

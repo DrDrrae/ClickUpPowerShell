@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: ''
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Add-ClickUpAPIKey
 ---
 
-# Get-ClickUpThreadedComments
+# Add-ClickUpAPIKey
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Adds a ClickUp API key to the current session.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Add-ClickUpAPIKey [-APIKey] <string> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,31 +30,35 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+The Add-ClickUpAPIKey cmdlet securely stores the provided ClickUp API key in a global variable for use by other cmdlets in this module.
+The key is converted to a SecureString and stored in a read-only global variable named 'ClickUpAPIKey'.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Add-ClickUpAPIKey -APIKey "pk_12345678_ABCDEF1234567890"
+
+Stores the provided API key in the session.
 
 ## PARAMETERS
 
-### -CommentID
+### -APIKey
 
-{{ Fill CommentID Description }}
+The ClickUp API key to be stored.
+This parameter is mandatory and can be piped.
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- Api_Key
 ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
-  ValueFromPipeline: false
+  ValueFromPipeline: true
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
 DontShow: false
@@ -71,25 +75,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None. This cmdlet does not accept any input.
+### System.String. You can pipe a string containing the API key to this cmdlet.
+
+{{ Fill in the Description }}
+
+### System.String
 
 {{ Fill in the Description }}
 
 ## OUTPUTS
 
-### System.Object
-
-{{ Fill in the Description }}
-
-### System.Array
+### None. This cmdlet does not return any output.
 
 {{ Fill in the Description }}
 
 ## NOTES
 
-See the link for information.
-
-
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+{{ Fill in the related links here }}
+

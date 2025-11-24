@@ -1,26 +1,26 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://developer.clickup.com/reference/getthreadedcomments
+HelpUri: https://developer.clickup.com/reference/getchatviewcomments
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
 PlatyPS schema version: 2024-05-01
-title: Get-ClickUpThreadedComments
+title: Get-ClickUpChatViewComments
 ---
 
-# Get-ClickUpThreadedComments
+# Get-ClickUpChatViewComments
 
 ## SYNOPSIS
 
-Get all threaded comments.
+Get ClickUp chat view comments.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Get-ClickUpThreadedComments [-CommentID] <ulong> [<CommonParameters>]
+Get-ClickUpChatViewComments [-ViewID] <string> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -30,24 +30,24 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-Get all threaded comments.
+Get ClickUp chat view comments.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Get-ClickUpThreadedComments -CommentID 123
-Get ClickUp threaded comments for comment with ID "123".
+Get-ClickUpChatViewComments -ViewID 3c
+Get ClickUp chat view comments for view with ID "3c".
 
 ## PARAMETERS
 
-### -CommentID
+### -ViewID
 
-{{ Fill CommentID Description }}
+{{ Fill ViewID Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -92,4 +92,4 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getthreadedcomments)
+- [](https://developer.clickup.com/reference/getchatviewcomments)
