@@ -12,7 +12,9 @@
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
+.OUTPUTS
+    System.Array.
 .NOTES
     See the link for information.
 .LINK
@@ -20,6 +22,7 @@
 #>
 function Get-ClickUpTaskComments {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -61,7 +64,9 @@ function Get-ClickUpTaskComments {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
+.OUTPUTS
+    System.Array.
 .NOTES
     See the link for information.
 .LINK
@@ -69,6 +74,7 @@ function Get-ClickUpTaskComments {
 #>
 function Get-ClickUpChatViewComments {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID
@@ -96,7 +102,9 @@ function Get-ClickUpChatViewComments {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
+.OUTPUTS
+    System.Array.
 .NOTES
     See the link for information.
 .LINK
@@ -104,6 +112,7 @@ function Get-ClickUpChatViewComments {
 #>
 function Get-ClickUpListComments {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$ListID
@@ -131,7 +140,9 @@ function Get-ClickUpListComments {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
+.OUTPUTS
+    System.Array.
 .NOTES
     See the link for information.
 .LINK
@@ -139,6 +150,7 @@ function Get-ClickUpListComments {
 #>
 function Get-ClickUpThreadedComments {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$CommentID
@@ -171,7 +183,7 @@ function Get-ClickUpThreadedComments {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    None
 .NOTES
     See the link for information.
 .LINK
@@ -207,7 +219,7 @@ function Set-ClickUpListComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    None
 .NOTES
     See the link for information.
 .LINK
@@ -264,7 +276,7 @@ function Remove-ClickUpListComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -272,6 +284,7 @@ function Remove-ClickUpListComment {
 #>
 function New-ClickUpTaskComment {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -329,7 +342,7 @@ function New-ClickUpTaskComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -337,6 +350,7 @@ function New-ClickUpTaskComment {
 #>
 function New-ClickUpChatViewComment {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
@@ -379,7 +393,7 @@ function New-ClickUpChatViewComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -387,6 +401,7 @@ function New-ClickUpChatViewComment {
 #>
 function New-ClickUpListComment {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$ListID,
@@ -429,7 +444,7 @@ function New-ClickUpListComment {
 .INPUTS
     None
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
@@ -437,6 +452,7 @@ function New-ClickUpListComment {
 #>
 function New-ClickUpThreadedComment {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [uint64]$CommentID,
