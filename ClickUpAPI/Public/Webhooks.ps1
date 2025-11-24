@@ -27,8 +27,16 @@ function Get-ClickUpWebhooks {
         [UInt64]$TeamID
     )
 
-    $Webhooks = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/webhook"
-    return $Webhooks.webhooks
+    Write-Verbose 'Entering Get-ClickUpWebhooks'
+    try {
+        Write-Verbose "Getting webhooks for team ID: $TeamID"
+        $Webhooks = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/webhook"
+        Write-Verbose 'Successfully retrieved webhooks'
+        return $Webhooks.webhooks
+    } catch {
+        Write-Error "Error in Get-ClickUpWebhooks: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -61,6 +69,8 @@ function New-ClickUpWebhook {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
+        [Parameter(Mandatory = $true)]
+        [UInt64]$TeamID,
         [Parameter(Mandatory = $True)]
         [string]$Endpoint,
         [Parameter()]
@@ -93,8 +103,16 @@ function New-ClickUpWebhook {
         $Body.Add('task_id', $FilterToTaskID)
     }
 
-    $Webhook = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/webhook" -Body $Body
-    return $Webhook
+    Write-Verbose 'Entering New-ClickUpWebhook'
+    try {
+        Write-Verbose "Creating new webhook for team ID: $TeamID"
+        $Webhook = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/webhook" -Body $Body
+        Write-Verbose 'Successfully created webhook'
+        return $Webhook
+    } catch {
+        Write-Error "Error in New-ClickUpWebhook: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -168,8 +186,16 @@ function Set-ClickUpWebhook {
         $Body.Add('task_id', $FilterToTaskID)
     }
 
-    $Webhook = Invoke-ClickUpAPIPut -Endpoint "webhook/$WebhookID" -Body $Body
-    return $Webhook
+    Write-Verbose 'Entering Set-ClickUpWebhook'
+    try {
+        Write-Verbose "Updating webhook with ID: $WebhookID"
+        $Webhook = Invoke-ClickUpAPIPut -Endpoint "webhook/$WebhookID" -Body $Body
+        Write-Verbose 'Successfully updated webhook'
+        return $Webhook
+    } catch {
+        Write-Error "Error in Set-ClickUpWebhook: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -198,7 +224,15 @@ function Remove-ClickUpWebhook {
         [string]$WebhookID
     )
 
+    Write-Verbose 'Entering Remove-ClickUpWebhook'
     if ($PSCmdlet.ShouldProcess($WebhookID)) {
-        $null = Invoke-ClickUpAPIDelete -Endpoint "webhook/$WebhookID"
+        try {
+            Write-Verbose "Removing webhook with ID: $WebhookID"
+            $null = Invoke-ClickUpAPIDelete -Endpoint "webhook/$WebhookID"
+            Write-Verbose 'Successfully removed webhook'
+        } catch {
+            Write-Error "Error in Remove-ClickUpWebhook: $($_.Exception.Message)"
+            throw $_
+        }
     }
 }
