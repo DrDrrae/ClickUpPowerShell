@@ -30,12 +30,20 @@ function Get-ClickUpSpaces {
         [bool]$Archived = $false
     )
 
-    $QueryString = @{
-        $Archived = $Archived
-    }
+    Write-Verbose 'Entering Get-ClickUpSpaces'
+    try {
+        Write-Verbose "Getting spaces for team ID: $TeamID (Archived: $Archived)"
+        $QueryString = @{
+            $Archived = $Archived
+        }
 
-    $Spaces = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/space"
-    return $Spaces.spaces
+        $Spaces = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "team/$TeamID/space"
+        Write-Verbose 'Successfully retrieved spaces'
+        return $Spaces.spaces
+    } catch {
+        Write-Error "Error in Get-ClickUpSpaces: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -62,8 +70,17 @@ function Get-ClickUpSpace {
         [Parameter(Mandatory = $true)]
         [uint64]$SpaceID
     )
-    $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
-    return $Space
+
+    Write-Verbose 'Entering Get-ClickUpSpace'
+    try {
+        Write-Verbose "Getting space with ID: $SpaceID"
+        $Space = Invoke-ClickUpAPIGet -Endpoint "space/$SpaceID"
+        Write-Verbose 'Successfully retrieved space'
+        return $Space
+    } catch {
+        Write-Error "Error in Get-ClickUpSpace: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -105,44 +122,53 @@ function New-ClickUpSpace {
         [bool]$FeatureDependencyWarning = $true,
         [bool]$FeaturePortfolios = $true
     )
-    $Body = @{
-        name               = $Name
-        multiple_assignees = $Multiple_Assignees
-        features           = @{
-            due_dates          = @{
-                enabled                = $FeatureDueDates
-                start_date             = $FeatureStartDate
-                remap_due_dates        = $FeatureRemapDueDates
-                remap_closed_due_dates = $FeatureRemapClosedDueDate
-            }
-            time_tracking      = @{
-                enabled = $FeatureTimeTracking
-            }
-            tags               = @{
-                enabled = $FeatureTags
-            }
-            time_estimates     = @{
-                enabled = $FeatureTimeEstimates
-            }
-            checklists         = @{
-                enabled = $FeatureChecklist
-            }
-            custom_fields      = @{
-                enabled = $FeatureCustomFields
-            }
-            remap_dependencies = @{
-                enabled = $FeatureRemapdependencies
-            }
-            dependency_warning = @{
-                enabled = $FeatureDependencyWarning
-            }
-            portfolios         = @{
-                enabled = $FeaturePortfolios
+
+    Write-Verbose 'Entering New-ClickUpSpace'
+    try {
+        Write-Verbose "Creating new space '$Name' in team ID: $TeamID"
+        $Body = @{
+            name               = $Name
+            multiple_assignees = $Multiple_Assignees
+            features           = @{
+                due_dates          = @{
+                    enabled                = $FeatureDueDates
+                    start_date             = $FeatureStartDate
+                    remap_due_dates        = $FeatureRemapDueDates
+                    remap_closed_due_dates = $FeatureRemapClosedDueDate
+                }
+                time_tracking      = @{
+                    enabled = $FeatureTimeTracking
+                }
+                tags               = @{
+                    enabled = $FeatureTags
+                }
+                time_estimates     = @{
+                    enabled = $FeatureTimeEstimates
+                }
+                checklists         = @{
+                    enabled = $FeatureChecklist
+                }
+                custom_fields      = @{
+                    enabled = $FeatureCustomFields
+                }
+                remap_dependencies = @{
+                    enabled = $FeatureRemapdependencies
+                }
+                dependency_warning = @{
+                    enabled = $FeatureDependencyWarning
+                }
+                portfolios         = @{
+                    enabled = $FeaturePortfolios
+                }
             }
         }
+        $Space = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/space" -Body $Body
+        Write-Verbose 'Successfully created space'
+        return $Space
+    } catch {
+        Write-Error "Error in New-ClickUpSpace: $($_.Exception.Message)"
+        throw $_
     }
-    $Space = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/space" -Body $Body
-    return $Space
 }
 
 <#
@@ -237,8 +263,16 @@ function Set-ClickUpSpace {
         [hashtable]$Body
     )
 
-    $Space = Invoke-ClickUpAPIPut -Endpoint "space/$SpaceID" -Body $Body
-    return $Space
+    Write-Verbose 'Entering Set-ClickUpSpace'
+    try {
+        Write-Verbose "Updating space with ID: $SpaceID"
+        $Space = Invoke-ClickUpAPIPut -Endpoint "space/$SpaceID" -Body $Body
+        Write-Verbose 'Successfully updated space'
+        return $Space
+    } catch {
+        Write-Error "Error in Set-ClickUpSpace: $($_.Exception.Message)"
+        throw $_
+    }
 }
 
 <#
@@ -265,7 +299,15 @@ function Remove-ClickupSpace {
         [uint64]$SpaceID
     )
 
-    if ($PSCmdlet.ShouldProcess($SpaceID)) {
-        $Null = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID"
+    Write-Verbose 'Entering Remove-ClickupSpace'
+    try {
+        if ($PSCmdlet.ShouldProcess($SpaceID)) {
+            Write-Verbose "Removing space with ID: $SpaceID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "space/$SpaceID"
+            Write-Verbose 'Successfully removed space'
+        }
+    } catch {
+        Write-Error "Error in Remove-ClickupSpace: $($_.Exception.Message)"
+        throw $_
     }
 }
