@@ -1,0 +1,70 @@
+---
+document type: cmdlet
+external help file: ClickupAPI-Help.xml
+HelpUri: https://developer.clickup.com/reference/getauthorizeduser
+Locale: en-US
+Module Name: ClickupAPI
+ms.date: 11-24-2025
+PlatyPS schema version: 2024-05-01
+title: Get-ClickUpAuthorizedUser
+---
+
+# Get-ClickUpAuthorizedUser
+
+## SYNOPSIS
+
+Get ClickUp authorized user.
+
+## SYNTAX
+
+### __AllParameterSets
+
+```
+Get-ClickUpAuthorizedUser [<CommonParameters>]
+```
+
+## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
+
+## DESCRIPTION
+
+Get ClickUp authorized user.
+
+## EXAMPLES
+
+### EXAMPLE 1
+
+Get-ClickUpAuthorizedUser
+Get the user that belongs to this token
+
+## PARAMETERS
+
+### CommonParameters
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+### None. This cmdlet does not accept any input.
+
+{{ Fill in the Description }}
+
+## OUTPUTS
+
+### System.Object
+
+{{ Fill in the Description }}
+
+## NOTES
+
+See the link for information.
+
+
+## RELATED LINKS
+
+- [](https://developer.clickup.com/reference/getauthorizeduser)
