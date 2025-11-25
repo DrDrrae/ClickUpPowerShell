@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/deletekeyresult
@@ -24,9 +24,6 @@ Remove-ClickUpKeyResult [-KeyResultID] <string> [-WhatIf] [-Confirm] [<CommonPar
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -128,7 +125,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

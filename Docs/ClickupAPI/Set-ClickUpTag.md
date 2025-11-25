@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/tags/edit-space-tag.html
@@ -25,9 +25,6 @@ Set-ClickUpTag [-SpaceID] <ulong> [-TagName] <string> [[-NewName] <string>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -173,7 +170,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

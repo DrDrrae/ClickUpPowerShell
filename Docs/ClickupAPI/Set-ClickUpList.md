@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/updatelist
@@ -21,14 +21,11 @@ Update a ClickUp list.
 
 ```
 Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-DueDate] <datetime>]
- [[-DueDateTime] <bool>] [[-Priorty] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
+ [[-DueDateTime] <bool>] [[-Priority] <ushort>] [[-Assignee] <ulong>] [[-UnsetStatus] <bool>]
  [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -174,13 +171,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priorty
+### -Priority
 
-{{ Fill Priorty Description }}
+{{ Fill Priority Description }}
 
 ```yaml
 Type: System.UInt16
-DefaultValue: ''
+DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -242,7 +239,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

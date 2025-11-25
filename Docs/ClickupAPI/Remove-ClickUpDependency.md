@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/deletedependency
@@ -46,9 +46,6 @@ Remove-ClickUpDependency -TaskID <string> -DependsOn <string> -CustomTaskID <boo
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -283,7 +280,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 See the link for information.
 
 One and only one of depends_on or dependency_of must be passed in the query params.
-
 
 ## RELATED LINKS
 

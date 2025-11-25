@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/updatespace
@@ -24,9 +24,6 @@ Set-ClickUpSpace [-SpaceID] <ulong> [-Body] <hashtable> [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -173,7 +170,6 @@ Body format:
         }
     }
 }
-
 
 ## RELATED LINKS
 

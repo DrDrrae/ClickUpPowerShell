@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: ''
@@ -24,9 +24,6 @@ Import-ClickUpModuleSettings [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -64,7 +61,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 If the configuration file is not found, it sets a default JSON conversion depth and prompts the user to run Add-ClickUpAPIKey.
-
 
 ## RELATED LINKS
 

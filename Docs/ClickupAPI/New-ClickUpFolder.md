@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/createfolder
@@ -20,13 +20,10 @@ Create a ClickUp folder in a particular space.
 ### __AllParameterSets
 
 ```
-New-ClickUpFolder [-SpaceID] <ulong> [-Name] <ulong> [<CommonParameters>]
+New-ClickUpFolder [-SpaceID] <ulong> [-Name] <string> [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -46,7 +43,7 @@ Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with
 {{ Fill Name Description }}
 
 ```yaml
-Type: System.UInt64
+Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
@@ -105,7 +102,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

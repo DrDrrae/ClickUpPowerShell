@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/updatewebhook
@@ -26,9 +26,6 @@ Set-ClickUpWebhook [-WebhookID] <string> [[-Endpoint] <string>] [[-Events] <stri
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -249,7 +246,6 @@ You may filter the location of resources that get sent to a webhook by passing a
 Without specifying any events, all event types will be sent to the webhook.
 However, you can filter for specific actions by sending an events array.
 To subscribe to specific events, pass an array of events that you want to subscribe to, otherwise pass "*" to subscribe to everything.
-
 
 ## RELATED LINKS
 

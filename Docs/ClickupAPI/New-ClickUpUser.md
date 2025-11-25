@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/inviteusertoworkspace
@@ -25,9 +25,6 @@ New-ClickUpUser [-TeamID] <ulong> [-Email] <string> [-Admin] <bool> [[-CustomRol
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -156,7 +153,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 This endpoint is only available to Workspaces on our Enterprise Plan.
 
 See the link for information.
-
 
 ## RELATED LINKS
 

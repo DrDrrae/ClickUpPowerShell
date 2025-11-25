@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/addguesttofolder
@@ -24,10 +24,14 @@ Add-ClickUpGuestToFolder [-FolderID] <ulong> [-GuestID] <ulong> [[-PermissionLev
  [<CommonParameters>]
 ```
 
-## ALIASES
+### __AllParameterSets
 
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
+```
+Add-ClickUpGuestToFolder [-FolderID] <ulong> [-GuestID] <ulong> [[-PermissionLevel] <string>]
+ [<CommonParameters>]
+```
+
+## ALIASES
 
 ## DESCRIPTION
 
@@ -136,7 +140,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

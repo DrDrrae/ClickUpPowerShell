@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/removeuserfromworkspace
@@ -24,9 +24,6 @@ Remove-ClickUpUser [-TeamID] <ulong> [-UserID] <ulong> [-WhatIf] [-Confirm] [<Co
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -151,7 +148,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 This endpoint is only available to Workspaces on our Enterprise Plan.
 
 See the link for information.
-
 
 ## RELATED LINKS
 

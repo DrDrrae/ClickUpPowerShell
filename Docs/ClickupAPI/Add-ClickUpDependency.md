@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/adddependency
@@ -44,9 +44,6 @@ Add-ClickUpDependency -TaskID <string> -DependsOn <string> -CustomTaskID <bool> 
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -249,7 +246,6 @@ See the link for information.
 To create a waiting on dependency, pass the property depends_on in the body.
 To create a blocking dependency, pass the property dependency_of.
 Both can not be passed in the same request.
-
 
 ## RELATED LINKS
 

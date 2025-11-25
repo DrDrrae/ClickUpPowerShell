@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/sharedhierarchy
@@ -24,9 +24,6 @@ Get-ClickUpSharedHierarchy [-TeamID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -93,7 +90,6 @@ See the link for information.
 
 Returns all resources you have access to where you don't have access to its parent.
 For example, if you have a access to a shared task, but don't have access to its parent list, it will come back in this request.
-
 
 ## RELATED LINKS
 

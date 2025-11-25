@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/createfolderlistfromtemplate
@@ -46,9 +46,6 @@ New-ClickUpListFromTemplate -SpaceID <ulong> -TemplateID <ulong> -Name <ulong>
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -1007,7 +1004,6 @@ In case of a timeout on synchronous requests, the objects from the template will
 Create a new List using a List template within a Space.
 Publicly shared templates must be added to your Workspace before you can use them with the public API.
 This request can be run asynchronously or synchronously via the return_immediately parameter.
-
 
 ## RELATED LINKS
 

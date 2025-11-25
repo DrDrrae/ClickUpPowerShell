@@ -1,4 +1,4 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/createlist
@@ -21,7 +21,7 @@ Create a ClickUp list.
 
 ```
 New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priorty <ushort>] [-Assignee <ulong>] [-Status <string>]
+ [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
  [<CommonParameters>]
 ```
 
@@ -29,14 +29,11 @@ New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <
 
 ```
 New-ClickUpList -SpaceID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priorty <ushort>] [-Assignee <ulong>] [-Status <string>]
+ [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
  [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -222,6 +219,33 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
+### -Priority
+
+{{ Fill Priority Description }}
+
+```yaml
+Type: System.UInt16
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: SpaceID
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: FolderID
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
 ### -Priorty
 
 {{ Fill Priorty Description }}
@@ -323,7 +347,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 
