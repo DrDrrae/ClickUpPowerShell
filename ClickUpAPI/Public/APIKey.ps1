@@ -25,7 +25,6 @@ function Add-ClickUpAPIKey {
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [ValidateNotNullOrEmpty()]
-        [Alias('Api_Key')]
         [string]$APIKey
     )
 

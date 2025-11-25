@@ -47,7 +47,7 @@ Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with
 
 ```yaml
 Type: System.UInt64
-DefaultValue: 0
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:

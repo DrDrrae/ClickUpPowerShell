@@ -1,10 +1,7 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: >-
-  https://developer.clickup.com/reference/createlist
-
-  https://developer.clickup.com/reference/createfolderlesslist
+HelpUri: https://developer.clickup.com/reference/createlist
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
@@ -24,7 +21,7 @@ Create a ClickUp list.
 
 ```
 New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
+ [-DueDateTime <bool>] [-Priorty <ushort>] [-Assignee <ulong>] [-Status <string>]
  [<CommonParameters>]
 ```
 
@@ -32,7 +29,7 @@ New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <
 
 ```
 New-ClickUpList -SpaceID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
+ [-DueDateTime <bool>] [-Priorty <ushort>] [-Assignee <ulong>] [-Status <string>]
  [<CommonParameters>]
 ```
 
@@ -225,13 +222,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Priority
+### -Priorty
 
-{{ Fill Priority Description }}
+{{ Fill Priorty Description }}
 
 ```yaml
 Type: System.UInt16
-DefaultValue: 0
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -330,7 +327,5 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist)
-- [https://developer.clickup.com/reference/createlist
-https://developer.clickup.com/reference/createfolderlesslist]()
+- [](https://developer.clickup.com/reference/createlist)
+- [](https://developer.clickup.com/reference/createfolderlesslist)

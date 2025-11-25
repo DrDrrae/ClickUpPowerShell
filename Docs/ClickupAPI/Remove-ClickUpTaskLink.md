@@ -48,8 +48,8 @@ Remove ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
 
 ### EXAMPLE 2
 
-Remove-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
-Remove ClickUp task with ID "CustomTaskID 2" as a link to ClickUp task with ID "CustomTaskID 1".
+Remove-ClickUpTaskLink -TaskID "CustomTaskID1" -LinksTo "CustomTaskID2" -CustomTaskID $true -TeamID 123456
+Remove ClickUp task with ID "CustomTaskID2" as a link to ClickUp task with ID "CustomTaskID1" using custom task IDs.
 
 ## PARAMETERS
 

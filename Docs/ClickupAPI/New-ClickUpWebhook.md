@@ -221,7 +221,7 @@ See the link for information.
 Only webhooks that were created by the authenticated user will be returned on this endpoint.
 
 We do not have a dedicated IP address for webhooks.
-We use our domain name and dynamic addressing.f
+We use our domain name and dynamic addressing.
 
 You may filter the location of resources that get sent to a webhook by passing an optional space_id, folder_id, list_id, or task_id in the body of the request.
 Without specifying any events, all event types will be sent to the webhook.

@@ -212,8 +212,8 @@ function Add-ClickUpTaskLink {
     PS C:\> Remove-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Remove ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
 .EXAMPLE
-    PS C:\> Remove-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
-    Remove ClickUp task with ID "CustomTaskID 2" as a link to ClickUp task with ID "CustomTaskID 1".
+    PS C:\> Remove-ClickUpTaskLink -TaskID "CustomTaskID1" -LinksTo "CustomTaskID2" -CustomTaskID $true -TeamID 123456
+    Remove ClickUp task with ID "CustomTaskID2" as a link to ClickUp task with ID "CustomTaskID1" using custom task IDs.
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS

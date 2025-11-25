@@ -86,7 +86,7 @@ function New-ClickUpFolder {
         [Parameter(Mandatory = $true)]
         [ulong]$SpaceID,
         [Parameter(Mandatory = $true)]
-        [ulong]$Name
+        [string]$Name
     )
 
     $Body = @{
@@ -185,7 +185,7 @@ function New-ClickUpFolderFromTemplate {
         [Parameter(Mandatory = $true)]
         [ulong]$TemplateID,
         [Parameter(Mandatory = $true)]
-        [ulong]$Name,
+        [string]$Name,
         [Parameter()]
         [bool]$ReturnImmediately,
         [Parameter()]

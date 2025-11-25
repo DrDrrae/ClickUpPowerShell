@@ -38,7 +38,7 @@ Remove a ClickUp task from a list.
 ### EXAMPLE 1
 
 Remove-ClickUpTaskFromList -ListID 123 -TaskID 9hz
-Add ClickUp task with ID "9hz" to list with ID "123".
+Remove ClickUp task with ID "9hz" from list with ID "123".
 
 ## PARAMETERS
 

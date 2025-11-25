@@ -1,10 +1,7 @@
 ---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: >-
-  https://developer.clickup.com/reference/getlists
-
-  https://developer.clickup.com/reference/getfolderlesslists
+HelpUri: https://developer.clickup.com/reference/getlists
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
@@ -164,7 +161,5 @@ See the link for information.
 
 ## RELATED LINKS
 
-- [](https://developer.clickup.com/reference/getlists
-https://developer.clickup.com/reference/getfolderlesslists)
-- [https://developer.clickup.com/reference/getlists
-https://developer.clickup.com/reference/getfolderlesslists]()
+- [](https://developer.clickup.com/reference/getlists)
+- [](https://developer.clickup.com/reference/getfolderlesslists)

@@ -359,7 +359,7 @@ function Add-ClickUpTaskToList {
     Remove a ClickUp task from a list.
 .EXAMPLE
     PS C:\> Remove-ClickUpTaskFromList -ListID 123 -TaskID 9hz
-    Add ClickUp task with ID "9hz" to list with ID "123".
+    Remove ClickUp task with ID "9hz" from list with ID "123".
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
