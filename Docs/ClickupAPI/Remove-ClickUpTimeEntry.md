@@ -1,7 +1,7 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/delete-a-time-entry.html
+HelpUri: https://developer.clickup.com/reference/deleteatimeentry
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
@@ -25,6 +25,9 @@ Remove-ClickUpTimeEntry [-TeamID] <ulong> [-TimerID] <ulong> [-WhatIf] [-Confirm
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -140,6 +143,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### None. This cmdlet does not return any output.
+
+{{ Fill in the Description }}
+
 ### System.Management.Automation.PSCustomObject
 
 {{ Fill in the Description }}
@@ -148,6 +155,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 See the link for information.
 
+
 ## RELATED LINKS
 
-- [](https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/delete-a-time-entry.html)
+- [](https://developer.clickup.com/reference/deleteatimeentry)

@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/updatetask
@@ -31,6 +31,9 @@ Set-ClickUpTask -TaskID <string> -Body <hashtable> -CustomTaskIDs <bool> -TeamID
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -207,6 +210,7 @@ Body format:
     }
     "archived = false
 }
+
 
 ## RELATED LINKS
 

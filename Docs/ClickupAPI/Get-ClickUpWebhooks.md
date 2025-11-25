@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/getwebhooks
@@ -24,6 +24,9 @@ Get-ClickUpWebhooks [-TeamID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -88,6 +91,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 See the link for information.
 
 Only webhooks that were created by the authenticated user will be returned on this endpoint.
+
 
 ## RELATED LINKS
 

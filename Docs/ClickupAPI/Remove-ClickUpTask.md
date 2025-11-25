@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/deletetask
@@ -31,6 +31,9 @@ Remove-ClickUpTask -TaskID <string> -CustomTaskIDs <bool> -TeamID <ulong> [-What
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -185,6 +188,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for more information.
+
 
 ## RELATED LINKS
 

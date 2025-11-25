@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/updatelist
@@ -26,6 +26,9 @@ Set-ClickUpList [-ListID] <string> [[-Name] <string>] [[-Content] <string>] [[-D
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -177,7 +180,7 @@ HelpMessage: ''
 
 ```yaml
 Type: System.UInt16
-DefaultValue: 0
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -239,6 +242,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
+
 
 ## RELATED LINKS
 

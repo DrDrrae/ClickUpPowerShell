@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/createfolderlistfromtemplate
@@ -20,7 +20,7 @@ Create a new list using a list template in a Folder.
 ### FolderID
 
 ```
-New-ClickUpListFromTemplate -FolderID <ulong> -TemplateID <ulong> -Name <ulong>
+New-ClickUpListFromTemplate -FolderID <ulong> -TemplateID <ulong> -Name <string>
  [-ReturnImmediately <bool>] [-Content <string>] [-TimeEstimate <bool>] [-Automation <bool>]
  [-IncludeViews <bool>] [-OldDueDate <bool>] [-OldStartDate <bool>] [-OldFollowers <bool>]
  [-CommentAttachments <bool>] [-RecurSettings <bool>] [-OldTags <bool>] [-OldStatuses <bool>]
@@ -34,7 +34,7 @@ New-ClickUpListFromTemplate -FolderID <ulong> -TemplateID <ulong> -Name <ulong>
 ### SpaceID
 
 ```
-New-ClickUpListFromTemplate -SpaceID <ulong> -TemplateID <ulong> -Name <ulong>
+New-ClickUpListFromTemplate -SpaceID <ulong> -TemplateID <ulong> -Name <string>
  [-ReturnImmediately <bool>] [-Content <string>] [-TimeEstimate <bool>] [-Automation <bool>]
  [-IncludeViews <bool>] [-OldDueDate <bool>] [-OldStartDate <bool>] [-OldFollowers <bool>]
  [-CommentAttachments <bool>] [-RecurSettings <bool>] [-OldTags <bool>] [-OldStatuses <bool>]
@@ -46,6 +46,9 @@ New-ClickUpListFromTemplate -SpaceID <ulong> -TemplateID <ulong> -Name <ulong>
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -415,8 +418,8 @@ HelpMessage: ''
 {{ Fill Name Description }}
 
 ```yaml
-Type: System.UInt64
-DefaultValue: 0
+Type: System.String
+DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
@@ -1004,6 +1007,7 @@ In case of a timeout on synchronous requests, the objects from the template will
 Create a new List using a List template within a Space.
 Publicly shared templates must be added to your Workspace before you can use them with the public API.
 This request can be run asynchronously or synchronously via the return_immediately parameter.
+
 
 ## RELATED LINKS
 

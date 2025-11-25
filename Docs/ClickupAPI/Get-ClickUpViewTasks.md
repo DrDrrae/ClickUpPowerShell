@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/getviewtasks
@@ -25,6 +25,9 @@ Get-ClickUpViewTasks [-ViewID] <string> [[-Page] <ulong>] [<CommonParameters>]
 
 ## ALIASES
 
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
+
 ## DESCRIPTION
 
 Get ClickUp view tasks.
@@ -39,7 +42,7 @@ Get a ClickUp view tasks with ID "3c".
 ### EXAMPLE 2
 
 Get-ClickUpViewTasks -ViewID 3c -Page 2
-Get ClickUp view tasks with ID "3c" staring on page "2".
+Get ClickUp view tasks with ID "3c" starting on page "2".
 
 ## PARAMETERS
 
@@ -111,6 +114,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
+
 
 ## RELATED LINKS
 

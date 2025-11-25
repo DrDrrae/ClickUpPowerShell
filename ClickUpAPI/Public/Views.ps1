@@ -201,7 +201,7 @@ function Get-ClickUpListViews {
     Get a ClickUp view tasks with ID "3c".
 .EXAMPLE
     PS C:\> Get-ClickUpViewTasks -ViewID 3c -Page 2
-    Get ClickUp view tasks with ID "3c" staring on page "2".
+    Get ClickUp view tasks with ID "3c" starting on page "2".
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS

@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/createfolder
@@ -20,7 +20,7 @@ Create a new Folder using a Folder template within a Space.
 ### __AllParameterSets
 
 ```
-New-ClickUpFolderFromTemplate [-SpaceID] <ulong> [-TemplateID] <ulong> [-Name] <string>
+New-ClickUpFolderFromTemplate [-SpaceID] <ulong> [-TemplateID] <ulong> [-Name] <ulong>
  [[-ReturnImmediately] <bool>] [[-Content] <string>] [[-TimeEstimate] <bool>] [[-Automation] <bool>]
  [[-IncludeViews] <bool>] [[-OldDueDate] <bool>] [[-OldStartDate] <bool>] [[-OldFollowers] <bool>]
  [[-CommentAttachments] <bool>] [[-RecurSettings] <bool>] [[-OldTags] <bool>]
@@ -33,6 +33,9 @@ New-ClickUpFolderFromTemplate [-SpaceID] <ulong> [-TemplateID] <ulong> [-Name] <
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -304,7 +307,7 @@ HelpMessage: ''
 {{ Fill Name Description }}
 
 ```yaml
-Type: System.String
+Type: System.UInt64
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
@@ -765,6 +768,7 @@ Create a new Folder using a Folder template within a Space.
 This endpoint allows you to create a folder with all its nested assets (lists, tasks, etc.) from a predefined template available in your Workspace.
 Publicly shared templates must be added to your Workspace before you can use them with the public API.
 This request can be run asynchronously or synchronously via the return_immediately parameter.
+
 
 ## RELATED LINKS
 

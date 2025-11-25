@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/gettask
@@ -32,6 +32,9 @@ Get-ClickUpTask -TaskID <string> -CustomTaskIDs <bool> -TeamID <ulong> [-Include
 
 ## ALIASES
 
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
+
 ## DESCRIPTION
 
 Get a ClickUp task.
@@ -41,12 +44,12 @@ Get a ClickUp task.
 ### EXAMPLE 1
 
 Get-ClickUpTask -TaskID 9hz
-Get a ClickUp task under List with ID "11111111".
+Get a ClickUp task with Task ID "9hz".
 
 ### EXAMPLE 2
 
 Get-ClickUpTask -TaskID 9hz -CustomTaskIDs $true -TeamID 123
-Get a ClickUp task under List with ID "22222222" and various other options.
+Get a ClickUp task with Task ID "9hz" using custom task IDs and specifying a Team ID.
 
 ## PARAMETERS
 
@@ -168,6 +171,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
+
 
 ## RELATED LINKS
 

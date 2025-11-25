@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: ''
@@ -25,6 +25,9 @@ Add-ClickUpAPIKey [-APIKey] <string> [<CommonParameters>]
 
 ## ALIASES
 
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
+
 ## DESCRIPTION
 
 The Add-ClickUpAPIKey cmdlet securely stores the provided ClickUp API key in a global variable for use by other cmdlets in this module.
@@ -49,7 +52,8 @@ This parameter is mandatory and can be piped.
 Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- Api_Key
 ParameterSets:
 - Name: (All)
   Position: 0

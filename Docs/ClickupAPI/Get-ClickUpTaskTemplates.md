@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/gettasktemplates
@@ -25,6 +25,9 @@ Get-ClickUpTaskTemplates [-TeamID] <ulong> [[-Page] <ulong>] [<CommonParameters>
 
 ## ALIASES
 
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
+
 ## DESCRIPTION
 
 Get all ClickUp task templates.
@@ -38,7 +41,7 @@ Get all ClickUp task templates for team with ID "512".
 
 ### EXAMPLE 2
 
-Get-ClickUpTaskTemplates -TeamID 512 -Page 1
+Get-ClickUpTaskTemplates -TeamID 512 -Page 2
 Get all ClickUp task templates for team with ID "512" starting on page 2.
 
 ## PARAMETERS
@@ -111,6 +114,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
+
 
 ## RELATED LINKS
 

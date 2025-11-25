@@ -12,15 +12,17 @@
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-time-entries-within-a-date-range.html
+    https://developer.clickup.com/reference/gettimeentrieswithinadaterange
 #>
 function Get-ClickUpTimeEntries {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object], [System.Array])]
     param(
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID,
@@ -101,15 +103,15 @@ function Get-ClickUpTimeEntries {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-singular-time-entry.html
+    https://developer.clickup.com/reference/getsingulartimeentry
 #>
 function Get-ClickUpTimeEntry {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param(
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID,
@@ -140,15 +142,15 @@ function Get-ClickUpTimeEntry {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-time-entry-history.html
+    https://developer.clickup.com/reference/gettimeentryhistory
 #>
 function Get-ClickUpTimeEntryHistory {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param(
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID,
@@ -178,19 +180,19 @@ function Get-ClickUpTimeEntryHistory {
     Get running time entries for ClickUp team with ID "512".
 .EXAMPLE
     PS C:\> Get-ClickUpRunningTimeEntry -TeamID 512 -Assignee 1234
-    Get running time entries for ClickUp team with ID "512" assigned to assingee with ID "1234"
+    Get running time entries for ClickUp team with ID "512" assigned to assignee with ID "1234"
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-running-time-entry.html
+    https://developer.clickup.com/reference/getrunningtimeentry
 #>
 function Get-ClickUpRunningTimeEntry {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param(
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID,
@@ -229,15 +231,15 @@ function Get-ClickUpRunningTimeEntry {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-all-tags-from-time-entries.html
+    https://developer.clickup.com/reference/getalltagsfromtimeentries
 #>
 function Get-ClickUpTimeEntryTags {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param(
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID
@@ -266,15 +268,15 @@ function Get-ClickUpTimeEntryTags {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/create-a-time-entry.html
+    https://developer.clickup.com/reference/createatimeentry
 #>
 function New-ClickUpTimeEntry {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param(
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID,
@@ -334,7 +336,7 @@ function New-ClickUpTimeEntry {
         Write-Verbose "Creating new time entry for team ID: $TeamID"
         $TimeEntry = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "team/$TeamID/time_entries" -Body $Body
         Write-Verbose 'Successfully created time entry'
-        Return $TimeEntry.data
+        Return $TimeEntry
     } catch {
         Write-Error "Error in New-ClickUpTimeEntry: $($_.Exception.Message)"
         throw $_
@@ -355,15 +357,14 @@ function New-ClickUpTimeEntry {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/add-tags-from-time-entries.html
+    https://developer.clickup.com/reference/addtagsfromtimeentries
 #>
 function Add-ClickUpTimeEntryTags {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$TeamID,
@@ -381,7 +382,7 @@ function Add-ClickUpTimeEntryTags {
     Write-Verbose 'Entering Add-ClickUpTimeEntryTags'
     try {
         Write-Verbose "Adding tags to time entries: $($TimeEntryIDs -join ', ') for team ID: $TeamID"
-        Invoke-ClickUpAPIPost -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+        $null = Invoke-ClickUpAPIPost -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
         Write-Verbose 'Successfully added tags to time entries'
     } catch {
         Write-Error "Error in Add-ClickUpTimeEntryTags: $($_.Exception.Message)"
@@ -403,15 +404,14 @@ function Add-ClickUpTimeEntryTags {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/change-tag-names-from-time-entries.html
+    https://developer.clickup.com/reference/changetagnamesfromtimeentries
 #>
 function Set-ClickUpTimeEntryTags {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
         [string]$TeamID,
@@ -435,7 +435,7 @@ function Set-ClickUpTimeEntryTags {
     Write-Verbose 'Entering Set-ClickUpTimeEntryTags'
     try {
         Write-Verbose "Updating tag name from '$OldTagName' to '$NewTagName' for team ID: $TeamID"
-        Invoke-ClickUpAPIPut -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
+        $null = Invoke-ClickUpAPIPut -EndPoint "team/$TeamID/time_entries/tags" -Body $Body
         Write-Verbose 'Successfully updated time entry tag'
     } catch {
         Write-Error "Error in Set-ClickUpTimeEntryTags: $($_.Exception.Message)"
@@ -457,15 +457,15 @@ function Set-ClickUpTimeEntryTags {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/start-a-time-entry.html
+    https://developer.clickup.com/reference/startatimeentry
 #>
 function Start-ClickUpTimeEntry() {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
@@ -530,15 +530,15 @@ function Start-ClickUpTimeEntry() {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/stop-a-time-entry.html
+    https://developer.clickup.com/reference/stopatimeentry
 #>
 function Stop-ClickUpTimeEntry() {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID
@@ -570,15 +570,14 @@ function Stop-ClickUpTimeEntry() {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/update-a-time-entry.html
+    https://developer.clickup.com/reference/updateatimeentry
 #>
 function Set-ClickUpTimeEntry() {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     param (
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID,
@@ -644,9 +643,8 @@ function Set-ClickUpTimeEntry() {
     Write-Verbose 'Entering Set-ClickUpTimeEntry'
     try {
         Write-Verbose "Updating time entry with timer ID: $TimerID for team ID: $TeamID"
-        $TimeEntry = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "team/$TeamID/time_entries/$TimerID" -Body $Body
+        $Null = Invoke-ClickUpAPIPut -Arguments $QueryString -Endpoint "team/$TeamID/time_entries/$TimerID" -Body $Body
         Write-Verbose 'Successfully updated time entry'
-        Return $TimeEntry.data
     } catch {
         Write-Error "Error in Set-ClickUpTimeEntry: $($_.Exception.Message)"
         throw $_
@@ -665,15 +663,14 @@ function Set-ClickUpTimeEntry() {
 .INPUTS
     None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/delete-a-time-entry.html
+    https://developer.clickup.com/reference/deleteatimeentry
 #>
 function Remove-ClickUpTimeEntry {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
         [ulong]$TeamID,
@@ -685,9 +682,8 @@ function Remove-ClickUpTimeEntry {
     if ($PSCmdlet.ShouldProcess($TimerID)) {
         try {
             Write-Verbose "Removing time entry with timer ID: $TimerID for team ID: $TeamID"
-            $TimeEntry = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/time_entries/$TimerID"
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/time_entries/$TimerID"
             Write-Verbose 'Successfully removed time entry'
-            Return $TimeEntry.data
         } catch {
             Write-Error "Error in Remove-ClickUpTimeEntry: $($_.Exception.Message)"
             throw $_

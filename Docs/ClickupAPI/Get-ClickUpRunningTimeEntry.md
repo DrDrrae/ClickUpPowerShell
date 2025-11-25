@@ -1,7 +1,7 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
-HelpUri: https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-running-time-entry.html
+HelpUri: https://developer.clickup.com/reference/getrunningtimeentry
 Locale: en-US
 Module Name: ClickupAPI
 ms.date: 11-24-2025
@@ -25,6 +25,9 @@ Get-ClickUpRunningTimeEntry [-TeamID] <ulong> [[-Assignee] <ulong>] [<CommonPara
 
 ## ALIASES
 
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
+
 ## DESCRIPTION
 
 Get running ClickUp time entries.
@@ -39,7 +42,7 @@ Get running time entries for ClickUp team with ID "512".
 ### EXAMPLE 2
 
 Get-ClickUpRunningTimeEntry -TeamID 512 -Assignee 1234
-Get running time entries for ClickUp team with ID "512" assigned to assingee with ID "1234"
+Get running time entries for ClickUp team with ID "512" assigned to assignee with ID "1234"
 
 ## PARAMETERS
 
@@ -100,6 +103,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Object
+
+{{ Fill in the Description }}
+
 ### System.Management.Automation.PSCustomObject
 
 {{ Fill in the Description }}
@@ -108,6 +115,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 See the link for information.
 
+
 ## RELATED LINKS
 
-- [](https://jsapi.apiary.io/apis/clickup20/reference/0/time-tracking-20/get-running-time-entry.html)
+- [](https://developer.clickup.com/reference/getrunningtimeentry)

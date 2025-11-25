@@ -1,4 +1,4 @@
-﻿---
+---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/setcustomfieldvalue
@@ -31,6 +31,9 @@ Set-ClickUpCustomFieldValue -TaskID <string> -FieldID <string> -Value <string> -
 ```
 
 ## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -198,6 +201,7 @@ See the link for information.
 
 The accessible fields can be found on the task object from the get task route.
 This is where you can retrieve the field_id.
+
 
 ## RELATED LINKS
 
