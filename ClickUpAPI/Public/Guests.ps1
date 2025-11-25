@@ -7,26 +7,33 @@
     PS C:\> Get-ClickUpGuest -TeamID 333 -GuestID 403
     Guest ClickUp guest user with ID "403" for team with ID "333".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/get-guest.html
+    https://developer.clickup.com/reference/getguest
 #>
 function Get-ClickUpGuest {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $True)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
-    $Guest = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/guest/$GuestID"
-    Return $Guest.guest
+    Write-Verbose "Getting guest with ID: $GuestID for team ID: $TeamID"
+    try {
+        $Guest = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/guest/$GuestID"
+        Write-Verbose "Successfully retrieved guest: $($Guest.guest.username) (ID: $($Guest.guest.id))"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to get guest with ID $GuestID for team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -41,20 +48,20 @@ function Get-ClickUpGuest {
     PS C:\> Add-ClickUpGuest -TeamID 333 -GuestEmail 'guest@example.com' -CanEditTags $true -CanSeeTimeSpent $true -CanSeeTimeEstimated $true
     Add ClickUp guest user with email "guest@example.com" for team with ID "333" and give them access to edit tags, see time spent, and see time estimated.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/invite-guest-to-workspace.html
+    https://developer.clickup.com/reference/inviteguesttoworkspace
 #>
 function Add-ClickUpGuest {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $True)]
         [string]$GuestEmail,
         [Parameter()]
@@ -72,8 +79,15 @@ function Add-ClickUpGuest {
         can_see_time_estimated = $CanSeeTimeEstimated
     }
 
-    $Team = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/guest" -Body $Body
-    Return $Team.team
+    Write-Verbose "Inviting guest '$GuestEmail' to team ID: $TeamID"
+    try {
+        $Team = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/guest" -Body $Body
+        Write-Verbose "Successfully invited guest '$GuestEmail' to team ID: $TeamID"
+        return $Team.team
+    } catch {
+        Write-Error "Failed to invite guest '$GuestEmail' to team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -88,20 +102,22 @@ function Add-ClickUpGuest {
     PS C:\> Set-ClickUpGuest -TeamID 333 -GuestID 403 -CanEditTags $true -CanSeeTimeSpent $true -CanSeeTimeEstimated $true
     Update ClickUp guest user's permissions to edit tags, see time spent, and see time estimated for guest with ID "403".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/edit-guest-on-workspace.html
+    https://developer.clickup.com/reference/editguestonworkspace
 #>
 function Set-ClickUpGuest {
     [CmdletBinding()]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
+        [Parameter(Mandatory = $True)]
+        [ulong]$GuestID,
         [Parameter()]
         [string]$Username,
         [Parameter()]
@@ -127,8 +143,15 @@ function Set-ClickUpGuest {
         $Body.Add('can_see_time_estimated', $CanSeeTimeEstimated)
     }
 
-    $Guest = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/guest" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Updating guest with ID: $GuestID for team ID: $TeamID"
+    try {
+        $Guest = Invoke-ClickUpAPIPut -Endpoint "team/$TeamID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully updated guest with ID: $GuestID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to update guest with ID $GuestID for team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -146,24 +169,24 @@ function Set-ClickUpGuest {
     PS C:\> Add-ClickUpGuestToTask -TaskID CustomID -GuestID 403 -CustomTaskIDs $true -TeamID 123 -PermissionLevel edit.
     Add ClickUp guest user with  custom ID "CustomID" to task with ID "c04" with permission level "edit".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-task.html
+    https://developer.clickup.com/reference/addguesttotask
 #>
 function Add-ClickUpGuestToTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -171,7 +194,7 @@ function Add-ClickUpGuestToTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     $Body = @{
@@ -187,8 +210,15 @@ function Add-ClickUpGuestToTask {
         $QueryString = @{}
     }
 
-    $Guest = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Adding guest with ID: $GuestID to task ID: $TaskID"
+    try {
+        $Guest = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully added guest with ID: $GuestID to task ID: $TaskID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to add guest with ID $GuestID to task ID $TaskID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -203,22 +233,22 @@ function Add-ClickUpGuestToTask {
     PS C:\> Add-ClickUpGuestToList -ListID 1427 -GuestID 403 -PermissionLevel edit
     Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "edit".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-list.html
+    https://developer.clickup.com/reference/addguesttolist
 #>
-function Add-ClickUpGuestToTask {
-    [CmdletBinding(DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+function Add-ClickUpGuestToList {
+    [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -228,8 +258,15 @@ function Add-ClickUpGuestToTask {
         permission_level = $PermissionLevel
     }
 
-    $Guest = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/guest/$GuestID" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Adding guest with ID: $GuestID to list ID: $ListID"
+    try {
+        $Guest = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully added guest with ID: $GuestID to list ID: $ListID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to add guest with ID $GuestID to list ID $ListID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -244,22 +281,22 @@ function Add-ClickUpGuestToTask {
     PS C:\> Add-ClickUpGuestToList -FolderID 1057 -GuestID 403 -PermissionLevel edit
     Add ClickUp guest user with ID "403" to folder with ID "1057" with permission level "edit".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/add-guest-to-folder.html
+    https://developer.clickup.com/reference/addguesttofolder
 #>
 function Add-ClickUpGuestToFolder {
-    [CmdletBinding(DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$FolderID,
+        [ulong]$FolderID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -269,8 +306,15 @@ function Add-ClickUpGuestToFolder {
         permission_level = $PermissionLevel
     }
 
-    $Guest = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/guest/$GuestID" -Body $Body
-    Return $Guest.guest
+    Write-Verbose "Adding guest with ID: $GuestID to folder ID: $FolderID"
+    try {
+        $Guest = Invoke-ClickUpAPIPost -Endpoint "folder/$FolderID/guest/$GuestID" -Body $Body
+        Write-Verbose "Successfully added guest with ID: $GuestID to folder ID: $FolderID"
+        return $Guest.guest
+    } catch {
+        Write-Error "Failed to add guest with ID $GuestID to folder ID $FolderID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -282,27 +326,34 @@ function Add-ClickUpGuestToFolder {
     PS C:\> Remove-ClickUpGuest -TeamID 333 -GuestID 403
     Remove ClickUp guest with Id "403" from team with ID "333".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-workspace.html
+    https://developer.clickup.com/reference/removeguestfromworkspace
 #>
 function Remove-ClickUpGuest {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Team = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/guest/$GuestID"
-        $Team.team
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Workspace')) {
+        Write-Verbose "Removing guest with ID: $GuestID from team ID: $TeamID"
+        try {
+            $Team = Invoke-ClickUpAPIDelete -Endpoint "team/$TeamID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from team ID: $TeamID"
+            return $Team.team
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from team ID $TeamID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -315,24 +366,24 @@ function Remove-ClickUpGuest {
     PS C:\> Remove-ClickUpGuestFromTask -TaskID 1427 -GuestID 403
     Remove ClickUp guest with Id "403" from task with ID "1427".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-task.html
+    https://developer.clickup.com/reference/removeguestfromtask
 #>
 function Remove-ClickUpGuestFromTask {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$GuestID,
+        [ulong]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -340,7 +391,7 @@ function Remove-ClickUpGuestFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -352,9 +403,16 @@ function Remove-ClickUpGuestFromTask {
         $QueryString = @{}
     }
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Guest = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID"
-        $Guest.guest
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Task')) {
+        Write-Verbose "Removing guest with ID: $GuestID from task ID: $TaskID"
+        try {
+            $Guest = Invoke-ClickUpAPIDelete -Arguments $QueryString -Endpoint "task/$TaskID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from task ID: $TaskID"
+            return $Guest.guest
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from task ID $TaskID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -367,27 +425,34 @@ function Remove-ClickUpGuestFromTask {
     PS C:\> Remove-ClickUpGuestFromList -ListID c04 -GuestID 403
     Remove ClickUp guest with Id "403" from list with ID "c04".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-list.html
+    https://developer.clickup.com/reference/removeguestfromlist
 #>
 function Remove-ClickUpGuestFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ListID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Guest = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID/guest/$GuestID"
-        $Guest.guest
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from List')) {
+        Write-Verbose "Removing guest with ID: $GuestID from list ID: $ListID"
+        try {
+            $Guest = Invoke-ClickUpAPIDelete -Endpoint "list/$ListID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from list ID: $ListID"
+            return $Guest.guest
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from list ID $ListID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -400,26 +465,33 @@ function Remove-ClickUpGuestFromList {
     PS C:\> Remove-ClickUpGuestFromFolder -FolderID 1057 -GuestID 403
     Remove ClickUp guest with Id "403" from folder with ID "1057".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Management.Automation.PSCustomObject.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/guests/remove-guest-from-folder.html
+    https://developer.clickup.com/reference/removeguestfromfolder
 #>
 function Remove-ClickUpGuestFromFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
-    [OutputType([System.Management.Automation.PSCustomObject])]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$FolderID,
         [Parameter(Mandatory = $true)]
-        [UInt64]$GuestID
+        [ulong]$GuestID
     )
 
-    if ($PSCmdlet.ShouldProcess($GuestID)) {
-        $Guest = Invoke-ClickUpAPIDelete -Endpoint "folder/$FolderID/guest/$GuestID"
-        $Guest.guest
+    if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Folder')) {
+        Write-Verbose "Removing guest with ID: $GuestID from folder ID: $FolderID"
+        try {
+            $Guest = Invoke-ClickUpAPIDelete -Endpoint "folder/$FolderID/guest/$GuestID"
+            Write-Verbose "Successfully removed guest with ID: $GuestID from folder ID: $FolderID"
+            return $Guest.guest
+        } catch {
+            Write-Error "Failed to remove guest with ID $GuestID from folder ID $FolderID. Error: $_"
+            throw $_
+        }
     }
 }

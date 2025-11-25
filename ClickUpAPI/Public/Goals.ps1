@@ -7,23 +7,31 @@
     PS C:\> Get-ClickUpGoals -TeamID 123
     Get all ClickUp team goals for team with ID "123".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/get-goals.html
+    https://developer.clickup.com/reference/getgoals
 #>
 function Get-ClickUpGoals {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
-    $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
-    Return $Goals.goals
+    Write-Verbose "Getting all goals for team ID: $TeamID"
+    try {
+        $Goals = Invoke-ClickUpAPIGet -Endpoint "team/$TeamID/goal"
+        Write-Verbose "Successfully retrieved $($Goals.goals.Count) goals."
+        return $Goals.goals
+    } catch {
+        Write-Error "Failed to get goals for team ID $TeamID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -35,23 +43,31 @@ function Get-ClickUpGoals {
     PS C:\> Get-ClickUpGoal -GoalID e53a033c
     Get a ClickUp team goal with ID "e53a033c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/get-goal.html
+    https://developer.clickup.com/reference/getgoal
 #>
 function Get-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$GoalID
+        [ulong]$GoalID
     )
 
-    $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
-    Return $Goal.goal
+    Write-Verbose "Getting goal with ID: $GoalID"
+    try {
+        $Goal = Invoke-ClickUpAPIGet -Endpoint "goal/$GoalID"
+        Write-Verbose "Successfully retrieved goal: $($Goal.goal.name)"
+        return $Goal.goal
+    } catch {
+        Write-Error "Failed to get goal with ID $GoalID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -63,19 +79,20 @@ function Get-ClickUpGoal {
     PS C:\> New-ClickUpGoal -TeamID 123 -Name 'Goal Name' -DueDate "12/31/2021 17:00"
     Create a new ClickUp goal for team with ID "123" with the name of "Goal Name" and the due date of "December 31st, 2021 at 5:00 PM."
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/create-goal.html
+    https://developer.clickup.com/reference/creategoal
 #>
 function New-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$TeamID,
+        [ulong]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
@@ -85,7 +102,7 @@ function New-ClickUpGoal {
         [Parameter()]
         [bool]$MultipleOwners,
         [Parameter()]
-        [UInt64[]]$Owners,
+        [ulong[]]$Owners,
         [Parameter()]
         [string]$Color
     )
@@ -110,32 +127,40 @@ function New-ClickUpGoal {
         $Body.Add('color', $Color)
     }
 
-    $Goal = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/goal" -Body $Body
-    Return $Goal.goal
+    Write-Verbose "Creating new goal '$Name' for team ID: $TeamID"
+    try {
+        $Goal = Invoke-ClickUpAPIPost -Endpoint "team/$TeamID/goal" -Body $Body
+        Write-Verbose "Successfully created goal: $($Goal.goal.name) (ID: $($Goal.goal.id))"
+        return $Goal.goal
+    } catch {
+        Write-Error "Failed to create goal '$Name'. Error: $_"
+        throw $_
+    }
 }
 
 <#
 .SYNOPSIS
-    Create a ClickUp team goal.
+    Update a ClickUp team goal.
 .DESCRIPTION
-    Create a ClickUp team goal.
+    Update a ClickUp team goal.
 .EXAMPLE
     PS C:\> Set-ClickUpGoal -GoalID e53a033c -Name "Updated Goal Name"
     Update ClickUp goal with ID "e53a033c" name to "Updated Goal Name".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/update-goal.html
+    https://developer.clickup.com/reference/updategoal
 #>
 function Set-ClickUpGoal {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [UInt64]$GoalID,
+        [ulong]$GoalID,
         [Parameter()]
         [string]$Name,
         [Parameter()]
@@ -145,7 +170,7 @@ function Set-ClickUpGoal {
         [Parameter()]
         [bool]$MultipleOwners,
         [Parameter()]
-        [UInt64[]]$Owners,
+        [ulong[]]$Owners,
         [Parameter()]
         [string]$Color
     )
@@ -171,8 +196,15 @@ function Set-ClickUpGoal {
         $Body.Add('color', $Color)
     }
 
-    $Goal = Invoke-ClickUpAPIPut -Endpoint "goal/$GoalID" -Body $Body
-    Return $Goal.goal
+    Write-Verbose "Updating goal with ID: $GoalID"
+    try {
+        $Goal = Invoke-ClickUpAPIPut -Endpoint "goal/$GoalID" -Body $Body
+        Write-Verbose "Successfully updated goal: $($Goal.goal.name)"
+        return $Goal.goal
+    } catch {
+        Write-Error "Failed to update goal with ID $GoalID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -184,13 +216,13 @@ function Set-ClickUpGoal {
     PS C:\> Remove-ClickUpGoal -GoalID e53a033c
     Remove ClickUp goal with ID "e53a033c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/delete-goal.html
+    https://developer.clickup.com/reference/deletegoal
 #>
 function Remove-ClickUpGoal {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -199,8 +231,15 @@ function Remove-ClickUpGoal {
         [string]$GoalID
     )
 
-    if ($PSCmdlet.ShouldProcess($CommentID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "goal/$GoalID"
+    if ($PSCmdlet.ShouldProcess($GoalID, 'Remove Goal')) {
+        Write-Verbose "Removing goal with ID: $GoalID"
+        try {
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "goal/$GoalID"
+            Write-Verbose "Successfully removed goal with ID: $GoalID"
+        } catch {
+            Write-Error "Failed to remove goal with ID $GoalID. Error: $_"
+            throw $_
+        }
     }
 }
 
@@ -213,36 +252,37 @@ function Remove-ClickUpGoal {
     PS C:\> New-ClickUpKeyResult -GoalID e53a033c -Name 'New Key Result Name' -Owners 183 -Type number -StepsStart 0 -StepsEnd 10 -Unit km
     Create a new ClickUp key result for goal with ID "e53a033c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/create-key-result.html
+    https://developer.clickup.com/reference/createkeyresult
 #>
 function New-ClickUpKeyResult {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$GoalID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
-        [UInt64[]]$Owners,
+        [ulong[]]$Owners,
         [Parameter()]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
-        [UInt64]$StepsStart,
+        [ulong]$StepsStart,
         [Parameter()]
-        [UInt64]$StepsEnd,
+        [ulong]$StepsEnd,
         [Parameter()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
         [Parameter()]
-        [UInt64[]]$ListIDs
+        [ulong[]]$ListIDs
     )
 
     $Body = @{
@@ -271,8 +311,15 @@ function New-ClickUpKeyResult {
         $Body.Add('list_ids', $ListIDs)
     }
 
-    $KeyResult = Invoke-ClickUpAPIPost -Endpoint "goal/$GoalID/key_result" -Body $Body
-    Return $KeyResult.key_result
+    Write-Verbose "Creating new key result '$Name' for goal ID: $GoalID"
+    try {
+        $KeyResult = Invoke-ClickUpAPIPost -Endpoint "goal/$GoalID/key_result" -Body $Body
+        Write-Verbose "Successfully created key result: $($KeyResult.key_result.name) (ID: $($KeyResult.key_result.id))"
+        return $KeyResult.key_result
+    } catch {
+        Write-Error "Failed to create key result '$Name'. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -284,16 +331,17 @@ function New-ClickUpKeyResult {
     PS C:\> Set-ClickUpKeyResult -KeyResultID 947d46ed -StepsCurrent 5 -Note 'Target achieved'
     Update a ClickUp key result with ID "947d46ed".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/edit-key-result.html
+    https://developer.clickup.com/reference/editkeyresult
 #>
 function Set-ClickUpKeyResult {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$KeyResultID,
@@ -302,22 +350,22 @@ function Set-ClickUpKeyResult {
         [Parameter()]
         [string]$Note,
         [Parameter()]
-        [UInt64[]]$Owners,
+        [ulong[]]$Owners,
         [Parameter()]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
-        [UInt64]$StepsStart,
+        [ulong]$StepsStart,
         [Parameter()]
-        [UInt64]$StepsEnd,
+        [ulong]$StepsEnd,
         [Parameter()]
-        [UInt64]$StepsCurrent,
+        [ulong]$StepsCurrent,
         [Parameter()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
         [Parameter()]
-        [UInt64[]]$ListIDs
+        [ulong[]]$ListIDs
     )
 
     $Body = @{}
@@ -353,8 +401,15 @@ function Set-ClickUpKeyResult {
         $Body.Add('list_ids', $ListIDs)
     }
 
-    $KeyResult = Invoke-ClickUpAPIPut -Endpoint 'key_result/$KeyResultID' -Body $Body
-    Return $KeyResult.key_result
+    Write-Verbose "Updating key result with ID: $KeyResultID"
+    try {
+        $KeyResult = Invoke-ClickUpAPIPut -Endpoint "key_result/$KeyResultID" -Body $Body
+        Write-Verbose "Successfully updated key result: $($KeyResult.key_result.name)"
+        return $KeyResult.key_result
+    } catch {
+        Write-Error "Failed to update key result with ID $KeyResultID. Error: $_"
+        throw $_
+    }
 }
 
 <#
@@ -366,13 +421,13 @@ function Set-ClickUpKeyResult {
     PS C:\> Remove-ClickUpKeyResult -KeyResultID 947d46ed
     Remove ClickUp key result with ID "947d46ed".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/goals/delete-key-result.html
+    https://developer.clickup.com/reference/deletekeyresult
 #>
 function Remove-ClickUpKeyResult {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
@@ -381,7 +436,14 @@ function Remove-ClickUpKeyResult {
         [string]$KeyResultID
     )
 
-    if ($PSCmdlet.ShouldProcess($KeyResultID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "key_result/$KeyResultID"
+    if ($PSCmdlet.ShouldProcess($KeyResultID, 'Remove Key Result')) {
+        Write-Verbose "Removing key result with ID: $KeyResultID"
+        try {
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "key_result/$KeyResultID"
+            Write-Verbose "Successfully removed key result with ID: $KeyResultID"
+        } catch {
+            Write-Error "Failed to remove key result with ID $KeyResultID. Error: $_"
+            throw $_
+        }
     }
 }

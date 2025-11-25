@@ -7,45 +7,61 @@
     PS C:\> Get-ClickUpAuthorizedUser
     Get the user that belongs to this token
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/authorization/get-authorized-user.html
+    https://developer.clickup.com/reference/getauthorizeduser
 #>
 function Get-ClickUpAuthorizedUser {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param ()
 
-    $User = Invoke-ClickUpAPIGet -Endpoint 'user'
-    Return $User.user
+    try {
+        $User = Invoke-ClickUpAPIGet -Endpoint 'user'
+        return $User.user
+    } catch {
+        Write-Error "Failed to get authorized user. Error: $_"
+        throw
+    }
 }
 
 <#
 .SYNOPSIS
-    Get ClickUp authorized teams.
+    Get ClickUp authorized workspaces.
 .DESCRIPTION
-    Get ClickUp authorized teams.
+    Get ClickUp authorized workspaces.
 .EXAMPLE
-    PS C:\> Get-ClickUpAuthorizedTeams
-    Get the authorized teams for this token
+    PS C:\> Get-ClickUpAuthorizedWorkspaces
+    Get the authorized workspaces for this token
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
+    https://developer.clickup.com/docs/faq#what-is-a-team
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/authorization/get-authorized-teams.html
+    https://developer.clickup.com/reference/getauthorizedteams
 #>
-function Get-ClickUpAuthorizedTeams {
+function Get-ClickUpAuthorizedWorkspaces {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
+    [Alias('Get-ClickUpAuthorizedTeams')]
     param ()
 
-    $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
-    Return $Teams.teams
+    try {
+        $Teams = Invoke-ClickUpAPIGet -Endpoint 'team'
+        return $Teams.teams
+    } catch {
+        Write-Error "Failed to get authorized workspaces. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -57,16 +73,17 @@ function Get-ClickUpAuthorizedTeams {
     PS C:\> New-ClickUpAccessToken -ClientID "ClientID" -ClientSecret "ClientSecret" -Code "Code"
     Get a new ClickUp access token.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/authorization/get-access-token.html
+    https://developer.clickup.com/reference/getaccesstoken
 #>
 function New-ClickUpAccessToken {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$ClientID,
@@ -82,6 +99,11 @@ function New-ClickUpAccessToken {
         code          = $Code
     }
 
-    $AccessToken = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint 'oath/token'
-    Return $AccessToken
+    try {
+        $AccessToken = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint 'oath/token'
+        return $AccessToken
+    } catch {
+        Write-Error "Failed to get access token. Error: $_"
+        throw
+    }
 }

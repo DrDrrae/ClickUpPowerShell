@@ -10,16 +10,17 @@
     PS C:\> New-ClickUpChecklist -TaskID CustomID -CustomTaskIDs $true -TeamID 123 -Name "Checklist"
     Create a new checklist on ClickUp task with custom ID "CustomID" with name "Checklist".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/create-checklist.html
+    https://developer.clickup.com/reference/createchecklist
 #>
 function New-ClickUpChecklist {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -30,7 +31,7 @@ function New-ClickUpChecklist {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [UInt64]$TeamID
+        [ulong]$TeamID
     )
 
     $Body = @{
@@ -46,8 +47,15 @@ function New-ClickUpChecklist {
         $QueryString = @{}
     }
 
-    $Checklist = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/checklist" -Body $Body
-    return $Checklist.checklist
+    Write-Verbose "Creating new checklist '$Name' on task '$TaskID'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/checklist" -Body $Body
+        Write-Verbose 'Checklist created successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to create checklist. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -62,23 +70,24 @@ function New-ClickUpChecklist {
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -Name "Update Checklist." -Position 3
     Update ClickUp checklist with ID "b955c4dc" to new name "Update Checklist." and position 3.
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/edit-checklist.html
+    https://developer.clickup.com/reference/editchecklist
 #>
 function Set-ClickUpChecklist {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
         [Parameter()]
         [string]$Name,
         [Parameter()]
-        [UInt64]$Position
+        [ulong]$Position
     )
 
     $Body = @{}
@@ -90,8 +99,15 @@ function Set-ClickUpChecklist {
         $Body.Add('position', $Position)
     }
 
-    $Checklist = Invoke-ClickUpAPIPut -Endpoint 'checklist/$ChecklistID' -Body $Body
-    return $Checklist.checklist
+    Write-Verbose "Updating checklist '$ChecklistID'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPut -Endpoint "checklist/$ChecklistID" -Body $Body
+        Write-Verbose 'Checklist updated successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to update checklist. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -103,23 +119,31 @@ function Set-ClickUpChecklist {
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc
     Remove ClickUp checklist with ID "b955c4dc".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/delete-checklist.html
+    https://developer.clickup.com/reference/deletechecklist
 #>
 function Remove-ClickUpChecklist {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID
     )
 
-    if ($PSCmdlet.ShouldProcess($ChecklistID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "checklist/$CheckListID"
+    if ($PSCmdlet.ShouldProcess($ChecklistID, 'Delete Checklist')) {
+        Write-Verbose "Deleting checklist '$ChecklistID'..."
+        try {
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID"
+            Write-Verbose 'Checklist deleted successfully.'
+        } catch {
+            Write-Error "Failed to delete checklist. Error: $_"
+            throw
+        }
     }
 }
 
@@ -135,23 +159,24 @@ function Remove-ClickUpChecklist {
     PS C:\> New-ClickUpChecklist -CheckListID b955c4dc -Name "Checklist item" -Assignee 183
     Create a new checklist item on ClickUp Checklist with ID "b955c4dc" with name "Checklist item" and assign it to member with ID "183."
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/create-checklist-item.html
+    https://developer.clickup.com/reference/createchecklistitem
 #>
 function New-ClickUpChecklistItem {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
         [string]$CheckListID,
         [Parameter(Mandatory = $True)]
         [string]$Name,
         [Parameter()]
-        [UInt64]$Assignee
+        [ulong]$Assignee
     )
 
     $Body = @{
@@ -162,8 +187,15 @@ function New-ClickUpChecklistItem {
         $Body.Add('assignee', $Assignee)
     }
 
-    $Checklist = Invoke-ClickUpAPIPost -Endpoint "checklist/$CheckListID/checklist_item" -Body $Body
-    $Checklist.checklist
+    Write-Verbose "Creating new checklist item '$Name' in checklist '$CheckListID'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPost -Endpoint "checklist/$CheckListID/checklist_item" -Body $Body
+        Write-Verbose 'Checklist item created successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to create checklist item. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -178,16 +210,17 @@ function New-ClickUpChecklistItem {
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8 -Name "Update Checklist item." -Assignee 183
     Update ClickUp checklist item with ID "21e08dc8" under checklist with ID "b955c4dc" to new name "Update Checklist item." and assign it to member with ID "183."
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/edit-checklist-item.html
+    https://developer.clickup.com/reference/editchecklistitem
 #>
 function Set-ClickUpChecklistItem {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
@@ -196,7 +229,7 @@ function Set-ClickUpChecklistItem {
         [Parameter()]
         [string]$Name,
         [Parameter()]
-        [UInt64]$Assignee,
+        [ulong]$Assignee,
         [Parameter()]
         [bool]$Resolved,
         [Parameter()]
@@ -218,8 +251,15 @@ function Set-ClickUpChecklistItem {
         $Body.Add('parent', $Parent)
     }
 
-    $Checklist = Invoke-ClickupAPIPut -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId" -Body $Body
-    $CheckList.checklist
+    Write-Verbose "Updating checklist item '$ChecklistItemId'..."
+    try {
+        $Checklist = Invoke-ClickUpAPIPut -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId" -Body $Body
+        Write-Verbose 'Checklist item updated successfully.'
+        return $Checklist.checklist
+    } catch {
+        Write-Error "Failed to update checklist item. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -231,16 +271,17 @@ function Set-ClickUpChecklistItem {
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8
     Remove ClickUp checklist with ID "b955c4dc".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/checklists/delete-checklist-item.html
+    https://developer.clickup.com/reference/deletechecklistitem
 #>
 function Remove-ClickUpCheckListItem {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
@@ -248,7 +289,14 @@ function Remove-ClickUpCheckListItem {
         [string]$ChecklistItemId
     )
 
-    if ($PSCmdlet.ShouldProcess($ChecklistID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId"
+    if ($PSCmdlet.ShouldProcess("$ChecklistID - $ChecklistItemId", 'Delete Checklist Item')) {
+        Write-Verbose "Deleting checklist item '$ChecklistItemId' from checklist '$ChecklistID'..."
+        try {
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "checklist/$ChecklistID/checklist_item/$ChecklistItemId"
+            Write-Verbose 'Checklist item deleted successfully.'
+        } catch {
+            Write-Error "Failed to delete checklist item. Error: $_"
+            throw
+        }
     }
 }

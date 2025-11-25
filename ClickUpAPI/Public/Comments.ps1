@@ -5,21 +5,24 @@
     Get all comments on a ClickUp task.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID 9hz
-    Get all ClickUp comments under task with ID "9hz"
+    Get all ClickUp task comments under task with ID "9hz"
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID CustomID -CustomTaskIDs $true -TeamID 123
-    Get all ClickUp comments under task with custom ID "CustomID".
+    Get all ClickUp task comments under task with custom ID "CustomID".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/get-task-comments.html
+    https://developer.clickup.com/reference/gettaskcomments
 #>
 function Get-ClickUpTaskComments {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -27,7 +30,7 @@ function Get-ClickUpTaskComments {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -39,8 +42,15 @@ function Get-ClickUpTaskComments {
         $QueryString = @{}
     }
 
-    $Comments = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/comment"
-    Return $Comments.comments
+    Write-Verbose "Retrieving comments for task '$TaskID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "task/$TaskID/comment"
+        Write-Verbose 'Comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve task comments. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -52,23 +62,33 @@ function Get-ClickUpTaskComments {
     PS C:\> Get-ClickUpChatViewComments -ViewID 3c
     Get ClickUp chat view comments for view with ID "3c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/get-chat-view-comments.html
+    https://developer.clickup.com/reference/getchatviewcomments
 #>
 function Get-ClickUpChatViewComments {
     [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID
     )
 
-    $Comments = Invoke-ClickUpAPIGet -Endpoint "view/$ViewID/comment"
-    Return $Comments.comments
+    Write-Verbose "Retrieving comments for chat view '$ViewID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Endpoint "view/$ViewID/comment"
+        Write-Verbose 'Chat view comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve chat view comments. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -78,25 +98,73 @@ function Get-ClickUpChatViewComments {
     Get all comments on a ClickUp list.
 .EXAMPLE
     PS C:\> Get-ClickUpListComments -ListID 123
-    Get ClickUp chat view comments for view with ID "3c".
+    Get ClickUp list comments for list with ID "123".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
+.OUTPUTS
+    System.Array
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/get-list-comments.html
+    https://developer.clickup.com/reference/getlistcomments
 #>
 function Get-ClickUpListComments {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$ListID
+        [ulong]$ListID
     )
 
-    $Comments = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/comment"
-    Return $Comments.comments
+    Write-Verbose "Retrieving comments for list '$ListID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Endpoint "list/$ListID/comment"
+        Write-Verbose 'List comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve list comments. Error: $_"
+        throw
+    }
+}
+
+<#
+.SYNOPSIS
+    Get all threaded comments.
+.DESCRIPTION
+    Get all threaded comments.
+.EXAMPLE
+    PS C:\> Get-ClickUpThreadedComments -CommentID 123
+    Get ClickUp threaded comments for comment with ID "123".
+.INPUTS
+    None. This cmdlet does not accept any input.
+.OUTPUTS
+    System.Object
+.OUTPUTS
+    System.Array
+.NOTES
+    See the link for information.
+.LINK
+    https://developer.clickup.com/reference/getthreadedcomments
+#>
+function Get-ClickUpThreadedComments {
+    [CmdletBinding()]
+    [OutputType([System.Object], [System.Array])]
+    param (
+        [Parameter(Mandatory = $true)]
+        [ulong]$CommentID
+    )
+
+    Write-Verbose "Retrieving comments for comment '$CommentID'..."
+    try {
+        $Comments = Invoke-ClickUpAPIGet -Endpoint "comment/$CommentID/reply"
+        Write-Verbose 'Comments retrieved successfully.'
+        return $Comments.comments
+    } catch {
+        Write-Error "Failed to retrieve threaded comments. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -106,31 +174,38 @@ function Get-ClickUpListComments {
     Update ClickUp comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Updated comment text"
-    >> assignee = 183
-    >> resolved = $true
+    >>     comment_text = "Updated comment text"
+    >>     assignee = 183
+    >>     resolved = $true
     >> }
     PS C:\> Set-ClickUpComment -CommentID 456 -Body $Body
     Update comment with ID "456".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/update-comment.html
+    https://developer.clickup.com/reference/updatecomment
 #>
-function Set-ClickUpListComment {
+function Set-ClickUpComment {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$CommentID,
+        [ulong]$CommentID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
 
-    Invoke-ClickUpAPIPut -Endpoint "comment/$CommentID"
+    Write-Verbose "Updating comment '$CommentID'..."
+    try {
+        $Null = Invoke-ClickUpAPIPut -Endpoint "comment/$CommentID" -Body $Body
+        Write-Verbose 'Comment updated successfully.'
+    } catch {
+        Write-Error "Failed to update comment. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -142,23 +217,30 @@ function Set-ClickUpListComment {
     PS C:\> Remove-ClickUpComment -CommentID 456
     Delete comment with ID "456".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/delete-comment.html
+    https://developer.clickup.com/reference/deletecomment
 #>
 function Remove-ClickUpListComment {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$CommentID
+        [ulong]$CommentID
     )
 
-    if ($PSCmdlet.ShouldProcess($CommentID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "comment/$CommentID"
+    if ($PSCmdlet.ShouldProcess($CommentID, 'Delete Comment')) {
+        Write-Verbose "Deleting comment '$CommentID'..."
+        try {
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "comment/$CommentID"
+            Write-Verbose 'Comment deleted successfully.'
+        } catch {
+            Write-Error "Failed to delete comment. Error: $_"
+            throw
+        }
     }
 }
 
@@ -169,52 +251,40 @@ function Remove-ClickUpListComment {
     Create ClickUp task comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpTaskComment -TaskID 9hz -Body $Body
     Create new ClickUp task comment on task with ID "9hz".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpTaskComment -TaskID 'CustomTaskID' -Body $Body -CustomTaskIDs $true -TeamID 1111111
     Create new ClickUp task comment on task with custom id "CustomTaskID".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment = @(
-    >> @{
-    >> text = "bold text",
-    >> attributes = @{
-    >>     bold = $true
-    >>     }
-    >> },
-    >> @{
-    >> text = "italic text",
-    >>  attributes = @{
-    >>     italic = $true
-    >>     }
-    >> }
-    >> )
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Task comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpTaskComment -TaskID 9hz -Body $Body
-    Create new ClickUp task comment with formatting on task with ID "9hz".
+    Create new ClickUp task comment on task with ID "9hz".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/create-task-comment.html
+    https://developer.clickup.com/reference/createtaskcomment
 #>
 function New-ClickUpTaskComment {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -225,7 +295,7 @@ function New-ClickUpTaskComment {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [uint64]$TeamID
+        [ulong]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -237,8 +307,15 @@ function New-ClickUpTaskComment {
         $QueryString = @{}
     }
 
-    $Comment = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint 'task/$TaskID/comment' -Body $Body
-    Return $Comment
+    Write-Verbose "Creating comment on task '$TaskID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Arguments $QueryString -Endpoint "task/$TaskID/comment" -Body $Body
+        Write-Verbose 'Task comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create task comment. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -248,44 +325,32 @@ function New-ClickUpTaskComment {
     Create ClickUp chat view comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Chat view comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpChatViewComment -TaskID 3c -Body $Body
     Create new ClickUp chat view comment on chat view with ID "3c".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment = @(
-    >> @{
-    >> text = "bold text",
-    >> attributes = @{
-    >>     bold = $true
-    >>     }
-    >> },
-    >> @{
-    >> text = "italic text",
-    >>  attributes = @{
-    >>     italic = $true
-    >>     }
-    >> }
-    >> )
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "Chat view comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpChatViewComment -ViewID 3c -Body $Body
-    Create new ClickUp chat view comment with formatting on chat view with ID "3c".
+    Create new ClickUp chat view comment on chat view with ID "3c".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/create-chat-view-comment.html
+    https://developer.clickup.com/reference/createchatviewcomment
 #>
 function New-ClickUpChatViewComment {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
@@ -293,8 +358,15 @@ function New-ClickUpChatViewComment {
         [hashtable]$Body
     )
 
-    $Comment = Invoke-ClickUpAPIPost -Endpoint 'view/$ViewID/comment' -Body $Body
-    Return $Comment
+    Write-Verbose "Creating comment on chat view '$ViewID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Endpoint "view/$ViewID/comment" -Body $Body
+        Write-Verbose 'Chat view comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create chat view comment. Error: $_"
+        throw
+    }
 }
 
 <#
@@ -304,51 +376,97 @@ function New-ClickUpChatViewComment {
     Create ClickUp list comment.
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment_text = "Task comment content"
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "List comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpListComment -ListID 124 -Body $Body
-    Create new ClickUp task comment on list with ID "124".
+    Create new ClickUp list comment on list with ID "124".
 .EXAMPLE
     PS C:\> $Body = @{
-    >> comment = @(
-    >> @{
-    >> text = "bold text",
-    >> attributes = @{
-    >>     bold = $true
-    >>     }
-    >> },
-    >> @{
-    >> text = "italic text",
-    >>  attributes = @{
-    >>     italic = $true
-    >>     }
-    >> }
-    >> )
-    >> assignee = 183
-    >> notify_all = $true
+    >>     comment_text = "List comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
     >> }
     PS C:\> New-ClickUpListComment -ListID 124 -Body $Body
-    Create new ClickUp task comment with formatting on task with ID "124".
+    Create new ClickUp list comment with formatting on list with ID "124".
 .INPUTS
-    None
+    None. This cmdlet does not accept any input.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
-    https://jsapi.apiary.io/apis/clickup20/reference/0/comments/create-list-comment.html
+    https://developer.clickup.com/reference/createlistcomment
 #>
 function New-ClickUpListComment {
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [uint64]$ListID,
+        [ulong]$ListID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
 
-    $Comment = Invoke-ClickUpAPIPost -Endpoint 'list/$ListID/comment' -Body $Body
-    Return $Comment
+    Write-Verbose "Creating comment on list '$ListID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Endpoint "list/$ListID/comment" -Body $Body
+        Write-Verbose 'List comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create list comment. Error: $_"
+        throw
+    }
+}
+
+<#
+.SYNOPSIS
+    Create ClickUp threaded comment.
+.DESCRIPTION
+    Create ClickUp threaded comment.
+.EXAMPLE
+    PS C:\> $Body = @{
+    >>     comment_text = "Threaded comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
+    >> }
+    PS C:\> New-ClickUpThreadedComment -CommentID 124 -Body $Body
+    Create new ClickUp threaded comment on comment with ID "124".
+.EXAMPLE
+    PS C:\> $Body = @{
+    >>     comment_text = "Threaded comment content"
+    >>     assignee = 183
+    >>     notify_all = $true
+    >> }
+    PS C:\> New-ClickUpThreadedComment -CommentID 124 -Body $Body
+    Create new ClickUp threaded comment on comment with ID "124".
+.INPUTS
+    None. This cmdlet does not accept any input.
+.OUTPUTS
+    System.Object
+.NOTES
+    See the link for information.
+.LINK
+    https://developer.clickup.com/reference/createthreadedcomment
+#>
+function New-ClickUpThreadedComment {
+    [CmdletBinding()]
+    [OutputType([System.Object])]
+    param (
+        [Parameter(Mandatory = $true)]
+        [ulong]$CommentID,
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Body
+    )
+
+    Write-Verbose "Creating threaded comment on comment '$CommentID'..."
+    try {
+        $Comment = Invoke-ClickUpAPIPost -Endpoint "comment/$CommentID/reply" -Body $Body
+        Write-Verbose 'Threaded comment created successfully.'
+        return $Comment
+    } catch {
+        Write-Error "Failed to create threaded comment. Error: $_"
+        throw
+    }
 }
