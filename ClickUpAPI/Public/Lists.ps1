@@ -2,24 +2,26 @@
 .SYNOPSIS
     Get all ClickUp lists.
 .DESCRIPTION
-    Get all ClickUp lists.
+    Get all ClickUp lists. Can accept FolderID or SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpLists -FolderID 456
-    Get ClickUp lists under folder with ID "456".
+    Gets ClickUp lists under folder with ID "456".
 .EXAMPLE
     PS C:\> Get-ClickUpLists -FolderID 456 -Archived $true
-    Get ClickUp lists under folder with ID "456" including archived lists.
+    Gets ClickUp lists under folder with ID "456" including archived lists.
 .EXAMPLE
     PS C:\> Get-ClickUpLists -SpaceID 789
-    Get ClickUp lists under space with ID "789".
+    Gets ClickUp lists under space with ID "789".
 .EXAMPLE
     PS C:\> Get-ClickUpLists -SpaceID 789 -Archived $true
-    Get ClickUp lists under space with ID "789" including archived lists.
+    Gets ClickUp lists under space with ID "789" including archived lists.
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 456 | Get-ClickUpLists
+    Gets lists by piping folder ID from Get-ClickUpFolder.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. FolderID or SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -32,10 +34,12 @@ function Get-ClickUpLists {
     [CmdletBinding(DefaultParameterSetName = 'FolderID')]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [ulong]$FolderID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id', 'id')]
+        [uint64]$FolderID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [bool]$Archived = $false
@@ -66,12 +70,15 @@ function Get-ClickUpLists {
 .SYNOPSIS
     Get a single ClickUp list.
 .DESCRIPTION
-    Get a single ClickUp list.
+    Get a single ClickUp list. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpList -ListID 456
-    Get a ClickUp list with ID "456".
+    Gets a ClickUp list with ID "456".
+.EXAMPLE
+    PS C:\> Get-ClickUpLists -FolderID 456 | Get-ClickUpList
+    Gets list details by piping list ID from Get-ClickUpLists.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -83,8 +90,9 @@ function Get-ClickUpList {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
+        [uint64]$ListID
     )
 
     Write-Verbose 'Entering Get-ClickUpList'
@@ -103,21 +111,24 @@ function Get-ClickUpList {
 .SYNOPSIS
     Create a ClickUp list.
 .DESCRIPTION
-    Create a ClickUp list.
+    Create a ClickUp list. Can accept FolderID or SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> New-ClickUpList -FolderID 456 -Name "New ClickUp List"
-    Create a ClickUp list called "New ClickUp List" under folder with ID "456".
+    Creates a ClickUp list called "New ClickUp List" under folder with ID "456".
 .EXAMPLE
     PS C:\> New-ClickUpList -FolderID 456 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-    Create a ClickUp list called "New ClickUp List" under folder with ID "456" with a due date and priority.
+    Creates a ClickUp list called "New ClickUp List" under folder with ID "456" with a due date and priority.
 .EXAMPLE
     PS C:\> New-ClickUpList -SpaceID 789 -Name "New ClickUp List"
-    Create a ClickUp list called "New ClickUp List" under space with ID "789".
+    Creates a ClickUp list called "New ClickUp List" under space with ID "789".
 .EXAMPLE
     PS C:\> New-ClickUpList -SpaceID 789 -Name "New ClickUp List" -DueDate "12/31/2021" -Priority 2
-    Create a ClickUp list called "New ClickUp List" under space with ID "789" with a due date and priority.
+    Creates a ClickUp list called "New ClickUp List" under space with ID "789" with a due date and priority.
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 456 | New-ClickUpList -Name "New List from Pipeline"
+    Creates list by piping folder ID from Get-ClickUpFolder.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. FolderID or SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -131,10 +142,12 @@ function New-ClickUpList {
     [CmdletBinding(DefaultParameterSetName = 'FolderID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [ulong]$FolderID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id', 'id')]
+        [uint64]$FolderID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
         [string]$Name,
@@ -152,7 +165,7 @@ function New-ClickUpList {
         [UInt16]$Priority,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
-        [ulong]$Assignee,
+        [uint64]$Assignee,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [string]$Status
@@ -202,15 +215,18 @@ function New-ClickUpList {
 .SYNOPSIS
     Update a ClickUp list.
 .DESCRIPTION
-    Update a ClickUp list.
+    Update a ClickUp list. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Set-ClickUpList -ListID 124 -Name "New ClickUp List Name"
-    Update a ClickUp list with ID "124" with new name "New ClickUp List Name".
+    Updates a ClickUp list with ID "124" with new name "New ClickUp List Name".
 .EXAMPLE
     PS C:\> Set-ClickUpList -ListID 124 -Name "New ClickUp List Name" -DueDate "12/31/2021" -Priority 2
-    Update a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+    Updates a ClickUp list with ID "124" with new name "New ClickUp List Name" with a due date and priority.
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 124 | Set-ClickUpList -Name "Updated Name"
+    Updates list by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. ListID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -222,7 +238,8 @@ function Set-ClickUpList {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
         [string]$ListID,
         [Parameter()]
         [string]$Name,
@@ -235,7 +252,7 @@ function Set-ClickUpList {
         [Parameter()]
         [UInt16]$Priority,
         [Parameter()]
-        [ulong]$Assignee,
+        [uint64]$Assignee,
         [Parameter()]
         [bool]$UnsetStatus
     )
@@ -280,12 +297,15 @@ function Set-ClickUpList {
 .SYNOPSIS
     Remove a ClickUp list.
 .DESCRIPTION
-    Remove a ClickUp list.
+    Remove a ClickUp list. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpList -ListID 124
-    Delete a ClickUp list with ID "124".
+    Removes a ClickUp list with ID "124".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 124 | Remove-ClickUpList
+    Removes list by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -296,8 +316,9 @@ function Set-ClickUpList {
 function Remove-ClickUpList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
+        [uint64]$ListID
     )
     Write-Verbose 'Entering Remove-ClickUpList'
     try {
@@ -316,12 +337,15 @@ function Remove-ClickUpList {
 .SYNOPSIS
     Add a ClickUp task to a list.
 .DESCRIPTION
-    Add a ClickUp task to a list.
+    Add a ClickUp task to a list. Can accept ListID and TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Add-ClickUpTaskToList -ListID 123 -TaskID 9hz
-    Add ClickUp task with ID "9hz" to list with ID "123".
+    Adds ClickUp task with ID "9hz" to list with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 123 | Add-ClickUpTaskToList -TaskID 9hz
+    Adds task to list by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name. System.String. TaskID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -335,9 +359,11 @@ function Remove-ClickUpList {
 function Add-ClickUpTaskToList {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
+        [uint64]$ListID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id')]
         [string]$TaskID
     )
 
@@ -356,12 +382,15 @@ function Add-ClickUpTaskToList {
 .SYNOPSIS
     Remove a ClickUp task from a list.
 .DESCRIPTION
-    Remove a ClickUp task from a list.
+    Remove a ClickUp task from a list. Can accept ListID and TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpTaskFromList -ListID 123 -TaskID 9hz
-    Remove ClickUp task with ID "9hz" from list with ID "123".
+    Removes ClickUp task with ID "9hz" from list with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 123 | Remove-ClickUpTaskFromList -TaskID 9hz
+    Removes task from list by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name. System.String. TaskID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -372,9 +401,11 @@ function Add-ClickUpTaskToList {
 function Remove-ClickUpTaskFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
+        [uint64]$ListID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id')]
         [string]$TaskID
     )
 
@@ -395,23 +426,23 @@ function Remove-ClickUpTaskFromList {
 .SYNOPSIS
     Create a new list using a list template in a Folder.
 .DESCRIPTION
-    Create a new list using a list template in a Folder.
+    Create a new list using a list template in a Folder or Space. Can accept FolderID or SpaceID via pipeline input for integration with other cmdlets. Publicly shared templates must be added to your Workspace before you can use them with the public API.
 .EXAMPLE
     PS C:\> New-ClickUpListFromTemplate -FolderID 123 -TemplateID 9hz -Name "New List"
-    Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
+    Creates a new list using a list template in a Folder. The request runs synchronously by default. Small templates can be applied synchronously, guaranteeing all sub objects are created.
 .EXAMPLE
     PS C:\> New-ClickUpListFromTemplate -SpaceID 123 -TemplateID 9hz -Name "New List"
-    Create a new list using a list template in a Space. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
+    Creates a new list using a list template in a Space. The request can be run asynchronously or synchronously via the return_immediately parameter.
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 123 | New-ClickUpListFromTemplate -TemplateID 9hz -Name "New List from Template"
+    Creates list from template by piping folder ID from Get-ClickUpFolder.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. FolderID or SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
     See the link for information.
-
-    Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request runs synchronously by default with return_immediately=true. The request returns the future List ID immediately, but the List may not be created when the response is sent. Small templates can be applied synchronously, which guarantees that all sub objects are created. In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.
-
-    Create a new List using a List template within a Space. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request can be run asynchronously or synchronously via the return_immediately parameter.
+    Publicly shared templates must be added to your Workspace before you can use them with the public API.
 .LINK
     https://developer.clickup.com/reference/createfolderlistfromtemplate
 .LINK
@@ -422,16 +453,18 @@ function Remove-ClickUpTaskFromList {
 function New-ClickUpListFromTemplate {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id', 'id')]
+        [uint64]$FolderID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [ulong]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [ulong]$SpaceID,
+        [uint64]$TemplateID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [ulong]$TemplateID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [ulong]$Name,
+        [uint64]$Name,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [bool]$ReturnImmediately,
