@@ -2,12 +2,15 @@
 .SYNOPSIS
     Get ClickUp guest.
 .DESCRIPTION
-    Get ClickUp guest.
+    Get ClickUp guest. Can accept TeamID and GuestID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpGuest -TeamID 333 -GuestID 403
-    Guest ClickUp guest user with ID "403" for team with ID "333".
+    Gets ClickUp guest user with ID "403" for team with ID "333".
+.EXAMPLE
+    PS C:\> Get-ClickUpAuthorizedUser | Select-Object -ExpandProperty team | Select-Object -First 1 | Get-ClickUpGuest -GuestID 403
+    Gets ClickUp guest by piping team ID from Get-ClickUpAuthorizedUser.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -19,10 +22,11 @@ function Get-ClickUpGuest {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter(Mandatory = $True)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $True)]
-        [ulong]$GuestID
+        [uint64]$GuestID
     )
 
     Write-Verbose "Getting guest with ID: $GuestID for team ID: $TeamID"
@@ -40,15 +44,18 @@ function Get-ClickUpGuest {
 .SYNOPSIS
     Invite ClickUp guest to workspace.
 .DESCRIPTION
-    Invite ClickUp guest to workspace.
+    Invite ClickUp guest to workspace. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Add-ClickUpGuest -TeamID 333 -GuestEmail 'guest@example.com'
-    Add ClickUp guest user with email "guest@example.com" for team with ID "333".
+    Invites ClickUp guest user with email "guest@example.com" for team with ID "333".
 .EXAMPLE
     PS C:\> Add-ClickUpGuest -TeamID 333 -GuestEmail 'guest@example.com' -CanEditTags $true -CanSeeTimeSpent $true -CanSeeTimeEstimated $true
-    Add ClickUp guest user with email "guest@example.com" for team with ID "333" and give them access to edit tags, see time spent, and see time estimated.
+    Invites ClickUp guest user with email "guest@example.com" for team with ID "333" and gives them access to edit tags, see time spent, and see time estimated.
+.EXAMPLE
+    PS C:\> Get-ClickUpAuthorizedWorkspaces | Get-ClickUpTeam | Select-Object -First 1 | Add-ClickUpGuest -GuestEmail 'guest@example.com'
+    Invites guest by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -60,8 +67,9 @@ function Add-ClickUpGuest {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $True)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter(Mandatory = $True)]
         [string]$GuestEmail,
         [Parameter()]
@@ -94,15 +102,18 @@ function Add-ClickUpGuest {
 .SYNOPSIS
     Update ClickUp guest on workspace.
 .DESCRIPTION
-    Update ClickUp guest on workspace.
+    Update ClickUp guest on workspace. Can accept TeamID and GuestID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Set-ClickUpGuest -TeamID 333 -GuestID 403 -Username 'Guest User'
-    Update ClickUp guest's username to "Guest User"  for guest with ID "403".
+    Updates ClickUp guest's username to "Guest User" for guest with ID "403".
 .EXAMPLE
     PS C:\> Set-ClickUpGuest -TeamID 333 -GuestID 403 -CanEditTags $true -CanSeeTimeSpent $true -CanSeeTimeEstimated $true
-    Update ClickUp guest user's permissions to edit tags, see time spent, and see time estimated for guest with ID "403".
+    Updates ClickUp guest user's permissions to edit tags, see time spent, and see time estimated for guest with ID "403".
+.EXAMPLE
+    PS C:\> Get-ClickUpGuest -TeamID 333 -GuestID 403 | Set-ClickUpGuest -Username 'Updated Guest User'
+    Updates guest by piping guest object from Get-ClickUpGuest.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -114,10 +125,12 @@ function Set-ClickUpGuest {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $True)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $True)]
-        [ulong]$GuestID,
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [Alias('guest_id')]
+        [uint64]$GuestID,
         [Parameter()]
         [string]$Username,
         [Parameter()]
@@ -158,18 +171,21 @@ function Set-ClickUpGuest {
 .SYNOPSIS
     Add ClickUp guest to task.
 .DESCRIPTION
-    Add ClickUp guest to task.
+    Add ClickUp guest to task. Can accept TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToTask -TaskID c04 -GuestID 403
-    Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "read".
+    Adds ClickUp guest user with ID "403" to task with ID "c04" with permission level "read".
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToTask -TaskID c04 -GuestID 403 -PermissionLevel edit
-    Add ClickUp guest user with ID "403" to task with ID "c04" with permission level "edit".
+    Adds ClickUp guest user with ID "403" to task with ID "c04" with permission level "edit".
 .EXAMPLE
-    PS C:\> Add-ClickUpGuestToTask -TaskID CustomID -GuestID 403 -CustomTaskIDs $true -TeamID 123 -PermissionLevel edit.
-    Add ClickUp guest user with  custom ID "CustomID" to task with ID "c04" with permission level "edit".
+    PS C:\> Add-ClickUpGuestToTask -TaskID CustomID -GuestID 403 -CustomTaskIDs $true -TeamID 123 -PermissionLevel edit
+    Adds ClickUp guest user with custom task ID "CustomID" to task with permission level "edit".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID c04 | Add-ClickUpGuestToTask -GuestID 403
+    Adds guest to task by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -181,12 +197,13 @@ function Add-ClickUpGuestToTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$GuestID,
+        [uint64]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -194,7 +211,7 @@ function Add-ClickUpGuestToTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     $Body = @{
@@ -225,15 +242,18 @@ function Add-ClickUpGuestToTask {
 .SYNOPSIS
     Add ClickUp guest to list.
 .DESCRIPTION
-    Add ClickUp guest to list.
+    Add ClickUp guest to list. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToList -ListID 1427 -GuestID 403
-    Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "read".
+    Adds ClickUp guest user with ID "403" to list with ID "1427" with permission level "read".
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToList -ListID 1427 -GuestID 403 -PermissionLevel edit
-    Add ClickUp guest user with ID "403" to list with ID "1427" with permission level "edit".
+    Adds ClickUp guest user with ID "403" to list with ID "1427" with permission level "edit".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 1427 | Add-ClickUpGuestToList -GuestID 403
+    Adds guest to list by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -245,10 +265,11 @@ function Add-ClickUpGuestToList {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
+        [uint64]$ListID,
         [Parameter(Mandatory = $true)]
-        [ulong]$ListID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$GuestID,
+        [uint64]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -273,15 +294,18 @@ function Add-ClickUpGuestToList {
 .SYNOPSIS
     Add ClickUp guest to folder.
 .DESCRIPTION
-    Add ClickUp guest to folder.
+    Add ClickUp guest to folder. Can accept FolderID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Add-ClickUpGuestToFolder -FolderID 1057 -GuestID 403
-    Add ClickUp guest user with ID "403" to folder with ID "1057" with permission level "read".
+    Adds ClickUp guest user with ID "403" to folder with ID "1057" with permission level "read".
 .EXAMPLE
-    PS C:\> Add-ClickUpGuestToList -FolderID 1057 -GuestID 403 -PermissionLevel edit
-    Add ClickUp guest user with ID "403" to folder with ID "1057" with permission level "edit".
+    PS C:\> Add-ClickUpGuestToFolder -FolderID 1057 -GuestID 403 -PermissionLevel edit
+    Adds ClickUp guest user with ID "403" to folder with ID "1057" with permission level "edit".
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 1057 | Add-ClickUpGuestToFolder -GuestID 403
+    Adds guest to folder by piping folder ID from Get-ClickUpFolder.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. FolderID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -293,10 +317,11 @@ function Add-ClickUpGuestToFolder {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id', 'id')]
+        [uint64]$FolderID,
         [Parameter(Mandatory = $true)]
-        [ulong]$FolderID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$GuestID,
+        [uint64]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
         [string]$PermissionLevel = 'read'
@@ -321,12 +346,15 @@ function Add-ClickUpGuestToFolder {
 .SYNOPSIS
     Remove ClickUp guest from workspace.
 .DESCRIPTION
-    Remove ClickUp guest from workspace.
+    Remove ClickUp guest from workspace. Can accept TeamID and GuestID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuest -TeamID 333 -GuestID 403
-    Remove ClickUp guest with Id "403" from team with ID "333".
+    Removes ClickUp guest with ID "403" from team with ID "333".
+.EXAMPLE
+    PS C:\> Get-ClickUpGuest -TeamID 333 -GuestID 403 | Remove-ClickUpGuest
+    Removes guest by piping guest object from Get-ClickUpGuest.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID and GuestID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -338,10 +366,12 @@ function Remove-ClickUpGuest {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$GuestID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('guest_id')]
+        [uint64]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Workspace')) {
@@ -361,12 +391,18 @@ function Remove-ClickUpGuest {
 .SYNOPSIS
     Remove ClickUp guest from task.
 .DESCRIPTION
-    Remove ClickUp guest from task.
+    Remove ClickUp guest from task. Can accept TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuestFromTask -TaskID 1427 -GuestID 403
-    Remove ClickUp guest with Id "403" from task with ID "1427".
+    Removes ClickUp guest with ID "403" from task with ID "1427".
+.EXAMPLE
+    PS C:\> Remove-ClickUpGuestFromTask -TaskID CustomID -GuestID 403 -CustomTaskIDs $true -TeamID 123
+    Removes ClickUp guest from task with custom task ID.
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 1427 | Remove-ClickUpGuestFromTask -GuestID 403
+    Removes guest from task by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -378,12 +414,13 @@ function Remove-ClickUpGuestFromTask {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$GuestID,
+        [uint64]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -391,7 +428,7 @@ function Remove-ClickUpGuestFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -420,12 +457,15 @@ function Remove-ClickUpGuestFromTask {
 .SYNOPSIS
     Remove ClickUp guest from list.
 .DESCRIPTION
-    Remove ClickUp guest from list.
+    Remove ClickUp guest from list. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuestFromList -ListID c04 -GuestID 403
-    Remove ClickUp guest with Id "403" from list with ID "c04".
+    Removes ClickUp guest with ID "403" from list with ID "c04".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID c04 | Remove-ClickUpGuestFromList -GuestID 403
+    Removes guest from list by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. ListID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -437,10 +477,11 @@ function Remove-ClickUpGuestFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
         [string]$ListID,
         [Parameter(Mandatory = $true)]
-        [ulong]$GuestID
+        [uint64]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from List')) {
@@ -460,12 +501,15 @@ function Remove-ClickUpGuestFromList {
 .SYNOPSIS
     Remove ClickUp guest from folder.
 .DESCRIPTION
-    Remove ClickUp guest from folder.
+    Remove ClickUp guest from folder. Can accept FolderID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpGuestFromFolder -FolderID 1057 -GuestID 403
-    Remove ClickUp guest with Id "403" from folder with ID "1057".
+    Removes ClickUp guest with ID "403" from folder with ID "1057".
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 1057 | Remove-ClickUpGuestFromFolder -GuestID 403
+    Removes guest from folder by piping folder ID from Get-ClickUpFolder.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. FolderID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -477,10 +521,11 @@ function Remove-ClickUpGuestFromFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id', 'id')]
         [string]$FolderID,
         [Parameter(Mandatory = $true)]
-        [ulong]$GuestID
+        [uint64]$GuestID
     )
 
     if ($PSCmdlet.ShouldProcess($GuestID, 'Remove Guest from Folder')) {
