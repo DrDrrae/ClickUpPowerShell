@@ -31,7 +31,7 @@ function New-ClickUpChecklist {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     $Body = @{
@@ -62,15 +62,19 @@ function New-ClickUpChecklist {
 .SYNOPSIS
     Update a ClickUp checklist.
 .DESCRIPTION
-    Update a ClickUp checklist.
+    Update a ClickUp checklist. Supports pipeline input from checklist objects for ChecklistID parameter.
 .EXAMPLE
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -Name "New checklist name."
     Update ClickUp checklist with ID "b955c4dc" to new name "New checklist name."
 .EXAMPLE
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -Name "Update Checklist." -Position 3
     Update ClickUp checklist with ID "b955c4dc" to new name "Update Checklist." and position 3.
+.EXAMPLE
+    PS C:\> $checklist = Get-ClickUpTask -TaskID 9hz | Select-Object -ExpandProperty checklists | Select-Object -First 1
+    PS C:\> $checklist | Set-ClickUpChecklist -Name "Updated Name"
+    Update a checklist by piping from a task's checklist collection.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a checklist ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -82,12 +86,13 @@ function Set-ClickUpChecklist {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('checklist_id','id')]
         [string]$ChecklistID,
         [Parameter()]
         [string]$Name,
         [Parameter()]
-        [ulong]$Position
+        [uint64]$Position
     )
 
     $Body = @{}
@@ -114,12 +119,16 @@ function Set-ClickUpChecklist {
 .SYNOPSIS
     Delete a ClickUp checklist.
 .DESCRIPTION
-    Delete a ClickUp checklist.
+    Delete a ClickUp checklist. Supports pipeline input from checklist objects for ChecklistID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc
     Remove ClickUp checklist with ID "b955c4dc".
+.EXAMPLE
+    PS C:\> $checklist = Get-ClickUpTask -TaskID 9hz | Select-Object -ExpandProperty checklists | Select-Object -First 1
+    PS C:\> $checklist | Remove-ClickUpChecklist
+    Delete a checklist by piping from a task's checklist collection.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a checklist ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -131,7 +140,8 @@ function Remove-ClickUpChecklist {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('checklist_id','id')]
         [string]$ChecklistID
     )
 
@@ -176,7 +186,7 @@ function New-ClickUpChecklistItem {
         [Parameter(Mandatory = $True)]
         [string]$Name,
         [Parameter()]
-        [ulong]$Assignee
+        [uint64]$Assignee
     )
 
     $Body = @{
@@ -202,15 +212,19 @@ function New-ClickUpChecklistItem {
 .SYNOPSIS
     Update a ClickUp checklist item.
 .DESCRIPTION
-    Update a ClickUp checklist item.
+    Update a ClickUp checklist item. Supports pipeline input from checklist item objects for ChecklistItemId parameter.
 .EXAMPLE
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8 -Name "New checklist item name."
     Update ClickUp checklist item with ID "21e08dc8" under checklist with ID "b955c4dc" to new name "New checklist item name."
 .EXAMPLE
     PS C:\> Set-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8 -Name "Update Checklist item." -Assignee 183
     Update ClickUp checklist item with ID "21e08dc8" under checklist with ID "b955c4dc" to new name "Update Checklist item." and assign it to member with ID "183."
+.EXAMPLE
+    PS C:\> $checklistItems = Get-ClickUpTask -TaskID 9hz | Select-Object -ExpandProperty checklists | Select-Object -ExpandProperty items | Select-Object -First 1
+    PS C:\> $checklistItems | Set-ClickUpChecklistItem -ChecklistID b955c4dc -Name "Updated Item"
+    Update a checklist item by piping from a task's checklist items.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a checklist item ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -224,12 +238,13 @@ function Set-ClickUpChecklistItem {
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('checklist_id','id')]
         [string]$ChecklistItemId,
         [Parameter()]
         [string]$Name,
         [Parameter()]
-        [ulong]$Assignee,
+        [uint64]$Assignee,
         [Parameter()]
         [bool]$Resolved,
         [Parameter()]
@@ -266,12 +281,16 @@ function Set-ClickUpChecklistItem {
 .SYNOPSIS
     Delete a ClickUp checklist item.
 .DESCRIPTION
-    Delete a ClickUp checklist item.
+    Delete a ClickUp checklist item. Supports pipeline input from checklist item objects for ChecklistItemId parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpChecklist -ChecklistID b955c4dc -ChecklistItemId 21e08dc8
-    Remove ClickUp checklist with ID "b955c4dc".
+    Remove ClickUp checklist item with ID "21e08dc8" from checklist with ID "b955c4dc".
+.EXAMPLE
+    PS C:\> $checklistItems = Get-ClickUpTask -TaskID 9hz | Select-Object -ExpandProperty checklists | Select-Object -ExpandProperty items | Select-Object -First 1
+    PS C:\> $checklistItems | Remove-ClickUpCheckListItem -ChecklistID b955c4dc
+    Delete a checklist item by piping from a task's checklist items.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a checklist item ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -285,7 +304,8 @@ function Remove-ClickUpCheckListItem {
     param (
         [Parameter(Mandatory = $true)]
         [string]$ChecklistID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('checklist_id','id')]
         [string]$ChecklistItemId
     )
 
