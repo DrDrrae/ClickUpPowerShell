@@ -1,6 +1,6 @@
 ### Todo
 
-- [ ] [Add input validation to function parameters](https://github.com/DrDrrae/ClickUpPowerShell/issues/1)
+- [ ] Nothing at the moment
 
 
 ### Todo but unlikely
@@ -36,7 +36,7 @@
 
 ### In Progress
 
-- [ ] Nothing at the moment
+- [ ] [Add input validation to function parameters](https://github.com/DrDrrae/ClickUpPowerShell/issues/1)
 
 
 ### Done ✓
