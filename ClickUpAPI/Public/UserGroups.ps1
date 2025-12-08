@@ -79,8 +79,10 @@ function New-ClickUpUserGroup {
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(Mandatory = $true)]
         [uint64[]]$Members,
@@ -135,10 +137,13 @@ function Set-ClickUpUserGroup {
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('group_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string]$GroupID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Handle,
         [Parameter()]
         [uint64[]]$AddMembers = @(),
