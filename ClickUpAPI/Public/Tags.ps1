@@ -2,15 +2,17 @@
 .SYNOPSIS
     Get all ClickUp space tags.
 .DESCRIPTION
-    Get all ClickUp space tags.
+    Get all ClickUp space tags. Can accept SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTags -SpaceID 512
-    Get all ClickUp tags for space with ID "512".
+    Gets all ClickUp tags for space with ID "512".
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 512 | Get-ClickUpTags
+    Gets tags by piping space ID from Get-ClickUpSpace.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -21,8 +23,9 @@ function Get-ClickUpTags {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID
     )
 
     Write-Verbose 'Entering Get-ClickUpTags'
@@ -41,12 +44,15 @@ function Get-ClickUpTags {
 .SYNOPSIS
     Create a new ClickUp space tag.
 .DESCRIPTION
-    Create a new ClickUp space tag.
+    Create a new ClickUp space tag. Can accept SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> New-ClickUpTag -SpaceID 512 -Name "Tag Name" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
-    Create a new ClickUp tag for space with ID "512" with the name "Tag Name", foreground color white, and background color black.
+    Creates a new ClickUp tag for space with ID "512" with the name "Tag Name", foreground color white, and background color black.
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 512 | New-ClickUpTag -TagName "New Tag"
+    Creates tag by piping space ID from Get-ClickUpSpace.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. SpaceID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -57,8 +63,9 @@ function Get-ClickUpTags {
 function New-ClickUpTag {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName,
         [Parameter()]
@@ -94,12 +101,15 @@ function New-ClickUpTag {
 .SYNOPSIS
     Update a ClickUp space tag.
 .DESCRIPTION
-    Update a ClickUp space tag.
+    Update a ClickUp space tag. Can accept SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Set-ClickUpTag -SpaceID 512 -TagName "Tag Name" -NewName "Updated Tag" -ForegroundColor "#ffffff" -BackgroundColor "#000000"
-    Update a ClickUp tag with name "Tag Name" for space with ID "512" to the name "Updated Tag", foreground color to white, and background color to black.
+    Updates a ClickUp tag with name "Tag Name" for space with ID "512" to the name "Updated Tag", foreground color to white, and background color to black.
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 512 | Set-ClickUpTag -TagName "Old Name" -NewName "New Name"
+    Updates tag by piping space ID from Get-ClickUpSpace.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object.
 .NOTES
@@ -111,8 +121,9 @@ function Set-ClickUpTag {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName,
         [Parameter()]
@@ -151,12 +162,15 @@ function Set-ClickUpTag {
 .SYNOPSIS
     Remove a ClickUp space tag.
 .DESCRIPTION
-    Remove a ClickUp space tag.
+    Remove a ClickUp space tag. Can accept SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpTag -SpaceID 512 -TagName "Tag name"
-    Remove a ClickUp tag with name "Tag Name" for space with ID "512".
+    Removes a ClickUp tag with name "Tag Name" for space with ID "512".
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 512 | Remove-ClickUpTag -TagName "Tag Name"
+    Removes tag by piping space ID from Get-ClickUpSpace.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. SpaceID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -167,8 +181,9 @@ function Set-ClickUpTag {
 function Remove-ClickUpTag {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$TagName
     )
@@ -190,15 +205,18 @@ function Remove-ClickUpTag {
 .SYNOPSIS
     Add ClickUp tag to task.
 .DESCRIPTION
-    Add ClickUp tag to task.
+    Add ClickUp tag to task. Can accept TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Add-ClickUpTagToTask -TaskID abc -TagName "name"
-    Add ClickUp tag with name "name" to task with ID "abc".
+    Adds ClickUp tag with name "name" to task with ID "abc".
 .EXAMPLE
     PS C:\> Add-ClickUpTagToTask -TaskID "Custom Task ID" -TagName "name" -CustomTaskIDs $true -TeamID 123
-    Add ClickUp tag with name "name" to task with custom ID "Custom Task ID".
+    Adds ClickUp tag with name "name" to task with custom ID "Custom Task ID".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID abc | Add-ClickUpTagToTask -TagName "name"
+    Adds tag to task by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -209,8 +227,9 @@ function Remove-ClickUpTag {
 function Add-ClickUpTagToTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -218,7 +237,7 @@ function Add-ClickUpTagToTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Add-ClickUpTagToTask'
@@ -246,15 +265,18 @@ function Add-ClickUpTagToTask {
 .SYNOPSIS
     Remove ClickUp tag from task.
 .DESCRIPTION
-    Remove ClickUp tag from task.
+    Remove ClickUp tag from task. Can accept TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
-    PS C:\> Remove-ClickUpTagToTask -TaskID abc -TagName "name"
-    Remove ClickUp tag with name "name" to task with ID "abc".
+    PS C:\> Remove-ClickUpTagFromTask -TaskID abc -TagName "name"
+    Removes ClickUp tag with name "name" from task with ID "abc".
 .EXAMPLE
-    PS C:\> Remove-ClickUpTagToTask -TaskID "Custom Task ID" -TagName "name" -CustomTaskIDs $true -TeamID 123
-    Remove ClickUp tag with name "name" to task with custom ID "Custom Task ID".
+    PS C:\> Remove-ClickUpTagFromTask -TaskID "Custom Task ID" -TagName "name" -CustomTaskIDs $true -TeamID 123
+    Removes ClickUp tag with name "name" from task with custom ID "Custom Task ID".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID abc | Remove-ClickUpTagFromTask -TagName "name"
+    Removes tag from task by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -265,8 +287,9 @@ function Add-ClickUpTagToTask {
 function Remove-ClickUpTagFromTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID', SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -274,7 +297,7 @@ function Remove-ClickUpTagFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Remove-ClickUpTagFromTask'
