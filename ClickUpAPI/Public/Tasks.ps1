@@ -2,18 +2,20 @@
 .SYNOPSIS
     Get all ClickUp tasks under a particular list.
 .DESCRIPTION
-    Get all ClickUp tasks under a particular list.
+    Get all ClickUp tasks under a particular list or team. Can accept ListID or TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTasks -ListID 11111111
-    Get all ClickUp task under List with ID "11111111".
+    Gets all ClickUp tasks under List with ID "11111111".
 .EXAMPLE
     PS C:\> Get-ClickUpTasks -ListID 22222222 -Archived $true -Page 1 -OrderBy 'updated' -Statuses 'New','In Progress'
-    Get all ClickUp task under List with ID "22222222" and various other options.
+    Gets all ClickUp tasks under List with ID "22222222" and various other options.
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 11111111 | Get-ClickUpTasks
+    Gets tasks by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. ListID or TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -26,10 +28,12 @@ function Get-ClickUpTasks {
     [CmdletBinding(DefaultParameterSetName = 'ListID')]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'ListID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'ListID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
         [string]$ListID,
 
-        [Parameter(Mandatory = $true, ParameterSetName = 'TeamID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TeamID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
         [string]$TeamID,
 
         [Parameter(ParameterSetName = 'ListID')]
@@ -37,7 +41,7 @@ function Get-ClickUpTasks {
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
-        [ulong]$Page = 0,
+        [uint64]$Page = 0,
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
@@ -53,13 +57,13 @@ function Get-ClickUpTasks {
         [bool]$Subtasks = $false,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [ulong[]]$SpaceIDs,
+        [uint64[]]$SpaceIDs,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [ulong[]]$ProjectIDs,
+        [uint64[]]$ProjectIDs,
 
         [Parameter(ParameterSetName = 'TeamID')]
-        [ulong[]]$ListIDs,
+        [uint64[]]$ListIDs,
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
@@ -173,15 +177,15 @@ function Get-ClickUpTasks {
 .SYNOPSIS
     Get a ClickUp task.
 .DESCRIPTION
-    Get a ClickUp task.
+    Get a ClickUp task. The TaskID can be provided via pipeline from other cmdlets that return task objects.
 .EXAMPLE
     PS C:\> Get-ClickUpTask -TaskID 9hz
-    Get a ClickUp task under List with ID "11111111".
+    Get a ClickUp task with Task ID "9hz".
 .EXAMPLE
     PS C:\> Get-ClickUpTask -TaskID 9hz -CustomTaskIDs $true -TeamID 123
-    Get a ClickUp task under List with ID "22222222" and various other options.
+    Get a ClickUp task with Task ID "9hz" using custom task IDs and specifying a Team ID.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -193,13 +197,14 @@ function Get-ClickUpTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID,
+        [uint64]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -232,15 +237,18 @@ function Get-ClickUpTask {
 .SYNOPSIS
     Get a ClickUp task's time in status.
 .DESCRIPTION
-    Get a ClickUp task's time in status.
+    Get a ClickUp task's time in status. Can accept TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatus -TaskID 9hz
-    Get a ClickUp task's time in status with ID "9hz".
+    Gets a ClickUp task's time in status with ID "9hz".
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatus -TaskID "CustomTaskID" -CustomTaskIDs $true -TeamID 123
-    Get a ClickUp task's time in status with custom ID "CustomTaskID".
+    Gets a ClickUp task's time in status with custom ID "CustomTaskID".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hz | Get-ClickUpTaskTimeInStatus
+    Gets task time in status by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -252,13 +260,14 @@ function Get-ClickUpTaskTimeInStatus {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID,
+        [uint64]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
         $IncludeSubtasks = $false
@@ -291,15 +300,18 @@ function Get-ClickUpTaskTimeInStatus {
 .SYNOPSIS
     Get a ClickUp bulk task's time in status.
 .DESCRIPTION
-    View how long two or more tasks have been in each status. The Total time in Status ClickApp must first be enabled by the Workspace owner or an admin.
+    View how long two or more tasks have been in each status. The Total time in Status ClickApp must first be enabled by the Workspace owner or an admin. Can accept TaskID array via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID 9hz,3cuh,g4fs
-    Get a ClickUp task's time in status with ID "9hz".
+    Gets time in status for multiple ClickUp tasks with IDs "9hz", "3cuh", and "g4fs".
 .EXAMPLE
     PS C:\> Get-ClickUpTaskTimeInStatusBulk -TaskID "CustomTaskID 1","CustomTaskID 2","CustomTaskID 3" -CustomTaskIDs $true -TeamID 123
-    Get multiple ClickUp task's time in status with custom IDs "CustomTaskID 1", "CustomTaskID 2", and "CustomTaskID 3".
+    Gets multiple ClickUp task's time in status with custom IDs "CustomTaskID 1", "CustomTaskID 2", and "CustomTaskID 3".
+.EXAMPLE
+    PS C:\> Get-ClickUpTasks -ListID 123 | Select-Object -ExpandProperty id | Get-ClickUpTaskTimeInStatusBulk
+    Gets bulk time in status by piping task IDs from Get-ClickUpTasks.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String[]. TaskID array via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -311,13 +323,14 @@ function Get-ClickUpTaskTimeInStatusBulk {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string[]]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     $QueryString = @{
@@ -347,15 +360,18 @@ function Get-ClickUpTaskTimeInStatusBulk {
 .SYNOPSIS
     Create a new ClickUp task.
 .DESCRIPTION
-    Create a new ClickUp task.
+    Create a new ClickUp task. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> New-ClickUpTask -ListID 11111111 -Name 'This is a new task'
     Creates a new ClickUp Task called "This is a new task" under the list with ID "11111111".
 .EXAMPLE
     PS C:\> New-ClickUpTask -ListID 22222222 -Name 'This is another new task' -Description "Description of the other new task" -Assignees 33333333 -Status 'Review' -Priority 1
     Creates a new ClickUp Task called "This is another new task" under the list with ID "22222222" with various other parameters.
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 11111111 | New-ClickUpTask -Name 'Task from Pipeline'
+    Creates task by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -367,18 +383,19 @@ function New-ClickUpTask {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
+        [uint64]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [string]$Description,
-        [ulong[]]$Assignees,
+        [uint64[]]$Assignees,
         [string[]]$Tags,
         [string]$Status,
-        [ulong]$Priority,
+        [uint64]$Priority,
         [datetime]$DueDate,
         [bool]$DueDateTime = $false,
-        [ulong]$TimeEstimate,
+        [uint64]$TimeEstimate,
         [datetime]$StartDate,
         [bool]$StartDateTime = $false,
         [bool]$NotifyAll,
@@ -447,7 +464,7 @@ function New-ClickUpTask {
 .SYNOPSIS
     Update a ClickUp task.
 .DESCRIPTION
-    Update a ClickUp task.
+    Update a ClickUp task. The TaskID can be provided via pipeline from other cmdlets that return task objects.
 .EXAMPLE
     PS C:\> $Body = @{
     >> name = "Updated Task Name"
@@ -476,7 +493,7 @@ function New-ClickUpTask {
     PS C:\> Set-ClickUpTask -TaskID 9hx -Body $Body
     Updated the task with ID "9hx".
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -506,8 +523,9 @@ function Set-ClickUpTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -515,7 +533,7 @@ function Set-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
 
@@ -544,15 +562,18 @@ function Set-ClickUpTask {
 .SYNOPSIS
     Remove a ClickUp task.
 .DESCRIPTION
-    Remove a ClickUp task.
+    Remove a ClickUp task. The TaskID can be provided via pipeline from other cmdlets that return task objects.
 .EXAMPLE
     PS C:\> Remove-ClickUpTask -TaskID 9hx
     Remove the task with ID "9hx".
 .EXAMPLE
     PS C:\> Remove-ClickUpTask -TaskID 'CustomTaskID' -CustomTaskIDs $True -TeamID 1111111
     Remove the task with custom ID "CustomTaskID".
+.EXAMPLE
+    PS C:\> Get-ClickUpTasks -ListID 123 | Remove-ClickUpTask
+    Pipe task IDs from Get-ClickUpTasks to remove multiple tasks.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -563,13 +584,14 @@ function Set-ClickUpTask {
 function Remove-ClickUpTask {
     [CmdletBinding(DefaultParameterSetName = 'TaskID', SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Remove-ClickUpTask'
@@ -598,15 +620,18 @@ function Remove-ClickUpTask {
 .SYNOPSIS
     Merge ClickUp tasks.
 .DESCRIPTION
-    Merge multiple ClickUp tasks into a single task. The source tasks will be merged into the target task.
+    Merge multiple ClickUp tasks into a single task. The source tasks will be merged into the target task. Can accept TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Merge-ClickUpTasks -TaskID '9hz' -SourceTaskIDs '3cuh','g4fs'
     Merges tasks with IDs "3cuh" and "g4fs" into the task with ID "9hz".
 .EXAMPLE
     PS C:\> Merge-ClickUpTasks -TaskID 'abc123' -SourceTaskIDs 'def456','ghi789','jkl012'
     Merges three source tasks into the target task with ID "abc123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID '9hz' | Merge-ClickUpTasks -SourceTaskIDs '3cuh','g4fs'
+    Merges tasks by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -617,7 +642,8 @@ function Remove-ClickUpTask {
 function Merge-ClickUpTasks {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true)]
         [string[]]$SourceTaskIDs
@@ -642,15 +668,18 @@ function Merge-ClickUpTasks {
 .SYNOPSIS
     Create Task From Template
 .DESCRIPTION
-    Create a new task using a task template defined in your workspace. Publicly shared templates must be added to your Workspace before you can use them with the public API.
+    Create a new task using a task template defined in your workspace. Publicly shared templates must be added to your Workspace before you can use them with the public API. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> New-ClickUpTaskFromTemplate -ListID 11111111 -TemplateID 'abc123' -Name 'Task from template'
     Creates a new ClickUp Task called "Task from template" using the template with ID "abc123" under the list with ID "11111111".
 .EXAMPLE
     PS C:\> New-ClickUpTaskFromTemplate -ListID 22222222 -TemplateID 'def456' -Name 'Another task from template'
     Creates a new ClickUp Task called "Another task from template" using the template with ID "def456" under the list with ID "22222222".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 11111111 | New-ClickUpTaskFromTemplate -TemplateID 'abc123' -Name 'Task from pipeline'
+    Creates task from template by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -661,8 +690,9 @@ function Merge-ClickUpTasks {
 function New-ClickUpTaskFromTemplate {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id', 'id')]
+        [uint64]$ListID,
         [Parameter(Mandatory = $true)]
         [string]$TemplateID,
         [Parameter(Mandatory = $true)]

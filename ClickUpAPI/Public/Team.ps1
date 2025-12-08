@@ -10,7 +10,6 @@
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -39,12 +38,15 @@ function Get-ClickUpTeam {
 .SYNOPSIS
     Get all ClickUp team plan.
 .DESCRIPTION
-    Get all ClickUp team plan.
+    Get all ClickUp team plan. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTeamPlan -TeamID 123
     Get all ClickUp team plan for team with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Get-ClickUpTeamPlan
+    Get team plan by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -57,8 +59,9 @@ function Get-ClickUpTeamPlan {
     [Alias('Get-ClickUpWorkspacePlan')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpTeamPlan'
@@ -77,12 +80,15 @@ function Get-ClickUpTeamPlan {
 .SYNOPSIS
     Get all ClickUp team seats.
 .DESCRIPTION
-    Get all ClickUp team seats.
+    Get all ClickUp team seats. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTeamSeats -TeamID 123
     Get all ClickUp team seats for team with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Get-ClickUpTeamSeats
+    Get team seats by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -95,8 +101,9 @@ function Get-ClickUpTeamSeats {
     [Alias('Get-ClickUpWorkspaceSeats')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpTeamSeats'

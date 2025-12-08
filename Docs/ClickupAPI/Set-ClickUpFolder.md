@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/updatefolder
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Set-ClickUpFolder
 ---
@@ -20,13 +20,10 @@ Update the name of a ClickUp Folder.
 ### __AllParameterSets
 
 ```
-Set-ClickUpFolder [-FolderID] <ulong> [-Name] <ulong> [<CommonParameters>]
+Set-ClickUpFolder [-FolderID] <ulong> [-Name] <string> [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -49,13 +46,15 @@ Change the name of the ClickUp folder with ID "11111111" to "Change Folder Name"
 Type: System.UInt64
 DefaultValue: 0
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- folder_id
+- id
 ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -67,7 +66,7 @@ HelpMessage: ''
 {{ Fill Name Description }}
 
 ```yaml
-Type: System.UInt64
+Type: System.String
 DefaultValue: 0
 SupportsWildcards: false
 Aliases: []
@@ -96,16 +95,27 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
+### System.UInt64. You can pipe a folder ID to this cmdlet.
+
+{{ Fill in the Description }}
+
+### System.UInt64
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
 ### System.Object Hashtable.
 
 {{ Fill in the Description }}
 
+### System.Object
+
+{{ Fill in the Description }}
+
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

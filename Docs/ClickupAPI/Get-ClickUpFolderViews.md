@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/getfolderviews
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Get-ClickUpFolderViews
 ---
@@ -24,9 +24,6 @@ Get-ClickUpFolderViews [-FolderID] <ulong> [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -85,10 +82,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
+### System.Object
+System.Array
+
+{{ Fill in the Description }}
+
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

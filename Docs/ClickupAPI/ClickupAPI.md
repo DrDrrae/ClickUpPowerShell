@@ -1,11 +1,11 @@
 ---
 document type: module
 Help Version: 1.0.0.0
-HelpInfoUri: 
+HelpInfoUri: ''
 Locale: en-US
 Module Guid: 8511f61f-0ff9-4c6d-8903-5ca262e1c120
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: ClickupAPI Module
 ---
@@ -16,7 +16,7 @@ title: ClickupAPI Module
 
 ClickUp API Wrapper
 
-## ClickupAPI
+## ClickupAPI Cmdlets
 
 ### [Add-ClickUpAPIKey](Add-ClickUpAPIKey.md)
 

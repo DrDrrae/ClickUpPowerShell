@@ -2,15 +2,17 @@
 .SYNOPSIS
     Get all ClickUp task members.
 .DESCRIPTION
-    Get all ClickUp task members.
+    Get all ClickUp task members. Can accept TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskMembers -TaskId 9hz
-    Get ClickUp task members from task with ID "9hz".
+    Gets ClickUp task members from task with ID "9hz".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hz | Get-ClickUpTaskMembers
+    Gets task members by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -21,7 +23,8 @@ function Get-ClickUpTaskMembers {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID
     )
 
@@ -41,15 +44,17 @@ function Get-ClickUpTaskMembers {
 .SYNOPSIS
     Get all ClickUp list members.
 .DESCRIPTION
-    Get all ClickUp list members.
+    Get all ClickUp list members. Can accept ListID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpListMembers -ListId 123
-    Get ClickUp list members from list with ID "123".
+    Gets ClickUp list members from list with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 123 | Get-ClickUpListMembers
+    Gets list members by piping list ID from Get-ClickUpList.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. ListID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -60,8 +65,9 @@ function Get-ClickUpListMembers {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id','id')]
+        [uint64]$ListID
     )
 
     Write-Verbose 'Entering Get-ClickUpListMembers'

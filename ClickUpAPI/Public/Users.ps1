@@ -2,12 +2,15 @@
 .SYNOPSIS
     Get ClickUp user.
 .DESCRIPTION
-    View information about a user in a Workspace.
+    View information about a user in a Workspace. The UserID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Get-ClickUpUser -TeamID 123 -UserID 456
     Get ClickUp user for team with ID "123" and user with ID "456".
+.EXAMPLE
+    PS C:\> 456 | Get-ClickUpUser -TeamID 123
+    Pipe user ID and retrieve user details.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a user ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -22,9 +25,10 @@ function Get-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$UserID,
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('user_id','id')]
+        [uint64]$UserID,
         [Parameter()]
         [bool]$IncludeShared = $true
     )
@@ -72,13 +76,13 @@ function New-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Email,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
         [Parameter()]
-        [ulong]$CustomRoleID
+        [uint64]$CustomRoleID
     )
 
     $Body = @{
@@ -107,12 +111,15 @@ function New-ClickUpUser {
 .SYNOPSIS
     Edit user in ClickUp workspace.
 .DESCRIPTION
-    Edit a user in a Workspace.
+    Edit a user in a Workspace. The UserID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Set-ClickUpUser -TeamID 123 -UserID 456 -Admin $true
     Edit user in ClickUp workspace with ID "123" and user with ID "456".
+.EXAMPLE
+    PS C:\> 456 | Set-ClickUpUser -TeamID 123 -Username "newusername" -Admin $false
+    Pipe user ID and update the user.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a user ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -127,15 +134,16 @@ function Set-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$UserID,
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('user_id','id')]
+        [uint64]$UserID,
         [Parameter(Mandatory = $true)]
         [string]$Username,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
         [Parameter()]
-        [ulong]$CustomRoleID
+        [uint64]$CustomRoleID
     )
 
     $Body = @{
@@ -164,12 +172,15 @@ function Set-ClickUpUser {
 .SYNOPSIS
     Remove user from ClickUp workspace.
 .DESCRIPTION
-    Remove a user from a Workspace.
+    Remove a user from a Workspace. The UserID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Remove-ClickUpUser -TeamID 123 -UserID 456
     Remove user from ClickUp workspace with ID "123" and user with ID "456".
+.EXAMPLE
+    PS C:\> 456 | Remove-ClickUpUser -TeamID 123
+    Pipe user ID and remove the user.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a user ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -184,9 +195,10 @@ function Remove-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$UserID
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('user_id','id')]
+        [uint64]$UserID
     )
 
     Write-Verbose 'Entering Remove-ClickUpUser'

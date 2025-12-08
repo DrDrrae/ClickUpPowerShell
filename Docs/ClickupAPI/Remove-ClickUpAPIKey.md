@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Remove-ClickUpAPIKey
 ---
@@ -24,9 +24,6 @@ Remove-ClickUpAPIKey [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 

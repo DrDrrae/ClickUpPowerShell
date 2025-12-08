@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/deletetasklink
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Remove-ClickUpTaskLink
 ---
@@ -31,9 +31,6 @@ Remove-ClickUpTaskLink -TaskID <string> -LinksTo <string> -CustomTaskID <bool> -
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -131,19 +128,21 @@ HelpMessage: ''
 Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- task_id
+- id
 ParameterSets:
 - Name: CustomTaskID
   Position: Named
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 - Name: TaskID
   Position: Named
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -206,6 +205,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
+### System.String. You can pipe a task ID to this cmdlet.
+
+{{ Fill in the Description }}
+
+### System.String
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
 ### None. This cmdlet does not return any output.
@@ -215,7 +222,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

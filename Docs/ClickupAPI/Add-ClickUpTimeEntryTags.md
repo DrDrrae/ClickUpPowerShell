@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/addtagsfromtimeentries
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Add-ClickUpTimeEntryTags
 ---
@@ -25,9 +25,6 @@ Add-ClickUpTimeEntryTags [-TeamID] <string> [-TimeEntryIDs] <ulong[]> [-Tags] <s
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -76,13 +73,14 @@ HelpMessage: ''
 Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- team_id
 ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
   ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -97,13 +95,15 @@ HelpMessage: ''
 Type: System.UInt64[]
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- time_entry_ids
+- id
 ParameterSets:
 - Name: (All)
   Position: 1
   IsRequired: true
   ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -123,6 +123,19 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
+### System.String. TeamID via pipeline by property name.
+System.UInt64[]. TimeEntryIDs via pipeline by property name.
+
+{{ Fill in the Description }}
+
+### System.String
+
+{{ Fill in the Description }}
+
+### System.UInt64[]
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
 ### None. This cmdlet does not return any output.
@@ -136,7 +149,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

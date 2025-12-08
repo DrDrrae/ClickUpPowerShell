@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/creategoal
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: New-ClickUpGoal
 ---
@@ -25,9 +25,6 @@ New-ClickUpGoal [-TeamID] <ulong> [-Name] <string> [[-DueDate] <datetime>] [[-De
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -176,13 +173,15 @@ HelpMessage: ''
 Type: System.UInt64
 DefaultValue: 0
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- team_id
+- id
 ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -202,6 +201,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
+### System.UInt64. You can pipe a team ID to this cmdlet.
+
+{{ Fill in the Description }}
+
+### System.UInt64
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
 ### System.Object.
@@ -215,7 +222,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 See the link for information.
-
 
 ## RELATED LINKS
 

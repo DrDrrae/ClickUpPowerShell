@@ -5,10 +5,11 @@
 .DESCRIPTION
     The New-ClickUpTaskAttachment cmdlet uploads a file as an attachment to a ClickUp task.
     You can specify the task by its ID or by using custom task IDs (requires Team ID).
+    The TaskID can be provided via pipeline from other cmdlets that return task objects.
 
 .PARAMETER TaskID
     The ID of the task to upload the attachment to.
-    This parameter is mandatory when not using Custom Task IDs.
+    This parameter is mandatory when not using Custom Task IDs and accepts pipeline input.
 
 .PARAMETER AttachmentPath
     The local file path of the attachment to be uploaded.
@@ -32,11 +33,21 @@
 
     Uploads the file "Design.png" to the task with custom ID "CUST-123" in team 123456.
 
+.EXAMPLE
+    Get-ClickUpTask -TaskID "8675309" | New-ClickUpTaskAttachment -AttachmentPath "C:\Reports\Status.pdf"
+
+    Pipes a task ID and uploads an attachment to it.
+
+.EXAMPLE
+    Get-ClickUpTasks -ListID 123456 | New-ClickUpTaskAttachment -AttachmentPath "C:\Reports\Status.pdf"
+
+    Pipes multiple task IDs from a list and uploads the same attachment to each task.
+
 .INPUTS
-    None. You cannot pipe objects to this cmdlet.
+    System.String. You can pipe a task ID to this cmdlet.
 
 .OUTPUTS
-    None. The cmdlet does not return any output.
+    System.Management.Automation.PSCustomObject
 
 .NOTES
     API Reference: https://developer.clickup.com/reference/createtaskattachment
@@ -48,8 +59,9 @@ function New-ClickUpTaskAttachment {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
@@ -57,7 +69,7 @@ function New-ClickUpTaskAttachment {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose "Reading attachment from: $AttachmentPath"

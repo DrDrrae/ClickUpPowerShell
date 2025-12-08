@@ -2,18 +2,20 @@
 .SYNOPSIS
     Get the details on all ClickUp Spaces in a team.
 .DESCRIPTION
-    Get the details on all ClickUp Spaces in a team.
+    Get the details on all ClickUp Spaces in a team. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpSpaces TeamID 11111111
     Returns the data on all the ClickUp Spaces with the Team ID "11111111"
 .EXAMPLE
     PS C:\> Get-ClickUpSpaces TeamID 11111111 -Archived $true
     Returns the data on all the ClickUp Spaces with the Team ID "11111111" including archived
+.EXAMPLE
+    PS C:\> Get-ClickUpAuthorizedWorkspaces | Get-ClickUpTeam | Get-ClickUpSpaces
+    Gets spaces by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -24,8 +26,9 @@ function Get-ClickUpSpaces {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter()]
         [bool]$Archived = $false
     )
@@ -50,12 +53,15 @@ function Get-ClickUpSpaces {
 .SYNOPSIS
     Get the details on a single ClickUp Space.
 .DESCRIPTION
-    Get the details on a single ClickUp Space.
+    Get the details on a single ClickUp Space. Can accept SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpSpace SpaceID 11111111
     Returns the data on the ClickUp Space with ID "11111111"
+.EXAMPLE
+    PS C:\> Get-ClickUpSpaces -TeamID 123 | Get-ClickUpSpace
+    Gets space details by piping space ID from Get-ClickUpSpaces.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -67,8 +73,9 @@ function Get-ClickUpSpace {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID
     )
 
     Write-Verbose 'Entering Get-ClickUpSpace'
@@ -87,12 +94,15 @@ function Get-ClickUpSpace {
 .SYNOPSIS
     Create a new ClickUp Space.
 .DESCRIPTION
-    Create a new ClickUp Space.
+    Create a new ClickUp Space. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> New-ClickUpSpace -TeamID 11111111 -Name 'New ClickUp Space' -Multiple_Assignees
     Creates a new ClickUp Space with the name "New Clickup Space" and the Multiple Assignees feature enabled.
+.EXAMPLE
+    PS C:\> Get-ClickUpAuthorizedWorkspaces | Get-ClickUpTeam | New-ClickUpSpace -Name 'New Space from Pipeline'
+    Creates space by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -104,8 +114,9 @@ function New-ClickUpSpace {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [bool]$Multiple_Assignees = $true,
@@ -175,7 +186,7 @@ function New-ClickUpSpace {
 .SYNOPSIS
     Change settings of a ClickUp Space
 .DESCRIPTION
-    Change settings of a ClickUp Space. Requires passing a hashtable of expected changes.
+    Change settings of a ClickUp Space. Requires passing a hashtable of expected changes. Can accept SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> $Body = @{
     >> name = 'New Name'
@@ -206,8 +217,11 @@ function New-ClickUpSpace {
     >> }
     PS C:\> Set-ClickUpSpace -SpaceID 11111111 -Body $Body
     Will enable the due dates feature and disable the time tracking and custom fields features of space with ID "11111111".
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 11111111 | Set-ClickUpSpace -Body @{name = 'Updated Name'}
+    Updates space by piping space ID from Get-ClickUpSpace.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -257,8 +271,9 @@ function Set-ClickUpSpace {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -279,12 +294,15 @@ function Set-ClickUpSpace {
 .SYNOPSIS
     Remove a ClickUp Space
 .DESCRIPTION
-    Remove a ClickUp Space.
+    Remove a ClickUp Space. Can accept SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickupSpace -SpaceID 11111111
     Removes the ClickUp Space with ID "11111111"
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 11111111 | Remove-ClickupSpace
+    Removes space by piping space ID from Get-ClickUpSpace.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. SpaceID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -295,8 +313,9 @@ function Set-ClickUpSpace {
 function Remove-ClickupSpace {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id', 'id')]
+        [uint64]$SpaceID
     )
 
     Write-Verbose 'Entering Remove-ClickupSpace'

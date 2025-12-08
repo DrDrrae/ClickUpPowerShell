@@ -2,12 +2,15 @@
 .SYNOPSIS
     Get a ClickUp view.
 .DESCRIPTION
-    Get a ClickUp view.
+    Get a ClickUp view. The ViewID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Get-ClickUpView -ViewID 3c
     Get a ClickUp view with ID "3c".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeamViews -TeamID 512 | Get-ClickUpView
+    Pipe view IDs from Get-ClickUpTeamViews to retrieve full view details.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a view ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -19,7 +22,8 @@ function Get-ClickUpView {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('view_id','id')]
         [string]$ViewID
     )
 
@@ -47,7 +51,6 @@ function Get-ClickUpView {
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -59,7 +62,7 @@ function Get-ClickUpTeamViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpTeamViews'
@@ -86,7 +89,6 @@ function Get-ClickUpTeamViews {
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -98,7 +100,7 @@ function Get-ClickUpSpaceViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID
+        [uint64]$SpaceID
     )
 
     Write-Verbose 'Entering Get-ClickUpSpaceViews'
@@ -125,7 +127,6 @@ function Get-ClickUpSpaceViews {
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -137,7 +138,7 @@ function Get-ClickUpFolderViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$FolderID
+        [uint64]$FolderID
     )
 
     Write-Verbose 'Entering Get-ClickUpFolderViews'
@@ -164,7 +165,6 @@ function Get-ClickUpFolderViews {
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -176,7 +176,7 @@ function Get-ClickUpListViews {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$ListID
+        [uint64]$ListID
     )
 
     Write-Verbose 'Entering Get-ClickUpListViews'
@@ -206,7 +206,6 @@ function Get-ClickUpListViews {
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -220,7 +219,7 @@ function Get-ClickUpViewTasks {
         [Parameter(Mandatory = $true)]
         [string]$ViewID,
         [Parameter()]
-        [ulong]$Page = 0
+        [uint64]$Page = 0
     )
 
     $QueryString = @{
@@ -269,7 +268,7 @@ function New-ClickUpTeamView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -316,7 +315,7 @@ function New-ClickUpSpaceView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -363,7 +362,7 @@ function New-ClickUpFolderView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$FolderID,
+        [uint64]$FolderID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -410,7 +409,7 @@ function New-ClickUpListView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$ListID,
+        [uint64]$ListID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -478,12 +477,15 @@ function Set-ClickUpView {
 .SYNOPSIS
     Remove a ClickUp view.
 .DESCRIPTION
-    Remove a ClickUp view.
+    Remove a ClickUp view. The ViewID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Remove-ClickUpView -ViewID 3c
     Remove a ClickUp view with ID "3c".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeamViews -TeamID 512 | Remove-ClickUpView
+    Pipe view IDs and remove multiple views.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a view ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any value.
 .NOTES
@@ -494,7 +496,8 @@ function Set-ClickUpView {
 function Remove-ClickUpView {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('view_id','id')]
         [string]$ViewID
     )
 

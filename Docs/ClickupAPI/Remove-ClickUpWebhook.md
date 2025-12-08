@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/deletewebhook
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Remove-ClickUpWebhook
 ---
@@ -24,9 +24,6 @@ Remove-ClickUpWebhook [-WebhookID] <string> [-WhatIf] [-Confirm] [<CommonParamet
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -71,13 +68,15 @@ HelpMessage: ''
 Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- webhook_id
+- id
 ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -119,6 +118,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
+### System.String. You can pipe a webhook ID to this cmdlet.
+
+{{ Fill in the Description }}
+
+### System.String
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
 ### None. This cmdlet does not return any output.
@@ -130,7 +137,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 See the link for information.
 
 Only webhooks that were created by the authenticated user will be returned on this endpoint.
-
 
 ## RELATED LINKS
 
