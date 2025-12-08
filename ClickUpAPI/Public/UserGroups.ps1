@@ -2,15 +2,17 @@
 .SYNOPSIS
     Get all user groups in a Workspace.
 .DESCRIPTION
-    View the user groups created via the API for a Workspace.
+    View the user groups created via the API for a Workspace. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickupUserGroups -TeamID 123
     Get all user groups for team with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Get-ClickupUserGroups
+    Get user groups by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -21,8 +23,9 @@ function Get-ClickupUserGroups {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter()]
         [string[]]$GroupIDs
     )
@@ -51,15 +54,18 @@ function Get-ClickupUserGroups {
 .SYNOPSIS
     Create a new user group.
 .DESCRIPTION
-    Create a new user group in a Workspace.
+    Create a new user group in a Workspace. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> New-ClickUpUserGroup -TeamID 123 -Name "New Group" -Members 456, 789
     Create a new user group with name "New Group" and members with IDs "456" and "789" in team with ID "123".
 .EXAMPLE
     PS C:\> New-ClickUpUserGroup -TeamID 123 -Name "New Group" -Members 456, 789 -Handle "new-group"
     Create a new user group with name "New Group" and members with IDs "456" and "789" in team with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | New-ClickUpUserGroup -Name "Pipeline Group" -Members 456, 789
+    Create user group by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -71,12 +77,13 @@ function New-ClickUpUserGroup {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter(Mandatory = $true)]
-        [ulong[]]$Members,
+        [uint64[]]$Members,
         [Parameter()]
         [string]$Handle
     )
@@ -106,12 +113,15 @@ function New-ClickUpUserGroup {
 .SYNOPSIS
     Update a user group.
 .DESCRIPTION
-    Update a user group in a Workspace.
+    Update a user group in a Workspace. Can accept GroupID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Set-ClickUpUserGroup -GroupID "123-456" -Name "Updated Group" -Handle "updated-handle"
     Update user group with ID "123-456" to have name "Updated Group" and handle "updated-handle".
+.EXAMPLE
+    PS C:\> Get-ClickupUserGroups -TeamID 123 | Set-ClickUpUserGroup -Name "Renamed Group"
+    Update user groups by piping group ID from Get-ClickupUserGroups.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. GroupID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -123,16 +133,17 @@ function Set-ClickUpUserGroup {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('group_id', 'id')]
         [string]$GroupID,
         [Parameter()]
         [string]$Name,
         [Parameter()]
         [string]$Handle,
         [Parameter()]
-        [ulong[]]$AddMembers = @(),
+        [uint64[]]$AddMembers = @(),
         [Parameter()]
-        [ulong[]]$RemoveMembers = @()
+        [uint64[]]$RemoveMembers = @()
     )
 
     $Body = @{}
@@ -166,12 +177,15 @@ function Set-ClickUpUserGroup {
 .SYNOPSIS
     Delete a user group.
 .DESCRIPTION
-    Delete a user group in a Workspace.
+    Delete a user group in a Workspace. Can accept GroupID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Remove-ClickUpUserGroup -GroupID "123-456"
     Delete user group with ID "123-456".
+.EXAMPLE
+    PS C:\> Get-ClickupUserGroups -TeamID 123 | Remove-ClickUpUserGroup
+    Remove user groups by piping group ID from Get-ClickupUserGroups.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. GroupID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -182,7 +196,8 @@ function Set-ClickUpUserGroup {
 function Remove-ClickUpUserGroup {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('group_id', 'id')]
         [string]$GroupID
     )
 
