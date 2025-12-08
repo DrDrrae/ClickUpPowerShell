@@ -2,18 +2,20 @@
 .SYNOPSIS
     Get all comments on a ClickUp task.
 .DESCRIPTION
-    Get all comments on a ClickUp task.
+    Get all comments on a ClickUp task. Supports pipeline input from task objects for TaskID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID 9hz
     Get all ClickUp task comments under task with ID "9hz"
 .EXAMPLE
     PS C:\> Get-ClickUpTaskComments -TaskID CustomID -CustomTaskIDs $true -TeamID 123
     Get all ClickUp task comments under task with custom ID "CustomID".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hz | Get-ClickUpTaskComments
+    Get all comments by piping a task object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -24,13 +26,14 @@ function Get-ClickUpTaskComments {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -57,15 +60,17 @@ function Get-ClickUpTaskComments {
 .SYNOPSIS
     Get ClickUp chat view comments.
 .DESCRIPTION
-    Get ClickUp chat view comments.
+    Get ClickUp chat view comments. Supports pipeline input from view objects for ViewID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpChatViewComments -ViewID 3c
     Get ClickUp chat view comments for view with ID "3c".
+.EXAMPLE
+    PS C:\> Get-ClickUpView -ViewID 3c | Get-ClickUpChatViewComments
+    Get chat view comments by piping a view object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a view ID to this cmdlet.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -76,7 +81,8 @@ function Get-ClickUpChatViewComments {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('view_id','id')]
         [string]$ViewID
     )
 
@@ -95,15 +101,17 @@ function Get-ClickUpChatViewComments {
 .SYNOPSIS
     Get all comments on a ClickUp list.
 .DESCRIPTION
-    Get all comments on a ClickUp list.
+    Get all comments on a ClickUp list. Supports pipeline input from list objects for ListID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpListComments -ListID 123
     Get ClickUp list comments for list with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 123 | Get-ClickUpListComments
+    Get list comments by piping a list object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a list ID to this cmdlet.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -114,8 +122,9 @@ function Get-ClickUpListComments {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$ListID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id','id')]
+        [uint64]$ListID
     )
 
     Write-Verbose "Retrieving comments for list '$ListID'..."
@@ -133,15 +142,17 @@ function Get-ClickUpListComments {
 .SYNOPSIS
     Get all threaded comments.
 .DESCRIPTION
-    Get all threaded comments.
+    Get all threaded comments. Supports pipeline input from comment objects for CommentID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpThreadedComments -CommentID 123
     Get ClickUp threaded comments for comment with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTaskComments -TaskID 9hz | Get-ClickUpThreadedComments
+    Get threaded comments by piping a comment object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a comment ID to this cmdlet.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -152,8 +163,9 @@ function Get-ClickUpThreadedComments {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$CommentID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('comment_id','id')]
+        [uint64]$CommentID
     )
 
     Write-Verbose "Retrieving comments for comment '$CommentID'..."
@@ -171,7 +183,7 @@ function Get-ClickUpThreadedComments {
 .SYNOPSIS
     Update ClickUp comment.
 .DESCRIPTION
-    Update ClickUp comment.
+    Update ClickUp comment. Supports pipeline input from comment objects for CommentID parameter.
 .EXAMPLE
     PS C:\> $Body = @{
     >>     comment_text = "Updated comment text"
@@ -180,8 +192,12 @@ function Get-ClickUpThreadedComments {
     >> }
     PS C:\> Set-ClickUpComment -CommentID 456 -Body $Body
     Update comment with ID "456".
+.EXAMPLE
+    PS C:\> $Body = @{comment_text = "Updated comment"}
+    PS C:\> Get-ClickUpTaskComments -TaskID 9hz | Set-ClickUpComment -Body $Body
+    Update comments by piping from task comments.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a comment ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -192,8 +208,9 @@ function Get-ClickUpThreadedComments {
 function Set-ClickUpComment {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$CommentID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('comment_id','id')]
+        [uint64]$CommentID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -212,12 +229,15 @@ function Set-ClickUpComment {
 .SYNOPSIS
     Delete ClickUp comment.
 .DESCRIPTION
-    Delete ClickUp comment.
+    Delete ClickUp comment. Supports pipeline input from comment objects for CommentID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpComment -CommentID 456
     Delete comment with ID "456".
+.EXAMPLE
+    PS C:\> Get-ClickUpTaskComments -TaskID 9hz | Remove-ClickUpComment
+    Delete comments by piping from task comments.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a comment ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -228,8 +248,9 @@ function Set-ClickUpComment {
 function Remove-ClickUpListComment {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$CommentID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('comment_id','id')]
+        [uint64]$CommentID
     )
 
     if ($PSCmdlet.ShouldProcess($CommentID, 'Delete Comment')) {
@@ -295,7 +316,7 @@ function New-ClickUpTaskComment {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     if ($PSBoundParameters.ContainsKey('CustomTaskIDs')) {
@@ -404,7 +425,7 @@ function New-ClickUpListComment {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$ListID,
+        [uint64]$ListID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
@@ -455,7 +476,7 @@ function New-ClickUpThreadedComment {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$CommentID,
+        [uint64]$CommentID,
         [Parameter(Mandatory = $true)]
         [hashtable]$Body
     )
