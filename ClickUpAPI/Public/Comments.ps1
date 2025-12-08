@@ -28,11 +28,13 @@ function Get-ClickUpTaskComments {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -82,6 +84,7 @@ function Get-ClickUpChatViewComments {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('view_id','id')]
         [string]$ViewID
     )
@@ -123,6 +126,7 @@ function Get-ClickUpListComments {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('list_id','id')]
         [uint64]$ListID
     )
@@ -209,9 +213,11 @@ function Set-ClickUpComment {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('comment_id','id')]
         [uint64]$CommentID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -309,13 +315,16 @@ function New-ClickUpTaskComment {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -374,8 +383,10 @@ function New-ClickUpChatViewComment {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -425,8 +436,10 @@ function New-ClickUpListComment {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$ListID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -476,8 +489,10 @@ function New-ClickUpThreadedComment {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$CommentID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
