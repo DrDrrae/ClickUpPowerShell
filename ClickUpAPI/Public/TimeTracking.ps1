@@ -2,18 +2,20 @@
 .SYNOPSIS
     Get ClickUp time entries.
 .DESCRIPTION
-    Get ClickUp time entries. Optional within a date range.
+    Get ClickUp time entries. Optional within a date range. Can accept TeamID, TaskID, ListID, FolderID, and SpaceID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntries -TeamID 512
     Get ClickUp Time Entries for ClickUp team with ID "512".
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntries -TeamID 512 -StartDate "12/01/2021 00:00" -EndDate "12/31/2021 23:59"
     Get ClickUp Time Entries for ClickUp team with ID "512" between December 1st, 2021 12:00 AM and December 31, 2021 11:59 PM.
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Get-ClickUpTimeEntries
+    Get time entries by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID, TaskID, ListID, FolderID, SpaceID via pipeline by property name.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -24,26 +26,31 @@ function Get-ClickUpTimeEntries {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter()]
         [DateTime]$StartDate,
         [Parameter()]
         [DateTime]$EndDate,
         [Parameter()]
-        [ulong[]]$Assignees,
+        [uint64[]]$Assignees,
         [Parameter()]
         [Bool]$IncludeTaskTags = $false,
         [Parameter()]
         [Bool]$IncludeLocationNames = $false,
-        [Parameter()]
-        [ulong]$SpaceID,
-        [Parameter()]
-        [ulong]$FolderID,
-        [Parameter()]
-        [ulong]$ListID,
-        [Parameter()]
-        [ulong]$TaskID,
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id')]
+        [uint64]$SpaceID,
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id')]
+        [uint64]$FolderID,
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id')]
+        [uint64]$ListID,
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id')]
+        [uint64]$TaskID,
         [Parameter()]
         [bool]$CustomTaskIDs = $false
     )
@@ -96,12 +103,15 @@ function Get-ClickUpTimeEntries {
 .SYNOPSIS
     Get a single ClickUp time entry.
 .DESCRIPTION
-    Get a single ClickUp time entry.
+    Get a single ClickUp time entry. Can accept TeamID and TimerID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntry -TeamID 512 -TimerID 1963465985517105840
     Get a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID "512".
+.EXAMPLE
+    PS C:\> Get-ClickUpTimeEntries -TeamID 512 | Get-ClickUpTimeEntry -TeamID 512
+    Get time entry details by piping timer ID from Get-ClickUpTimeEntries.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID and TimerID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -113,10 +123,12 @@ function Get-ClickUpTimeEntry {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$TimerID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id')]
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('timer_id', 'id')]
+        [uint64]$TimerID
     )
 
     Write-Verbose 'Entering Get-ClickUpTimeEntry'
@@ -135,12 +147,15 @@ function Get-ClickUpTimeEntry {
 .SYNOPSIS
     Get the history of a single ClickUp time entry.
 .DESCRIPTION
-    Get the history of a single ClickUp time entry.
+    Get the history of a single ClickUp time entry. Can accept TeamID and TimerID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntryHistory -TeamID 512 -TimerID 1963465985517105840
     Get the history of a ClickUp Time Entry with ID "1963465985517105840" for ClickUp team with ID "512".
+.EXAMPLE
+    PS C:\> Get-ClickUpTimeEntry -TeamID 512 -TimerID 1963465985517105840 | Get-ClickUpTimeEntryHistory -TeamID 512
+    Get time entry history by piping timer ID from Get-ClickUpTimeEntry.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID and TimerID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -152,10 +167,12 @@ function Get-ClickUpTimeEntryHistory {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$TimerID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id')]
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('timer_id', 'id')]
+        [uint64]$TimerID
     )
 
     Write-Verbose 'Entering Get-ClickUpTimeEntryHistory'
@@ -174,15 +191,18 @@ function Get-ClickUpTimeEntryHistory {
 .SYNOPSIS
     Get running ClickUp time entries.
 .DESCRIPTION
-    Get running ClickUp time entries.
+    Get running ClickUp time entries. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpRunningTimeEntry -TeamID 512
     Get running time entries for ClickUp team with ID "512".
 .EXAMPLE
     PS C:\> Get-ClickUpRunningTimeEntry -TeamID 512 -Assignee 1234
     Get running time entries for ClickUp team with ID "512" assigned to assignee with ID "1234"
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Get-ClickUpRunningTimeEntry
+    Get running time entries by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -194,10 +214,11 @@ function Get-ClickUpRunningTimeEntry {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID,
         [Parameter()]
-        [ulong]$Assignee
+        [uint64]$Assignee
     )
 
     if ($PSBoundParameters.ContainsKey('Assignee')) {
@@ -224,12 +245,15 @@ function Get-ClickUpRunningTimeEntry {
 .SYNOPSIS
     Get all tags from ClickUp time entries.
 .DESCRIPTION
-    Get all tags from ClickUp time entries.
+    Get all tags from ClickUp time entries. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Get-ClickUpTimeEntryTags -TeamID 512
     Get time entry tags for ClickUp team with ID "512".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Get-ClickUpTimeEntryTags
+    Get time entry tags by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -241,8 +265,9 @@ function Get-ClickUpTimeEntryTags {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpTimeEntryTags'
@@ -261,12 +286,16 @@ function Get-ClickUpTimeEntryTags {
 .SYNOPSIS
     Create a new ClickUp time entry.
 .DESCRIPTION
-    Create a new ClickUp time entry.
+    Create a new ClickUp time entry. Can accept TeamID and TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> New-ClickUpTimeEntry -TeamID 1111111 -Description 'this is a test time entry' -StartDate '12/31/2021 08:25' -Duration '600'
     Create a new ClickUp time entry starting December 31, 2021 8:25 AM with a duration of 10 minutes.
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID '9hz' | New-ClickUpTimeEntry -TeamID 1111111 -StartDate '12/31/2021 08:25' -Duration 600
+    Create time entry by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID and TaskID via pipeline by property name.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -278,8 +307,9 @@ function New-ClickUpTimeEntry {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param(
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id')]
+        [uint64]$TeamID,
         [Parameter()]
         [bool]$CustomTaskIDs = $false,
         [Parameter()]
@@ -291,10 +321,11 @@ function New-ClickUpTimeEntry {
         [Parameter()]
         [bool]$Billable,
         [Parameter(Mandatory = $true)]
-        [ulong]$Duration,
+        [uint64]$Duration,
         [Parameter()]
-        [ulong]$Assignee,
-        [Parameter()]
+        [uint64]$Assignee,
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID
     )
 
@@ -347,15 +378,19 @@ function New-ClickUpTimeEntry {
 .SYNOPSIS
     Add tags to a ClickUp time entry.
 .DESCRIPTION
-    Add tags to a ClickUp time entry.
+    Add tags to a ClickUp time entry. Can accept TeamID and TimeEntryIDs via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222 -Tags "name of tag"
     Add the tag with name "name of tag" to ClickUp time entry with ID "2222222222222222222".
 .EXAMPLE
     PS C:\> Add-ClickUpTimeEntryTags -TeamID 1111111 -TimeEntryIDs 2222222222222222222,3333333333333333333 -Tags "name of tag","second tag name"
     Add the tag with name "name of tag" and "second tag name" to ClickUp time entries with IDs "2222222222222222222" and "3333333333333333333".
+.EXAMPLE
+    PS C:\> Get-ClickUpTimeEntries -TeamID 1111111 | Add-ClickUpTimeEntryTags -TeamID 1111111 -Tags "new tag"
+    Add tags by piping time entry IDs from Get-ClickUpTimeEntries.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TeamID via pipeline by property name.
+    System.UInt64[]. TimeEntryIDs via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -366,10 +401,12 @@ function New-ClickUpTimeEntry {
 function Add-ClickUpTimeEntryTags {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id')]
         [string]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong[]]$TimeEntryIDs,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('time_entry_ids', 'id')]
+        [uint64[]]$TimeEntryIDs,
         [Parameter(Mandatory = $true)]
         [string[]]$Tags
     )
@@ -394,15 +431,18 @@ function Add-ClickUpTimeEntryTags {
 .SYNOPSIS
     Update tag names from ClickUp time entries.
 .DESCRIPTION
-    Update tag names from ClickUp time entries.
+    Update tag names from ClickUp time entries. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag" -NewTagName "new tag"
     Rename the tag "old tag" to "new tag" for team with ID "1111111".
 .EXAMPLE
     PS C:\> Set-ClickUpTimeEntryTags -TeamID 1111111 -OldTagName "old tag" -NewTagName "new tag" -TagBackgroundColor "#FF0000" -TagForegroundColor "#FFFFFF"
     Rename the tag "old tag" to "new tag" with custom colors for team with ID "1111111".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Set-ClickUpTimeEntryTags -OldTagName "old" -NewTagName "new"
+    Update tag names by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. TeamID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -413,7 +453,8 @@ function Add-ClickUpTimeEntryTags {
 function Set-ClickUpTimeEntryTags {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
         [string]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$OldTagName,
@@ -447,15 +488,19 @@ function Set-ClickUpTimeEntryTags {
 .SYNOPSIS
     Start a ClickUp time entry.
 .DESCRIPTION
-    Start a ClickUp time entry.
+    Start a ClickUp time entry. Can accept TeamID, TimerID, and TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Start-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description'
     Start time entry with ID "2004673344540003570" and set description to "Time entry description" for team with ID "512".
 .EXAMPLE
     PS C:\> Start-ClickUpTimeEntry -TeamID 512 -TaskID 9hx -Description 'Time entry description' -Billable $true
     Start time entry for task with ID "9hx" and set description to "Time entry description" and billable set to true for team with ID "512".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID '9hx' | Start-ClickUpTimeEntry -TeamID 512 -Description 'Started from pipeline'
+    Start time entry by piping task ID from Get-ClickUpTask.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID and TimerID via pipeline by property name.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -467,12 +512,15 @@ function Start-ClickUpTimeEntry() {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID')]
-        [ulong]$TimerID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id')]
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('timer_id', 'id')]
+        [uint64]$TimerID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'TimerID')]
@@ -523,12 +571,15 @@ function Start-ClickUpTimeEntry() {
 .SYNOPSIS
     Stop ClickUp time entries.
 .DESCRIPTION
-    Stop ClickUp time entries.
+    Stop ClickUp time entries. Can accept TeamID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Stop-ClickUpTimeEntry -TeamID 512
     Stop ClickUp time entries for Team with ID "512".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam | Stop-ClickUpTimeEntry
+    Stop time entries by piping team ID from Get-ClickUpTeam.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID via pipeline by property name.
 .OUTPUTS
     System.Object
 .NOTES
@@ -540,8 +591,9 @@ function Stop-ClickUpTimeEntry() {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id', 'id')]
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Stop-ClickUpTimeEntry'
@@ -560,15 +612,19 @@ function Stop-ClickUpTimeEntry() {
 .SYNOPSIS
     Update a ClickUp time entry.
 .DESCRIPTION
-    Update a ClickUp time entry.
+    Update a ClickUp time entry. Can accept TeamID, TimerID, and TaskID via pipeline input for integration with other cmdlets.
 .EXAMPLE
     PS C:\> Set-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description.' -Tags 'Time Entry Tag' -TagAction 'replace'
     Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time entry description." and removes the tag "Time Entry Tag".
 .EXAMPLE
     PS C:\> Set-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 -Description 'Time entry description.' -Tags 'Time Entry Tag' -TagAction 'add'
     Sets ClickUp Time Entry with timer ID "2004673344540003570" description to "Time entry description." and adds the tag "Time Entry Tag".
+.EXAMPLE
+    PS C:\> Get-ClickUpTimeEntry -TeamID 512 -TimerID 2004673344540003570 | Set-ClickUpTimeEntry -TeamID 512 -Description 'Updated description'
+    Update time entry by piping timer ID from Get-ClickUpTimeEntry.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. TeamID and TimerID via pipeline by property name.
+    System.String. TaskID via pipeline by property name.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -579,10 +635,12 @@ function Stop-ClickUpTimeEntry() {
 function Set-ClickUpTimeEntry() {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$TimerID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id')]
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('timer_id', 'id')]
+        [uint64]$TimerID,
         [Parameter()]
         [string]$Description = '',
         [Parameter()]
@@ -594,12 +652,13 @@ function Set-ClickUpTimeEntry() {
         [string]$StartDate,
         [Parameter()]
         [string]$EndDate,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id')]
         [string]$TaskID,
         [Parameter()]
         [bool]$Billable,
         [Parameter()]
-        [ulong]$Duration,
+        [uint64]$Duration,
         [Parameter()]
         [bool]$CustomTaskIDs
     )
@@ -656,12 +715,15 @@ function Set-ClickUpTimeEntry() {
 .SYNOPSIS
     Remove a ClickUp time entry.
 .DESCRIPTION
-    Remove a ClickUp time entry.
+    Remove a ClickUp time entry. The TimerID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Remove-ClickUpTimeEntry -TeamID 1111111 -TimerID 2222222222222222222
     Remove a ClickUp time entry with ID "2222222222222222222".
+.EXAMPLE
+    PS C:\> 2222222222222222222 | Remove-ClickUpTimeEntry -TeamID 1111111
+    Pipe time entry ID and remove it.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a timer ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -673,9 +735,10 @@ function Remove-ClickUpTimeEntry {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param(
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$TimerID
+        [uint64]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('timer_id','id')]
+        [uint64]$TimerID
     )
 
     Write-Verbose 'Entering Remove-ClickUpTimeEntry'
