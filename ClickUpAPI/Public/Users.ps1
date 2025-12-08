@@ -76,8 +76,11 @@ function New-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [ValidatePattern('^[^@]+@[^@]+\\.[^@]+$')]
         [string]$Email,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
@@ -134,11 +137,14 @@ function Set-ClickUpUser {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('user_id','id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$UserID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Username,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
