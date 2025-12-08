@@ -41,7 +41,6 @@ function Get-ClickUpAuthorizedUser {
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -68,12 +67,16 @@ function Get-ClickUpAuthorizedWorkspaces {
 .SYNOPSIS
     Get a new ClickUp access token.
 .DESCRIPTION
-    Get a new ClickUp access token.
+    Get a new ClickUp access token. Supports pipeline input from configuration objects containing ClientID, ClientSecret, and Code properties.
 .EXAMPLE
     PS C:\> New-ClickUpAccessToken -ClientID "ClientID" -ClientSecret "ClientSecret" -Code "Code"
     Get a new ClickUp access token.
+.EXAMPLE
+    PS C:\> $config = [PSCustomObject]@{ClientID = "id"; ClientSecret = "secret"; Code = "code"}
+    PS C:\> $config | New-ClickUpAccessToken
+    Get a new ClickUp access token by piping a configuration object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.Management.Automation.PSCustomObject. You can pipe a configuration object with ClientID, ClientSecret, and Code properties to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -85,11 +88,11 @@ function New-ClickUpAccessToken {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
         [string]$ClientID,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
         [string]$ClientSecret,
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
         [string]$Code
     )
 
