@@ -10,7 +10,6 @@
     None. This cmdlet does not accept any input.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -24,7 +23,7 @@ function Get-ClickUpWebhooks {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose 'Entering Get-ClickUpWebhooks'
@@ -70,15 +69,15 @@ function New-ClickUpWebhook {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [uint64]$TeamID,
         [Parameter(Mandatory = $True)]
         [string]$Endpoint,
         [Parameter()]
         [string[]]$Events = '*',
         [Parameter()]
-        [ulong]$FilterToSpaceID,
+        [uint64]$FilterToSpaceID,
         [Parameter()]
-        [ulong]$FilterToFolderID,
+        [uint64]$FilterToFolderID,
         [Parameter()]
         [string]$FilterToListID,
         [Parameter()]
@@ -119,15 +118,18 @@ function New-ClickUpWebhook {
 .SYNOPSIS
     Update a ClickUp webhook.
 .DESCRIPTION
-    Update a webhook to change the events to be monitored.
+    Update a webhook to change the events to be monitored. The WebhookID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Set-ClickUpWebhook -WebhookID 4b67ac88 -Endpoint 'https://www.example.com/webhook'
     Updates a ClickUp webhook with ID "4b67ac88" that subscribes to all resources and events. Posts information to the URL "https://www.example.com/webhook".
 .EXAMPLE
     PS C:\> Set-ClickUpWebhook -WebhookID 4b67ac88 -Endpoint 'https://www.example.com/webhook' -Events 'taskCreated','taskUpdated','taskDeleted' -FilterToTaskID 9hx
     Updates a ClickUp webhook with ID "4b67ac88" that subscribes to task with ID "9hx" task creation, update, and deletion events. Posts information to the URL "https://www.example.com/webhook".
+.EXAMPLE
+    PS C:\> Get-ClickUpWebhooks -TeamID 123 | Set-ClickUpWebhook -Endpoint 'https://www.example.com/webhook'
+    Pipe webhook IDs and update them.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a webhook ID to this cmdlet.
 .OUTPUTS
     System.Object Hashtable.
 .NOTES
@@ -143,7 +145,8 @@ function Set-ClickUpWebhook {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('webhook_id','id')]
         [string]$WebhookID,
         [Parameter()]
         [string]$Endpoint,
@@ -153,9 +156,9 @@ function Set-ClickUpWebhook {
         [ValidateSet('active')]
         [string]$Status,
         [Parameter()]
-        [ulong]$FilterToSpaceID,
+        [uint64]$FilterToSpaceID,
         [Parameter()]
-        [ulong]$FilterToFolderID,
+        [uint64]$FilterToFolderID,
         [Parameter()]
         [string]$FilterToListID,
         [Parameter()]
@@ -202,12 +205,15 @@ function Set-ClickUpWebhook {
 .SYNOPSIS
     Remove a ClickUp webhook.
 .DESCRIPTION
-    Remove a ClickUp webhook.
+    Remove a ClickUp webhook. The WebhookID can be provided via pipeline.
 .EXAMPLE
     PS C:\> Remove-ClickUpWebhook -WebhookID 4b67ac88
     Remove a ClickUp webhook with ID "4b67ac88".
+.EXAMPLE
+    PS C:\> Get-ClickUpWebhooks -TeamID 123 | Remove-ClickUpWebhook
+    Pipe webhook IDs and remove multiple webhooks.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a webhook ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -220,7 +226,8 @@ function Set-ClickUpWebhook {
 function Remove-ClickUpWebhook {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('webhook_id','id')]
         [string]$WebhookID
     )
 
