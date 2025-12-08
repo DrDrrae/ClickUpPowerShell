@@ -24,13 +24,16 @@ function New-ClickUpChecklist {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -87,11 +90,14 @@ function Set-ClickUpChecklist {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('checklist_id','id')]
         [string]$ChecklistID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$Position
     )
 
@@ -141,6 +147,7 @@ function Remove-ClickUpChecklist {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('checklist_id','id')]
         [string]$ChecklistID
     )
@@ -182,10 +189,13 @@ function New-ClickUpChecklistItem {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True)]
+        [ValidateNotNullOrEmpty()]
         [string]$CheckListID,
         [Parameter(Mandatory = $True)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$Assignee
     )
 
@@ -237,17 +247,22 @@ function Set-ClickUpChecklistItem {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistID,
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('checklist_id','id')]
         [string]$ChecklistItemId,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$Assignee,
         [Parameter()]
         [bool]$Resolved,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Parent
     )
 
@@ -303,8 +318,10 @@ function Remove-ClickUpCheckListItem {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$ChecklistID,
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('checklist_id','id')]
         [string]$ChecklistItemId
     )
