@@ -217,8 +217,10 @@ function Get-ClickUpViewTasks {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$Page = 0
     )
 
@@ -268,8 +270,10 @@ function New-ClickUpTeamView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -315,8 +319,10 @@ function New-ClickUpSpaceView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -362,8 +368,10 @@ function New-ClickUpFolderView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$FolderID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -409,8 +417,10 @@ function New-ClickUpListView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$ListID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
@@ -456,8 +466,10 @@ function Set-ClickUpView {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$ViewID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 
