@@ -24,6 +24,7 @@ function Get-ClickUpTaskMembers {
     [OutputType([System.Object], [System.Array])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id','id')]
         [string]$TaskID
     )
@@ -66,6 +67,7 @@ function Get-ClickUpListMembers {
     [OutputType([System.Object], [System.Array])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('list_id','id')]
         [uint64]$ListID
     )
