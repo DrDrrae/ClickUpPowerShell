@@ -2,7 +2,7 @@
 .SYNOPSIS
     Add ClickUp dependency.
 .DESCRIPTION
-    Add ClickUp dependency.
+    Add ClickUp dependency. Supports pipeline input from task objects for TaskID parameter.
 .EXAMPLE
     PS C:\> Add-ClickUpDependency -TaskID 9hv -DependsOn 9hz
     Add ClickUp task with ID "9hz" as a dependency of ClickUp task with ID "9hv".
@@ -15,8 +15,11 @@
 .EXAMPLE
     PS C:\> Add-ClickUpDependency -TaskID "CustomTaskID 1" -DependencyOf "CustomTaskID 2" -CustomTaskID $true -TeamID 123
     Add ClickUp task with ID "CustomTaskID 1" as a dependency of ClickUp task with ID "CustomTaskID 2".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hv | Add-ClickUpDependency -DependsOn 9hz
+    Add a dependency by piping a task object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -29,10 +32,11 @@
 function Add-ClickUpDependency {
     [CmdletBinding(DefaultParameterSetName = 'DependsOnTaskID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
@@ -45,7 +49,7 @@ function Add-ClickUpDependency {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose "Entering Add-ClickUpDependency with TaskID: $TaskID"
@@ -81,15 +85,18 @@ function Add-ClickUpDependency {
 .SYNOPSIS
     Remove ClickUp dependency.
 .DESCRIPTION
-    Remove ClickUp dependency.
+    Remove ClickUp dependency. Supports pipeline input from task objects for TaskID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpDependency -TaskID 9hv -DependsOn 9hz
     Remove ClickUp task with ID "9hz" as a dependency of ClickUp task with ID "9hv".
 .EXAMPLE
     PS C:\> Remove-ClickUpDependency -TaskID 9hv -DependencyOf 9hz
     Remove ClickUp task with ID "9hv" as a dependency of ClickUp task with ID "9hz".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hv | Remove-ClickUpDependency -DependsOn 9hz
+    Remove a dependency by piping a task object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -102,10 +109,11 @@ function Add-ClickUpDependency {
 function Remove-ClickUpDependency {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'DependsOnTaskID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
@@ -118,7 +126,7 @@ function Remove-ClickUpDependency {
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose "Entering Remove-ClickUpDependency with TaskID: $TaskID"
@@ -152,15 +160,18 @@ function Remove-ClickUpDependency {
 .SYNOPSIS
     Add ClickUp task link.
 .DESCRIPTION
-    Add ClickUp task link.
+    Add ClickUp task link. Supports pipeline input from task objects for TaskID parameter.
 .EXAMPLE
     PS C:\> Add-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Add ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
 .EXAMPLE
     PS C:\> Add-ClickUpTaskLink -TaskID "CustomTaskID 1" -LinksTo "CustomTaskID 2" -CustomTaskID $true -TeamID 123
     Add ClickUp task with ID "CustomTaskID 2" as a link to ClickUp task with ID "CustomTaskID 1".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hv | Add-ClickUpTaskLink -LinksTo 9hz
+    Add a task link by piping a task object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -172,8 +183,9 @@ function Add-ClickUpTaskLink {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Management.Automation.PSCustomObject])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
@@ -181,7 +193,7 @@ function Add-ClickUpTaskLink {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose "Entering Add-ClickUpTaskLink with TaskID: $TaskID, LinksTo: $LinksTo"
@@ -207,15 +219,18 @@ function Add-ClickUpTaskLink {
 .SYNOPSIS
     Remove ClickUp task link.
 .DESCRIPTION
-    Remove ClickUp task link.
+    Remove ClickUp task link. Supports pipeline input from task objects for TaskID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpTaskLink -TaskID 9hv -LinksTo 9hz
     Remove ClickUp task with ID "9hz" as a link to ClickUp task with ID "9hv".
 .EXAMPLE
     PS C:\> Remove-ClickUpTaskLink -TaskID "CustomTaskID1" -LinksTo "CustomTaskID2" -CustomTaskID $true -TeamID 123456
     Remove ClickUp task with ID "CustomTaskID2" as a link to ClickUp task with ID "CustomTaskID1" using custom task IDs.
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hv | Remove-ClickUpTaskLink -LinksTo 9hz
+    Remove a task link by piping a task object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -226,8 +241,9 @@ function Add-ClickUpTaskLink {
 function Remove-ClickUpTaskLink {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'TaskID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
@@ -235,7 +251,7 @@ function Remove-ClickUpTaskLink {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose "Entering Remove-ClickUpTaskLink with TaskID: $TaskID, LinksTo: $LinksTo"
