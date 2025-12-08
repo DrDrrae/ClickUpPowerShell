@@ -2,14 +2,17 @@
 .SYNOPSIS
     Get all ClickUp team goals.
 .DESCRIPTION
-    Get all ClickUp team goals.
+    Get all ClickUp team goals. Supports pipeline input from team/workspace objects for TeamID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpGoals -TeamID 123
     Get all ClickUp team goals for team with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam -TeamID 123 | Get-ClickUpGoals
+    Get all goals by piping a team/workspace object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a team ID to this cmdlet.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -19,8 +22,9 @@ function Get-ClickUpGoals {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id','id')]
+        [uint64]$TeamID
     )
 
     Write-Verbose "Getting all goals for team ID: $TeamID"
@@ -38,14 +42,17 @@ function Get-ClickUpGoals {
 .SYNOPSIS
     Get a single ClickUp team goal.
 .DESCRIPTION
-    Get a single ClickUp team goal.
+    Get a single ClickUp team goal. Supports pipeline input from goal objects for GoalID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpGoal -GoalID e53a033c
     Get a ClickUp team goal with ID "e53a033c".
+.EXAMPLE
+    PS C:\> Get-ClickUpGoals -TeamID 123 | Get-ClickUpGoal
+    Get detailed goal properties by piping a goal object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a goal ID to this cmdlet.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -55,8 +62,9 @@ function Get-ClickUpGoal {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$GoalID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('goal_id','id')]
+        [uint64]$GoalID
     )
 
     Write-Verbose "Getting goal with ID: $GoalID"
@@ -74,14 +82,17 @@ function Get-ClickUpGoal {
 .SYNOPSIS
     Create a ClickUp team goal.
 .DESCRIPTION
-    Create a ClickUp team goal.
+    Create a ClickUp team goal. Supports pipeline input from team/workspace objects for TeamID parameter.
 .EXAMPLE
     PS C:\> New-ClickUpGoal -TeamID 123 -Name 'Goal Name' -DueDate "12/31/2021 17:00"
     Create a new ClickUp goal for team with ID "123" with the name of "Goal Name" and the due date of "December 31st, 2021 at 5:00 PM."
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam -TeamID 123 | New-ClickUpGoal -Name 'Goal Name' -DueDate "12/31/2021 17:00"
+    Create a new goal by piping a team/workspace object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a team ID to this cmdlet.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -91,8 +102,9 @@ function New-ClickUpGoal {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id','id')]
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
@@ -102,7 +114,7 @@ function New-ClickUpGoal {
         [Parameter()]
         [bool]$MultipleOwners,
         [Parameter()]
-        [ulong[]]$Owners,
+        [uint64[]]$Owners,
         [Parameter()]
         [string]$Color
     )
@@ -142,14 +154,17 @@ function New-ClickUpGoal {
 .SYNOPSIS
     Update a ClickUp team goal.
 .DESCRIPTION
-    Update a ClickUp team goal.
+    Update a ClickUp team goal. Supports pipeline input from goal objects for GoalID parameter.
 .EXAMPLE
     PS C:\> Set-ClickUpGoal -GoalID e53a033c -Name "Updated Goal Name"
     Update ClickUp goal with ID "e53a033c" name to "Updated Goal Name".
+.EXAMPLE
+    PS C:\> Get-ClickUpGoal -GoalID e53a033c | Set-ClickUpGoal -Name "Updated Goal Name"
+    Update a goal by piping a goal object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a goal ID to this cmdlet.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -159,8 +174,9 @@ function Set-ClickUpGoal {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$GoalID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('goal_id','id')]
+        [uint64]$GoalID,
         [Parameter()]
         [string]$Name,
         [Parameter()]
@@ -170,7 +186,7 @@ function Set-ClickUpGoal {
         [Parameter()]
         [bool]$MultipleOwners,
         [Parameter()]
-        [ulong[]]$Owners,
+        [uint64[]]$Owners,
         [Parameter()]
         [string]$Color
     )
@@ -211,12 +227,15 @@ function Set-ClickUpGoal {
 .SYNOPSIS
     Remove a ClickUp team goal.
 .DESCRIPTION
-    Remove a ClickUp team goal.
+    Remove a ClickUp team goal. Supports pipeline input from goal objects for GoalID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpGoal -GoalID e53a033c
     Remove ClickUp goal with ID "e53a033c".
+.EXAMPLE
+    PS C:\> Get-ClickUpGoal -GoalID e53a033c | Remove-ClickUpGoal
+    Remove a goal by piping a goal object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a goal ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -227,7 +246,8 @@ function Set-ClickUpGoal {
 function Remove-ClickUpGoal {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('goal_id','id')]
         [string]$GoalID
     )
 
@@ -247,14 +267,17 @@ function Remove-ClickUpGoal {
 .SYNOPSIS
     Create a ClickUp key result.
 .DESCRIPTION
-    Create a ClickUp key result.
+    Create a ClickUp key result. Supports pipeline input from goal objects for GoalID parameter.
 .EXAMPLE
     PS C:\> New-ClickUpKeyResult -GoalID e53a033c -Name 'New Key Result Name' -Owners 183 -Type number -StepsStart 0 -StepsEnd 10 -Unit km
     Create a new ClickUp key result for goal with ID "e53a033c".
+.EXAMPLE
+    PS C:\> Get-ClickUpGoal -GoalID e53a033c | New-ClickUpKeyResult -Name 'New Key Result Name' -Owners 183
+    Create a key result by piping a goal object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a goal ID to this cmdlet.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -264,25 +287,26 @@ function New-ClickUpKeyResult {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('goal_id','id')]
         [string]$GoalID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
-        [ulong[]]$Owners,
+        [uint64[]]$Owners,
         [Parameter()]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
-        [ulong]$StepsStart,
+        [uint64]$StepsStart,
         [Parameter()]
-        [ulong]$StepsEnd,
+        [uint64]$StepsEnd,
         [Parameter()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
         [Parameter()]
-        [ulong[]]$ListIDs
+        [uint64[]]$ListIDs
     )
 
     $Body = @{
@@ -326,14 +350,17 @@ function New-ClickUpKeyResult {
 .SYNOPSIS
     Update a ClickUp key result.
 .DESCRIPTION
-    Update a ClickUp key result.
+    Update a ClickUp key result. Supports pipeline input from key result objects for KeyResultID parameter.
 .EXAMPLE
     PS C:\> Set-ClickUpKeyResult -KeyResultID 947d46ed -StepsCurrent 5 -Note 'Target achieved'
     Update a ClickUp key result with ID "947d46ed".
+.EXAMPLE
+    PS C:\> New-ClickUpKeyResult -GoalID e53a033c -Name 'New Key Result' | Set-ClickUpKeyResult -StepsCurrent 5
+    Update a key result by piping a key result object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a key result ID to this cmdlet.
 .OUTPUTS
-    System.Object.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -343,29 +370,30 @@ function Set-ClickUpKeyResult {
     [CmdletBinding()]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('key_result_id','id')]
         [string]$KeyResultID,
         [Parameter()]
         [string]$Name,
         [Parameter()]
         [string]$Note,
         [Parameter()]
-        [ulong[]]$Owners,
+        [uint64[]]$Owners,
         [Parameter()]
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
-        [ulong]$StepsStart,
+        [uint64]$StepsStart,
         [Parameter()]
-        [ulong]$StepsEnd,
+        [uint64]$StepsEnd,
         [Parameter()]
-        [ulong]$StepsCurrent,
+        [uint64]$StepsCurrent,
         [Parameter()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
         [Parameter()]
-        [ulong[]]$ListIDs
+        [uint64[]]$ListIDs
     )
 
     $Body = @{}
@@ -416,12 +444,15 @@ function Set-ClickUpKeyResult {
 .SYNOPSIS
     Remove a ClickUp key result.
 .DESCRIPTION
-    Remove a ClickUp key result.
+    Remove a ClickUp key result. Supports pipeline input from key result objects for KeyResultID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpKeyResult -KeyResultID 947d46ed
     Remove ClickUp key result with ID "947d46ed".
+.EXAMPLE
+    PS C:\> New-ClickUpKeyResult -GoalID e53a033c -Name 'New Key Result' | Remove-ClickUpKeyResult
+    Remove a key result by piping a key result object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a key result ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -432,7 +463,8 @@ function Set-ClickUpKeyResult {
 function Remove-ClickUpKeyResult {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('key_result_id','id')]
         [string]$KeyResultID
     )
 
