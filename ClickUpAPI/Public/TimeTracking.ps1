@@ -530,12 +530,15 @@ function Start-ClickUpTimeEntry() {
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TimerID', ValueFromPipelineByPropertyName = $true)]
         [Alias('timer_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TimerID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
         [Alias('task_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'TimerID')]
@@ -608,6 +611,7 @@ function Stop-ClickUpTimeEntry() {
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -652,9 +656,11 @@ function Set-ClickUpTimeEntry() {
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('timer_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TimerID,
         [Parameter()]
         [string]$Description = '',
@@ -750,9 +756,11 @@ function Remove-ClickUpTimeEntry {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param(
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('timer_id','id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TimerID
     )
 
