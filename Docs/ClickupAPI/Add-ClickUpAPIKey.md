@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Add-ClickUpAPIKey
 ---
@@ -25,9 +25,6 @@ Add-ClickUpAPIKey [-APIKey] <string> [<CommonParameters>]
 
 ## ALIASES
 
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
-
 ## DESCRIPTION
 
 The Add-ClickUpAPIKey cmdlet securely stores the provided ClickUp API key in a global variable for use by other cmdlets in this module.
@@ -47,13 +44,14 @@ Stores the provided API key in the session.
 
 The ClickUp API key to be stored.
 This parameter is mandatory and can be piped.
+The ClickUp API key to be stored.
+This parameter is mandatory and can be piped.
 
 ```yaml
 Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
-Aliases:
-- Api_Key
+Aliases: []
 ParameterSets:
 - Name: (All)
   Position: 0

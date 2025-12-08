@@ -20,7 +20,7 @@ Get all ClickUp tasks under a particular list.
 ### ListID (Default)
 
 ```
-Get-ClickUpTasks -ListID <string> [-Archived <bool>] [-Page <ulong>] [-OrderBy <string>]
+Get-ClickUpTasks -ListID <string> [-Archived <bool>] [-Page <uint64>] [-OrderBy <string>]
  [-Reverse <bool>] [-Subtasks <bool>] [-Statuses <string[]>] [-IncludeClosed <bool>]
  [-Assignees <string[]>] [-DueDateGreaterThan <datetime>] [-DueDateLessThan <datetime>]
  [-DateCreatedGreaterThan <datetime>] [-DateCreatedLessThan <datetime>]
@@ -31,8 +31,8 @@ Get-ClickUpTasks -ListID <string> [-Archived <bool>] [-Page <ulong>] [-OrderBy <
 ### TeamID
 
 ```
-Get-ClickUpTasks -TeamID <string> [-Page <ulong>] [-OrderBy <string>] [-Reverse <bool>]
- [-Subtasks <bool>] [-SpaceIDs <ulong[]>] [-ProjectIDs <ulong[]>] [-ListIDs <ulong[]>]
+Get-ClickUpTasks -TeamID <string> [-Page <uint64>] [-OrderBy <string>] [-Reverse <bool>]
+ [-Subtasks <bool>] [-SpaceIDs <uint64[]>] [-ProjectIDs <uint64[]>] [-ListIDs <uint64[]>]
  [-Statuses <string[]>] [-IncludeClosed <bool>] [-Assignees <string[]>]
  [-DueDateGreaterThan <datetime>] [-DueDateLessThan <datetime>] [-DateCreatedGreaterThan <datetime>]
  [-DateCreatedLessThan <datetime>] [-DateUpdatedGreaterThan <datetime>]

@@ -20,14 +20,14 @@ Start a ClickUp time entry.
 ### TaskID (Default)
 
 ```
-Start-ClickUpTimeEntry -TeamID <ulong> -TaskID <string> [-Description <string>]
+Start-ClickUpTimeEntry -TeamID <uint64> -TaskID <string> [-Description <string>]
  [-Tags <hashtable[]>] [-Billable <bool>] [-CustomTaskIDs <bool>] [<CommonParameters>]
 ```
 
 ### TimerID
 
 ```
-Start-ClickUpTimeEntry -TeamID <ulong> -TimerID <ulong> [-Description <string>]
+Start-ClickUpTimeEntry -TeamID <uint64> -TimerID <uint64> [-Description <string>]
  [-Tags <hashtable[]>] [-Billable <bool>] [-CustomTaskIDs <bool>] [<CommonParameters>]
 ```
 

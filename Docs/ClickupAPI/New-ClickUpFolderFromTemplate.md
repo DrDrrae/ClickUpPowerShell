@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/createfolder
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: New-ClickUpFolderFromTemplate
 ---
@@ -20,7 +20,7 @@ Create a new Folder using a Folder template within a Space.
 ### __AllParameterSets
 
 ```
-New-ClickUpFolderFromTemplate [-SpaceID] <ulong> [-TemplateID] <ulong> [-Name] <ulong>
+New-ClickUpFolderFromTemplate [-SpaceID] <ulong> [-TemplateID] <ulong> [-Name] <string>
  [[-ReturnImmediately] <bool>] [[-Content] <string>] [[-TimeEstimate] <bool>] [[-Automation] <bool>]
  [[-IncludeViews] <bool>] [[-OldDueDate] <bool>] [[-OldStartDate] <bool>] [[-OldFollowers] <bool>]
  [[-CommentAttachments] <bool>] [[-RecurSettings] <bool>] [[-OldTags] <bool>]
@@ -33,9 +33,6 @@ New-ClickUpFolderFromTemplate [-SpaceID] <ulong> [-TemplateID] <ulong> [-Name] <
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -307,7 +304,7 @@ HelpMessage: ''
 {{ Fill Name Description }}
 
 ```yaml
-Type: System.UInt64
+Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
@@ -646,13 +643,15 @@ HelpMessage: ''
 Type: System.UInt64
 DefaultValue: 0
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- space_id
+- id
 ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -756,9 +755,21 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 {{ Fill in the Description }}
 
+### System.UInt64. You can pipe a space ID to this cmdlet.
+
+{{ Fill in the Description }}
+
+### System.UInt64
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
 ### System.Object Hashtable.
+
+{{ Fill in the Description }}
+
+### System.Object
 
 {{ Fill in the Description }}
 
@@ -768,7 +779,6 @@ Create a new Folder using a Folder template within a Space.
 This endpoint allows you to create a folder with all its nested assets (lists, tasks, etc.) from a predefined template available in your Workspace.
 Publicly shared templates must be added to your Workspace before you can use them with the public API.
 This request can be run asynchronously or synchronously via the return_immediately parameter.
-
 
 ## RELATED LINKS
 

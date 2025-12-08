@@ -20,16 +20,16 @@ Create a ClickUp list.
 ### FolderID (Default)
 
 ```
-New-ClickUpList -FolderID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
+New-ClickUpList -FolderID <uint64> -Name <string> [-Content <string>] [-DueDate <datetime>]
+ [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <uint64>] [-Status <string>]
  [<CommonParameters>]
 ```
 
 ### SpaceID
 
 ```
-New-ClickUpList -SpaceID <ulong> -Name <string> [-Content <string>] [-DueDate <datetime>]
- [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <ulong>] [-Status <string>]
+New-ClickUpList -SpaceID <uint64> -Name <string> [-Content <string>] [-DueDate <datetime>]
+ [-DueDateTime <bool>] [-Priority <ushort>] [-Assignee <uint64>] [-Status <string>]
  [<CommonParameters>]
 ```
 

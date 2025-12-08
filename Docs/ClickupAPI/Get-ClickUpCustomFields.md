@@ -20,25 +20,25 @@ Get ClickUp custom fields.
 ### ListID
 
 ```
-Get-ClickUpCustomFields -ListID <ulong> [<CommonParameters>]
+Get-ClickUpCustomFields -ListID <uint64> [<CommonParameters>]
 ```
 
 ### FolderID
 
 ```
-Get-ClickUpCustomFields -FolderID <ulong> [<CommonParameters>]
+Get-ClickUpCustomFields -FolderID <uint64> [<CommonParameters>]
 ```
 
 ### SpaceID
 
 ```
-Get-ClickUpCustomFields -SpaceID <ulong> [<CommonParameters>]
+Get-ClickUpCustomFields -SpaceID <uint64> [<CommonParameters>]
 ```
 
 ### WorkspaceID
 
 ```
-Get-ClickUpCustomFields -WorkspaceID <ulong> [<CommonParameters>]
+Get-ClickUpCustomFields -WorkspaceID <uint64> [<CommonParameters>]
 ```
 
 ## ALIASES

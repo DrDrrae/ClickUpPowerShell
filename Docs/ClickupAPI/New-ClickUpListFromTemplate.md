@@ -20,7 +20,7 @@ Create a new list using a list template in a Folder.
 ### FolderID
 
 ```
-New-ClickUpListFromTemplate -FolderID <ulong> -TemplateID <ulong> -Name <string>
+New-ClickUpListFromTemplate -FolderID <uint64> -TemplateID <uint64> -Name <string>
  [-ReturnImmediately <bool>] [-Content <string>] [-TimeEstimate <bool>] [-Automation <bool>]
  [-IncludeViews <bool>] [-OldDueDate <bool>] [-OldStartDate <bool>] [-OldFollowers <bool>]
  [-CommentAttachments <bool>] [-RecurSettings <bool>] [-OldTags <bool>] [-OldStatuses <bool>]
@@ -34,7 +34,7 @@ New-ClickUpListFromTemplate -FolderID <ulong> -TemplateID <ulong> -Name <string>
 ### SpaceID
 
 ```
-New-ClickUpListFromTemplate -SpaceID <ulong> -TemplateID <ulong> -Name <string>
+New-ClickUpListFromTemplate -SpaceID <uint64> -TemplateID <uint64> -Name <string>
  [-ReturnImmediately <bool>] [-Content <string>] [-TimeEstimate <bool>] [-Automation <bool>]
  [-IncludeViews <bool>] [-OldDueDate <bool>] [-OldStartDate <bool>] [-OldFollowers <bool>]
  [-CommentAttachments <bool>] [-RecurSettings <bool>] [-OldTags <bool>] [-OldStatuses <bool>]

@@ -20,13 +20,13 @@ Get all ClickUp lists.
 ### FolderID (Default)
 
 ```
-Get-ClickUpLists -FolderID <ulong> [-Archived <bool>] [<CommonParameters>]
+Get-ClickUpLists -FolderID <uint64> [-Archived <bool>] [<CommonParameters>]
 ```
 
 ### SpaceID
 
 ```
-Get-ClickUpLists -SpaceID <ulong> [-Archived <bool>] [<CommonParameters>]
+Get-ClickUpLists -SpaceID <uint64> [-Archived <bool>] [<CommonParameters>]
 ```
 
 ## ALIASES

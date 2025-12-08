@@ -1,10 +1,10 @@
----
+﻿---
 document type: cmdlet
 external help file: ClickupAPI-Help.xml
 HelpUri: https://developer.clickup.com/reference/updatewebhook
 Locale: en-US
 Module Name: ClickupAPI
-ms.date: 11-24-2025
+ms.date: 12-08-2025
 PlatyPS schema version: 2024-05-01
 title: Set-ClickUpWebhook
 ---
@@ -26,9 +26,6 @@ Set-ClickUpWebhook [-WebhookID] <string> [[-Endpoint] <string>] [[-Events] <stri
 ```
 
 ## ALIASES
-
-This cmdlet has the following aliases,
-  {{Insert list of aliases}}
 
 ## DESCRIPTION
 
@@ -203,13 +200,15 @@ HelpMessage: ''
 Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- webhook_id
+- id
 ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -226,6 +225,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None. This cmdlet does not accept any input.
+
+{{ Fill in the Description }}
+
+### System.String. You can pipe a webhook ID to this cmdlet.
+
+{{ Fill in the Description }}
+
+### System.String
 
 {{ Fill in the Description }}
 
@@ -249,7 +256,6 @@ You may filter the location of resources that get sent to a webhook by passing a
 Without specifying any events, all event types will be sent to the webhook.
 However, you can filter for specific actions by sending an events array.
 To subscribe to specific events, pass an array of events that you want to subscribe to, otherwise pass "*" to subscribe to everything.
-
 
 ## RELATED LINKS
 
