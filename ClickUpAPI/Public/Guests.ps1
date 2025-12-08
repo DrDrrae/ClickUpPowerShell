@@ -23,9 +23,11 @@ function Get-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id', 'id')]
         [uint64]$TeamID,
         [Parameter(Mandatory = $True)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$GuestID
     )
 
@@ -68,10 +70,15 @@ function Add-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id', 'id')]
         [uint64]$TeamID,
         [Parameter(Mandatory = $True)]
-        [string]$GuestEmail,
+        [ValidateNotNullOrEmpty()]
+        [ValidatePattern(@'
+^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_'+\-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$
+'@)]
+        [System.Net.Mail.MailAddress]$GuestEmail,
         [Parameter()]
         [bool]$CanEditTags = $false,
         [Parameter()]
@@ -126,12 +133,15 @@ function Set-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id', 'id')]
         [uint64]$TeamID,
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('guest_id')]
         [uint64]$GuestID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Username,
         [Parameter()]
         [bool]$CanEditTags = $false,
@@ -266,9 +276,11 @@ function Add-ClickUpGuestToList {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('list_id', 'id')]
         [uint64]$ListID,
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -318,9 +330,11 @@ function Add-ClickUpGuestToFolder {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('folder_id', 'id')]
         [uint64]$FolderID,
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$GuestID,
         [Parameter()]
         [ValidateSet('read', 'comment', 'edit', 'create')]
@@ -367,9 +381,11 @@ function Remove-ClickUpGuest {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id', 'id')]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('guest_id')]
         [uint64]$GuestID
     )
@@ -416,10 +432,12 @@ function Remove-ClickUpGuestFromTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$GuestID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
@@ -428,6 +446,7 @@ function Remove-ClickUpGuestFromTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -478,9 +497,11 @@ function Remove-ClickUpGuestFromList {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('list_id', 'id')]
         [string]$ListID,
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$GuestID
     )
 
@@ -522,9 +543,11 @@ function Remove-ClickUpGuestFromFolder {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('folder_id', 'id')]
         [string]$FolderID,
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$GuestID
     )
 
