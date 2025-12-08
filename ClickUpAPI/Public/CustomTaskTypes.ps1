@@ -3,15 +3,17 @@
 .SYNOPSIS
     Get Clickup Custom Task Types.
 .DESCRIPTION
-    Get Clickup Custom Task Types.
+    Get Clickup Custom Task Types. Supports pipeline input from team/workspace objects for TeamID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpCustomTaskTypes -TeamID 123
     Get Clickup Custom Task Types for Team with ID "123".
+.EXAMPLE
+    PS C:\> Get-ClickUpTeam -TeamID 123 | Get-ClickUpCustomTaskTypes
+    Get custom task types by piping a team/workspace object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a team ID to this cmdlet.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -22,8 +24,9 @@ function Get-ClickUpCustomTaskTypes {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$TeamID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('team_id','id')]
+        [uint64]$TeamID
     )
 
     Write-Verbose "Retrieving custom task types for TeamID: $TeamID"
