@@ -69,8 +69,10 @@ function New-ClickUpWebhook {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $True)]
+        [ValidateNotNullOrEmpty()]
         [string]$Endpoint,
         [Parameter()]
         [string[]]$Events = '*',
@@ -147,8 +149,10 @@ function Set-ClickUpWebhook {
     param (
         [Parameter(Mandatory = $True, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('webhook_id','id')]
+        [ValidateNotNullOrEmpty()]
         [string]$WebhookID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Endpoint,
         [Parameter()]
         [string[]]$Events,
@@ -228,6 +232,7 @@ function Remove-ClickUpWebhook {
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('webhook_id','id')]
+        [ValidateNotNullOrEmpty()]
         [string]$WebhookID
     )
 
