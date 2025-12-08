@@ -2,18 +2,23 @@
 .SYNOPSIS
     Get ClickUp custom fields.
 .DESCRIPTION
-    Get ClickUp custom fields.
+    Get ClickUp custom fields. Supports pipeline input from list, folder, space, or workspace objects.
 .EXAMPLE
     PS C:\> Get-ClickUpCustomFields -ListID 123
     Get all ClickUp custom fields for list with ID "123".
 .EXAMPLE
     PS C:\> Get-ClickUpCustomFields -FolderID 456
     Get all ClickUp custom fields for folder with ID "456".
+.EXAMPLE
+    PS C:\> Get-ClickUpList -ListID 123 | Get-ClickUpCustomFields
+    Get custom fields by piping a list object.
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 456 | Get-ClickUpCustomFields
+    Get custom fields by piping a folder object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a list ID, folder ID, space ID, or workspace ID to this cmdlet.
 .OUTPUTS
     System.Object
-.OUTPUTS
     System.Array
 .NOTES
     See the link for information.
@@ -24,14 +29,18 @@ function Get-ClickUpCustomFields {
     [CmdletBinding()]
     [OutputType([System.Object], [System.Array])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'ListID')]
-        [ulong]$ListID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
-        [ulong]$FolderID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [ulong]$SpaceID,
-        [Parameter(Mandatory = $true, ParameterSetName = 'WorkspaceID')]
-        [ulong]$WorkspaceID
+        [Parameter(Mandatory = $true, ParameterSetName = 'ListID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('list_id','id')]
+        [uint64]$ListID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id','id')]
+        [uint64]$FolderID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id','id')]
+        [uint64]$SpaceID,
+        [Parameter(Mandatory = $true, ParameterSetName = 'WorkspaceID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('workspace_id','id')]
+        [uint64]$WorkspaceID
     )
 
     switch ($PSCmdlet.ParameterSetName) {
@@ -56,15 +65,18 @@ function Get-ClickUpCustomFields {
 .SYNOPSIS
     Set ClickUp custom field value.
 .DESCRIPTION
-    Set ClickUp custom field value.
+    Set ClickUp custom field value. Supports pipeline input from task objects for TaskID parameter.
 .EXAMPLE
     PS C:\> Set-ClickUpCustomFieldValue -TaskID 9hz -FieldID b955c4dc -Value 80
     Set the ClickUp custom field under task with ID "9hz" and field with ID "b955c4dc" to value "80".
 .EXAMPLE
     PS C:\> Set-ClickUpCustomFieldValue -TaskID CustomID -FieldID b955c4dc -Value 80 -CustomTaskIDs $true -TeamID 123
     Set the ClickUp custom field under task with custom ID "CustomID" and field with ID "b955c4dc" to value "80".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hz | Set-ClickUpCustomFieldValue -FieldID b955c4dc -Value 80
+    Set a custom field value by piping a task object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     System.Object
 .NOTES
@@ -78,8 +90,9 @@ function Set-ClickUpCustomFieldValue {
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     [OutputType([System.Object])]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
@@ -90,7 +103,7 @@ function Set-ClickUpCustomFieldValue {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose "Setting custom field value for TaskID: $TaskID, FieldID: $FieldID, Value: $Value"
@@ -122,15 +135,18 @@ function Set-ClickUpCustomFieldValue {
 .SYNOPSIS
     Remove a ClickUp custom field value.
 .DESCRIPTION
-    Remove a ClickUp custom field value.
+    Remove a ClickUp custom field value. Supports pipeline input from task objects for TaskID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpCustomFieldValue -TaskID 9hz -FieldID b955c4dc -Value 80
     Remove the ClickUp custom field under task with ID "9hz" and field with ID "b955c4dc".
 .EXAMPLE
     PS C:\> Set-ClickUpCustomFieldValue -TaskID CustomID -FieldID b955c4dc -Value 80 -CustomTaskIDs $true -TeamID 123
     Remove the ClickUp custom field under task with custom ID "CustomID" and field with ID "b955c4dc".
+.EXAMPLE
+    PS C:\> Get-ClickUpTask -TaskID 9hz | Remove-ClickUpCustomFieldValue -FieldID b955c4dc
+    Remove a custom field value by piping a task object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.String. You can pipe a task ID to this cmdlet.
 .OUTPUTS
     None. This cmdlet does not return any output.
 .NOTES
@@ -142,8 +158,9 @@ function Remove-ClickUpCustomFieldValue {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     [CmdletBinding(DefaultParameterSetName = 'TaskID')]
     param (
-        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
@@ -151,7 +168,7 @@ function Remove-ClickUpCustomFieldValue {
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
-        [ulong]$TeamID
+        [uint64]$TeamID
     )
 
     Write-Verbose "Removing custom field value for TaskID: $TaskID, FieldID: $FieldID"
