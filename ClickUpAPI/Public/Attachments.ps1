@@ -61,14 +61,24 @@ function New-ClickUpTaskAttachment {
     param(
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateScript({
+            if (Test-Path -Path $_ -PathType Leaf) {
+                $true
+            } else {
+                throw "The file '$_' does not exist or is not a valid file path."
+            }
+        })]
         [string]$AttachmentPath,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
