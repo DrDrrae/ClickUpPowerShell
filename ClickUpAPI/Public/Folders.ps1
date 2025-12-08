@@ -2,17 +2,20 @@
 .SYNOPSIS
     Get all ClickUp Folders.
 .DESCRIPTION
-    Get all ClickUp Folders.
+    Get all ClickUp Folders. Supports pipeline input from space objects for SpaceID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpFolders -SpaceID 11111111
     Get all ClickUp folders under ClickUp Space with ID "11111111".
 .EXAMPLE
     PS C:\> Get-ClickUpFolders -SpaceID 11111111 -Archived $true
     Get all ClickUp folders under ClickUp Space with ID "11111111" including archived.
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 11111111 | Get-ClickUpFolders
+    Get all folders by piping a space object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a space ID to this cmdlet.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -21,32 +24,44 @@
 function Get-ClickUpFolders {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id','id')]
+        [uint64]$SpaceID,
         [Parameter()]
         [bool]$Archived = $false
     )
 
+    Write-Verbose "Retrieving folders for SpaceID: $SpaceID"
+    
     $QueryString = @{
-        $Archived = $Archived
+        archived = $Archived
     }
 
-    $Folders = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "space/$SpaceID/folder"
-    return $Folders.folders
+    try {
+        $Folders = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "space/$SpaceID/folder"
+        Write-Verbose 'Folders retrieved successfully.'
+        return $Folders.folders
+    } catch {
+        Write-Error "Failed to retrieve folders. Error: $_"
+        throw
+    }
 }
 
 <#
 .SYNOPSIS
     Get properties on a particular ClickUp folder.
 .DESCRIPTION
-    Get properties on a particular ClickUp folder.
+    Get properties on a particular ClickUp folder. Supports pipeline input from folder objects for FolderID parameter.
 .EXAMPLE
     PS C:\> Get-ClickUpFolder -FolderID 11111111
     Get ClickUp folder with ID "11111111".
+.EXAMPLE
+    PS C:\> Get-ClickUpFolders -SpaceID 11111111 | Get-ClickUpFolder
+    Get detailed properties by piping folder objects.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a folder ID to this cmdlet.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -55,26 +70,38 @@ function Get-ClickUpFolders {
 function Get-ClickUpFolder {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$FolderID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id','id')]
+        [uint64]$FolderID
     )
 
-    $Folder = Invoke-ClickUpAPIGet -Arguments $QueryString -Endpoint "folder/$FolderID"
-    return $Folder
+    Write-Verbose "Retrieving folder with FolderID: $FolderID"
+    
+    try {
+        $Folder = Invoke-ClickUpAPIGet -Endpoint "folder/$FolderID"
+        Write-Verbose 'Folder retrieved successfully.'
+        return $Folder
+    } catch {
+        Write-Error "Failed to retrieve folder. Error: $_"
+        throw
+    }
 }
 
 <#
 .SYNOPSIS
     Create a ClickUp folder in a particular space.
 .DESCRIPTION
-    Create a ClickUp folder in a particular space.
+    Create a ClickUp folder in a particular space. Supports pipeline input from space objects for SpaceID parameter.
 .EXAMPLE
     PS C:\> New-ClickUpFolder -SpaceID 11111111 -Name 'New Folder Name'
     Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with ID "11111111".
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 11111111 | New-ClickUpFolder -Name 'New Folder Name'
+    Create a new folder by piping a space object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a space ID to this cmdlet.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -83,32 +110,44 @@ function Get-ClickUpFolder {
 function New-ClickUpFolder {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id','id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
         [string]$Name
     )
 
+    Write-Verbose "Creating folder '$Name' in SpaceID: $SpaceID"
+    
     $Body = @{
         name = $Name
     }
 
-    $NewFolder = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/folder" -Body $Body
-    return $NewFolder
+    try {
+        $NewFolder = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/folder" -Body $Body
+        Write-Verbose 'Folder created successfully.'
+        return $NewFolder
+    } catch {
+        Write-Error "Failed to create folder. Error: $_"
+        throw
+    }
 }
 
 <#
 .SYNOPSIS
     Update the name of a ClickUp Folder.
 .DESCRIPTION
-    Update the name of a ClickUp Folder.
+    Update the name of a ClickUp Folder. Supports pipeline input from folder objects for FolderID parameter.
 .EXAMPLE
     PS C:\> Set-ClickUpFolder -FolderID 11111111 -Name 'Change Folder Name'
     Change the name of the ClickUp folder with ID "11111111" to "Change Folder Name".
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 11111111 | Set-ClickUpFolder -Name 'Change Folder Name'
+    Update a folder by piping a folder object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a folder ID to this cmdlet.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     See the link for information.
 .LINK
@@ -117,32 +156,44 @@ function New-ClickUpFolder {
 function Set-ClickUpFolder {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id','id')]
+        [uint64]$FolderID,
         [Parameter(Mandatory = $true)]
-        [ulong]$FolderID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$Name
+        [string]$Name
     )
 
+    Write-Verbose "Updating folder '$FolderID' with name: $Name"
+    
     $Body = @{
         name = $Name
     }
 
-    $Folder = Invoke-ClickUpAPIPut -Endpoint "folder/$FolderID" -Body $Body
-    return $Folder
+    try {
+        $Folder = Invoke-ClickUpAPIPut -Endpoint "folder/$FolderID" -Body $Body
+        Write-Verbose 'Folder updated successfully.'
+        return $Folder
+    } catch {
+        Write-Error "Failed to update folder. Error: $_"
+        throw
+    }
 }
 
 <#
 .SYNOPSIS
     Delete a ClickUp Folder.
 .DESCRIPTION
-    Delete a ClickUp Folder.
+    Delete a ClickUp Folder. Supports pipeline input from folder objects for FolderID parameter.
 .EXAMPLE
     PS C:\> Remove-ClickUpFolder -FolderID 11111111
     Delete the ClickUp folder with ID "11111111".
+.EXAMPLE
+    PS C:\> Get-ClickUpFolder -FolderID 11111111 | Remove-ClickUpFolder
+    Delete a folder by piping a folder object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a folder ID to this cmdlet.
 .OUTPUTS
-    System.Object Hashtable.
+    None. This cmdlet does not return any output.
 .NOTES
     See the link for information.
 .LINK
@@ -151,12 +202,20 @@ function Set-ClickUpFolder {
 function Remove-ClickUpFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
-        [Parameter(Mandatory = $true)]
-        [ulong]$FolderID
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('folder_id','id')]
+        [uint64]$FolderID
     )
 
-    if ($PSCmdlet.ShouldProcess($FolderID)) {
-        Invoke-ClickUpAPIDelete -Endpoint "folder/$FolderID"
+    if ($PSCmdlet.ShouldProcess($FolderID, 'Delete Folder')) {
+        Write-Verbose "Deleting folder '$FolderID'..."
+        try {
+            $Null = Invoke-ClickUpAPIDelete -Endpoint "folder/$FolderID"
+            Write-Verbose 'Folder deleted successfully.'
+        } catch {
+            Write-Error "Failed to delete folder. Error: $_"
+            throw
+        }
     }
 }
 
@@ -164,14 +223,17 @@ function Remove-ClickUpFolder {
 .SYNOPSIS
     Create a new Folder using a Folder template within a Space.
 .DESCRIPTION
-    Create a new Folder using a Folder template within a Space.
+    Create a new Folder using a Folder template within a Space. Supports pipeline input from space objects for SpaceID parameter.
 .EXAMPLE
     PS C:\> New-ClickUpFolderFromTemplate -SpaceID 11111111 -TemplateID 22222222 -Name 'New Folder Name'
     Create a ClickUp folder with name "New Folder Name" under the ClickUp Space with ID "11111111".
+.EXAMPLE
+    PS C:\> Get-ClickUpSpace -SpaceID 11111111 | New-ClickUpFolderFromTemplate -TemplateID 22222222 -Name 'New Folder Name'
+    Create a folder from template by piping a space object.
 .INPUTS
-    None. This cmdlet does not accept any input.
+    System.UInt64. You can pipe a space ID to this cmdlet.
 .OUTPUTS
-    System.Object Hashtable.
+    System.Object
 .NOTES
     Create a new Folder using a Folder template within a Space. This endpoint allows you to create a folder with all its nested assets (lists, tasks, etc.) from a predefined template available in your Workspace. Publicly shared templates must be added to your Workspace before you can use them with the public API. This request can be run asynchronously or synchronously via the return_immediately parameter.
 .LINK
@@ -180,10 +242,11 @@ function Remove-ClickUpFolder {
 function New-ClickUpFolderFromTemplate {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('space_id','id')]
+        [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
-        [ulong]$SpaceID,
-        [Parameter(Mandatory = $true)]
-        [ulong]$TemplateID,
+        [uint64]$TemplateID,
         [Parameter(Mandatory = $true)]
         [string]$Name,
         [Parameter()]
@@ -249,6 +312,8 @@ function New-ClickUpFolderFromTemplate {
         [int]$Archived
     )
 
+    Write-Verbose "Creating folder from template in SpaceID: $SpaceID with TemplateID: $TemplateID"
+    
     $Body = @{
         name               = $Name
         return_immediately = $ReturnImmediately
@@ -342,6 +407,12 @@ function New-ClickUpFolderFromTemplate {
         $Body.Add('archived', $Archived)
     }
 
-    $NewFolder = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/folder_template/$TemplateID" -Body $Body
-    return $NewFolder
+    try {
+        $NewFolder = Invoke-ClickUpAPIPost -Endpoint "space/$SpaceID/folder_template/$TemplateID" -Body $Body
+        Write-Verbose 'Folder created from template successfully.'
+        return $NewFolder
+    } catch {
+        Write-Error "Failed to create folder from template. Error: $_"
+        throw
+    }
 }
