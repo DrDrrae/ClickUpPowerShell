@@ -25,6 +25,7 @@ function Get-ClickUpCustomTaskTypes {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id','id')]
         [uint64]$TeamID
     )
