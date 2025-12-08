@@ -28,6 +28,7 @@ function Get-ClickUpTimeEntries {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter()]
         [DateTime]$StartDate,
@@ -125,9 +126,11 @@ function Get-ClickUpTimeEntry {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('timer_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TimerID
     )
 
@@ -169,9 +172,11 @@ function Get-ClickUpTimeEntryHistory {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('timer_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TimerID
     )
 
@@ -216,6 +221,7 @@ function Get-ClickUpRunningTimeEntry {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter()]
         [uint64]$Assignee
@@ -267,6 +273,7 @@ function Get-ClickUpTimeEntryTags {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -309,6 +316,7 @@ function New-ClickUpTimeEntry {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter()]
         [bool]$CustomTaskIDs = $false,
@@ -321,6 +329,7 @@ function New-ClickUpTimeEntry {
         [Parameter()]
         [bool]$Billable,
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$Duration,
         [Parameter()]
         [uint64]$Assignee,
@@ -403,11 +412,14 @@ function Add-ClickUpTimeEntryTags {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id')]
+        [ValidateNotNullOrEmpty()]
         [string]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('time_entry_ids', 'id')]
+        [ValidateNotNullOrEmpty()]
         [uint64[]]$TimeEntryIDs,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Tags
     )
 
@@ -455,10 +467,13 @@ function Set-ClickUpTimeEntryTags {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string]$TeamID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$OldTagName,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$NewTagName,
         [Parameter()]
         [string]$TagBackgroundColor,
