@@ -36,19 +36,23 @@ function Add-ClickUpDependency {
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependsOn,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependendencyOf,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -113,19 +117,23 @@ function Remove-ClickUpDependency {
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependsOn,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [ValidateNotNullOrEmpty()]
         [string]$DependendencyOf,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'DependsOnCustomTaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'DependendencyOfCustomTaskID')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -185,14 +193,17 @@ function Add-ClickUpTaskLink {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [ValidateNotNullOrEmpty()]
         [string]$LinksTo,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -243,14 +254,17 @@ function Remove-ClickUpTaskLink {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id','id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [ValidateNotNullOrEmpty()]
         [string]$LinksTo,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
         [bool]$CustomTaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskID')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
