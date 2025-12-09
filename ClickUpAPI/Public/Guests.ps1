@@ -77,7 +77,7 @@ function Add-ClickUpGuest {
         [ValidateNotNullOrEmpty()]
         [ValidatePattern(@'
 ^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_'+\-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$
-'@)]
+'@, Options='IgnoreCase')]
         [string]$GuestEmail,
         [Parameter()]
         [bool]$CanEditTags = $false,

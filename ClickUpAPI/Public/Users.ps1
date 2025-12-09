@@ -82,7 +82,7 @@ function New-ClickUpUser {
         [ValidateNotNullOrEmpty()]
         [ValidatePattern(@'
 ^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_'+\-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$
-'@)]
+'@, Options='IgnoreCase')]
         [string]$Email,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
