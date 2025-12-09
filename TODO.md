@@ -36,7 +36,7 @@
 
 ### In Progress
 
-- [ ] [Add input validation to function parameters](https://github.com/DrDrrae/ClickUpPowerShell/issues/1)
+- [ ] Nothing at the moment
 
 
 ### Done ✓
@@ -68,3 +68,5 @@
   - [x] Users
   - [x] Views
   - [x] Webhooks
+- [x] [Add input validation to function parameters](https://github.com/DrDrrae/ClickUpPowerShell/issues/1)
+
