@@ -80,7 +80,9 @@ function New-ClickUpUser {
         [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [ValidatePattern('^[^@]+@[^@]+\\.[^@]+$')]
+        [ValidatePattern(@'
+^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_'+\-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$
+'@)]
         [string]$Email,
         [Parameter(Mandatory = $true)]
         [bool]$Admin,
