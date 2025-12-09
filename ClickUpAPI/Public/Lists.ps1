@@ -481,7 +481,7 @@ function New-ClickUpListFromTemplate {
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
         [ValidateNotNullOrEmpty()]
-        [uint64]$Name,
+        [string]$Name,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [bool]$ReturnImmediately,
