@@ -412,8 +412,8 @@ function Add-ClickUpTimeEntryTags {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id')]
-        [ValidateNotNullOrEmpty()]
-        [string]$TeamID,
+        [ValidateRange(1, [uint64]::MaxValue)]
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('time_entry_ids', 'id')]
         [ValidateNotNullOrEmpty()]
@@ -467,8 +467,8 @@ function Set-ClickUpTimeEntryTags {
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
-        [ValidateNotNullOrEmpty()]
-        [string]$TeamID,
+        [ValidateRange(1, [uint64]::MaxValue)]
+        [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$OldTagName,
