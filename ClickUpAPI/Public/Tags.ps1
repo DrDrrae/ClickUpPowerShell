@@ -24,6 +24,7 @@ function Get-ClickUpTags {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id', 'id')]
         [uint64]$SpaceID
     )
@@ -64,13 +65,17 @@ function New-ClickUpTag {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id', 'id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$ForegroundColor,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$BackgroundColor
     )
 
@@ -122,15 +127,20 @@ function Set-ClickUpTag {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id', 'id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$NewName,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$ForegroundColor,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$BackgroundColor
     )
 
@@ -182,9 +192,11 @@ function Remove-ClickUpTag {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id', 'id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName
     )
 
@@ -229,14 +241,17 @@ function Add-ClickUpTagToTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -289,14 +304,17 @@ function Remove-ClickUpTagFromTask {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id', 'id')]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
         [string]$TagName,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 

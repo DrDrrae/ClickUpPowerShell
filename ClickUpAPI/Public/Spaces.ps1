@@ -115,9 +115,11 @@ function New-ClickUpSpace {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id', 'id')]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [bool]$Multiple_Assignees = $true,
         [bool]$FeatureDueDates = $true,
@@ -272,9 +274,11 @@ function Set-ClickUpSpace {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id', 'id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body
     )
 

@@ -143,13 +143,16 @@ function New-ClickUpList {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('folder_id', 'id')]
         [uint64]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id', 'id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
@@ -239,19 +242,24 @@ function Set-ClickUpList {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('list_id', 'id')]
         [string]$ListID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Content,
         [Parameter()]
         [DateTime]$DueDate,
         [Parameter()]
         [bool]$DueDateTime = $false,
         [Parameter()]
+        [ValidateRange(1, 4)]
         [UInt16]$Priority,
         [Parameter()]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$Assignee,
         [Parameter()]
         [bool]$UnsetStatus
@@ -317,6 +325,7 @@ function Remove-ClickUpList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('list_id', 'id')]
         [uint64]$ListID
     )
@@ -360,9 +369,11 @@ function Add-ClickUpTaskToList {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('list_id', 'id')]
         [uint64]$ListID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id')]
         [string]$TaskID
     )
@@ -402,9 +413,11 @@ function Remove-ClickUpTaskFromList {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('list_id', 'id')]
         [uint64]$ListID,
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('task_id')]
         [string]$TaskID
     )
@@ -454,22 +467,27 @@ function New-ClickUpListFromTemplate {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID', ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('folder_id', 'id')]
         [uint64]$FolderID,
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID', ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id', 'id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TemplateID,
         [Parameter(Mandatory = $true, ParameterSetName = 'FolderID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'SpaceID')]
-        [uint64]$Name,
+        [ValidateNotNullOrEmpty()]
+        [string]$Name,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
         [bool]$ReturnImmediately,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]
+        [ValidateNotNullOrEmpty()]
         [string]$Content,
         [Parameter(ParameterSetName = 'FolderID')]
         [Parameter(ParameterSetName = 'SpaceID')]

@@ -25,6 +25,7 @@ function Add-ClickUpAPIKey {
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [ValidateNotNullOrEmpty()]
+        [ValidatePattern('^pk_\d{8}_[A-Z0-9]{16}$')]
         [string]$APIKey
     )
 

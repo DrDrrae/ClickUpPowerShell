@@ -25,6 +25,7 @@ function Get-ClickUpFolders {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id','id')]
         [uint64]$SpaceID,
         [Parameter()]
@@ -71,6 +72,7 @@ function Get-ClickUpFolder {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('folder_id','id')]
         [uint64]$FolderID
     )
@@ -111,9 +113,11 @@ function New-ClickUpFolder {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id','id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name
     )
 
@@ -157,9 +161,11 @@ function Set-ClickUpFolder {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('folder_id','id')]
         [uint64]$FolderID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name
     )
 
@@ -203,6 +209,7 @@ function Remove-ClickUpFolder {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('folder_id','id')]
         [uint64]$FolderID
     )
@@ -243,15 +250,19 @@ function New-ClickUpFolderFromTemplate {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('space_id','id')]
         [uint64]$SpaceID,
         [Parameter(Mandatory = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TemplateID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
         [bool]$ReturnImmediately,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Content,
         [Parameter()]
         [bool]$TimeEstimate,

@@ -27,9 +27,11 @@ function Get-ClickUpTaskTemplates {
     [OutputType([System.Object], [System.Array])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id', 'id')]
         [uint64]$TeamID,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$Page = 0
     )
 

@@ -89,10 +89,13 @@ function New-ClickUpAccessToken {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$ClientID,
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$ClientSecret,
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Code
     )
 

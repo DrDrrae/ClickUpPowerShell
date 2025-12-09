@@ -30,10 +30,12 @@ function Get-ClickUpTasks {
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'ListID', ValueFromPipelineByPropertyName = $true)]
         [Alias('list_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string]$ListID,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'TeamID', ValueFromPipelineByPropertyName = $true)]
         [Alias('team_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string]$TeamID,
 
         [Parameter(ParameterSetName = 'ListID')]
@@ -41,6 +43,7 @@ function Get-ClickUpTasks {
 
         [Parameter(ParameterSetName = 'ListID')]
         [Parameter(ParameterSetName = 'TeamID')]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$Page = 0,
 
         [Parameter(ParameterSetName = 'ListID')]
@@ -263,10 +266,12 @@ function Get-ClickUpTaskTimeInStatus {
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
         [Alias('task_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID,
         [Parameter(ParameterSetName = 'TaskID')]
         [Parameter(ParameterSetName = 'CustomTaskIDs')]
@@ -326,10 +331,12 @@ function Get-ClickUpTaskTimeInStatusBulk {
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipelineByPropertyName = $true)]
         [Alias('task_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string[]]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -385,8 +392,10 @@ function New-ClickUpTask {
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('list_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$ListID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [string]$Description,
         [uint64[]]$Assignees,
@@ -526,13 +535,16 @@ function Set-ClickUpTask {
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('task_id','id')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true, ParameterSetName = 'TaskID')]
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateNotNullOrEmpty()]
         [hashtable]$Body,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
         [bool]$CustomTaskIDs,
         [Parameter(Mandatory = $true, ParameterSetName = 'CustomTaskIDs')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$TeamID
     )
 
@@ -644,8 +656,10 @@ function Merge-ClickUpTasks {
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('task_id', 'id')]
+        [ValidateNotNullOrEmpty()]
         [string]$TaskID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string[]]$SourceTaskIDs
     )
 
@@ -692,10 +706,13 @@ function New-ClickUpTaskFromTemplate {
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('list_id', 'id')]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [uint64]$ListID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$TemplateID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name
     )
 

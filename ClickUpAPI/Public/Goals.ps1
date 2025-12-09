@@ -23,6 +23,7 @@ function Get-ClickUpGoals {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id','id')]
         [uint64]$TeamID
     )
@@ -63,6 +64,7 @@ function Get-ClickUpGoal {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('goal_id','id')]
         [uint64]$GoalID
     )
@@ -103,9 +105,11 @@ function New-ClickUpGoal {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('team_id','id')]
         [uint64]$TeamID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
         [DateTime]$DueDate,
@@ -175,9 +179,11 @@ function Set-ClickUpGoal {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateRange(1, [uint64]::MaxValue)]
         [Alias('goal_id','id')]
         [uint64]$GoalID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
         [DateTime]$DueDate,
@@ -247,6 +253,7 @@ function Remove-ClickUpGoal {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $True, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('goal_id','id')]
         [string]$GoalID
     )
@@ -288,9 +295,11 @@ function New-ClickUpKeyResult {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('goal_id','id')]
         [string]$GoalID,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
         [uint64[]]$Owners,
@@ -298,10 +307,13 @@ function New-ClickUpKeyResult {
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$StepsStart,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$StepsEnd,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
@@ -371,11 +383,14 @@ function Set-ClickUpKeyResult {
     [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('key_result_id','id')]
         [string]$KeyResultID,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Name,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Note,
         [Parameter()]
         [uint64[]]$Owners,
@@ -383,12 +398,16 @@ function Set-ClickUpKeyResult {
         [ValidateSet('number', 'currency', 'boolean', 'percentage', 'automatic')]
         [string]$Type,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$StepsStart,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$StepsEnd,
         [Parameter()]
+        [ValidateRange(0, [uint64]::MaxValue)]
         [uint64]$StepsCurrent,
         [Parameter()]
+        [ValidateNotNullOrEmpty()]
         [string]$Unit,
         [Parameter()]
         [string[]]$TaskIDs,
@@ -464,6 +483,7 @@ function Remove-ClickUpKeyResult {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $True, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [ValidateNotNullOrEmpty()]
         [Alias('key_result_id','id')]
         [string]$KeyResultID
     )
